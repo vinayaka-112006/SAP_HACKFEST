@@ -9,3 +9,5 @@ Phase 1: full 21-entity CDS model, construction plan, deterministic CSVs, provis
 Phase 2: CAP-backed incident create/confirm/detail, tools, history, audit; transaction-scoped audit/history/IDs; missing rules fallback; SQLite triggers and indexes installed both during deployment and after startup. Header demo role checks introduced ahead of Phase 4. Tests cover concurrency, rollback, audit protection and reassignment history.
 
 Phase 3: deterministic trace with exact evidence, all-window exposure range, data gaps, location uncertainty, synthetic value, version persistence, audit/history. 26 tests pass; B counts 35/100/160, scores 100/82/83, range 35/154/6. Results use provisional candidate, not Jamuna-approved ground truth.
+
+Phase 4: all four mock actions and document listing are real persisted simulations. Transactional approval checks bind role, incident, action and scope; restriction helper also gates directly. Role matrix, replay, missing/wrong-scope approvals, stock-only changes and rollback tests pass. XSUAA uses installed @sap/xssec verification API but no real binding/token has been tested. External workflow headers are ignored.

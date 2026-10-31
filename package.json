@@ -18,6 +18,7 @@
   "dependencies": {
     "@cap-js/sqlite": "3.1.2",
     "@sap/cds": "10.2.2",
+    "@sap/xssec": "^4.16.0",
     "cors": "^2.8.5",
     "express": "^4.21.2"
   },
