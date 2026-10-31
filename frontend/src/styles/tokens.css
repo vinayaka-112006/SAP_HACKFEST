@@ -1,0 +1,84 @@
+:root {
+  /* ToolSathi AI - Bespoke Cyber-Teal & Titanium Clarity Glass Palette */
+  --pearl: #F4F7FC;
+  --pearl-light: #FFFFFF;
+  --pearl-dark: #E6ECF5;
+
+  /* Ambient Glows inspired by the ToolSathi AI 3D Cyan-Teal Metallic Logo */
+  --glow-cyan: #00E5FF;
+  --glow-teal: #00D2B4;
+  --glow-electric: #0AB6FF;
+
+  /* High-Contrast Typography / Deep Titanium Ink */
+  --ink: #071120;
+  --ink-secondary: #1E2E48;
+  --ink-soft: #334766;
+  --ink-muted: #566D8E;
+  --ink-inverted: #FFFFFF;
+
+  /* Brand Signature Gradient & Accents (Matching Logo) */
+  --brand-cyan: #00B8CC;
+  --brand-cyan-hover: #00A2B4;
+  --brand-cyan-ink: #005662;
+  --brand-cyan-soft: rgba(0, 184, 204, 0.12);
+  --brand-cyan-glow: rgba(0, 184, 204, 0.32);
+  --brand-gradient: linear-gradient(135deg, #00C2CB 0%, #0AB6FF 50%, #0070F3 100%);
+  --brand-metallic: linear-gradient(135deg, #D6F8FF 0%, #7CE6FF 30%, #00B4D8 70%, #0077B6 100%);
+
+  /* Semantics (Strict Industrial Meaning, Never Decoration) */
+  --ruby: #DC2626;
+  --ruby-ink: #991B1B;
+  --ruby-soft: rgba(220, 38, 38, 0.12);
+  --ruby-glow: rgba(220, 38, 38, 0.32);
+
+  --saffron: #D97706;
+  --saffron-ink: #92400E;
+  --saffron-soft: rgba(217, 119, 6, 0.14);
+  --saffron-glow: rgba(217, 119, 6, 0.28);
+
+  --frost: #64748B;
+  --frost-ink: #334155;
+  --frost-soft: rgba(100, 116, 139, 0.16);
+  --frost-hatch: rgba(71, 85, 105, 0.38);
+
+  --cobalt: #0284C7;
+  --cobalt-ink: #0369A1;
+  --cobalt-soft: rgba(2, 132, 199, 0.12);
+  --cobalt-glow: rgba(2, 132, 199, 0.3);
+
+  --jade: #059669;
+  --jade-ink: #065F46;
+  --jade-soft: rgba(5, 150, 105, 0.12);
+  --jade-glow: rgba(5, 150, 105, 0.25);
+
+  /* Clarity Glass Surface Recipes - Crisp, Non-Washout Standard */
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-clear: rgba(255, 255, 255, 0.55);
+  --glass-strong: rgba(255, 255, 255, 0.92);
+  --glass-solid: #FFFFFF;
+  --glass-border: rgba(255, 255, 255, 0.95);
+  --glass-border-prominent: rgba(7, 17, 32, 0.12);
+
+  /* Crisp Shadows & Occlusion */
+  --shadow-sm: 0 2px 8px rgba(7, 17, 32, 0.05);
+  --shadow-md: 0 8px 24px rgba(7, 17, 32, 0.08), 0 2px 6px rgba(7, 17, 32, 0.04);
+  --shadow-lg: 0 20px 48px rgba(7, 17, 32, 0.11), 0 4px 14px rgba(7, 17, 32, 0.06);
+  --shadow-specular: inset 0 1px 0 rgba(255, 255, 255, 0.98);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-pill: 9999px;
+
+  /* Typography Families */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-kannada: 'Noto Sans Kannada', 'IBM Plex Sans', sans-serif;
+  --font-devanagari: 'Noto Sans Devanagari', 'IBM Plex Sans', sans-serif;
+
+  /* Larger, Projector-Grade Readability Scales */
+  --text-console-min: 20px;
+  --touch-target-min: 58px;
+}

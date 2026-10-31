@@ -1,0 +1,6301 @@
+[
+  {
+    "unitId": "TS-BRK-0001",
+    "serial": "SN-2026-00001",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T08:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0002",
+    "serial": "SN-2026-00002",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T08:07:42.857Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0003",
+    "serial": "SN-2026-00003",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T07:33:25.714Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0004",
+    "serial": "SN-2026-00004",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T06:59:08.571Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0005",
+    "serial": "SN-2026-00005",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T06:24:51.428Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0006",
+    "serial": "SN-2026-00006",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T05:50:34.285Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0007",
+    "serial": "SN-2026-00007",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T05:16:17.142Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0008",
+    "serial": "SN-2026-00008",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T04:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0009",
+    "serial": "SN-2026-00009",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T04:07:42.857Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0010",
+    "serial": "SN-2026-00010",
+    "toolId": "TOOL-B",
+    "runId": "RUN-390",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T03:33:25.714Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-390",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-100",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-100",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0011",
+    "serial": "SN-2026-00011",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T02:59:08.571Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0012",
+    "serial": "SN-2026-00012",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T02:24:51.428Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0013",
+    "serial": "SN-2026-00013",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T01:50:34.285Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0014",
+    "serial": "SN-2026-00014",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T01:16:17.142Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0015",
+    "serial": "SN-2026-00015",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-200",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0016",
+    "serial": "SN-2026-00016",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-31T00:07:42.857Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0017",
+    "serial": "SN-2026-00017",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T23:33:25.714Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0018",
+    "serial": "SN-2026-00018",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T22:59:08.571Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0019",
+    "serial": "SN-2026-00019",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T22:24:51.428Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0020",
+    "serial": "SN-2026-00020",
+    "toolId": "TOOL-B",
+    "runId": "RUN-391",
+    "batchId": "BATCH-2026-B1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T21:50:34.285Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-391",
+      "EV-BATCH-BATCH-2026-B1",
+      "EV-TUE-TUE-TOOL-B-2026-101",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-101",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0021",
+    "serial": "SN-2026-00021",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T21:16:17.142Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0022",
+    "serial": "SN-2026-00022",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T20:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0023",
+    "serial": "SN-2026-00023",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T20:07:42.857Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [
+      "Conflicting timestamps: run end time (08:30) precedes start time (09:00)"
+    ],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0024",
+    "serial": "SN-2026-00024",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T19:33:25.714Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0025",
+    "serial": "SN-2026-00025",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T18:59:08.571Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0026",
+    "serial": "SN-2026-00026",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T18:24:51.428Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0027",
+    "serial": "SN-2026-00027",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T17:50:34.285Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0028",
+    "serial": "SN-2026-00028",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T17:16:17.142Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0029",
+    "serial": "SN-2026-00029",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T16:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0030",
+    "serial": "SN-2026-00030",
+    "toolId": "TOOL-B",
+    "runId": "RUN-392",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T16:07:42.857Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-392",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-102",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-102",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-201",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0031",
+    "serial": "SN-2026-00031",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T15:33:25.714Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0032",
+    "serial": "SN-2026-00032",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T14:59:08.571Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0033",
+    "serial": "SN-2026-00033",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T14:24:51.428Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0034",
+    "serial": "SN-2026-00034",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T13:50:34.285Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0035",
+    "serial": "SN-2026-00035",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "24h",
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T13:16:17.142Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0036",
+    "serial": "SN-2026-00036",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0037",
+    "serial": "SN-2026-00037",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T09:00:27.692Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0038",
+    "serial": "SN-2026-00038",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T08:18:55.384Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0039",
+    "serial": "SN-2026-00039",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T07:37:23.076Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0040",
+    "serial": "SN-2026-00040",
+    "toolId": "TOOL-B",
+    "runId": "RUN-393",
+    "batchId": "BATCH-2026-B2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T06:55:50.769Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-393",
+      "EV-BATCH-BATCH-2026-B2",
+      "EV-TUE-TUE-TOOL-B-2026-103",
+      "EV-LOC-FACTORY-STOCK"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-103",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0041",
+    "serial": "SN-2026-00041",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T06:14:18.461Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0042",
+    "serial": "SN-2026-00042",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T05:32:46.153Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0043",
+    "serial": "SN-2026-00043",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T04:51:13.846Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0044",
+    "serial": "SN-2026-00044",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T04:09:41.538Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0045",
+    "serial": "SN-2026-00045",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T03:28:09.230Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-202",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0046",
+    "serial": "SN-2026-00046",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T02:46:36.923Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0047",
+    "serial": "SN-2026-00047",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T02:05:04.615Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0048",
+    "serial": "SN-2026-00048",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T01:23:32.307Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0049",
+    "serial": "SN-2026-00049",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0050",
+    "serial": "SN-2026-00050",
+    "toolId": "TOOL-B",
+    "runId": "RUN-394",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-30T00:00:27.692Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-394",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-104",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-104",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0051",
+    "serial": "SN-2026-00051",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T23:18:55.384Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0052",
+    "serial": "SN-2026-00052",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T22:37:23.076Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0053",
+    "serial": "SN-2026-00053",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T21:55:50.769Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0054",
+    "serial": "SN-2026-00054",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T21:14:18.461Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0055",
+    "serial": "SN-2026-00055",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T20:32:46.153Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0056",
+    "serial": "SN-2026-00056",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T19:51:13.846Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0057",
+    "serial": "SN-2026-00057",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T19:09:41.538Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0058",
+    "serial": "SN-2026-00058",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T18:28:09.230Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0059",
+    "serial": "SN-2026-00059",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T17:46:36.923Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0060",
+    "serial": "SN-2026-00060",
+    "toolId": "TOOL-B",
+    "runId": "RUN-395",
+    "batchId": "BATCH-2026-B3",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T17:05:04.615Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-395",
+      "EV-BATCH-BATCH-2026-B3",
+      "EV-TUE-TUE-TOOL-B-2026-105",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-105",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-203",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0061",
+    "serial": "SN-2026-00061",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T16:23:32.307Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0062",
+    "serial": "SN-2026-00062",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0063",
+    "serial": "SN-2026-00063",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T15:00:27.692Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0064",
+    "serial": "SN-2026-00064",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T14:18:55.384Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0065",
+    "serial": "SN-2026-00065",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T13:37:23.076Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0066",
+    "serial": "SN-2026-00066",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T12:55:50.769Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0067",
+    "serial": "SN-2026-00067",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T12:14:18.461Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0068",
+    "serial": "SN-2026-00068",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T11:32:46.153Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0069",
+    "serial": "SN-2026-00069",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T10:51:13.846Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0070",
+    "serial": "SN-2026-00070",
+    "toolId": "TOOL-B",
+    "runId": "RUN-396",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T10:09:41.538Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-396",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-106",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-106",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0071",
+    "serial": "SN-2026-00071",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T09:28:09.230Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0072",
+    "serial": "SN-2026-00072",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T08:46:36.923Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0073",
+    "serial": "SN-2026-00073",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T08:05:04.615Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0074",
+    "serial": "SN-2026-00074",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T07:23:32.307Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0075",
+    "serial": "SN-2026-00075",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-X"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-204",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0076",
+    "serial": "SN-2026-00076",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T06:00:27.692Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0077",
+    "serial": "SN-2026-00077",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T05:18:55.384Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0078",
+    "serial": "SN-2026-00078",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T04:37:23.076Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0079",
+    "serial": "SN-2026-00079",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T03:55:50.769Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0080",
+    "serial": "SN-2026-00080",
+    "toolId": "TOOL-B",
+    "runId": "RUN-397",
+    "batchId": "BATCH-2026-B4",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T03:14:18.461Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-397",
+      "EV-BATCH-BATCH-2026-B4",
+      "EV-TUE-TUE-TOOL-B-2026-107",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-107",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0081",
+    "serial": "SN-2026-00081",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T02:32:46.153Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0082",
+    "serial": "SN-2026-00082",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T01:51:13.846Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0083",
+    "serial": "SN-2026-00083",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T01:09:41.538Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0084",
+    "serial": "SN-2026-00084",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-29T00:28:09.230Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0085",
+    "serial": "SN-2026-00085",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T23:46:36.923Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [
+      "Stale shipment record: transit scan overdue by 48 hours for Dealer Y consignment"
+    ],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0086",
+    "serial": "SN-2026-00086",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T23:05:04.615Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0087",
+    "serial": "SN-2026-00087",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T22:23:32.307Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0088",
+    "serial": "SN-2026-00088",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0089",
+    "serial": "SN-2026-00089",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T21:00:27.692Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0090",
+    "serial": "SN-2026-00090",
+    "toolId": "TOOL-B",
+    "runId": "RUN-398",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T20:18:55.384Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-398",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-TOOL-B-2026-108",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-2026-108",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-205",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0091",
+    "serial": "SN-2026-00091",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Probable",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T19:37:23.076Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-INFERRED-91",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-INFERRED-91",
+    "warnings": [
+      "Tool-use record unlinked: association inferred by station torque telemetry"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0092",
+    "serial": "SN-2026-00092",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Probable",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T18:55:50.769Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-INFERRED-92",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-INFERRED-92",
+    "warnings": [
+      "Tool-use record unlinked: association inferred by station torque telemetry"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0093",
+    "serial": "SN-2026-00093",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Probable",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T18:14:18.461Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-INFERRED-93",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-INFERRED-93",
+    "warnings": [
+      "Tool-use record unlinked: association inferred by station torque telemetry"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0094",
+    "serial": "SN-2026-00094",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Probable",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T17:32:46.153Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-TUE-TUE-INFERRED-94",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": "TUE-INFERRED-94",
+    "warnings": [
+      "Tool-use record unlinked: association inferred by station torque telemetry"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0095",
+    "serial": "SN-2026-00095",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Unknown",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T16:51:13.846Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-GAP-RECORD-MISSING",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": null,
+    "warnings": [
+      "Data gap: missing tool-use record for assembly run"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0096",
+    "serial": "SN-2026-00096",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Unknown",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T16:09:41.538Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-GAP-RECORD-MISSING",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": null,
+    "warnings": [
+      "Data gap: missing tool-use record for assembly run"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0097",
+    "serial": "SN-2026-00097",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Unknown",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T15:28:09.230Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-GAP-RECORD-MISSING",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": null,
+    "warnings": [
+      "Data gap: missing tool-use record for assembly run"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0098",
+    "serial": "SN-2026-00098",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Unknown",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T14:46:36.923Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-GAP-RECORD-MISSING",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": null,
+    "warnings": [
+      "Data gap: missing tool-use record for assembly run"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0099",
+    "serial": "SN-2026-00099",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Unknown",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T14:05:04.615Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-GAP-RECORD-MISSING",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": null,
+    "warnings": [
+      "Data gap: missing tool-use record for assembly run"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0100",
+    "serial": "SN-2026-00100",
+    "toolId": "TOOL-B",
+    "runId": "RUN-399",
+    "batchId": "BATCH-2026-B5",
+    "tier": "Unknown",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "72h",
+      "7d"
+    ],
+    "productionTime": "2026-10-28T13:23:32.307Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-399",
+      "EV-BATCH-BATCH-2026-B5",
+      "EV-GAP-RECORD-MISSING",
+      "EV-LOC-DEALER-Y"
+    ],
+    "toolUseEventId": null,
+    "warnings": [
+      "Data gap: missing tool-use record for assembly run"
+    ],
+    "componentLot": "LOT-VALVE-206",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0101",
+    "serial": "SN-2026-00101",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Probable",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-150"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-150",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0102",
+    "serial": "SN-2026-00102",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T08:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-151"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-151",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0103",
+    "serial": "SN-2026-00103",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-152"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-152",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0104",
+    "serial": "SN-2026-00104",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T05:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-153"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-153",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0105",
+    "serial": "SN-2026-00105",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-154"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-154",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0106",
+    "serial": "SN-2026-00106",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T02:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-155"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-155",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0107",
+    "serial": "SN-2026-00107",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-28T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-156"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-156",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0108",
+    "serial": "SN-2026-00108",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T23:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-157"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-157",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0109",
+    "serial": "SN-2026-00109",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-158"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-158",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0110",
+    "serial": "SN-2026-00110",
+    "toolId": "TOOL-B",
+    "runId": "RUN-380",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T20:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-380",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-159"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-159",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-250",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0111",
+    "serial": "SN-2026-00111",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-160"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-160",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0112",
+    "serial": "SN-2026-00112",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T17:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-161"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-161",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0113",
+    "serial": "SN-2026-00113",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Probable",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-162"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-162",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0114",
+    "serial": "SN-2026-00114",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T14:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-163"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-163",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0115",
+    "serial": "SN-2026-00115",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-164"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-164",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0116",
+    "serial": "SN-2026-00116",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T11:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-165"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-165",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0117",
+    "serial": "SN-2026-00117",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-166"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-166",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0118",
+    "serial": "SN-2026-00118",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T08:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-167"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-167",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0119",
+    "serial": "SN-2026-00119",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-168"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-168",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0120",
+    "serial": "SN-2026-00120",
+    "toolId": "TOOL-B",
+    "runId": "RUN-381",
+    "batchId": "BATCH-2026-B6",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T05:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-381",
+      "EV-BATCH-BATCH-2026-B6",
+      "EV-TUE-TUE-TOOL-B-HIST-169"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-169",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-251",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0121",
+    "serial": "SN-2026-00121",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-170"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-170",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0122",
+    "serial": "SN-2026-00122",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T02:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-171"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-171",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0123",
+    "serial": "SN-2026-00123",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-27T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-172"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-172",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0124",
+    "serial": "SN-2026-00124",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T23:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-173"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-173",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0125",
+    "serial": "SN-2026-00125",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Probable",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-174"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-174",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0126",
+    "serial": "SN-2026-00126",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T20:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-175"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-175",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0127",
+    "serial": "SN-2026-00127",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-176"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-176",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0128",
+    "serial": "SN-2026-00128",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T17:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-177"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-177",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0129",
+    "serial": "SN-2026-00129",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-178"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-178",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0130",
+    "serial": "SN-2026-00130",
+    "toolId": "TOOL-B",
+    "runId": "RUN-382",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T14:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-382",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-179"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-179",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-252",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0131",
+    "serial": "SN-2026-00131",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-180"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-180",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0132",
+    "serial": "SN-2026-00132",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T11:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-181"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-181",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0133",
+    "serial": "SN-2026-00133",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-182"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-182",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0134",
+    "serial": "SN-2026-00134",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T08:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-183"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-183",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0135",
+    "serial": "SN-2026-00135",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-184"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-184",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0136",
+    "serial": "SN-2026-00136",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T05:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-185"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-185",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0137",
+    "serial": "SN-2026-00137",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Probable",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-186"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-186",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0138",
+    "serial": "SN-2026-00138",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T02:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-187"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-187",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0139",
+    "serial": "SN-2026-00139",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-26T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-188"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-188",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0140",
+    "serial": "SN-2026-00140",
+    "toolId": "TOOL-B",
+    "runId": "RUN-383",
+    "batchId": "BATCH-2026-B7",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T23:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-383",
+      "EV-BATCH-BATCH-2026-B7",
+      "EV-TUE-TUE-TOOL-B-HIST-189"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-189",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-253",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0141",
+    "serial": "SN-2026-00141",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-190"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-190",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0142",
+    "serial": "SN-2026-00142",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T20:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-191"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-191",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0143",
+    "serial": "SN-2026-00143",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-192"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-192",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0144",
+    "serial": "SN-2026-00144",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T17:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-193"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-193",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0145",
+    "serial": "SN-2026-00145",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-194"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-194",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0146",
+    "serial": "SN-2026-00146",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T14:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-195"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-195",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0147",
+    "serial": "SN-2026-00147",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-196"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-196",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0148",
+    "serial": "SN-2026-00148",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T11:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-197"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-197",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0149",
+    "serial": "SN-2026-00149",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Probable",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-198"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-198",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0150",
+    "serial": "SN-2026-00150",
+    "toolId": "TOOL-B",
+    "runId": "RUN-384",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T08:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-384",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-199"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-199",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-254",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0151",
+    "serial": "SN-2026-00151",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-200"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-200",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0152",
+    "serial": "SN-2026-00152",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T05:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-201"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-201",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0153",
+    "serial": "SN-2026-00153",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-202"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-202",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0154",
+    "serial": "SN-2026-00154",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T02:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-203"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-203",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0155",
+    "serial": "SN-2026-00155",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-25T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-204"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-204",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0156",
+    "serial": "SN-2026-00156",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-24T23:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-205"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-205",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-101"
+  },
+  {
+    "unitId": "TS-BRK-0157",
+    "serial": "SN-2026-00157",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-24T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-206"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-206",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-BRK-0158",
+    "serial": "SN-2026-00158",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer X",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-24T20:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-207"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-207",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-103"
+  },
+  {
+    "unitId": "TS-BRK-0159",
+    "serial": "SN-2026-00159",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Dealer Y",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-24T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-208"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-208",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-BRK-0160",
+    "serial": "SN-2026-00160",
+    "toolId": "TOOL-B",
+    "runId": "RUN-385",
+    "batchId": "BATCH-2026-B8",
+    "tier": "Confirmed",
+    "location": "Distribution Hub C",
+    "windowMembership": [
+      "7d"
+    ],
+    "productionTime": "2026-10-24T17:12:00.000Z",
+    "evidenceIds": [
+      "EV-RUN-RUN-385",
+      "EV-BATCH-BATCH-2026-B8",
+      "EV-TUE-TUE-TOOL-B-HIST-209"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-HIST-209",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-255",
+    "operatorId": "OP-105"
+  },
+  {
+    "unitId": "TS-BRK-0161",
+    "serial": "SN-2026-00161",
+    "toolId": "TOOL-B",
+    "runId": "RUN-360",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-23T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-161"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-0",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0162",
+    "serial": "SN-2026-00162",
+    "toolId": "TOOL-B",
+    "runId": "RUN-360",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-22T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-162"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-1",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0163",
+    "serial": "SN-2026-00163",
+    "toolId": "TOOL-B",
+    "runId": "RUN-360",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-22T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-163"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-2",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0164",
+    "serial": "SN-2026-00164",
+    "toolId": "TOOL-B",
+    "runId": "RUN-360",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-21T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-164"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-3",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0165",
+    "serial": "SN-2026-00165",
+    "toolId": "TOOL-B",
+    "runId": "RUN-360",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-21T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-165"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-4",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0166",
+    "serial": "SN-2026-00166",
+    "toolId": "TOOL-B",
+    "runId": "RUN-361",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-20T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-166"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-5",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0167",
+    "serial": "SN-2026-00167",
+    "toolId": "TOOL-B",
+    "runId": "RUN-361",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-20T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-167"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-6",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0168",
+    "serial": "SN-2026-00168",
+    "toolId": "TOOL-B",
+    "runId": "RUN-361",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-19T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-168"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-7",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0169",
+    "serial": "SN-2026-00169",
+    "toolId": "TOOL-B",
+    "runId": "RUN-361",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-19T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-169"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-8",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0170",
+    "serial": "SN-2026-00170",
+    "toolId": "TOOL-B",
+    "runId": "RUN-361",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-18T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-170"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-9",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0171",
+    "serial": "SN-2026-00171",
+    "toolId": "TOOL-B",
+    "runId": "RUN-362",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-18T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-171"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-10",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0172",
+    "serial": "SN-2026-00172",
+    "toolId": "TOOL-B",
+    "runId": "RUN-362",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-17T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-172"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-11",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0173",
+    "serial": "SN-2026-00173",
+    "toolId": "TOOL-B",
+    "runId": "RUN-362",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-17T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-173"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-12",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0174",
+    "serial": "SN-2026-00174",
+    "toolId": "TOOL-B",
+    "runId": "RUN-362",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-16T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-174"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-13",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0175",
+    "serial": "SN-2026-00175",
+    "toolId": "TOOL-B",
+    "runId": "RUN-362",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-16T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-175"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-14",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0176",
+    "serial": "SN-2026-00176",
+    "toolId": "TOOL-B",
+    "runId": "RUN-363",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-15T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-176"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-15",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0177",
+    "serial": "SN-2026-00177",
+    "toolId": "TOOL-B",
+    "runId": "RUN-363",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-15T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-177"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-16",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0178",
+    "serial": "SN-2026-00178",
+    "toolId": "TOOL-B",
+    "runId": "RUN-363",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-14T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-178"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-17",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0179",
+    "serial": "SN-2026-00179",
+    "toolId": "TOOL-B",
+    "runId": "RUN-363",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-14T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-179"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-18",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-BRK-0180",
+    "serial": "SN-2026-00180",
+    "toolId": "TOOL-B",
+    "runId": "RUN-363",
+    "batchId": "BATCH-2026-B-ARCHIVE",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-13T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-ARCHIVE-180"
+    ],
+    "toolUseEventId": "TUE-TOOL-B-ARCH-19",
+    "warnings": [],
+    "componentLot": "LOT-VALVE-HIST",
+    "operatorId": "OP-098"
+  },
+  {
+    "unitId": "TS-CAL-0181",
+    "serial": "SN-2026-00181",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T07:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-181"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-0",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0182",
+    "serial": "SN-2026-00182",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T05:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-182"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-1",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0183",
+    "serial": "SN-2026-00183",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T02:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-183"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-2",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0184",
+    "serial": "SN-2026-00184",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T00:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-184"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-3",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0185",
+    "serial": "SN-2026-00185",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-185"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-4",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0186",
+    "serial": "SN-2026-00186",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T19:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-186"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-5",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0187",
+    "serial": "SN-2026-00187",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T16:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-187"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-6",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0188",
+    "serial": "SN-2026-00188",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T14:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-188"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-7",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0189",
+    "serial": "SN-2026-00189",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T11:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-189"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-8",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0190",
+    "serial": "SN-2026-00190",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T09:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-190"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-9",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0191",
+    "serial": "SN-2026-00191",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-191"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-10",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0192",
+    "serial": "SN-2026-00192",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T04:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-192"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-11",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0193",
+    "serial": "SN-2026-00193",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T01:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-193"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-12",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0194",
+    "serial": "SN-2026-00194",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T23:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-194"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-13",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0195",
+    "serial": "SN-2026-00195",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-200",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T20:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-195"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-14",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0196",
+    "serial": "SN-2026-00196",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T18:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-196"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-15",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0197",
+    "serial": "SN-2026-00197",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-197"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-16",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0198",
+    "serial": "SN-2026-00198",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T13:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-198"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-17",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0199",
+    "serial": "SN-2026-00199",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T10:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-199"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-18",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0200",
+    "serial": "SN-2026-00200",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T08:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-200"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-19",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0201",
+    "serial": "SN-2026-00201",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T05:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-201"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-20",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0202",
+    "serial": "SN-2026-00202",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T03:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-202"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-21",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0203",
+    "serial": "SN-2026-00203",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-203"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-22",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0204",
+    "serial": "SN-2026-00204",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T22:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-204"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-23",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0205",
+    "serial": "SN-2026-00205",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T19:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-205"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-24",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0206",
+    "serial": "SN-2026-00206",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T17:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-206"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-25",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0207",
+    "serial": "SN-2026-00207",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T14:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-207"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-26",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0208",
+    "serial": "SN-2026-00208",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T12:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-208"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-27",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0209",
+    "serial": "SN-2026-00209",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-209"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-28",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0210",
+    "serial": "SN-2026-00210",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-201",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T07:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-210"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-29",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0211",
+    "serial": "SN-2026-00211",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T04:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-211"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-30",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0212",
+    "serial": "SN-2026-00212",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T02:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-212"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-31",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0213",
+    "serial": "SN-2026-00213",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T23:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-213"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-32",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0214",
+    "serial": "SN-2026-00214",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T21:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-214"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-33",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0215",
+    "serial": "SN-2026-00215",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-215"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-34",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0216",
+    "serial": "SN-2026-00216",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T16:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-216"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-35",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0217",
+    "serial": "SN-2026-00217",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T13:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-217"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-36",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0218",
+    "serial": "SN-2026-00218",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T11:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-218"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-37",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0219",
+    "serial": "SN-2026-00219",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T08:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-219"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-38",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0220",
+    "serial": "SN-2026-00220",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-2",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T06:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-220"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-39",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0221",
+    "serial": "SN-2026-00221",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-221"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-40",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0222",
+    "serial": "SN-2026-00222",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T01:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-222"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-41",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0223",
+    "serial": "SN-2026-00223",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T22:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-223"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-42",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0224",
+    "serial": "SN-2026-00224",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T20:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-224"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-43",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0225",
+    "serial": "SN-2026-00225",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-202",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T17:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-225"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-44",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0226",
+    "serial": "SN-2026-00226",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T15:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-226"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-45",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0227",
+    "serial": "SN-2026-00227",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-227"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-46",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0228",
+    "serial": "SN-2026-00228",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T10:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-228"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-47",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0229",
+    "serial": "SN-2026-00229",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T07:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-229"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-48",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0230",
+    "serial": "SN-2026-00230",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T05:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-230"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-49",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0231",
+    "serial": "SN-2026-00231",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T02:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-231"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-50",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0232",
+    "serial": "SN-2026-00232",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T00:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-232"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-51",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0233",
+    "serial": "SN-2026-00233",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-233"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-52",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0234",
+    "serial": "SN-2026-00234",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T19:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-234"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-53",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0235",
+    "serial": "SN-2026-00235",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T16:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-235"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-54",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0236",
+    "serial": "SN-2026-00236",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T14:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-236"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-55",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0237",
+    "serial": "SN-2026-00237",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T11:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-237"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-56",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0238",
+    "serial": "SN-2026-00238",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T09:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-238"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-57",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0239",
+    "serial": "SN-2026-00239",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-239"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-58",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0240",
+    "serial": "SN-2026-00240",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-203",
+    "batchId": "BATCH-2026-A-3",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T04:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-240"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-59",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0241",
+    "serial": "SN-2026-00241",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-204",
+    "batchId": "BATCH-2026-A-4",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T01:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-241"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-60",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0242",
+    "serial": "SN-2026-00242",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-204",
+    "batchId": "BATCH-2026-A-4",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T23:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-242"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-61",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0243",
+    "serial": "SN-2026-00243",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-204",
+    "batchId": "BATCH-2026-A-4",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T20:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-243"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-62",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0244",
+    "serial": "SN-2026-00244",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-204",
+    "batchId": "BATCH-2026-A-4",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T18:12:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-244"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-63",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-CAL-0245",
+    "serial": "SN-2026-00245",
+    "toolId": "TOOL-A",
+    "runId": "RUN-A-204",
+    "batchId": "BATCH-2026-A-4",
+    "tier": "Confirmed",
+    "location": "Customer Fleet",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-A-245"
+    ],
+    "toolUseEventId": "TUE-TOOL-A-64",
+    "warnings": [],
+    "componentLot": "LOT-CAL-01",
+    "operatorId": "OP-102"
+  },
+  {
+    "unitId": "TS-SPD-0246",
+    "serial": "SN-2026-00246",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-246"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-0",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0247",
+    "serial": "SN-2026-00247",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-247"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-1",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0248",
+    "serial": "SN-2026-00248",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-31T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-248"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-2",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0249",
+    "serial": "SN-2026-00249",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-249"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-3",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0250",
+    "serial": "SN-2026-00250",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-250"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-4",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0251",
+    "serial": "SN-2026-00251",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-251"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-5",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0252",
+    "serial": "SN-2026-00252",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-252"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-6",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0253",
+    "serial": "SN-2026-00253",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-253"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-7",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0254",
+    "serial": "SN-2026-00254",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-254"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-8",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0255",
+    "serial": "SN-2026-00255",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-255"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-9",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0256",
+    "serial": "SN-2026-00256",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-30T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-256"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-10",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0257",
+    "serial": "SN-2026-00257",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-257"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-11",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0258",
+    "serial": "SN-2026-00258",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-258"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-12",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0259",
+    "serial": "SN-2026-00259",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-259"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-13",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0260",
+    "serial": "SN-2026-00260",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-100",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-260"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-14",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0261",
+    "serial": "SN-2026-00261",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-261"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-15",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0262",
+    "serial": "SN-2026-00262",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-262"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-16",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0263",
+    "serial": "SN-2026-00263",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-263"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-17",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0264",
+    "serial": "SN-2026-00264",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-29T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-264"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-18",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0265",
+    "serial": "SN-2026-00265",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-1",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-265"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-19",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0266",
+    "serial": "SN-2026-00266",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-266"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-20",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0267",
+    "serial": "SN-2026-00267",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-267"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-21",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0268",
+    "serial": "SN-2026-00268",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-268"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-22",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0269",
+    "serial": "SN-2026-00269",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-269"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-23",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0270",
+    "serial": "SN-2026-00270",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Factory stock",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-270"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-24",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0271",
+    "serial": "SN-2026-00271",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-271"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-25",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0272",
+    "serial": "SN-2026-00272",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-28T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-272"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-26",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0273",
+    "serial": "SN-2026-00273",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-273"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-27",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0274",
+    "serial": "SN-2026-00274",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-274"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-28",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0275",
+    "serial": "SN-2026-00275",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-101",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-275"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-29",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0276",
+    "serial": "SN-2026-00276",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-276"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-30",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0277",
+    "serial": "SN-2026-00277",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-277"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-31",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0278",
+    "serial": "SN-2026-00278",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-278"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-32",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0279",
+    "serial": "SN-2026-00279",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-279"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-33",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0280",
+    "serial": "SN-2026-00280",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-27T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-280"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-34",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0281",
+    "serial": "SN-2026-00281",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-281"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-35",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0282",
+    "serial": "SN-2026-00282",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-282"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-36",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0283",
+    "serial": "SN-2026-00283",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-283"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-37",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0284",
+    "serial": "SN-2026-00284",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-284"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-38",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0285",
+    "serial": "SN-2026-00285",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-2",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-285"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-39",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0286",
+    "serial": "SN-2026-00286",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-286"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-40",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0287",
+    "serial": "SN-2026-00287",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-287"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-41",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0288",
+    "serial": "SN-2026-00288",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-26T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-288"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-42",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0289",
+    "serial": "SN-2026-00289",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-289"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-43",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0290",
+    "serial": "SN-2026-00290",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-102",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-290"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-44",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0291",
+    "serial": "SN-2026-00291",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-291"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-45",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0292",
+    "serial": "SN-2026-00292",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-292"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-46",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0293",
+    "serial": "SN-2026-00293",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T09:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-293"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-47",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0294",
+    "serial": "SN-2026-00294",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T06:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-294"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-48",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0295",
+    "serial": "SN-2026-00295",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T03:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-295"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-49",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0296",
+    "serial": "SN-2026-00296",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-25T00:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-296"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-50",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0297",
+    "serial": "SN-2026-00297",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T21:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-297"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-51",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0298",
+    "serial": "SN-2026-00298",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T18:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-298"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-52",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0299",
+    "serial": "SN-2026-00299",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T15:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-299"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-53",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  },
+  {
+    "unitId": "TS-SPD-0300",
+    "serial": "SN-2026-00300",
+    "toolId": "TOOL-C",
+    "runId": "RUN-C-103",
+    "batchId": "BATCH-2026-C-3",
+    "tier": "Confirmed",
+    "location": "Dealer Z",
+    "windowMembership": [],
+    "productionTime": "2026-10-24T12:42:00.000Z",
+    "evidenceIds": [
+      "EV-TOOL-C-300"
+    ],
+    "toolUseEventId": "TUE-TOOL-C-54",
+    "warnings": [],
+    "componentLot": "LOT-SPD-99",
+    "operatorId": "OP-104"
+  }
+]

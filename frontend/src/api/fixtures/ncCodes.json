@@ -1,0 +1,22 @@
+[
+  {
+    "code": "NC-FAST-042",
+    "group": "FASTENERS",
+    "description": "Bolt Torque Deviation (< specification)"
+  },
+  {
+    "code": "NC-FAST-043",
+    "group": "FASTENERS",
+    "description": "Cross-threaded or stripped fastener"
+  },
+  {
+    "code": "NC-CAL-012",
+    "group": "CALIBRATION",
+    "description": "Transducer telemetry drift out of tolerance"
+  },
+  {
+    "code": "NC-SURF-009",
+    "group": "SURFACE",
+    "description": "Scratch or indentation on mating flange"
+  }
+]

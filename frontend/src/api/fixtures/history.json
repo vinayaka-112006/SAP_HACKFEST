@@ -1,0 +1,58 @@
+[
+  {
+    "eventId": "HIST-EV-01",
+    "date": "2026-10-31T12:30:00.000Z",
+    "type": "duplicate_report",
+    "incidentId": "TS-0002",
+    "toolId": "TOOL-B",
+    "title": "Secondary Worker Report (Possible Duplicate)",
+    "author": "Ramesh N. (Line 3)",
+    "language": "hi",
+    "rawText": "टूल बी नट कसने में झटके दे रहा है और स्लिप हो रहा है",
+    "translatedText": "Tool B is jerking while tightening nuts and slipping",
+    "actionRequired": "Merge or keep separate prompt",
+    "potentialDuplicateOf": "TS-0001"
+  },
+  {
+    "eventId": "HIST-EV-02",
+    "date": "2026-10-31T10:42:00.000Z",
+    "type": "incident",
+    "incidentId": "TS-0001",
+    "toolId": "TOOL-B",
+    "title": "Reported: Torque Drift / Fastener Looseness",
+    "author": "Basavaraj K. (Operator)",
+    "language": "kn",
+    "rawText": "ಟೂಲ್ ಬಿ ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿ ಬಿಡುತ್ತಿದೆ",
+    "translatedText": "Tool B is leaving bolts loose",
+    "badge": "Active Incident"
+  },
+  {
+    "eventId": "HIST-EV-03",
+    "date": "2026-10-19T14:15:00.000Z",
+    "type": "repeat_incident",
+    "incidentId": "TS-9088",
+    "toolId": "TOOL-B",
+    "title": "Repeat Incident: Torque clutch slip (12 days ago)",
+    "author": "Arun V.",
+    "resolution": "Torque spring retensioned, passed 5 sample cycles. Repeat pattern flagged.",
+    "isRepeatFlag": true
+  },
+  {
+    "eventId": "HIST-EV-04",
+    "date": "2026-10-15T09:00:00.000Z",
+    "type": "calibration",
+    "toolId": "TOOL-B",
+    "title": "Periodic Scheduled Calibration",
+    "author": "Metrology Lab",
+    "resolution": "Calibrated to ISO 6789. Deviation was +1.2Nm."
+  },
+  {
+    "eventId": "HIST-EV-05",
+    "date": "2026-09-28T11:20:00.000Z",
+    "type": "repair",
+    "toolId": "TOOL-B",
+    "title": "Handle Sensor Replacement",
+    "author": "Ravi M. (Senior Tech)",
+    "resolution": "Replaced transducer wiring harness."
+  }
+]

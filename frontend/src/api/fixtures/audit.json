@@ -1,0 +1,32 @@
+[
+  {
+    "auditId": "AUD-9001",
+    "incidentId": "TS-0001",
+    "timestamp": "2026-10-31T10:42:01.000Z",
+    "actor": "OP-104 (Basavaraj K.)",
+    "role": "Shop-Floor Worker",
+    "action": "INCIDENT_INTAKE_SUBMITTED",
+    "details": "Spoken intake in Kannada transcribed and structured via Generative AI Hub",
+    "modelVersion": "SAP-GenAI-Adapter v2.4.1 (Claude 3.5 Sonnet / Azure OpenAI)"
+  },
+  {
+    "auditId": "AUD-9002",
+    "incidentId": "TS-0001",
+    "timestamp": "2026-10-31T10:42:04.000Z",
+    "actor": "System AI Engine",
+    "role": "Triage Agent",
+    "action": "TRACE_CALCULATED",
+    "details": "Calculated 72h deterministic exposure window: 100 potentially exposed assemblies (40 Stock, 35 Dealer X, 25 Dealer Y)",
+    "modelVersion": "Deterministic Trace Algorithm v1.0"
+  },
+  {
+    "auditId": "AUD-9003",
+    "incidentId": "TS-0001",
+    "timestamp": "2026-10-31T10:45:12.000Z",
+    "actor": "Yogesh (1MV24CS240)",
+    "role": "Plant Manager",
+    "action": "INTERLOCK_GATE_APPROVED",
+    "details": "Proposal PROP-001 (Restrict Tool B) approved. Dispatched simulated lock to SAP DM.",
+    "modelVersion": "Human Approval Step 1"
+  }
+]
