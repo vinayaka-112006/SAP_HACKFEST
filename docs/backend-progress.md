@@ -5,3 +5,5 @@ Baseline inspected: a5a9879, branch yogesh/platform, clean tree. CAP 10.2.2, SQL
 Continuation authorization supersedes previous Phase 1 STOP. Continue sequentially; use provisional ground truth and never create Jamuna's approved file.
 
 Phase 1: full 21-entity CDS model, construction plan, deterministic CSVs, provisional serial/tier ground truth, demo payloads and independent CSV deployment checks. Approval of ground truth remains external.
+
+Phase 2: CAP-backed incident create/confirm/detail, tools, history, audit; transaction-scoped audit/history/IDs; missing rules fallback; SQLite triggers and indexes installed both during deployment and after startup. Header demo role checks introduced ahead of Phase 4. Tests cover concurrency, rollback, audit protection and reassignment history.

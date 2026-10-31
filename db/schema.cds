@@ -221,4 +221,3 @@ entity Counter {
   key ![name] : String(120);
   ![value] : Integer64;
 }
-
