@@ -22,11 +22,12 @@ export default function App() {
           <IntroSequence onComplete={() => setShowIntro(false)} />
         )}
 
-        {/* Background Refractive Glows (Cyan-Teal Metallic) */}
+        {/* Background Refractive Glows (Cyan-Teal Metallic with Fluid Drift) */}
         <div className="ambient-glows" aria-hidden="true">
-          <div className="ambient-glow-1" />
-          <div className="ambient-glow-2" />
-          <div className="ambient-glow-3" />
+          <div className="ambient-glow-1 animate-glow-drift-1" />
+          <div className="ambient-glow-2 animate-glow-drift-2" />
+          <div className="ambient-glow-3 animate-glow-drift-3" />
+          <div className="ambient-glow-4 animate-glow-drift-4" />
         </div>
 
         {/* Top Enterprise Manufacturing Status Ribbon */}

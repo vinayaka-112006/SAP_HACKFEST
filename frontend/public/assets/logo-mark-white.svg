@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <filter id="glow-w">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer hexagonal bolt head — white outline -->
+  <polygon
+    points="256,42 432,144 432,368 256,470 80,368 80,144"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="5"
+    opacity="0.9"
+  />
+
+  <!-- Inner hex fill — very subtle white -->
+  <polygon
+    points="256,72 408,160 408,352 256,440 104,352 104,160"
+    fill="#FFFFFF"
+    opacity="0.06"
+  />
+
+  <!-- Gear teeth -->
+  <g fill="#FFFFFF" opacity="0.5">
+    <rect x="240" y="32" width="32" height="18" rx="3"/>
+    <rect x="240" y="462" width="32" height="18" rx="3"/>
+    <rect x="68" y="130" width="18" height="28" rx="3" transform="rotate(-30 77 144)"/>
+    <rect x="426" y="130" width="18" height="28" rx="3" transform="rotate(30 435 144)"/>
+    <rect x="68" y="354" width="18" height="28" rx="3" transform="rotate(30 77 368)"/>
+    <rect x="426" y="354" width="18" height="28" rx="3" transform="rotate(-30 435 368)"/>
+  </g>
+
+  <!-- Letter T -->
+  <g fill="#FFFFFF" filter="url(#glow-w)">
+    <rect x="148" y="140" width="120" height="28" rx="6"/>
+    <rect x="194" y="140" width="28" height="150" rx="6"/>
+  </g>
+
+  <!-- Letter S -->
+  <g filter="url(#glow-w)">
+    <path d="
+      M 270 155
+      Q 270 140, 290 140
+      L 350 140
+      Q 370 140, 370 160
+      L 370 190
+      Q 370 210, 350 210
+      L 290 210
+      Q 270 210, 270 230
+      L 270 260
+      Q 270 280, 290 280
+      L 350 280
+      Q 370 280, 370 260
+    " stroke="#FFFFFF" stroke-width="26" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wrench -->
+  <g transform="translate(130, 320) rotate(-45)" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.7">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="20" y1="20" x2="65" y2="65"/>
+    <circle cx="73" cy="73" r="10"/>
+    <path d="M 65 81 Q 73 89, 81 81" stroke-width="4"/>
+  </g>
+
+  <!-- Upward arrow -->
+  <g transform="translate(340, 100)" fill="#FFFFFF" opacity="0.8">
+    <polygon points="30,0 60,35 42,35 42,90 18,90 18,35 0,35"/>
+  </g>
+
+  <!-- Robot head -->
+  <g transform="translate(232, 80)" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity="0.65">
+    <rect x="6" y="10" width="36" height="28" rx="8"/>
+    <line x1="24" y1="10" x2="24" y2="2"/>
+    <circle cx="24" cy="0" r="3" fill="#FFFFFF"/>
+    <circle cx="17" cy="22" r="3" fill="#FFFFFF"/>
+    <circle cx="31" cy="22" r="3" fill="#FFFFFF"/>
+    <line x1="15" y1="30" x2="33" y2="30"/>
+  </g>
+</svg>

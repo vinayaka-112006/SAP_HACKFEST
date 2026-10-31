@@ -1,6 +1,146 @@
-/* Motion with a Purpose */
+/* Motion with a Purpose - Industrial Dynamics & Fluid Micro-Interactions */
 
-/* Lockout Tag Swing Physics */
+/* 1. Ambient Glow Drift & Atmosphere Physics */
+@keyframes ambientDrift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6vw, 4vh) scale(1.15); }
+  100% { transform: translate(-4vw, 7vh) scale(0.95); }
+}
+
+@keyframes ambientDrift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-6vw, -5vh) scale(1.18); }
+  100% { transform: translate(4vw, -4vh) scale(0.92); }
+}
+
+@keyframes ambientDrift3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-4vw, 6vh) scale(1.12); }
+  100% { transform: translate(6vw, -3vh) scale(0.96); }
+}
+
+@keyframes ambientDrift4 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5vw, -6vh) scale(1.2); }
+  100% { transform: translate(-5vw, 4vh) scale(0.9); }
+}
+
+.animate-glow-drift-1 {
+  animation: ambientDrift1 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-glow-drift-2 {
+  animation: ambientDrift2 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-glow-drift-3 {
+  animation: ambientDrift3 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-glow-drift-4 {
+  animation: ambientDrift4 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* 2. Floating Gentle Micro-Motion */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: floatGentle 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-slow {
+  animation: floatGentle 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* 3. Pulsing Aura & Glowing Status Accents */
+@keyframes pulseCyanGlow {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(0, 184, 204, 0.3), inset 0 0 8px rgba(0, 229, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(0, 229, 255, 0.65), 0 0 60px rgba(0, 184, 204, 0.35), inset 0 0 16px rgba(0, 229, 255, 0.4);
+  }
+}
+
+.animate-cyan-pulse {
+  animation: pulseCyanGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes badgePing {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 184, 204, 0.6);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(0, 184, 204, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 184, 204, 0);
+  }
+}
+
+.animate-badge-ping {
+  animation: badgePing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 4. Staggered Fade & Slide In Entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+.delay-5 { animation-delay: 0.40s; }
+
+/* 5. Shimmer Light Sweep for Highlights & Buttons */
+@keyframes shimmerBeam {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.shimmer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmerBeam 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 6. Lockout Tag Swing Physics */
 @keyframes tagSwing {
   0% { transform: rotate(0deg); }
   20% { transform: rotate(14deg); }
@@ -15,7 +155,7 @@
   animation: tagSwing 2.4s ease-in-out infinite;
 }
 
-/* Mic Orb Ambient Pulse */
+/* 7. Mic Orb Ambient Pulse */
 @keyframes orbPulse {
   0%, 100% {
     transform: scale(1);
@@ -31,7 +171,7 @@
   animation: orbPulse 3s infinite ease-in-out;
 }
 
-/* Interlock Gate 3D Door Rotation */
+/* 8. Interlock Gate 3D Door Rotation */
 .interlock-perspective {
   perspective: 800px;
 }
@@ -54,7 +194,7 @@
   transform: rotateY(82deg);
 }
 
-/* Accessibility: Disable motion when reduced motion is preferred */
+/* 9. Accessibility: Disable motion when reduced motion is preferred */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -62,10 +202,17 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .animate-tag-swing {
-    animation: none !important;
-  }
-  .animate-orb-pulse {
+  .animate-tag-swing,
+  .animate-orb-pulse,
+  .animate-glow-drift-1,
+  .animate-glow-drift-2,
+  .animate-glow-drift-3,
+  .animate-glow-drift-4,
+  .animate-float,
+  .animate-float-slow,
+  .animate-cyan-pulse,
+  .animate-badge-ping,
+  .animate-fade-in-up {
     animation: none !important;
   }
 }

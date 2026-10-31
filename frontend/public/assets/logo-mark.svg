@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <!-- Main gradient: cobalt to ice-teal -->
+    <linearGradient id="g1" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#003D73"/>
+      <stop offset="50%" stop-color="#0077B6"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+    <!-- Metallic sheen -->
+    <linearGradient id="g2" x1="180" y1="100" x2="380" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#B0E0FF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#003D73" stop-opacity="0.1"/>
+    </linearGradient>
+    <!-- Glow filter for dark backgrounds -->
+    <filter id="glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#003D73" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Outer hexagonal bolt head -->
+  <polygon
+    points="256,42 432,144 432,368 256,470 80,368 80,144"
+    fill="url(#g1)"
+    stroke="#00E5FF"
+    stroke-width="4"
+    filter="url(#shadow)"
+  />
+
+  <!-- Inner hex cutout for depth -->
+  <polygon
+    points="256,72 408,160 408,352 256,440 104,352 104,160"
+    fill="url(#g2)"
+    stroke="none"
+  />
+
+  <!-- Gear teeth around the hex (8 teeth) -->
+  <g stroke="#00E5FF" stroke-width="3" fill="none" opacity="0.7">
+    <rect x="240" y="32" width="32" height="18" rx="3" fill="#00E5FF" opacity="0.5"/>
+    <rect x="240" y="462" width="32" height="18" rx="3" fill="#00E5FF" opacity="0.5"/>
+    <rect x="68" y="130" width="18" height="28" rx="3" fill="#00E5FF" opacity="0.5" transform="rotate(-30 77 144)"/>
+    <rect x="426" y="130" width="18" height="28" rx="3" fill="#00E5FF" opacity="0.5" transform="rotate(30 435 144)"/>
+    <rect x="68" y="354" width="18" height="28" rx="3" fill="#00E5FF" opacity="0.5" transform="rotate(30 77 368)"/>
+    <rect x="426" y="354" width="18" height="28" rx="3" fill="#00E5FF" opacity="0.5" transform="rotate(-30 435 368)"/>
+  </g>
+
+  <!-- Letter T -->
+  <g fill="#FFFFFF" filter="url(#glow)">
+    <rect x="148" y="140" width="120" height="28" rx="6"/>
+    <rect x="194" y="140" width="28" height="150" rx="6"/>
+  </g>
+
+  <!-- Letter S -->
+  <g fill="#FFFFFF" filter="url(#glow)">
+    <path d="
+      M 270 155
+      Q 270 140, 290 140
+      L 350 140
+      Q 370 140, 370 160
+      L 370 190
+      Q 370 210, 350 210
+      L 290 210
+      Q 270 210, 270 230
+      L 270 260
+      Q 270 280, 290 280
+      L 350 280
+      Q 370 280, 370 260
+    " stroke="#FFFFFF" stroke-width="26" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wrench icon (bottom-left) -->
+  <g transform="translate(130, 320) rotate(-45)" fill="none" stroke="#B0E0FF" stroke-width="5" stroke-linecap="round" opacity="0.85">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="20" y1="20" x2="65" y2="65"/>
+    <circle cx="73" cy="73" r="10"/>
+    <path d="M 65 81 Q 73 89, 81 81" stroke-width="4"/>
+  </g>
+
+  <!-- Upward arrow (top-right) -->
+  <g transform="translate(340, 100)" fill="#00E5FF" opacity="0.9">
+    <polygon points="30,0 60,35 42,35 42,90 18,90 18,35 0,35"/>
+  </g>
+
+  <!-- Small robot head (top, centered) -->
+  <g transform="translate(232, 80)" fill="none" stroke="#B0E0FF" stroke-width="3.5" stroke-linecap="round" opacity="0.75">
+    <rect x="6" y="10" width="36" height="28" rx="8"/>
+    <line x1="24" y1="10" x2="24" y2="2"/>
+    <circle cx="24" cy="0" r="3" fill="#00E5FF"/>
+    <circle cx="17" cy="22" r="3" fill="#B0E0FF"/>
+    <circle cx="31" cy="22" r="3" fill="#B0E0FF"/>
+    <line x1="15" y1="30" x2="33" y2="30"/>
+  </g>
+</svg>
