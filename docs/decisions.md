@@ -16,3 +16,9 @@
 - npm audit fix applied compatible dependency updates. Runtime dependency audit is clean; the Jest development dependency tree still reports advisories. No forced major-version downgrade was applied.
 
 - Git had no configured author identity. Phase commits use the explicit automation identity `ToolSathi Automation <toolsathi-bot@users.noreply.github.com>` through per-command Git settings; no global or repository user identity is changed. Use your normal Git identity for future human commits.
+
+## Continuation decisions
+
+- The new user prompt authorizes Phases 1?6 without the previous STOP gates. Candidate ground truth stays provisional; no approved file is created. The verification command fails on any difference when an approved file appears.
+- Explicit scalar foreign identifiers plus unmanaged CDS associations preserve REST field names. The generator verifies required links; runtime services validate them transactionally. Broader database constraints can be added after cross-database migration review.
+- Time plan uses closed one-hour runs at least hours from all window boundaries. Missing-end events are bounded by valid linked run end for window selection. For conflicting run timestamps, run start is the scope anchor. Without this documented assumption, open-ended older records contaminate 24h and contradict the specified totals. Association tiers retain the uncertainty; there is no inferred confirmation. Change this policy and ground truth together after Jamuna review.

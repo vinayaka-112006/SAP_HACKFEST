@@ -1,0 +1,2 @@
+repairId;toolId;incidentId;description;loggedBy;loggedAt;testReadings;passed;verifiedBy;verifiedAt
+"REP-0001";"TOOL-B";"TS-0001";"Synthetic torque adjustment";"TECH-01";"2026-10-23T23:12:00.000Z";"{""torqueNm"":[40,40,40]}";"true";"VER-01";"2026-10-24T05:12:00.000Z"

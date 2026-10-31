@@ -1,0 +1,2 @@
+auditId;incidentId;toolId;actor;actorRole;action;details;reason;modelVersion;timestamp
+"AUD-SEED-0001";"TS-0001";"TOOL-B";"SEED-GENERATOR";"System";"SEED_HISTORY_IMPORTED";"{""state"":""Closed"",""synthetic"":true}";"Historical synthetic fixture imported; not a live workflow execution";"seed-v1";"2026-10-24T05:12:00.000Z"
