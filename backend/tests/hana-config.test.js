@@ -74,6 +74,24 @@ test("HANA compiler plan contains only CREATE tables and append-only triggers", 
 test("HDI bindings are never subjected to the direct-schema deployer", async () => {
   await expect(deploy({}, {}, {}, { mode: "hana", schema: "HDI_123", connection: "binding" }, { apply: true, env: { HANA_TARGET_CONFIRMED: "HDI_123" } })).rejects.toMatchObject({ code: "HANA_HDI_DEPLOY_REQUIRED" });
 });
+test("the catalog's own SCHEMA row is permitted without permitting foreign objects", async () => {
+  const cds = require("@sap/cds"), model = await cds.load("db/schema.cds");
+  const metadata = { schema: "TOOLSATHI", schemaVisible: true, objects: [{ OBJECT_NAME: null, OBJECT_TYPE: "SCHEMA" }] };
+  expect(() => assertExclusive(metadata, model)).not.toThrow();
+  expect(() => assertExclusive({ ...metadata, objects: [{ OBJECT_NAME: "OTHER_SCHEMA", OBJECT_TYPE: "SCHEMA" }] }, model)).toThrow("outside the ToolSathi model");
+  expect(() => assertExclusive({ ...metadata, objects: [...metadata.objects, { OBJECT_NAME: "OTHER_TABLE", OBJECT_TYPE: "TABLE" }] }, model)).toThrow("outside the ToolSathi model");
+});
+test("a HANA primary-key index appearing in both catalogs retains its INDEX type", async () => {
+  const cds = require("@sap/cds"), model = await cds.load("db/schema.cds");
+  const metadata = {
+    schema: "TOOLSATHI", schemaVisible: true,
+    objects: [{ OBJECT_NAME: "_SYS_PRIMARY_TOOL", OBJECT_TYPE: "INDEX" }],
+    indexes: [{ INDEX_NAME: "_SYS_PRIMARY_TOOL", TABLE_NAME: "TOOLSATHI_TOOL" }],
+    constraints: [{ CONSTRAINT_NAME: "_SYS_PRIMARY_TOOL", TABLE_NAME: "TOOLSATHI_TOOL" }],
+  };
+  expect(() => assertExclusive(metadata, model)).not.toThrow();
+  expect(() => assertExclusive({ ...metadata, indexes: [{ INDEX_NAME: "_SYS_PRIMARY_TOOL", TABLE_NAME: "OTHER_APP" }], constraints: [] }, model)).toThrow("outside the ToolSathi model");
+});
 test("test environment never loads a developer .env file", () => {
   const out = execFileSync(process.execPath, ["-e", "process.loadEnvFile=()=>{throw Error('must not load')};require('./srv/lib/database-config').loadEnvironment();console.log('isolated')"], { env: { ...process.env, NODE_ENV: "test" }, encoding: "utf8" });
   expect(out.trim()).toBe("isolated");

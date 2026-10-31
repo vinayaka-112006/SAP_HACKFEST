@@ -22,7 +22,7 @@ export default function WindowLens({ activeWindow = 72, totalUnits, onWindowChan
         flexWrap: 'wrap',
         gap: '16px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px', maxWidth: '100%' }}>
           <span style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -56,8 +56,9 @@ export default function WindowLens({ activeWindow = 72, totalUnits, onWindowChan
         </div>
 
         {/* Snap Buttons */}
-        <div style={{
+        <div className="window-presets" style={{
           display: 'flex',
+          flexWrap: 'wrap',
           alignItems: 'center',
           gap: '8px',
           background: 'rgba(255, 255, 255, 0.85)',

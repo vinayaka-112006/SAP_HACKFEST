@@ -1,5 +1,11 @@
 # Backend progress
 
+## Current integration verification
+
+The user selected HANA after the final real SQL check passed. Reviewed create-only deployment installed 21 tables and two audit triggers in the confirmed application schema. All 394 existing SQLite records were migrated and transactionally verified; the immediate repeat inserted zero. Post-application direct reads retain all imported rows (393 unchanged, one incident counter advanced normally). Original SQLite data and verified backup remain unchanged.
+
+Latest executed results: 101 backend tests / 16 suites, 17 frontend client tests, 8 isolated SQLite browser checks, 11 real HANA backend checks and 7 real HANA browser checks; all pass without failures/skips. CAP build, packaged runtime, frontend build, legacy fixtures, ground-truth verification and isolated API smoke pass. The local app runs on 5173/4004 with HANA; explicit local/fresh SQLite fallback remains available. No cloud application deployment, XSUAA live login or productive SAP action was performed. AI and four workflow stubs remain pending. See [current handover](../../docs/local-demo-readiness.md); counts below record earlier phases.
+
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
 Baseline: a5a9879, yogesh/platform, clean working tree; six platform tests and 18 fixture checks passed. Existing CAP/SQLite/Express architecture retained. No teammate modules/branches were available. No frontend, AI adapter or rules source was modified. No push or merge performed.

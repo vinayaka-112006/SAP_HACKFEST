@@ -1,5 +1,7 @@
 # Frontend/backend integration
 
+This records the initial integration phase. See [current local demo readiness](local-demo-readiness.md) for the subsequently authorized HANA cutover, completed 394-record migration, application fixes, combined launcher and latest executed tests.
+
 ## Current status
 
 Vinayaka's React 18/Vite 5 frontend was already merged successfully at e78c5c0 on integration/frontend-backend. No merge conflicts or missing frontend source remained. The existing design, assets, glass panels, isometric yard, typography, intro animation and routes were retained. The active app now reads the real CAP backend rather than fixtures; no competing backend, AI adapter or workflow engine was created.

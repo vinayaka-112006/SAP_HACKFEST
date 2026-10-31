@@ -132,6 +132,7 @@ p {
 .console-container {
   font-size: var(--text-console-min);
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 /* Monospace text */
@@ -202,4 +203,8 @@ pre { max-width:100%; overflow:auto; font-size:13px; white-space:pre-wrap;overfl
   .navigation-dock>a,.navigation-dock>div {flex-shrink:0;}
   .navigation-dock>a {min-height:44px;}
   .intro-replay {bottom:85px !important;}
+  .window-presets {width:100%;max-width:100%;}
+  .window-presets>button {flex:1 1 100%;justify-content:space-between;min-height:44px;}
+  .certainty-heading h2 {font-size:26px !important;}
+  .evidence-yard-canvas {height:300px !important;}
 }

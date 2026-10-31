@@ -9,7 +9,7 @@ function auditStatements() {
 }
 async function inspect(db, schema) {
   const [identity] = await db.run("SELECT CURRENT_USER, CURRENT_SCHEMA FROM DUMMY");
-  const schemas = await db.run("SELECT SCHEMA_NAME FROM SYS.SCHEMAS WHERE SCHEMA_NAME = ?", [schema]);
+  const schemas = await db.run("SELECT SCHEMA_NAME, SCHEMA_OWNER FROM SYS.SCHEMAS WHERE SCHEMA_NAME = ?", [schema]);
   const objects = await db.run("SELECT OBJECT_NAME, OBJECT_TYPE FROM SYS.OBJECTS WHERE SCHEMA_NAME = ? ORDER BY OBJECT_TYPE, OBJECT_NAME", [schema]);
   const indexes = await db.run("SELECT INDEX_NAME, TABLE_NAME FROM SYS.INDEXES WHERE SCHEMA_NAME = ?", [schema]);
   const constraints = await db.run("SELECT CONSTRAINT_NAME, TABLE_NAME FROM SYS.CONSTRAINTS WHERE SCHEMA_NAME = ?", [schema]);
@@ -17,17 +17,23 @@ async function inspect(db, schema) {
   try {
     privileges = await db.run("SELECT DISTINCT PRIVILEGE FROM SYS.EFFECTIVE_PRIVILEGES WHERE USER_NAME = CURRENT_USER AND SCHEMA_NAME = ? ORDER BY PRIVILEGE", [schema]);
   } catch { privilegeInspection = "unavailable: ask schema owner to review grants"; }
-  return { identity, schema, schemaVisible: schemas.length === 1, objects, indexes, constraints, privileges: privileges.map(row => row.PRIVILEGE), privilegeInspection };
+  return { identity, schema, schemaVisible: schemas.length === 1, schemaOwner: schemas[0]?.SCHEMA_OWNER, objects, indexes, constraints, privileges: privileges.map(row => row.PRIVILEGE), privilegeInspection };
 }
 function assertExclusive(metadata, model) {
   if (!metadata.schemaVisible) fail("HANA_SCHEMA_UNAVAILABLE", "The assigned schema is not visible; no objects or data were changed.");
-  const allowed = new Map(entities(model).map(entity => [entity.table.toUpperCase(), "TABLE"]));
+  const allowed = new Map(entities(model).map(entity => [entity.table.toUpperCase(), new Set(["TABLE"])]));
   const tables = new Set(allowed.keys());
+  const permit = (name, type) => {
+    if (!allowed.has(name)) allowed.set(name, new Set());
+    allowed.get(name).add(type);
+  };
   // Permit only indexes/constraints proven to belong to these exact application tables.
-  for (const index of metadata.indexes || []) if (tables.has(index.TABLE_NAME)) allowed.set(index.INDEX_NAME, "INDEX");
-  for (const constraint of metadata.constraints || []) if (tables.has(constraint.TABLE_NAME)) allowed.set(constraint.CONSTRAINT_NAME, "CONSTRAINT");
-  for (const item of auditStatements()) allowed.set(item.name, "TRIGGER");
-  if (metadata.objects.some(object => allowed.get(object.OBJECT_NAME) !== object.OBJECT_TYPE))
+  // HANA can report a primary-key name in both catalogs; retain both proven object types.
+  for (const index of metadata.indexes || []) if (tables.has(index.TABLE_NAME)) permit(index.INDEX_NAME, "INDEX");
+  for (const constraint of metadata.constraints || []) if (tables.has(constraint.TABLE_NAME)) permit(constraint.CONSTRAINT_NAME, "CONSTRAINT");
+  for (const item of auditStatements()) permit(item.name, "TRIGGER");
+  const ownSchema = object => object.OBJECT_TYPE === "SCHEMA" && metadata.schema && (object.OBJECT_NAME === null || object.OBJECT_NAME === metadata.schema);
+  if (metadata.objects.some(object => !ownSchema(object) && !allowed.get(object.OBJECT_NAME)?.has(object.OBJECT_TYPE)))
     fail("HANA_SCHEMA_CONFLICT", "The schema contains objects outside the ToolSathi model. Use a dedicated destination; no objects were changed.");
 }
 function deploymentPlan(cds, model) {

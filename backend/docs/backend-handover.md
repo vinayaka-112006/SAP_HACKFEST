@@ -2,7 +2,9 @@
 
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
-All data is synthetic. External SAP behavior is SIMULATED. No SAP tenant, BTP deployment, real identity provider, approved ground-truth sign-off or teammate workflow integration has been verified.
+All manufacturing data is synthetic. Real HANA Cloud persistence is now verified: 394 existing records migrated across 21 tables, actual incident/trace/audit writes and restart persistence, and append-only database protections. S/4HANA/DM behavior remains SIMULATED. BTP deployment, real identity provider, approved ground-truth sign-off and teammate workflow integration remain unverified.
+
+Current integration handover: [local demo readiness](../../docs/local-demo-readiness.md). Root `npm run dev` follows private backend configuration, currently HANA; `dev:local` and `dev:fresh` explicitly select SQLite. Latest results: 101 backend tests, 17 frontend client tests, 8 isolated browser checks, 11 live HANA backend checks and 7 live HANA browser checks, with zero failures/skips. Earlier SQLite-only counts below describe prior phases.
 
 ## Delivered architecture and files
 

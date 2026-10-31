@@ -23,7 +23,7 @@ module.exports = class ResultsReporter {
             "Jamuna ground truth sign-off",
             "Real teammate workflow and verified return",
             "Real XSUAA binding/token",
-            "HANA/MTAR deployment and cloud audit protection",
+            "BTP/HDI service deployment (direct HANA checks are reported separately)",
           ],
           groundTruth: trace?.groundTruth || "not exercised",
           trace: trace?.rows || [],

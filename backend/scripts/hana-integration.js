@@ -7,7 +7,8 @@ const { fork } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
 let server, db, currentCheck = "configuration", connected = false;
-const report = { mode: "hana", executedAt: new Date().toISOString(), status: "NOT_EXECUTED", checks: [], _label: "SIMULATED" };
+const applicationCheck = process.argv.includes("--application-check");
+const report = { mode: "hana", executedAt: new Date().toISOString(), status: "NOT_EXECUTED", verificationScope: applicationCheck ? "new uniquely identified synthetic incident in the confirmed application schema" : "dedicated test schema", checks: [], _label: "SIMULATED" };
 const headers = { "content-type": "application/json", "x-demo-user": "HANA-INTEGRATION", "x-demo-role": "Manager" };
 async function check(name, fn) {
   currentCheck = name;
@@ -46,7 +47,7 @@ async function main() {
   const cds = require("@sap/cds");
   const config = configuration.configureDatabase(cds, { mode: "hana" });
   configuration.assertTarget(config);
-  if (!process.env.HANA_TEST_SCHEMA || process.env.HANA_TEST_SCHEMA !== config.schema)
+  if (!applicationCheck && (!process.env.HANA_TEST_SCHEMA || process.env.HANA_TEST_SCHEMA !== config.schema))
     throw Object.assign(new Error("Set HANA_TEST_SCHEMA to the owner-authorized test schema selected by HANA_SCHEMA/binding. Never use the normal demo destination."), { code: "HANA_TEST_TARGET_REQUIRED" });
   const model = await cds.load("db/schema.cds");
   db = await cds.connect.to("db", { ...cds.env.requires.db, model, silent: true });
@@ -142,7 +143,7 @@ async function main() {
 main().catch(error => {
   report.status = report.checks.length || connected ? "FAILED" : "BLOCKED";
   report.failedAt = currentCheck;
-  report.error = configuration.diagnostic(error);
+  report.error = error.code === "ERR_ASSERTION" ? { code: "HANA_VERIFICATION_ASSERTION", message: "Application verification assertion failed; inspect the named failed check." } : configuration.diagnostic(error);
   process.exitCode = 1;
 }).finally(async () => {
   await stop();

@@ -1,7 +1,7 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-10-31T15:38:10.945Z",
-  "passed": 96,
+  "executedAt": "2026-10-31T16:59:41.464Z",
+  "passed": 101,
   "failed": 0,
   "skipped": 0,
   "suitesFailed": 0,
@@ -9,7 +9,7 @@
     "Jamuna ground truth sign-off",
     "Real teammate workflow and verified return",
     "Real XSUAA binding/token",
-    "HANA/MTAR deployment and cloud audit protection"
+    "BTP/HDI service deployment (direct HANA checks are reported separately)"
   ],
   "groundTruth": "PROVISIONAL CANDIDATE; Jamuna review pending",
   "trace": [
@@ -51,7 +51,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 13.64719999999943,
+      "durationMs": 19.558899999999994,
       "status": 200
     },
     {
@@ -92,7 +92,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 14.323500000000422,
+      "durationMs": 19.7413000000015,
       "status": 200
     },
     {
@@ -133,7 +133,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 14.660799999999654,
+      "durationMs": 20.483100000001286,
       "status": 200
     }
   ]

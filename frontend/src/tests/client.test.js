@@ -137,6 +137,12 @@ test("tools response must have the real tools envelope", async () => {
   const { api } = setup({ data: [{ toolId: "TOOL-B" }] });
   await assert.rejects(api.getTools(), { code: "INVALID_RESPONSE" });
 });
+for (const [label, value] of [["null", null], ["array", []], ["string", "unexpected"]]) {
+  test(`a JSON ${label} response is rejected as invalid rather than a network failure`, async () => {
+    const { api } = setup(value);
+    await assert.rejects(api.getIncident("TS-0002"), { code: "INVALID_RESPONSE" });
+  });
+}
 test("display mapping preserves backend totals, evidence IDs and Unknown tier", () => {
   const trace = {
     toolId: "TOOL-B",

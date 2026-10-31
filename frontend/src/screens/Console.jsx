@@ -116,6 +116,7 @@ export default function Console() {
               <div
                 style={{
                   display: "flex",
+                  flexWrap: "wrap",
                   alignItems: "center",
                   gap: "12px",
                   marginBottom: "6px",
@@ -419,7 +420,7 @@ export default function Console() {
                 <StatusBadge status="Simulated" />
                 <h3>{doc.type}</h3>
                 <p>
-                  {doc.docId} ? {doc.system} ? {doc.createdAt}
+                  {doc.docId} | {doc.system} | {doc.createdAt}
                 </p>
                 <details>
                   <summary>Document fields</summary>

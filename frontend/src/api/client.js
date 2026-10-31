@@ -51,6 +51,11 @@ export function createApiClient({
           status: response.status,
         });
       }
+      if (value === null || typeof value !== "object" || Array.isArray(value))
+        throw new ApiError("The API returned an invalid response object.", {
+          code: "INVALID_RESPONSE",
+          status: response.status,
+        });
       if (!response.ok)
         throw new ApiError(
           value.error?.message || `Request failed (${response.status}).`,

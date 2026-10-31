@@ -1,0 +1,31 @@
+{
+  "executedAt": "2026-10-31T16:29:12.053Z",
+  "applied": true,
+  "createTables": 21,
+  "createAuditTriggers": 2,
+  "statements": [
+    "CREATE TABLE toolsathi_Tool (\n  toolId NVARCHAR(120) NOT NULL,\n  type NVARCHAR(120),\n  line NVARCHAR(120),\n  workCenter NVARCHAR(120),\n  state NVARCHAR(120),\n  calibrationDue DATE,\n  usageCount INTEGER,\n  lastVerifiedGood TIMESTAMP,\n  PRIMARY KEY(toolId)\n);",
+    "CREATE TABLE toolsathi_ToolUseEvent (\n  eventId NVARCHAR(120) NOT NULL,\n  toolId NVARCHAR(120),\n  runId NVARCHAR(120),\n  \"START\" TIMESTAMP,\n  \"END\" TIMESTAMP,\n  sourceRecordId NVARCHAR(120),\n  PRIMARY KEY(eventId)\n);",
+    "CREATE TABLE toolsathi_ProductionRun (\n  runId NVARCHAR(120) NOT NULL,\n  startTime TIMESTAMP,\n  endTime TIMESTAMP,\n  operatorId NVARCHAR(120),\n  material NVARCHAR(120),\n  workCenter NVARCHAR(120),\n  PRIMARY KEY(runId)\n);",
+    "CREATE TABLE toolsathi_Batch (\n  batchId NVARCHAR(120) NOT NULL,\n  runId NVARCHAR(120),\n  material NVARCHAR(120),\n  quantity INTEGER,\n  supplierLot NVARCHAR(120),\n  status NVARCHAR(120),\n  PRIMARY KEY(batchId)\n);",
+    "CREATE TABLE toolsathi_Unit (\n  serial NVARCHAR(120) NOT NULL,\n  batchId NVARCHAR(120),\n  status NVARCHAR(120),\n  value DECIMAL(15, 2),\n  PRIMARY KEY(serial)\n);",
+    "CREATE TABLE toolsathi_InventoryStock (\n  stockId NVARCHAR(120) NOT NULL,\n  batchId NVARCHAR(120),\n  location NVARCHAR(120),\n  quantity INTEGER,\n  value DECIMAL(15, 2),\n  stockStatus NVARCHAR(120),\n  snapshotTime TIMESTAMP,\n  PRIMARY KEY(stockId)\n);",
+    "CREATE TABLE toolsathi_Shipment (\n  shipmentId NVARCHAR(120) NOT NULL,\n  batchId NVARCHAR(120),\n  dealerId NVARCHAR(120),\n  quantity INTEGER,\n  shipDate TIMESTAMP,\n  recordTime TIMESTAMP,\n  PRIMARY KEY(shipmentId)\n);",
+    "CREATE TABLE toolsathi_Dealer (\n  dealerId NVARCHAR(120) NOT NULL,\n  name NVARCHAR(120),\n  \"LANGUAGE\" NVARCHAR(120),\n  PRIMARY KEY(dealerId)\n);",
+    "CREATE TABLE toolsathi_Incident (\n  incidentId NVARCHAR(120) NOT NULL,\n  toolId NVARCHAR(120),\n  reporterId NVARCHAR(120),\n  \"LANGUAGE\" NVARCHAR(120),\n  rawText NCLOB,\n  translatedText NCLOB,\n  category NVARCHAR(120),\n  suggestedNcCode NVARCHAR(120),\n  confidence DOUBLE,\n  missingFields NCLOB,\n  state NVARCHAR(120),\n  createdAt TIMESTAMP,\n  reportedAt TIMESTAMP,\n  reportedAtSource NVARCHAR(120),\n  confirmedAt TIMESTAMP,\n  confirmedBy NVARCHAR(120),\n  modelVersion NVARCHAR(120),\n  PRIMARY KEY(incidentId)\n);",
+    "CREATE TABLE toolsathi_IncidentEvidence (\n  evidenceId NVARCHAR(120) NOT NULL,\n  incidentId NVARCHAR(120),\n  type NVARCHAR(120),\n  reference NCLOB,\n  sourceTime TIMESTAMP,\n  PRIMARY KEY(evidenceId)\n);",
+    "CREATE TABLE toolsathi_TraceResult (\n  traceId NVARCHAR(120) NOT NULL,\n  incidentId NVARCHAR(120),\n  windowHours INTEGER,\n  units NCLOB,\n  tiers NCLOB,\n  valueAtRisk DECIMAL(15, 2),\n  dataQualityScore INTEGER,\n  gaps NCLOB,\n  snapshotTime TIMESTAMP,\n  version INTEGER,\n  generatedAt TIMESTAMP,\n  PRIMARY KEY(traceId)\n);",
+    "CREATE TABLE toolsathi_Proposal (\n  proposalId NVARCHAR(120) NOT NULL,\n  incidentId NVARCHAR(120),\n  type NVARCHAR(120),\n  payload NCLOB,\n  reason NCLOB,\n  state NVARCHAR(120),\n  createdAt TIMESTAMP,\n  PRIMARY KEY(proposalId)\n);",
+    "CREATE TABLE toolsathi_Approval (\n  approvalId NVARCHAR(120) NOT NULL,\n  proposalId NVARCHAR(120),\n  approverRole NVARCHAR(120),\n  decision NVARCHAR(120),\n  reason NCLOB,\n  decidedAt TIMESTAMP,\n  decidedBy NVARCHAR(120),\n  PRIMARY KEY(approvalId)\n);",
+    "CREATE TABLE toolsathi_RepairLog (\n  repairId NVARCHAR(120) NOT NULL,\n  toolId NVARCHAR(120),\n  incidentId NVARCHAR(120),\n  description NCLOB,\n  loggedBy NVARCHAR(120),\n  loggedAt TIMESTAMP,\n  testReadings NCLOB,\n  passed BOOLEAN,\n  verifiedBy NVARCHAR(120),\n  verifiedAt TIMESTAMP,\n  PRIMARY KEY(repairId)\n);",
+    "CREATE TABLE toolsathi_CalibrationRecord (\n  calibrationId NVARCHAR(120) NOT NULL,\n  toolId NVARCHAR(120),\n  calibratedAt TIMESTAMP,\n  result NVARCHAR(120),\n  PRIMARY KEY(calibrationId)\n);",
+    "CREATE TABLE toolsathi_ToolHistoryEvent (\n  eventId NVARCHAR(120) NOT NULL,\n  toolId NVARCHAR(120),\n  type NVARCHAR(120),\n  \"AT\" TIMESTAMP,\n  summary NCLOB,\n  refId NVARCHAR(120),\n  details NCLOB,\n  PRIMARY KEY(eventId)\n);",
+    "CREATE TABLE toolsathi_AuditLog (\n  auditId NVARCHAR(120) NOT NULL,\n  incidentId NVARCHAR(120),\n  toolId NVARCHAR(120),\n  actor NVARCHAR(120),\n  actorRole NVARCHAR(120),\n  action NVARCHAR(120),\n  details NCLOB,\n  reason NCLOB,\n  modelVersion NVARCHAR(120),\n  \"TIMESTAMP\" TIMESTAMP,\n  PRIMARY KEY(auditId)\n);",
+    "CREATE TABLE toolsathi_NcCode (\n  code NVARCHAR(120) NOT NULL,\n  \"GROUP\" NVARCHAR(120),\n  description NCLOB,\n  PRIMARY KEY(code)\n);",
+    "CREATE TABLE toolsathi_SopDoc (\n  docId NVARCHAR(120) NOT NULL,\n  title NVARCHAR(120),\n  section NVARCHAR(120),\n  \"TEXT\" NCLOB,\n  PRIMARY KEY(docId)\n);",
+    "CREATE TABLE toolsathi_MockDocument (\n  docId NVARCHAR(120) NOT NULL,\n  system NVARCHAR(120),\n  type NVARCHAR(120),\n  incidentId NVARCHAR(120),\n  payload NCLOB,\n  createdAt TIMESTAMP,\n  PRIMARY KEY(docId)\n);",
+    "CREATE TABLE toolsathi_Counter (\n  name NVARCHAR(120) NOT NULL,\n  value BIGINT,\n  PRIMARY KEY(name)\n);",
+    "CREATE TRIGGER TOOLSATHI_AUDIT_NO_UPDATE BEFORE UPDATE ON toolsathi_AuditLog FOR EACH ROW BEGIN SIGNAL SQL_ERROR_CODE 10001 SET MESSAGE_TEXT = 'Application audit history is append-only'; END",
+    "CREATE TRIGGER TOOLSATHI_AUDIT_NO_DELETE BEFORE DELETE ON toolsathi_AuditLog FOR EACH ROW BEGIN SIGNAL SQL_ERROR_CODE 10001 SET MESSAGE_TEXT = 'Application audit history is append-only'; END"
+  ]
+}

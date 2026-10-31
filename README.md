@@ -1,6 +1,6 @@
 # ToolSathi
 
-A synthetic manufacturing incident and product-exposure investigation prototype. SAP services are explicitly SIMULATED; no real SAP tenant is connected.
+A synthetic manufacturing incident and product-exposure investigation prototype. Local application persistence is verified against real SAP HANA Cloud. S/4HANA and Digital Manufacturing actions remain explicitly SIMULATED.
 
 ## Repository map
 
@@ -12,7 +12,23 @@ deploy/      Shared deployment guidance; executable MTA/XSUAA configuration live
 backup/      Ignored database backups and isolated verification databases
 ```
 
-## Start the backend
+## Start the application on Windows
+
+Use Node 24.11+ (major 24). From the repository root:
+
+```powershell
+npm --prefix backend ci
+npm --prefix frontend ci
+npm run dev
+```
+
+Open **http://localhost:5173**; API: **http://localhost:4004/api**. The combined launcher follows `backend/.env`, currently configured for HANA, and stops its two children on Ctrl+C. It reports occupied ports without stopping existing applications. Root dependency installation is unnecessary.
+
+`npm run dev:local` explicitly uses the preserved `backend/db.sqlite` offline. `npm run dev:fresh` creates a separate seeded SQLite file under ignored `backup/` each time. Neither resets the existing database. Stop the running application before switching modes.
+
+See [current demo readiness, verified results and limitations](docs/local-demo-readiness.md). Existing data migration completed: **394 records across 21 tables**, with content verification and a zero-insert repeat before application testing.
+
+## Start the backend independently with SQLite
 
 Use Node 24.11+ (major 24). The backend installs and runs independently:
 
@@ -24,7 +40,7 @@ npm run verify-ground-truth
 npm run start:local
 ```
 
-API: **http://localhost:4004/api**. Local protected requests need `x-demo-user` and `x-demo-role`. `seed` generates files without resetting existing database state. The sole demo database is `backend/db.sqlite`; backups are in repository `backup/`.
+API: **http://localhost:4004/api**. Local protected requests need `x-demo-user` and `x-demo-role`. `seed` generates files without resetting existing database state. The preserved offline demo database is `backend/db.sqlite`; backups are in repository `backup/`. Use `npm run start:hana` instead for the configured HANA target; startup never deploys or imports records.
 
 In another backend terminal run `npm test`, `npm run verify:stubs` or `npm run smoke`. The smoke command creates a synthetic incident. Build checks: `npm run build`, then `npm run verify:package`.
 
@@ -40,10 +56,11 @@ npm ci
 npm run dev
 ```
 
-Open **http://localhost:5173**. The existing design is preserved; /api is proxied to the backend. Local demo roles are explicitly labelled. Typed reporting, separate confirmation, incident lookup, tool history, trace windows, audit and simulated documents use real APIs. AI and workflow stubs stay unavailable. See [integration walkthrough and executed tests](docs/frontend-backend-integration.md).
+Open **http://localhost:5173**. The existing design is preserved; /api is proxied to the backend. Local demo roles are explicitly labelled. Typed reporting, separate confirmation, incident lookup, tool history, trace windows, audit and simulated documents use real APIs. AI and workflow stubs stay unavailable. See [current walkthrough and executed tests](docs/local-demo-readiness.md).
 
 ## Documentation
 
+- [Current demo readiness and HANA verification](docs/local-demo-readiness.md)
 - [Frontend/backend integration](docs/frontend-backend-integration.md)
 - [Architecture and folder ownership](docs/architecture/overview.md)
 - [API documentation](docs/api/README.md)

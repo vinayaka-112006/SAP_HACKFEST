@@ -1,5 +1,14 @@
 # Decisions
 
+## Current HANA cutover and local application stabilization
+
+- The user's later explicit HANA choice supersedes the previous SQLite-only plan. Private `.env` selects direct HANA; explicit local/fresh launchers and default regression tests retain SQLite isolation. No HANA code was removed.
+- The real HANA catalog includes the schema itself and overlapping primary-key index/constraint names. Recognize those proven objects without permitting foreign objects. The inspected account-owned application destination received only reviewed create-only tables/triggers and a transactional copy of all 394 source records.
+- `verify:hana-app` explicitly distinguishes additive application verification from the dedicated test-schema harness. Both preserve synthetic test history. Independent direct reads verify the real browser's HANA writes. Replaying the old SQLite source after new HANA activity remains a conflict, never an overwrite.
+- The root launcher forks the existing Node entry points, checks ports, anchors backend paths and shuts down only its children. Fresh demos always use a new ignored SQLite file. Vite verification caches are isolated from running application caches.
+- Frontend fixes preserve Vinayaka's design and backend trace semantics: reject malformed JSON roots, freeze speech on review, clear prior report metadata, correct separators/favicon, and fit trace controls/identifiers/evidence SVG on mobile. No AI adapter or rules logic was added.
+- See [current handover and executed evidence](../../docs/local-demo-readiness.md). Earlier sections below record historical phase decisions.
+
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
 - Historical Phase 0 decision: implementation initially used repository-root paths. This is superseded by the authorized backend/ restructuring below; frontend/ remains untouched.

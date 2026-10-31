@@ -17,6 +17,10 @@ const DEMO_INPUT = {
   suggestedNcCode: "NC-TORQUE-LOOSE",
   reportedAt: "2026-11-04T05:12:00.000Z",
 };
+const emptyFields = (tool) => ({
+  tool, symptom: "", category: "", time: "", suggestedNc: "",
+  confidence: null, missingFields: [], modelVersion: null,
+});
 
 export default function Worker() {
   const {
@@ -37,16 +41,7 @@ export default function Worker() {
   const [isRecording, setIsRecording] = useState(false);
   const [workerWords, setWorkerWords] = useState("");
   const [reporterId, setReporterId] = useState("");
-  const [fields, setFields] = useState({
-    tool: "TOOL-B",
-    symptom: "",
-    category: "",
-    time: "",
-    suggestedNc: "",
-    confidence: null,
-    missingFields: [],
-    modelVersion: null,
-  });
+  const [fields, setFields] = useState(() => emptyFields("TOOL-B"));
   const [editedFields, setEditedFields] = useState({});
   const [saved, setSaved] = useState(null);
   const [warnings, setWarnings] = useState([]);
@@ -56,7 +51,17 @@ export default function Worker() {
     recognition = useRef(null);
   const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
   const canReport = ["Worker", "Manager"].includes(currentRole);
-  useEffect(() => () => recognition.current?.abort(), []);
+  useEffect(() => () => {
+    const rec = recognition.current;
+    recognition.current = null;
+    if (rec) { rec.onresult = rec.onerror = rec.onend = null; rec.abort(); }
+  }, []);
+  const stopRecording = () => {
+    const rec = recognition.current;
+    recognition.current = null;
+    if (rec) { rec.onresult = rec.onerror = rec.onend = null; rec.abort(); }
+    setIsRecording(false);
+  };
   const handleFieldChange = (key, value) => {
     setFields((previous) => ({ ...previous, [key]: value }));
     setEditedFields((previous) => ({ ...previous, [key]: true }));
@@ -78,6 +83,7 @@ export default function Worker() {
     setActionError("");
   };
   const loadDemo = () => {
+    stopRecording();
     chooseTool(DEMO_INPUT.toolId);
     setLanguage(DEMO_INPUT.language);
     setReporterId(DEMO_INPUT.reporterId);
@@ -104,12 +110,16 @@ export default function Worker() {
     recognition.current = rec;
     rec.lang = { kn: "kn-IN", hi: "hi-IN", en: "en-IN" }[language];
     rec.interimResults = false;
-    rec.onresult = (e) => setWorkerWords(e.results[0][0].transcript);
+    rec.onresult = (e) => {
+      if (recognition.current === rec) setWorkerWords(e.results[0][0].transcript);
+    };
     rec.onerror = () =>
       setActionError(
         "Speech input is unavailable. You can type your report below.",
       );
-    rec.onend = () => setIsRecording(false);
+    rec.onend = () => {
+      if (recognition.current === rec) { recognition.current = null; setIsRecording(false); }
+    };
     try {
       rec.start();
       setIsRecording(true);
@@ -123,6 +133,7 @@ export default function Worker() {
       return;
     }
     setActionError("");
+    stopRecording();
     setCurrentStep("card");
   };
   const structureWithAI = async () => {
@@ -1154,7 +1165,7 @@ export default function Worker() {
         <GlassPanel variant="strong" style={{ padding: "28px" }}>
           <h2>Incident Confirmed: {saved?.incident.incidentId}</h2>
           <p>
-            Tool {saved?.incident.toolId} ? {saved?.incident.state}
+            Tool {saved?.incident.toolId} | {saved?.incident.state}
           </p>
           <p>
             Your report is stored with application audit history. Containment
@@ -1169,10 +1180,14 @@ export default function Worker() {
           <button
             className="secondary-action"
             onClick={() => {
+              stopRecording();
               setCurrentStep("scan");
               setSaved(null);
               setWorkerWords("");
               setWarnings([]);
+              setFields(emptyFields(selectedToolId));
+              setEditedFields({});
+              setActionError("");
             }}
           >
             Report Another Issue

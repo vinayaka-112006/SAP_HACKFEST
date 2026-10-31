@@ -4,9 +4,9 @@
 
 The existing CAP backend can explicitly select SQLite or HANA using the same CDS model, transactions and REST routes. The installed stack is @sap/cds 10.2.2, @cap-js/hana 3.1.2, hdb 2.30.1 and @cap-js/sqlite 3.1.2. No additional database adapter or frontend persistence layer was introduced.
 
-The latest live hana:check attempt used the supplied credentials from ignored backend/.env and failed with **HANA_AUTH_FAILED**. No SQL query succeeded, so schema inspection, deployment, transfer and remote persistence tests could not proceed. Verify the database SQL account/password and its lock/expiry status. Credentials also appeared in .env.example; after verifying the same values were safely present in .env, the public template was restored without credentials. See [live connection result](../tests/results/hana-connection.json).
+The latest live check **passed a real SQL query**, using direct SQL authentication and verified TLS from ignored backend/.env. The user then explicitly selected HANA and authorized migration/application testing. Inspection confirmed the account-owned application schema; reviewed create-only deployment installed 21 tables and two audit triggers. The existing SQLite source supplied 394 records, copied and verified transactionally. A repeat before normal application writes inserted zero rows and matched all 394 existing rows. See [connection](../tests/results/hana-connection.json), [deployment](../tests/results/hana-deployment.json), [migration](../tests/results/hana-migration.json) and [repeat](../tests/results/hana-migration-repeat.json).
 
-Before credentials were supplied, checks failed with HANA_CREDENTIALS_MISSING/HANA_BINDING_MISSING. The earlier explicit remote test harness recorded BLOCKED in [hana-results.json](../tests/results/hana-results.json). No remote tables, seed records, incident writes, restarts, trace comparisons or audit triggers have been verified against a real HANA instance. Hackfest-DB's name/status alone is not a SQL connection or schema authorization.
+Earlier missing-credential and HANA_AUTH_FAILED results are historical. The exact account-side change between failed and successful attempts was not observed; no credential change or grant was made by this work. The public .env.example contains placeholders only. Actual HANA application checks now pass: 11 backend checks including writes, confirmation, two restarts, exact SQLite trace parity and database audit UPDATE/DELETE rejection. Seven live browser checks additionally verify the UI-created incident/traces/audit through independent HANA reads. See [application results](../tests/results/hana-results.json) and [current local demo handover](../../docs/local-demo-readiness.md). Cloud Foundry/HDI deployment and real XSUAA remain unverified.
 
 The existing local database was exported through a read-only consistent snapshot: 300 units, three tools, 18 runs/batches/tool-use records, nine stock rows, nine shipments, two dealers, existing incident TS-0001, history, repair, calibration, audit and counters. All 21 modeled tables are included, even empty tables. The snapshot is ignored under repository backup/; neither database files nor report contents are committed. Existing-data migration copies these records, rather than regenerating the seed or resetting SQLite.
 
@@ -23,7 +23,7 @@ notepad .env
 Do not overwrite an already configured .env. Fill HANA_SQL_ENDPOINT with the **SQL endpoint** shown for Hackfest-DB in HANA Cloud Central, using hostname:port (typically port 443), without https:// or a cockpit/Database Explorer path. Use a database SQL account and the exact application schema assigned by its owner. BTP cockpit login credentials are not database SQL credentials.
 
 ```dotenv
-DATABASE_MODE=sqlite
+DATABASE_MODE=hana
 HANA_CONNECTION=direct
 HANA_SQL_ENDPOINT=your-instance.hana.hanacloud.ondemand.com:443
 HANA_USER=your_database_username
@@ -72,7 +72,7 @@ npm run hana:deploy -- --apply
 
 The first command inspects and prints the still-missing DDL without applying it. The second creates only absent application tables/triggers. It never creates a schema, drops/replaces tables or alters existing columns. It refuses unrelated objects and checks existing table columns, types, sizes, numeric precision, nullability and primary keys. Index/constraint objects are allowed only when metadata proves they belong to the exact application tables. An existing incompatible table requires a separately reviewed migration, never an automatic reset.
 
-HANA DDL commits individually; a deployment failure may leave a subset of newly created empty application objects. Fix privileges and rerun: already matching objects are retained. Do not delete shared objects to work around a conflict. Trigger syntax and real deployment remain unverified until a real assigned destination is supplied.
+HANA DDL commits individually; a deployment failure may leave a subset of newly created empty application objects. Fix privileges and rerun: already matching objects are retained. Do not delete shared objects to work around a conflict. Direct-schema table/trigger deployment and audit enforcement were verified in the configured destination. HDI deployment remains a separate unverified path.
 
 ## Copy the existing SQLite data
 
@@ -124,6 +124,14 @@ Requires real credentials, a confirmed dedicated target, deployed application ta
 
 ## Remote persistence and trace verification
 
+The authorized additive application check is:
+
+```powershell
+npm run verify:hana-app
+```
+
+It requires the confirmed application target and creates one uniquely labelled synthetic incident. It runs the same persistence/trace/audit checks without claiming that this is a separate disposable test schema. From the frontend, `npm run verify:hana-ui` tests the already running local application on 5173/4004 and directly verifies the resulting HANA rows. Verification history is retained; interrupted attempts may leave a Reported incident. For a read-only saved-report check use `npm run hana:record -- --incident=TS-0007`.
+
 Use a separate owner-authorized test schema/container, deploy the model and load the same deterministic seed there first. Select that destination through HANA_SCHEMA/binding, set HANA_TARGET_CONFIRMED to it, then set HANA_TEST_SCHEMA to that exact test schema. Do not point the test command at the normal demo/shared destination.
 
 ```powershell
@@ -136,7 +144,7 @@ Expected Tool B totals/tiers are 35/35/0/0, 100/90/4/6 and 160/146/8/6, with sco
 
 ## Executed offline verification
 
-All 96 backend tests pass across 15 suites, including the original 61 (zero failed/skipped). The final suite was launched with inherited HANA-mode settings to verify that the test runner still forces isolated SQLite. Additional tests exercise configuration/TLS/missing credentials, dotenv loading before CAP, binding preservation, offline-test isolation, HANA SQL compilation/row locks/LOB insertion/atomic counters, safe target/schema guards, copy previews, idempotency/conflicts/rollback, exact report/JSON preservation, seven-digit timestamps and 64-bit counters. Counts are in [summary.json](../tests/results/summary.json). CAP production artifact build and packaged runtime validation pass; these do not establish cloud deployment success. Frontend client tests (14), browser checks (7) and production build pass with no application-code changes. A final snapshot comparison confirms all 394 existing records across 21 tables are unchanged. See [readiness results](../tests/results/hana-readiness.json).
+All 101 backend tests pass across 16 suites, including the original 61 (zero failed/skipped). The suite forces isolated SQLite even with inherited HANA settings. Additional tests exercise configuration/TLS/missing credentials, dotenv loading, binding preservation, offline isolation, HANA SQL compilation/row locks/LOB insertion/atomic counters, catalog/schema guards, transactional transfer, precision, path anchoring, combined startup/shutdown and occupied-port handling. Counts are in [summary.json](../tests/results/summary.json). CAP production build and packaged-runtime checks pass. Frontend client tests (17), isolated browser checks (8), legacy fixtures (15) and production build pass. Live HANA verification separately passed 11 backend and seven browser checks. The original SQLite still has all 394 unchanged records across 21 tables. In HANA all imported rows are retained; 393 are unchanged and one incident counter advanced through normal reporting. See [readiness](../tests/results/hana-readiness.json) and [post-application data integrity](../tests/results/hana-data-integrity.json).
 
 ## Troubleshooting and references
 
@@ -161,5 +169,5 @@ Conventions were checked against the installed SAP packages and official referen
 - srv/lib/db-protection.js, db/src/.hdiconfig and two .hdbtrigger artifacts: HANA append-only readiness and deployment artifacts; SQLite protection retained.
 - scripts/hana.js, hana-integration.js, run-tests.js and package.json: operational commands, explicit remote persistence checks and default offline test isolation.
 - tests/hana-config.test.js, hana-sql.test.js and data-transfer.test.js: focused offline regression coverage.
-- Documentation and executed result files: actual capability boundaries and reproducible handover. No frontend source or deterministic trace code changed.
-- frontend/scripts/browser.integration.test.js and scripts/verify-package.js: explicitly pin test storage to SQLite when backend/.env later selects HANA; frontend application code is unchanged.
+- Documentation and executed result files: actual capability boundaries and reproducible handover. The deterministic trace code is unchanged.
+- frontend/scripts/browser.integration.test.js and scripts/verify-package.js explicitly pin test storage to SQLite. The current frontend fixes, HANA browser verifier and root launcher are described in the current demo handover.

@@ -15,15 +15,15 @@ export default function TopNavbar() {
   const getPageInfo = () => {
     switch (location.pathname) {
       case '/console':
-        return { title: 'Evidence Control Console', code: 'MOD-01', status: 'Live Line Supervised' };
+        return { title: 'Evidence Control Console', code: 'MOD-01', status: 'Backend Evidence Records' };
       case '/worker':
-        return { title: 'Shop-Floor Intake Terminal', code: 'MOD-02', status: 'Acoustic & QR Active' };
+        return { title: 'Shop-Floor Intake Terminal', code: 'MOD-02', status: 'Typed & Manual Tool Intake' };
       case '/history':
-        return { title: 'Asset Lifecycle & Telemetry', code: 'MOD-03', status: 'Repeat Pattern Monitor' };
+        return { title: 'Asset Lifecycle & Telemetry', code: 'MOD-03', status: 'Stored Tool History' };
       case '/kitchen':
         return { title: 'Clarity Glass Design System', code: 'MOD-04', status: 'Design Token Audit' };
       default:
-        return { title: 'Enterprise System Overview', code: 'PORTAL', status: 'Plant 1010 Synchronized' };
+        return { title: 'Enterprise System Overview', code: 'PORTAL', status: 'Synthetic Manufacturing Demo' };
     }
   };
 

@@ -1,8 +1,10 @@
 # ToolSathi backend
 
-Synthetic manufacturing data and SIMULATED SAP services; no real SAP tenant connected. CAP 10, Node 24.11+, SQLite locally, HANA/XSUAA production configuration prepared.
+Synthetic manufacturing data, real SAP HANA Cloud persistence, and SIMULATED S/4HANA/DM actions. CAP 10, Node 24.11+, explicit SQLite fallback; XSUAA production integration remains unverified.
 
-Run from `C:\Users\yoges\Desktop\hackfest\SAP_HACKFEST\backend`:
+The configured HANA target now contains the existing 394 records across 21 tables. Real SQL, incident persistence across restarts, trace parity and database audit protections passed. Use `npm run start:hana`, or repository-root `npm run dev` for both services. See [current demo handover](../docs/local-demo-readiness.md).
+
+For explicit offline SQLite operation, run from `C:\Users\yoges\Desktop\hackfest\SAP_HACKFEST\backend`:
 
 ```powershell
 npm ci
@@ -21,4 +23,4 @@ See [repository ownership](../docs/architecture/overview.md). The root convenien
 
 ## HANA Cloud and existing data
 
-[HANA integration and migration](docs/hana-cloud-integration.md) documents the real adapter, ignored .env credentials, dedicated-schema authorization and safe transfer of all existing SQLite records. Use hana:check / hana:inspect, review hana:plan / hana:deploy, then preview hana:migrate before applying it. start:hana selects HANA explicitly; start:local and the default regression suite stay offline. No remote connection or data transfer is claimed until credentials and an assigned target are available. The frontend uses the same API in either mode.
+[HANA integration and migration](docs/hana-cloud-integration.md) documents the adapter, ignored .env credentials, confirmed schema and completed transfer. `hana:check` performs a safe real SQL retry. `start:hana` selects HANA explicitly; `start:local` and the default regression suite use SQLite. Application checks `verify:hana-app` and frontend `verify:hana-ui` each add a labelled synthetic report; normal startup and `hana:record` do not migrate data. Do not replay the old SQLite migration after HANA has acquired new records: the importer correctly rejects conflicts. The frontend uses the same API in either mode.

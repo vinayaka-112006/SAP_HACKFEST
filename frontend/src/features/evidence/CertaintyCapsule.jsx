@@ -28,8 +28,8 @@ export default function CertaintyCapsule({
         marginBottom: '18px'
       }}>
         {/* Main Headline */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ minWidth: 0, maxWidth: '100%' }}>
+          <div className="certainty-heading" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px' }}>
             <span style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -46,7 +46,7 @@ export default function CertaintyCapsule({
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </span>
-            <h2 style={{ fontSize: '30px', fontWeight: 900, letterSpacing: '-0.025em', color: 'var(--ink)' }}>
+            <h2 style={{ minWidth: 0, flex: '1 1 200px', fontSize: '30px', fontWeight: 900, letterSpacing: '-0.025em', color: 'var(--ink)' }}>
               {totalExposed} Assemblies Potentially Exposed
             </h2>
             <StatusBadge status="Verified" size="medium" />
@@ -57,7 +57,7 @@ export default function CertaintyCapsule({
         </div>
 
         {/* Quality Score & Freshness */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px', maxWidth: '100%' }}>
           <FreshnessStamp timestamp={snapshotTime ? new Date(snapshotTime).toLocaleString() : 'Not available'} />
           
           <div

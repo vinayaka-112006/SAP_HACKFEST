@@ -24,7 +24,7 @@ async function main() {
     console.log(JSON.stringify({ exported: true, source: "backend/db.sqlite (read-only consistent snapshot)", sourceSnapshot: transfer.saveSnapshot(snapshot, backupRoot), manifest: snapshot.manifest }, null, 2));
     return;
   }
-  if (!["check", "inspect", "deploy", "migrate", "seed"].includes(operation)) throw Object.assign(new Error("Unknown HANA operation."), { code: "HANA_COMMAND_INVALID" });
+  if (!["check", "inspect", "deploy", "migrate", "seed", "record"].includes(operation)) throw Object.assign(new Error("Unknown HANA operation."), { code: "HANA_COMMAND_INVALID" });
   const selected = config.configureDatabase(cds, { mode: "hana" });
   const started = Date.now();
   // Inspect without SET SCHEMA first so missing schema is distinguishable from failed authentication.
@@ -45,6 +45,15 @@ async function main() {
     return;
   }
   config.assertTarget(selected);
+  if (operation === "record") {
+    const incidentId = process.argv.find(arg => arg.startsWith("--incident="))?.slice(11);
+    if (!incidentId) throw Object.assign(new Error("Supply --incident=<saved incident ID>."), { code: "HANA_INCIDENT_REQUIRED" });
+    const incident = await db.run(cds.ql.SELECT.one.from("toolsathi.Incident").where({ incidentId }));
+    const traces = await db.run(cds.ql.SELECT.from("toolsathi.TraceResult").where({ incidentId }));
+    const audit = await db.run(cds.ql.SELECT.from("toolsathi.AuditLog").where({ incidentId }));
+    console.log(JSON.stringify({ mode: db.kind, targetSchemaMatches: identity.CURRENT_SCHEMA === selected.schema, found: Boolean(incident), incidentId: incident?.incidentId, state: incident?.state, rawTextHash: incident ? require("node:crypto").createHash("sha256").update(incident.rawText).digest("hex") : null, traceWindows: [...new Set(traces.map(trace => trace.windowHours))].sort((a, b) => a - b), auditActions: [...new Set(audit.map(row => row.action))].sort() }, null, 2));
+    return;
+  }
   const apply = process.argv.includes("--apply");
   if (operation === "deploy") {
     console.log(JSON.stringify(await operations.deploy(db, cds, model, selected, { apply }), null, 2));

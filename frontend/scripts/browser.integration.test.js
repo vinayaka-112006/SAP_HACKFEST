@@ -129,6 +129,7 @@ before(
           VITE_AI_ENABLED: "false",
           VITE_WORKFLOW_ENABLED: "false",
           API_PROXY_TARGET: apiUrl,
+          TOOLSATHI_VITE_CACHE_DIR: path.join(output, `vite-${frontendPort}`),
         },
       },
     );
@@ -570,4 +571,49 @@ check('existing backend smoke and health/stub verification pass on isolated data
   assert.ok(command==='smoke'?text.includes('VERIFIED_APPROVAL_REJECTION'):text.includes('6 endpoints passed'));
  }
  report.backendSmoke='PASSED';report.backendStubVerification='PASSED';
+});
+
+check("review freezes late speech input and the next report clears old structured fields", async () => {
+  const worker = await context.newPage();
+  worker.on("pageerror", error => pageErrors.push(error.message));
+  await worker.addInitScript(() => {
+    window.SpeechRecognition = class {
+      constructor() { window.__testSpeech = this; }
+      start() { window.__lateSpeechResult = this.onresult; }
+      abort() { this.aborted = true; }
+      stop() { this.onend?.(); }
+    };
+  });
+  try {
+    await worker.goto(frontendUrl + "/worker");
+    await skipIntro(worker);
+    await until(async () => await worker.getByLabel("Tool register").locator("option").count() === 3, "Worker tools did not load");
+    await worker.getByRole("button", { name: "Worker local demo role" }).first().click();
+    await worker.getByRole("button", { name: "Confirm Tool & Proceed" }).click();
+    await worker.getByRole("button", { name: "Continue to Report" }).click();
+    await worker.getByRole("button", { name: "Load synthetic demo report" }).click();
+    const reviewed = "Typed text explicitly reviewed before saving";
+    await worker.getByLabel("Original report").fill(reviewed);
+    await worker.getByRole("button", { name: "Start recording voice report" }).click();
+    await worker.getByRole("button", { name: "Review Manual Incident Card" }).click();
+    assert.equal(await worker.evaluate(() => window.__testSpeech.aborted), true);
+    await worker.evaluate(() => window.__lateSpeechResult({ results: [[{ transcript: "Late speech must not replace the reviewed text" }]] }));
+    const saved = worker.waitForResponse(response => response.url().endsWith("/api/incidents") && response.request().method() === "POST");
+    await worker.getByRole("button", { name: "Save Incident", exact: true }).click();
+    const created = await (await saved).json();
+    assert.equal(created.incident.rawText, reviewed);
+    await worker.getByRole("button", { name: "Confirm Incident", exact: true }).click();
+    await worker.getByRole("heading", { name: `Incident Confirmed: ${created.incident.incidentId}` }).waitFor();
+    await worker.getByRole("button", { name: "Report Another Issue" }).click();
+    await worker.getByRole("button", { name: "Confirm Tool & Proceed" }).click();
+    await worker.getByRole("button", { name: "Continue to Report" }).click();
+    assert.equal(await worker.getByLabel("Original report").inputValue(), "");
+    await worker.getByLabel("Original report").fill("Independent follow-up report");
+    await worker.getByRole("button", { name: "Review Manual Incident Card" }).click();
+    for (const label of ["Category (optional)", "Reported at (UTC ISO timestamp, optional)", "Translated report", "Suggested NC code"])
+      assert.equal(await worker.getByLabel(label, { exact: true }).inputValue(), "");
+    report.speechLifecycleMocked = true;
+    report.microphoneHardwareVerified = false;
+    assert.equal(pageErrors.length, 0);
+  } finally { await worker.close(); }
 });

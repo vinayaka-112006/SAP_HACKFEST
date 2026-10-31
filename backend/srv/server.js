@@ -1,4 +1,6 @@
 const databaseConfig = require("./lib/database-config");
+// Resolve the CAP project and SQLite file consistently, including launches from repository root.
+process.chdir(databaseConfig.projectRoot);
 databaseConfig.loadEnvironment();
 const cds = require("@sap/cds");
 let database, configurationError;

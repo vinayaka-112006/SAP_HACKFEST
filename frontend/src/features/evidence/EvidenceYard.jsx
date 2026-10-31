@@ -179,6 +179,7 @@ export default function EvidenceYard({
       {/* VIEW MODE 1: 3D ISOMETRIC EVIDENCE YARD */}
       {viewMode === 'yard' ? (
         <div
+          className="evidence-yard-canvas"
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
@@ -205,6 +206,8 @@ export default function EvidenceYard({
           {/* Subtle Tilt Wrapper */}
           <div
             style={{
+              width: '100%',
+              maxWidth: '1000px',
               transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
               transition: 'transform 0.15s ease-out',
               transformStyle: 'preserve-3d'
@@ -214,7 +217,7 @@ export default function EvidenceYard({
               width="1000"
               height="440"
               viewBox="0 0 1000 440"
-              style={{ overflow: 'visible' }}
+              style={{ overflow: 'visible', width: '100%', height: 'auto', display: 'block' }}
             >
               <defs>
                 {/* SVG Cross-Hatch Pattern for Unknown Fog */}
