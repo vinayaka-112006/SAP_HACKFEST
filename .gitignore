@@ -10,3 +10,8 @@ backup/
 *service_key*
 coverage/
 gen/
+
+*.sqlite.lock
+*.mtar
+mta_archives/
+_out/

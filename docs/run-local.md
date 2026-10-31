@@ -1,25 +1,47 @@
-# Run Phase 0
+# Run ToolSathi locally
 
-Use Node 20 or newer and npm. From the repository root:
+Synthetic data, simulated services; no SAP tenant connected. Node 20+ and npm required. Commands run from C:/Users/yoges/Desktop/hackfest/SAP_HACKFEST.
 
 ```powershell
 npm ci
+npm run seed
+npm run verify-ground-truth
 npm run start:local
 ```
 
-Base URL: http://localhost:4004/api . Stop with Ctrl+C. After installation, runtime needs no internet. CAP uses in-memory SQLite; restart resets the probe. No domain seed exists yet.
+After dependencies are installed, seed/start/tests require no network. First start initializes db.sqlite from generated CSVs. Subsequent starts preserve incidents/tool/stock state. Base URL http://localhost:4004/api . Stop with Ctrl+C. `npm run dev` starts the same server.
 
-In another terminal:
+Protected requests need local demo headers (this is not verified identity): `x-demo-user: WRK-014`, `x-demo-role: Worker`. Use Manager/Quality/Verifier for trace and audit. Manager/Quality may call simulated actions, but approved persisted records are still required. Teammate stubs and health are public. The smoke script uses synthetic named demo actors.
 
 ```powershell
 npm test
 npm run verify:stubs
+npm run smoke
 ```
 
-`npm run dev` also starts the server. `PORT` defaults to 4004. `CORS_ORIGINS` is a comma-separated list (default http://localhost:3000,http://localhost:5173). `BASE_URL` changes the verification script's server URL.
+For a fresh rehearsal, **stop every process using db.sqlite**, then:
 
-All 17 business endpoints are unauthenticated fixed stubs and execute no actions. Health is live. `seed` and `verify-ground-truth` fail clearly until Phase 1; `backup:db` requires db.sqlite, unavailable in Phase 0. These scripts never fabricate success.
+```powershell
+npm run backup:db
+npm run seed
+npm run db:reset
+npm run start:local
+```
 
-Later phases add AUTH_MODE, ENFORCE_APPROVALS (default true), and ALLOW_UNAPPROVED_MOCKS (default false; never on for the demo build). They are not implemented switches in Phase 0.
+`db:reset` backs up an existing local database before reloading the full synthetic schema. It affects only the configured SQLite file within this workspace; it never touches teammate source or HANA. `seed` alone generates files and does not alter a running database. Next incident after reset is TS-0002.
 
-To integrate a router export `{ mount: '/api', router, owner }` from `srv/routes/*.router.js`. Use direct Express routes; attach middleware as route handlers. Duplicate real METHOD/path combinations fail startup; matching stubs disappear. Parameter names are normalized. See api-contract.md for examples and provisional teammate seams.
+Restore with the server stopped: `npm run restore:db -- backup/<selected-backup>.sqlite`. Backups are ignored. Nonempty WAL files cause offline file operations to refuse; cleanly stop all writers first. Do not copy a live SQLite database as a reliable backup. Use a closed-file backup or a reviewed SQLite online-backup procedure.
+
+| Variable | Default / behavior |
+|---|---|
+| PORT | 4004 |
+| CORS_ORIGINS | http://localhost:3000,http://localhost:5173 comma separated |
+| AUTH_MODE | header locally, xsuaa in production |
+| NODE_ENV | production selects HANA/XSUAA; leave unset for local |
+| CDS_ENV | CAP profile selector; test uses in-memory SQLite |
+| CDS_REQUIRES_DB_CREDENTIALS_URL | Optional local SQLite override, defaults db.sqlite |
+| BASE_URL | Verification/smoke origin, defaults http://localhost:4004 |
+| ENFORCE_APPROVALS | true; false alone does not bypass |
+| ALLOW_UNAPPROVED_MOCKS | false; combined with ENFORCE_APPROVALS=false is DEVELOPMENT ONLY, **never on for the demo build**; refused in production |
+
+XSUAA/HANA credentials come only from service bindings. No secrets belong in .env files committed to Git. Header auth and simulated adapters do not prove production security or SAP integration.

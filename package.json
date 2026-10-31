@@ -1,6 +1,6 @@
 {
   "name": "toolsathi-platform",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=20"
@@ -13,9 +13,14 @@
     "verify:stubs": "node scripts/verify-stubs.js",
     "seed": "node db/seed/generate.js",
     "verify-ground-truth": "node db/seed/verify.js",
-    "backup:db": "node scripts/backup-db.js"
+    "backup:db": "node scripts/backup-db.js",
+    "build": "node scripts/build.js",
+    "db:reset": "node scripts/reset-db.js",
+    "restore:db": "node scripts/restore-db.js",
+    "smoke": "node scripts/smoke.js"
   },
   "dependencies": {
+    "@cap-js/hana": "^3.1.2",
     "@cap-js/sqlite": "3.1.2",
     "@sap/cds": "10.2.2",
     "@sap/xssec": "^4.16.0",
@@ -23,20 +28,68 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@apidevtools/swagger-parser": "^13.1.0",
     "@cap-js/cds-test": "^1.0.2",
+    "@sap/cds-dk": "^10.2.0",
+    "@sap/hdi-deploy": "^5.7.0",
     "jest": "^30.2.0",
-    "supertest": "^7.1.4"
+    "supertest": "^7.1.4",
+    "yaml": "^2.9.1"
   },
   "cds": {
     "requires": {
       "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "url": ":memory:"
+        "kind": "sqlite"
+      },
+      "queue": false,
+      "[test]": {
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
         }
       },
-      "queue": false
+      "[production]": {
+        "db": {
+          "kind": "hana"
+        },
+        "auth": {
+          "kind": "xsuaa"
+        }
+      },
+      "[development]": {
+        "db": {
+          "credentials": {
+            "url": "db.sqlite"
+          }
+        }
+      }
     },
-    "server": "./srv/server.js"
+    "server": "./srv/server.js",
+    "build": {
+      "tasks": [
+        {
+          "for": "hana",
+          "src": "db",
+          "options": {
+            "model": [
+              "db",
+              "srv"
+            ]
+          }
+        },
+        {
+          "for": "nodejs",
+          "src": "srv",
+          "options": {
+            "model": [
+              "db",
+              "srv"
+            ]
+          }
+        }
+      ]
+    }
   }
 }
