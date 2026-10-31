@@ -1,0 +1,2011 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ToolSathi simulated platform",
+    "version": "0.0.0",
+    "description": "Phase 0 fixed fixtures. No SAP connection. Stubs do not execute actions."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4004/api"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health",
+        "tags": [
+          "platform"
+        ],
+        "description": "Live database health",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "status": "ok",
+                  "db": "connected",
+                  "mode": "SIMULATED",
+                  "seedVersion": "phase-0-unseeded"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents": {
+      "post": {
+        "operationId": "incident-create",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "?????? ??????????",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Reported",
+                    "reportedAt": "2026-11-04T05:12:00Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "createdAt": "2026-11-04T05:12:00Z",
+                    "modelVersion": "stub-0"
+                  },
+                  "warnings": [],
+                  "auditId": "AUD-000001"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "toolId": "TOOL-B",
+                "reporterId": "WRK-014",
+                "language": "kn",
+                "rawText": "?????? ??????????",
+                "translatedText": "Tool B is leaving bolts loose",
+                "category": "TORQUE",
+                "reportedAt": "2026-11-04T05:12:00Z",
+                "modelVersion": "stub-0"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/confirm": {
+      "post": {
+        "operationId": "incident-confirm",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "?????? ??????????",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Confirmed",
+                    "reportedAt": "2026-11-04T05:12:00Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "createdAt": "2026-11-04T05:12:00Z",
+                    "modelVersion": "stub-0",
+                    "confirmedBy": "WRK-014",
+                    "confirmedAt": "2026-11-04T05:13:00Z"
+                  },
+                  "warnings": [],
+                  "auditId": "AUD-000002"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "confirmedBy": "WRK-014",
+                "corrections": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}": {
+      "get": {
+        "operationId": "incident-get",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "?????? ??????????",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Reported",
+                    "reportedAt": "2026-11-04T05:12:00Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "createdAt": "2026-11-04T05:12:00Z",
+                    "modelVersion": "stub-0"
+                  },
+                  "evidence": [],
+                  "auditSummary": {
+                    "count": 1,
+                    "last": [
+                      {
+                        "auditId": "AUD-000001",
+                        "incidentId": "TS-0002",
+                        "toolId": "TOOL-B",
+                        "actor": "WRK-014",
+                        "actorRole": "Worker",
+                        "action": "INCIDENT_CREATED",
+                        "details": {
+                          "state": "Reported"
+                        },
+                        "reason": "Worker reported tool fault",
+                        "modelVersion": "stub-0",
+                        "timestamp": "2026-11-04T05:12:00Z"
+                      }
+                    ]
+                  },
+                  "traceResults": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/tools": {
+      "get": {
+        "operationId": "tools",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "tools": [
+                    {
+                      "toolId": "TOOL-B",
+                      "type": "TORQUE",
+                      "line": "LINE-BRAKE-1",
+                      "workCenter": "WC-B",
+                      "state": "Active",
+                      "calibrationDue": "2026-11-09",
+                      "usageCount": 200,
+                      "lastVerifiedGood": "2026-10-23T05:12:00Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/{id}/history": {
+      "get": {
+        "operationId": "tool-history",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "toolId": "TOOL-B",
+                  "events": [
+                    {
+                      "eventId": "HIST-0001",
+                      "type": "INCIDENT",
+                      "at": "2026-10-23T05:12:00Z",
+                      "summary": "Prior torque incident",
+                      "refId": "TS-0001",
+                      "details": {
+                        "state": "Closed"
+                      }
+                    }
+                  ],
+                  "counts": {
+                    "INCIDENT": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/trace": {
+      "get": {
+        "operationId": "trace",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incidentId": "TS-0002",
+                  "toolId": "TOOL-B",
+                  "windowHours": 24,
+                  "windowStart": "2026-11-03T05:12:00Z",
+                  "windowEnd": "2026-11-04T05:12:00Z",
+                  "snapshotTime": "2026-11-04T05:02:00Z",
+                  "generatedAt": "2026-11-04T05:12:00Z",
+                  "version": 1,
+                  "disclaimer": "Potentially exposed units only. No fault or quality determination is made by this system.",
+                  "summary": {
+                    "totalUnits": 35,
+                    "byTier": {
+                      "CONFIRMED": 35,
+                      "PROBABLE": 0,
+                      "UNKNOWN": 0
+                    },
+                    "byLocation": {
+                      "IN_STOCK": 35,
+                      "SHIPPED": 0,
+                      "UNKNOWN_LOCATION": 0
+                    },
+                    "staleLocationUnits": 0,
+                    "shippedByDealer": {
+                      "DLR-X": 0,
+                      "DLR-Y": 0
+                    }
+                  },
+                  "exposureRange": {
+                    "low": 35,
+                    "high": 154,
+                    "unknownSeparate": 6,
+                    "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+                  },
+                  "dataQuality": {
+                    "score": 100,
+                    "deductions": []
+                  },
+                  "valueAtRisk": {
+                    "amountINR": 112000,
+                    "label": "ESTIMATE_SYNTHETIC"
+                  },
+                  "gaps": [
+                    {
+                      "code": "DUPLICATE_TOOL_USE_LINK",
+                      "severity": "INFO",
+                      "message": "Two links reference the same run; units counted once.",
+                      "runId": "RUN-B-DUP",
+                      "affectedUnits": 10,
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP"
+                      ]
+                    }
+                  ],
+                  "units": [
+                    {
+                      "serial": "SN-000001",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000001",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000002",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000002",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000003",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000003",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000004",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000004",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000005",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000005",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000006",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000006",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000007",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000007",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000008",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000008",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000009",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000009",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000010",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000010",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000011",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000011",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000012",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000012",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000013",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000013",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000014",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000014",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000015",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000015",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000016",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000016",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000017",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000017",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000018",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000018",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000019",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000019",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000020",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000020",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000021",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000021",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000022",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000022",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000023",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000023",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000024",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000024",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000025",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000025",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000026",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000026",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000027",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000027",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000028",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000028",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000029",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000029",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000030",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000030",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000031",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000031",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000032",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000032",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000033",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000033",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000034",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000034",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000035",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "PLANT-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0002",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000035",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "window",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "24",
+                "72",
+                "168",
+                "24h",
+                "72h",
+                "168h"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/audit": {
+      "get": {
+        "operationId": "audit",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incidentId": "TS-0002",
+                  "entries": [
+                    {
+                      "auditId": "AUD-000001",
+                      "incidentId": "TS-0002",
+                      "toolId": "TOOL-B",
+                      "actor": "WRK-014",
+                      "actorRole": "Worker",
+                      "action": "INCIDENT_CREATED",
+                      "details": {
+                        "state": "Reported"
+                      },
+                      "reason": "Worker reported tool fault",
+                      "modelVersion": "stub-0",
+                      "timestamp": "2026-11-04T05:12:00Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "incident",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/mock/s4/maintenance-notifications": {
+      "post": {
+        "operationId": "maintenance",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "_shapedLike": "S/4HANA Maintenance Notification",
+                  "MaintenanceNotification": "0000000001",
+                  "NotificationType": "M1",
+                  "NotificationText": "Inspect Tool B",
+                  "TechnicalObject": "TOOL-B",
+                  "Plant": "PLANT-01",
+                  "MaintPriority": "2",
+                  "NotificationStatus": "OSNO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "incidentId": "TS-0002",
+                "toolId": "TOOL-B",
+                "shortText": "Inspect Tool B",
+                "priority": "2",
+                "requestedBy": "MGR-01",
+                "approvalId": "APR-0001"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/s4/quality-notifications": {
+      "post": {
+        "operationId": "quality",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "_shapedLike": "S/4HANA Quality Notification",
+                  "QualityNotification": "0000000002",
+                  "NotificationType": "Q3",
+                  "batchIds": [
+                    "BATCH-B-DUP"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "incidentId": "TS-0002",
+                "toolId": "TOOL-B",
+                "shortText": "Review potential exposure",
+                "batchIds": [
+                  "BATCH-B-DUP"
+                ],
+                "requestedBy": "QA-01",
+                "approvalId": "APR-0002"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/s4/stock-blocks": {
+      "post": {
+        "operationId": "stock-block",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "_shapedLike": "S/4HANA Material Document",
+                  "MaterialDocument": "0000000003",
+                  "GoodsMovementType": "344",
+                  "items": [
+                    {
+                      "batchId": "BATCH-B-DUP",
+                      "fromStatus": "UNRESTRICTED",
+                      "toStatus": "BLOCKED"
+                    }
+                  ],
+                  "skipped": [],
+                  "alreadyBlocked": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "incidentId": "TS-0002",
+                "batchIds": [
+                  "BATCH-B-DUP"
+                ],
+                "plant": "PLANT-01",
+                "storageLocation": "STORE-01",
+                "reason": "Potential exposure review",
+                "approvalId": "APR-0002"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/dm/tool-restrictions": {
+      "post": {
+        "operationId": "restriction",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "_shapedLike": "Digital Manufacturing Resource",
+                  "ResourceId": "TOOL-B",
+                  "Status": "RESTRICTED"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "toolId": "TOOL-B",
+                "incidentId": "TS-0002",
+                "action": "RESTRICT",
+                "reason": "Review torque report",
+                "approvalId": "APR-0001"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/documents": {
+      "get": {
+        "operationId": "documents",
+        "tags": [
+          "platform"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incidentId": "TS-0002",
+                  "documents": [
+                    {
+                      "docId": "MOCK-0001",
+                      "system": "DM",
+                      "type": "TOOL_RESTRICTION",
+                      "incidentId": "TS-0002",
+                      "payload": {
+                        "ResourceId": "TOOL-B",
+                        "Status": "RESTRICTED",
+                        "_label": "SIMULATED"
+                      },
+                      "createdAt": "2026-11-04T05:15:00Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "incident",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/ai/structure-report": {
+      "post": {
+        "operationId": "ai-structure",
+        "tags": [
+          "Shashank"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "toolId": "TOOL-B",
+                  "language": "kn",
+                  "rawText": "?????? ??????????",
+                  "translatedText": "Tool B is leaving bolts loose",
+                  "category": "TORQUE",
+                  "suggestedNcCode": "NC-TORQUE-LOOSE",
+                  "confidence": 0.82,
+                  "missingFields": [],
+                  "modelVersion": "stub-0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "toolId": "TOOL-B",
+                "language": "kn",
+                "rawText": "?????? ??????????"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/duplicates": {
+      "get": {
+        "operationId": "duplicates",
+        "tags": [
+          "Jamuna"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incidentId": "TS-0002",
+                  "candidates": [
+                    {
+                      "incidentId": "TS-0001",
+                      "reason": "Same tool and category; human review required."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/proposals": {
+      "post": {
+        "operationId": "proposals",
+        "tags": [
+          "Jamuna"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "proposal": {
+                    "proposalId": "PROP-0001",
+                    "incidentId": "TS-0002",
+                    "type": "TOOL_RESTRICTION",
+                    "payload": {
+                      "toolId": "TOOL-B",
+                      "action": "RESTRICT"
+                    },
+                    "reason": "Review torque report",
+                    "state": "Pending",
+                    "createdAt": "2026-11-04T05:14:00Z"
+                  },
+                  "approval": {
+                    "approvalId": "APR-0001",
+                    "proposalId": "PROP-0001",
+                    "approverRole": "Manager",
+                    "decision": "PENDING"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "type": "TOOL_RESTRICTION",
+                "reason": "Review torque report"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/approvals/{id}/decision": {
+      "post": {
+        "operationId": "approval-decision",
+        "tags": [
+          "Jamuna"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "approval": {
+                    "approvalId": "APR-0001",
+                    "proposalId": "PROP-0001",
+                    "approverRole": "Manager",
+                    "decision": "APPROVED",
+                    "reason": "Containment approved",
+                    "decidedAt": "2026-11-04T05:15:00Z",
+                    "decidedBy": "MGR-01"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "decision": "APPROVED",
+                "reason": "Containment approved",
+                "decidedBy": "MGR-01"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/verify-return": {
+      "post": {
+        "operationId": "verify-return",
+        "tags": [
+          "Jamuna"
+        ],
+        "description": "Fixed SIMULATED stub; input is not processed.",
+        "responses": {
+          "200": {
+            "description": "Phase 0 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "?????? ??????????",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Closed",
+                    "reportedAt": "2026-11-04T05:12:00Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "createdAt": "2026-11-04T05:12:00Z",
+                    "modelVersion": "stub-0"
+                  },
+                  "tool": {
+                    "toolId": "TOOL-B",
+                    "type": "TORQUE",
+                    "line": "LINE-BRAKE-1",
+                    "workCenter": "WC-B",
+                    "state": "Active",
+                    "calibrationDue": "2026-11-09",
+                    "usageCount": 200,
+                    "lastVerifiedGood": "2026-10-23T05:12:00Z"
+                  },
+                  "verification": {
+                    "verifiedBy": "VER-01",
+                    "passed": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed JSON",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "INVALID_JSON",
+                    "message": "Invalid JSON",
+                    "details": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "verifiedBy": "VER-01",
+                "repairId": "REP-0001",
+                "passed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

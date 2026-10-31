@@ -1,0 +1,35 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "incident": {
+    "incidentId": "TS-0002",
+    "toolId": "TOOL-B",
+    "reporterId": "WRK-014",
+    "language": "kn",
+    "rawText": "?????? ??????????",
+    "translatedText": "Tool B is leaving bolts loose",
+    "category": "TORQUE",
+    "suggestedNcCode": "NC-TORQUE-LOOSE",
+    "confidence": 0.82,
+    "missingFields": [],
+    "state": "Closed",
+    "reportedAt": "2026-11-04T05:12:00Z",
+    "reportedAtSource": "CLIENT_REPORTED",
+    "createdAt": "2026-11-04T05:12:00Z",
+    "modelVersion": "stub-0"
+  },
+  "tool": {
+    "toolId": "TOOL-B",
+    "type": "TORQUE",
+    "line": "LINE-BRAKE-1",
+    "workCenter": "WC-B",
+    "state": "Active",
+    "calibrationDue": "2026-11-09",
+    "usageCount": 200,
+    "lastVerifiedGood": "2026-10-23T05:12:00Z"
+  },
+  "verification": {
+    "verifiedBy": "VER-01",
+    "passed": true
+  }
+}

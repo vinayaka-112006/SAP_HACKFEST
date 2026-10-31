@@ -1,0 +1,10 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "_shapedLike": "S/4HANA Quality Notification",
+  "QualityNotification": "0000000002",
+  "NotificationType": "Q3",
+  "batchIds": [
+    "BATCH-B-DUP"
+  ]
+}

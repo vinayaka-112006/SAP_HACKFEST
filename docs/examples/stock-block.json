@@ -1,0 +1,16 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "_shapedLike": "S/4HANA Material Document",
+  "MaterialDocument": "0000000003",
+  "GoodsMovementType": "344",
+  "items": [
+    {
+      "batchId": "BATCH-B-DUP",
+      "fromStatus": "UNRESTRICTED",
+      "toStatus": "BLOCKED"
+    }
+  ],
+  "skipped": [],
+  "alreadyBlocked": []
+}

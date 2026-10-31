@@ -1,0 +1,19 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "incidentId": "TS-0002",
+  "documents": [
+    {
+      "docId": "MOCK-0001",
+      "system": "DM",
+      "type": "TOOL_RESTRICTION",
+      "incidentId": "TS-0002",
+      "payload": {
+        "ResourceId": "TOOL-B",
+        "Status": "RESTRICTED",
+        "_label": "SIMULATED"
+      },
+      "createdAt": "2026-11-04T05:15:00Z"
+    }
+  ]
+}

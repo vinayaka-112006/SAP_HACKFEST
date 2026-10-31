@@ -1,0 +1,41 @@
+{
+  "name": "toolsathi-platform",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node srv/server.js",
+    "start": "node srv/server.js",
+    "start:local": "node srv/server.js",
+    "test": "jest --runInBand",
+    "verify:stubs": "node scripts/verify-stubs.js",
+    "seed": "node scripts/phase-pending.js seed",
+    "verify-ground-truth": "node scripts/phase-pending.js ground-truth",
+    "backup:db": "node scripts/backup-db.js"
+  },
+  "dependencies": {
+    "@cap-js/sqlite": "3.1.2",
+    "@sap/cds": "10.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@cap-js/cds-test": "^1.0.2",
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": ":memory:"
+        }
+      },
+      "queue": false
+    },
+    "server": "./srv/server.js"
+  }
+}

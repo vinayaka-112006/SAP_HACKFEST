@@ -1,0 +1,42 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "incident": {
+    "incidentId": "TS-0002",
+    "toolId": "TOOL-B",
+    "reporterId": "WRK-014",
+    "language": "kn",
+    "rawText": "?????? ??????????",
+    "translatedText": "Tool B is leaving bolts loose",
+    "category": "TORQUE",
+    "suggestedNcCode": "NC-TORQUE-LOOSE",
+    "confidence": 0.82,
+    "missingFields": [],
+    "state": "Reported",
+    "reportedAt": "2026-11-04T05:12:00Z",
+    "reportedAtSource": "CLIENT_REPORTED",
+    "createdAt": "2026-11-04T05:12:00Z",
+    "modelVersion": "stub-0"
+  },
+  "evidence": [],
+  "auditSummary": {
+    "count": 1,
+    "last": [
+      {
+        "auditId": "AUD-000001",
+        "incidentId": "TS-0002",
+        "toolId": "TOOL-B",
+        "actor": "WRK-014",
+        "actorRole": "Worker",
+        "action": "INCIDENT_CREATED",
+        "details": {
+          "state": "Reported"
+        },
+        "reason": "Worker reported tool fault",
+        "modelVersion": "stub-0",
+        "timestamp": "2026-11-04T05:12:00Z"
+      }
+    ]
+  },
+  "traceResults": []
+}

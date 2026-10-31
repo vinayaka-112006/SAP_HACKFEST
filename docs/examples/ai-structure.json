@@ -1,0 +1,13 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "toolId": "TOOL-B",
+  "language": "kn",
+  "rawText": "?????? ??????????",
+  "translatedText": "Tool B is leaving bolts loose",
+  "category": "TORQUE",
+  "suggestedNcCode": "NC-TORQUE-LOOSE",
+  "confidence": 0.82,
+  "missingFields": [],
+  "modelVersion": "stub-0"
+}

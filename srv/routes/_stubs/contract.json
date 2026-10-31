@@ -1,0 +1,204 @@
+[
+  {
+    "name": "health",
+    "method": "GET",
+    "path": "/health",
+    "owner": "platform",
+    "example": "health.json",
+    "request": null
+  },
+  {
+    "name": "incident-create",
+    "method": "POST",
+    "path": "/incidents",
+    "owner": "platform",
+    "example": "incident-create.json",
+    "request": {
+      "toolId": "TOOL-B",
+      "reporterId": "WRK-014",
+      "language": "kn",
+      "rawText": "?????? ??????????",
+      "translatedText": "Tool B is leaving bolts loose",
+      "category": "TORQUE",
+      "reportedAt": "2026-11-04T05:12:00Z",
+      "modelVersion": "stub-0"
+    }
+  },
+  {
+    "name": "incident-confirm",
+    "method": "POST",
+    "path": "/incidents/:id/confirm",
+    "owner": "platform",
+    "example": "incident-confirm.json",
+    "request": {
+      "confirmedBy": "WRK-014",
+      "corrections": {}
+    }
+  },
+  {
+    "name": "incident-get",
+    "method": "GET",
+    "path": "/incidents/:id",
+    "owner": "platform",
+    "example": "incident-get.json",
+    "request": null
+  },
+  {
+    "name": "tools",
+    "method": "GET",
+    "path": "/tools",
+    "owner": "platform",
+    "example": "tools.json",
+    "request": null
+  },
+  {
+    "name": "tool-history",
+    "method": "GET",
+    "path": "/tools/:id/history",
+    "owner": "platform",
+    "example": "tool-history.json",
+    "request": null
+  },
+  {
+    "name": "trace",
+    "method": "GET",
+    "path": "/incidents/:id/trace",
+    "owner": "platform",
+    "example": "trace.json",
+    "request": null
+  },
+  {
+    "name": "audit",
+    "method": "GET",
+    "path": "/audit",
+    "owner": "platform",
+    "example": "audit.json",
+    "request": null
+  },
+  {
+    "name": "maintenance",
+    "method": "POST",
+    "path": "/mock/s4/maintenance-notifications",
+    "owner": "platform",
+    "example": "maintenance.json",
+    "request": {
+      "incidentId": "TS-0002",
+      "toolId": "TOOL-B",
+      "shortText": "Inspect Tool B",
+      "priority": "2",
+      "requestedBy": "MGR-01",
+      "approvalId": "APR-0001"
+    }
+  },
+  {
+    "name": "quality",
+    "method": "POST",
+    "path": "/mock/s4/quality-notifications",
+    "owner": "platform",
+    "example": "quality.json",
+    "request": {
+      "incidentId": "TS-0002",
+      "toolId": "TOOL-B",
+      "shortText": "Review potential exposure",
+      "batchIds": [
+        "BATCH-B-DUP"
+      ],
+      "requestedBy": "QA-01",
+      "approvalId": "APR-0002"
+    }
+  },
+  {
+    "name": "stock-block",
+    "method": "POST",
+    "path": "/mock/s4/stock-blocks",
+    "owner": "platform",
+    "example": "stock-block.json",
+    "request": {
+      "incidentId": "TS-0002",
+      "batchIds": [
+        "BATCH-B-DUP"
+      ],
+      "plant": "PLANT-01",
+      "storageLocation": "STORE-01",
+      "reason": "Potential exposure review",
+      "approvalId": "APR-0002"
+    }
+  },
+  {
+    "name": "restriction",
+    "method": "POST",
+    "path": "/mock/dm/tool-restrictions",
+    "owner": "platform",
+    "example": "restriction.json",
+    "request": {
+      "toolId": "TOOL-B",
+      "incidentId": "TS-0002",
+      "action": "RESTRICT",
+      "reason": "Review torque report",
+      "approvalId": "APR-0001"
+    }
+  },
+  {
+    "name": "documents",
+    "method": "GET",
+    "path": "/mock/documents",
+    "owner": "platform",
+    "example": "documents.json",
+    "request": null
+  },
+  {
+    "name": "ai-structure",
+    "method": "POST",
+    "path": "/ai/structure-report",
+    "owner": "Shashank",
+    "example": "ai-structure.json",
+    "request": {
+      "toolId": "TOOL-B",
+      "language": "kn",
+      "rawText": "?????? ??????????"
+    }
+  },
+  {
+    "name": "duplicates",
+    "method": "GET",
+    "path": "/incidents/:id/duplicates",
+    "owner": "Jamuna",
+    "example": "duplicates.json",
+    "request": null
+  },
+  {
+    "name": "proposals",
+    "method": "POST",
+    "path": "/incidents/:id/proposals",
+    "owner": "Jamuna",
+    "example": "proposals.json",
+    "request": {
+      "type": "TOOL_RESTRICTION",
+      "reason": "Review torque report"
+    }
+  },
+  {
+    "name": "approval-decision",
+    "method": "POST",
+    "path": "/approvals/:id/decision",
+    "owner": "Jamuna",
+    "example": "approval-decision.json",
+    "request": {
+      "decision": "APPROVED",
+      "reason": "Containment approved",
+      "decidedBy": "MGR-01"
+    }
+  },
+  {
+    "name": "verify-return",
+    "method": "POST",
+    "path": "/incidents/:id/verify-return",
+    "owner": "Jamuna",
+    "example": "verify-return.json",
+    "request": {
+      "verifiedBy": "VER-01",
+      "repairId": "REP-0001",
+      "passed": true
+    }
+  }
+]

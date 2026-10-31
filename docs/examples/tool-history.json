@@ -1,0 +1,20 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "toolId": "TOOL-B",
+  "events": [
+    {
+      "eventId": "HIST-0001",
+      "type": "INCIDENT",
+      "at": "2026-10-23T05:12:00Z",
+      "summary": "Prior torque incident",
+      "refId": "TS-0001",
+      "details": {
+        "state": "Closed"
+      }
+    }
+  ],
+  "counts": {
+    "INCIDENT": 1
+  }
+}

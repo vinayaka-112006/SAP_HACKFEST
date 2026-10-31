@@ -1,0 +1,13 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "approval": {
+    "approvalId": "APR-0001",
+    "proposalId": "PROP-0001",
+    "approverRole": "Manager",
+    "decision": "APPROVED",
+    "reason": "Containment approved",
+    "decidedAt": "2026-11-04T05:15:00Z",
+    "decidedBy": "MGR-01"
+  }
+}
