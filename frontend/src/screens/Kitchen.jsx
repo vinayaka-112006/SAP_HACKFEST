@@ -20,7 +20,7 @@ export default function Kitchen() {
           <StatusBadge status="Built" />
         </div>
         <p style={{ fontSize: '16px', color: 'var(--ink-soft)' }}>
-          Visual fidelity and state verification for Clarity Glass tokens, trust badges, and tier materials.
+          Visual examples only; not incident records, approvals or real SAP execution.
         </p>
       </header>
 
@@ -90,7 +90,7 @@ export default function Kitchen() {
                   </div>
                 </div>
                 <p style={{ fontSize: '13px', color: 'var(--ink-soft)' }}>
-                  Crisp, sharp-edged facet glass. Used exclusively when tool-use, run, and batch records are cryptographically verified.
+                  Crisp, sharp-edged facet glass. Used exclusively when tool-use, run, and batch records have a direct valid association.
                 </p>
               </div>
 
@@ -108,7 +108,7 @@ export default function Kitchen() {
                   </div>
                 </div>
                 <p style={{ fontSize: '13px', color: 'var(--ink-soft)' }}>
-                  Translucent tinted amber. Inferred association (e.g. tool-use record omitted but workcenter and timestamp match).
+                  Translucent tinted amber. An explicit tool-use link has a missing end or conflicting timestamps. Missing tool-use records remain Unknown.
                 </p>
               </div>
 

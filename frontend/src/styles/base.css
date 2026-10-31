@@ -172,3 +172,34 @@ a {
 a:hover {
   text-decoration: underline;
 }
+/* Integration states use the existing Clarity Glass palette and layout. */
+.resource-message { margin: 16px 0; padding: 16px 20px; border: 1px solid var(--brand-cyan); border-radius: 12px; background: rgba(255,255,255,.94); color: var(--ink); overflow-wrap: anywhere; }
+.resource-message.error { border-color: var(--ruby); color: var(--ruby-ink); }
+.integration-fields { display: grid; gap: 10px; margin: 18px 0; }
+.integration-fields input, .integration-fields select, .qr-manual-box input, .incident-picker input, .demo-identity input { max-width:100%; width:100%; padding:10px 14px; border:1px solid rgba(14,26,47,.25); border-radius:8px; background:white; color:var(--ink); font:inherit; min-height:44px; }
+.primary-action, .secondary-action { padding:10px 18px; min-height:44px; margin:6px 8px 6px 0; border-radius:var(--radius-pill); font-weight:700; }
+.primary-action { background:var(--brand-cyan);color:white; }
+.secondary-action { background:white;color:var(--ink);border:1px solid rgba(14,26,47,.25); }
+button:disabled { opacity:.55;cursor:not-allowed; }
+.qr-manual-box { padding:18px; border:2px dashed var(--brand-cyan); border-radius:16px; margin:20px 0; }
+.incident-picker { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.incident-picker input { flex:1; width:auto; min-width:160px; }
+.integration-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px;margin:16px 0; }
+.muted { font-size:14px;color:var(--ink-soft); }
+.original-report { white-space:pre-wrap; }
+pre { max-width:100%; overflow:auto; font-size:13px; white-space:pre-wrap;overflow-wrap:anywhere; }
+.demo-identity { display:flex; gap:10px; align-items:center;font-size:12px;flex-wrap:wrap;margin-top:8px; }
+.demo-identity input { width:190px;font-size:13px;min-height:36px; }
+@media(max-width:760px) { .console-container { padding:14px !important; } .top-navbar {padding:12px !important;} .top-navbar>div {flex-wrap:wrap;gap:14px !important;} [role="group"][aria-label="Local demo roles"] {flex-wrap:wrap;max-width:100%;border-radius:12px !important;} .incident-picker {align-items:stretch;} .incident-picker input {width:100%;} .integration-grid {grid-template-columns:1fr;} }
+
+@media(max-width:760px) {
+  .synthetic-ribbon {flex-direction:column;align-items:flex-start !important;gap:8px;padding:8px 12px !important;font-size:10px !important;}
+  .synthetic-ribbon>div {flex-wrap:wrap;max-width:100%;gap:6px !important;}
+  .synthetic-ribbon span {overflow-wrap:anywhere;}
+  .persona-controls {width:100%;display:block !important;}
+  .persona-controls [role="group"] {width:100%;justify-content:flex-start;}
+  .navigation-dock {max-width:calc(100vw - 16px);overflow-x:auto;white-space:nowrap;bottom:12px !important;}
+  .navigation-dock>a,.navigation-dock>div {flex-shrink:0;}
+  .navigation-dock>a {min-height:44px;}
+  .intro-replay {bottom:85px !important;}
+}

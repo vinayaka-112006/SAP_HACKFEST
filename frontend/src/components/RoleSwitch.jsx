@@ -1,4 +1,5 @@
 import React from 'react';
+import { apiConfig } from '../api/api';
 
 const ROLES = [
   {
@@ -40,7 +41,8 @@ const ROLES = [
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
       </svg>
     )
-  }
+  },
+  { id: 'Verifier', label: 'Verifier', icon: null }
 ];
 
 /**
@@ -49,7 +51,7 @@ const ROLES = [
  */
 export default function RoleSwitch({ activeRole = 'Manager', onRoleChange }) {
   return (
-    <div
+    <div role="group" aria-label="Local demo roles"
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -70,14 +72,14 @@ export default function RoleSwitch({ activeRole = 'Manager', onRoleChange }) {
         padding: '0 10px',
         fontFamily: 'var(--font-mono)'
       }}>
-        PERSONA:
+        LOCAL DEMO:
       </span>
 
       {ROLES.map(role => {
         const isActive = activeRole.toLowerCase() === role.id.toLowerCase();
         return (
           <button
-            key={role.id}
+            key={role.id} disabled={!apiConfig.demoMode} aria-pressed={isActive} aria-label={`${role.id} local demo role`}
             onClick={() => onRoleChange && onRoleChange(role.id)}
             style={{
               padding: '6px 14px',

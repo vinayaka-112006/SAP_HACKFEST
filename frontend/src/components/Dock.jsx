@@ -65,7 +65,7 @@ export default function Dock() {
   ];
 
   return (
-    <nav
+    <nav className="navigation-dock"
       aria-label="Enterprise system navigation dock"
       style={{
         position: 'fixed',

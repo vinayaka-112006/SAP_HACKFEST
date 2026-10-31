@@ -9,7 +9,7 @@ import { useStore } from '../state/store';
  * active module indicator, and live role switcher.
  */
 export default function TopNavbar() {
-  const { currentRole, setCurrentRole } = useStore();
+  const { currentRole, setCurrentRole, demoUserId, setDemoUserId, apiConfig } = useStore();
   const location = useLocation();
 
   const getPageInfo = () => {
@@ -30,7 +30,7 @@ export default function TopNavbar() {
   const pageInfo = getPageInfo();
 
   return (
-    <header
+    <header className="top-navbar"
       style={{
         position: 'sticky',
         top: 0,
@@ -123,7 +123,7 @@ export default function TopNavbar() {
               fontWeight: 500,
               letterSpacing: '-0.01em'
             }}>
-              Autonomous Manufacturing Intelligence &amp; Explainable Traceability
+              Human-reviewed incidents &amp; deterministic traceability
             </div>
           </div>
         </Link>
@@ -163,8 +163,9 @@ export default function TopNavbar() {
         </div>
 
         {/* Persona Role Switcher */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="persona-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole} />
+          {apiConfig.demoMode&&<label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120} /></label>}
         </div>
       </div>
     </header>

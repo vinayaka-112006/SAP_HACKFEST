@@ -1,6 +1,6 @@
 # ToolSathi repository instructions
 
-The sole CAP project root is `backend/`. Run backend npm commands there, or use the root convenience scripts. The repository organization request supersedes the original root-level layout. Frontend is owned independently by Vinayaka in `frontend/`. Root `docs/` and `deploy/` are navigation/shared guidance; deployable MTA/XSUAA assets stay at the backend CAP root.
+The sole CAP project root is `backend/`. Run backend npm commands there, or use the root convenience scripts. The repository organization request supersedes the original root-level layout. Frontend design is owned by Vinayaka in `frontend/`. The current user explicitly authorizes frontend/backend integration changes while preserving that design; AI and workflow business modules remain separately owned. Root `docs/` and `deploy/` are navigation/shared guidance; deployable MTA/XSUAA assets stay at the backend CAP root.
 
 ## 1. Hard rules (non-negotiable)
 
@@ -43,7 +43,7 @@ backend/srv/routes/mock-dm.router.js       (you)
 backend/srv/routes/_stubs/                 (you: stubs for endpoints owned by others)
 backend/srv/ai-adapter/                    (Shashank: do not create anything here)
 backend/srv/rules/                         (Jamuna: do not create anything here)
-frontend/                          (Vinayaka: do not touch)
+frontend/                          (Vinayaka design; authorized API integration may edit)
 backend/tests/ground-truth.json            (Jamuna freezes it; you generate a candidate, see Phase 1)
 backend/tests/                             (you write platform tests; Jamuna adds rule tests)
 backend/docs/                              (you: api-contract, examples, seed, mapping, run-local, deploy-btp, decisions)

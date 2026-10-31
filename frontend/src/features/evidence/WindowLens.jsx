@@ -2,9 +2,9 @@ import React from 'react';
 import GlassPanel from '../../components/GlassPanel';
 
 const WINDOW_PRESETS = [
-  { hours: 24, label: '24 Hours', count: 35, desc: 'Immediate Shift Horizon' },
-  { hours: 72, label: '72 Hours', count: 100, desc: 'Default Investigation Window (Ground Truth)' },
-  { hours: 168, label: '7 Days', count: 160, desc: 'Full Weekly Calibration Boundary' }
+  { hours: 24, label: '24 Hours', desc: 'Immediate Shift Horizon' },
+  { hours: 72, label: '72 Hours', desc: 'Default Investigation Window (Ground Truth)' },
+  { hours: 168, label: '7 Days', desc: 'Full Weekly Calibration Boundary' }
 ];
 
 /**
@@ -12,7 +12,7 @@ const WINDOW_PRESETS = [
  * Always prints the active window as text.
  * Enhanced text size and contrast.
  */
-export default function WindowLens({ activeWindow = 72, onWindowChange }) {
+export default function WindowLens({ activeWindow = 72, totalUnits, onWindowChange }) {
   return (
     <GlassPanel variant="clear" style={{ padding: '16px 24px', width: '100%' }}>
       <div style={{
@@ -71,7 +71,7 @@ export default function WindowLens({ activeWindow = 72, onWindowChange }) {
               <button
                 key={preset.hours}
                 onClick={() => onWindowChange && onWindowChange(preset.hours)}
-                title={`${preset.desc} • ${preset.count} potentially exposed units`}
+                title={preset.desc} aria-pressed={isActive} aria-label={`Trace ${preset.hours} hours`}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -95,7 +95,7 @@ export default function WindowLens({ activeWindow = 72, onWindowChange }) {
                   backgroundColor: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(7,17,32,0.08)',
                   color: isActive ? '#FFFFFF' : 'var(--ink-secondary)'
                 }}>
-                  {preset.count} units
+                  {isActive && totalUnits != null ? `${totalUnits} units` : 'Load records'}
                 </span>
               </button>
             );

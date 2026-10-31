@@ -2,7 +2,7 @@
 
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
-No teammate branches/modules were locally available during implementation. No code was merged, pushed or edited in teammate-owned directories. Five teammate endpoints remain _stub:true; their fixtures are provisional contract proposals, not implemented workflow.
+During the original backend implementation, teammate branches/modules were unavailable. No code was merged, pushed or edited in teammate-owned directories. Five teammate endpoints remain _stub:true; their fixtures are provisional contract proposals, not implemented workflow.
 
 | Owner | Files/endpoints to provide | Expected seam |
 |---|---|---|
@@ -44,4 +44,6 @@ The standalone approval check accepts an omitted transaction for compatibility, 
 
 ## Current repository paths
 
-All backend paths above are CAP-root relative: use backend/srv/routes for teammate routers, backend/srv/ai-adapter for Shashank, backend/srv/rules for Jamuna and backend/tests/ground-truth.json for reviewed data. Vinayaka owns the independent repository frontend/ directory. No AI/rules source existed during restructuring, and frontend/.gitkeep was preserved unchanged. Run npm commands inside backend/; the root package has only explicit backend wrappers.
+All backend paths above are CAP-root relative: use backend/srv/routes for teammate routers, backend/srv/ai-adapter for Shashank, backend/srv/rules for Jamuna and backend/tests/ground-truth.json for reviewed data. Vinayaka owns the independent repository frontend/ directory. No AI/rules source existed during restructuring. Vinayaka's real frontend has since been merged and its supported screens now use the backend; the five AI/workflow routes remain stubs. Run npm commands inside backend/; the root package has only explicit backend wrappers.
+
+Frontend integration status and browser evidence: [integration handover](../../docs/frontend-backend-integration.md). The active UI no longer uses fake incidents, trace arrays, approval receipts or browser-generated audit records.

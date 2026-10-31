@@ -51,7 +51,7 @@ export default function App() {
         {!showIntro && (
           <button
             onClick={() => setShowIntro(true)}
-            title="Replay ToolSathi AI Cinematic Intro"
+            className="intro-replay" title="Replay ToolSathi AI Cinematic Intro"
             style={{
               position: 'fixed',
               bottom: '26px',

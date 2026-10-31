@@ -7,7 +7,7 @@ import React from 'react';
 export default function StatusBadge({ status = 'Verified', size = 'medium', className = '' }) {
   const norm = (status || '').toLowerCase();
 
-  let label = 'System Verified';
+  let label = 'Backend Records';
   let bg = 'rgba(14, 163, 122, 0.12)';
   let border = 'rgba(14, 163, 122, 0.35)';
   let color = 'var(--jade-ink)';
@@ -18,7 +18,7 @@ export default function StatusBadge({ status = 'Verified', size = 'medium', clas
   );
 
   if (norm.includes('sim') || norm.includes('sap')) {
-    label = 'SAP S/4 Interface';
+    label = 'SIMULATED';
     bg = 'rgba(59, 91, 255, 0.12)';
     border = 'rgba(59, 91, 255, 0.35)';
     color = 'var(--cobalt-ink)';

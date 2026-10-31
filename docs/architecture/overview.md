@@ -13,7 +13,7 @@ ToolSathi contains one CAP project, `backend/`, and an independent frontend area
 | backend/tests/ground-truth.json (when reviewed) | Jamuna | Frozen approved reference; absent, candidate remains provisional |
 | backend/tests/, scripts/, docs/ | Yogesh | Platform verification, operations and backend-specific documentation |
 | backend/mta.yaml, xs-security.json, .cdsrc.json | Yogesh | CAP-local build, database profiles and deployment configuration |
-| frontend/ | Vinayaka | UI area; currently only .gitkeep |
+| frontend/ | Vinayaka | React/Vite UI with API-backed incident/trace/history/audit views |
 | docs/, deploy/, AGENTS.md | Repository integration | Navigation, architecture and shared guidance |
 | backup/ | Local runtime, ignored | Consistent database backups and isolated verification databases |
 
@@ -22,3 +22,5 @@ Requests use the unchanged /api endpoints. Express routers use shared CAP databa
 Backend module-relative imports are preserved by moving its source and public fixtures together. CAP configuration lives in backend/.cdsrc.json; dependency versions and commands live in backend/package.json/lock. The MTA remains beside its build outputs and XSUAA descriptor at the CAP root. Runtime/generated files stay ignored: backend/node_modules, backend/gen, backend/db.sqlite and repository backup/.
 
 See [backend handover](../../backend/docs/backend-handover.md), [API navigation](../api/README.md), [team seams](../../backend/docs/team-integration.md) and [deployment](../../deploy/README.md).
+
+The real frontend merge is integrated on integration/frontend-backend. Frontend changes in this phase preserve Vinayaka's design while adapting to CAP responses; the backend implementation and all 18 paths remain unchanged. See [integration handover](../frontend-backend-integration.md).

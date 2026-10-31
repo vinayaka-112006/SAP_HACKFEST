@@ -17,4 +17,4 @@ Read [handover](docs/backend-handover.md), [local operations](docs/run-local.md)
 
 CAP configuration is in [.cdsrc.json](.cdsrc.json); deployment descriptors remain [mta.yaml](mta.yaml) and [xs-security.json](xs-security.json) at this project root. The existing local database is db.sqlite here. Backups are kept in repository ../backup/; restore with `npm run restore:db -- ../backup/<file>.sqlite` while the server is stopped.
 
-See [repository ownership](../docs/architecture/overview.md). The root convenience scripts delegate to this same backend. Frontend has no package/start script yet and is owned separately by Vinayaka.
+See [repository ownership](../docs/architecture/overview.md). The root convenience scripts delegate to this same backend. The merged React/Vite frontend runs independently with npm ci / npm run dev in frontend/. See the repository integration handover for actual connected features and pending adapters.

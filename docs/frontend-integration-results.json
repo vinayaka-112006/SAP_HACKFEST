@@ -1,0 +1,312 @@
+{
+  "browser": {
+    "label": "synthetic data, simulated services",
+    "automatedBrowser": true,
+    "mainDatabaseReset": false,
+    "checks": [
+      {
+        "name": "real register, manual QR fallback and explicit synthetic input",
+        "status": "PASSED"
+      },
+      {
+        "name": "typed creation prevents double submission and confirmation requires a second worker action",
+        "status": "PASSED"
+      },
+      {
+        "name": "actual 72h trace, gaps, evidence and browser CORS work without fabricated results",
+        "status": "PASSED"
+      },
+      {
+        "name": "trace window switching clears stale values and returns 35/100/160 with scores 100/82/83",
+        "status": "PASSED"
+      },
+      {
+        "name": "audit/documents/history are real and unavailable human workflow stays blocked",
+        "status": "PASSED"
+      },
+      {
+        "name": "network error recovery, role access and mobile layout do not crash",
+        "status": "PASSED"
+      },
+      {
+        "name": "existing backend smoke and health/stub verification pass on isolated data",
+        "status": "PASSED"
+      }
+    ],
+    "pageErrors": [],
+    "frontendUrl": "http://localhost:5174",
+    "backendUrl": "http://localhost:58951/api",
+    "backendSmoke": "PASSED",
+    "backendStubVerification": "PASSED",
+    "trace": [
+      {
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 100,
+          "byTier": {
+            "CONFIRMED": 90,
+            "PROBABLE": 4,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 40,
+            "SHIPPED": 60,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 35,
+            "DLR-Y": 25
+          }
+        },
+        "dataQuality": {
+          "score": 82,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 2.4
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0.8
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "windowHours": 24,
+        "summary": {
+          "totalUnits": 35,
+          "byTier": {
+            "CONFIRMED": 35,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 35,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "windowHours": 168,
+        "summary": {
+          "totalUnits": 160,
+          "byTier": {
+            "CONFIRMED": 146,
+            "PROBABLE": 8,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 50,
+            "SHIPPED": 110,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 55,
+            "DLR-Y": 55
+          }
+        },
+        "dataQuality": {
+          "score": 83,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 1.5
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 1
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 100,
+          "byTier": {
+            "CONFIRMED": 90,
+            "PROBABLE": 4,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 40,
+            "SHIPPED": 60,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 35,
+            "DLR-Y": 25
+          }
+        },
+        "dataQuality": {
+          "score": 82,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 2.4
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0.8
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 100,
+          "byTier": {
+            "CONFIRMED": 90,
+            "PROBABLE": 4,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 40,
+            "SHIPPED": 60,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 35,
+            "DLR-Y": 25
+          }
+        },
+        "dataQuality": {
+          "score": 82,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 2.4
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0.8
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      }
+    ],
+    "executedAt": "2026-10-31T13:46:29.856Z"
+  },
+  "normalUrlsReadOnlyCheck": {
+    "frontendUrl": "http://localhost:5173",
+    "backendUrl": "http://localhost:4004/api",
+    "status": "PASSED",
+    "toolIds": [
+      "TOOL-A",
+      "TOOL-B",
+      "TOOL-C"
+    ],
+    "readOnly": true,
+    "pageErrors": []
+  },
+  "backendTests": {
+    "passed": 61,
+    "failed": 0,
+    "skipped": 0,
+    "suites": 12
+  },
+  "frontendClientTests": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "legacyFixtureChecks": 15,
+  "frontendBuild": "PASSED",
+  "manualHardwareSpeech": "NOT_VERIFIED",
+  "physicalCameraScan": "UNAVAILABLE"
+}

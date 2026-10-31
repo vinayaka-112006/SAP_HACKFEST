@@ -1,6 +1,6 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-10-31T11:07:24.065Z",
+  "executedAt": "2026-10-31T13:46:29.042Z",
   "realBackend": [
     "tools",
     "incident-create",
@@ -56,7 +56,7 @@
         "UNKNOWN": 0
       },
       "score": 100,
-      "durationMs": 40.26980000000185
+      "durationMs": 15.856099999999998
     },
     {
       "windowHours": 72,
@@ -67,7 +67,7 @@
         "UNKNOWN": 6
       },
       "score": 82,
-      "durationMs": 34.35959999999977
+      "durationMs": 16.453099999999992
     },
     {
       "windowHours": 168,
@@ -78,8 +78,8 @@
         "UNKNOWN": 6
       },
       "score": 83,
-      "durationMs": 37.53669999999693
+      "durationMs": 12.270600000000002
     }
   ],
-  "incidentId": "TS-0002"
+  "incidentId": "TS-0003"
 }

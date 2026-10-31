@@ -93,9 +93,9 @@ export default function ProposalCard({
         {isApproved && (
           <AuthorChip
             type="approved"
-            role={proposal.approvedBy || currentRole}
-            time={new Date(proposal.approvedAt || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            reason={proposal.approvalReason || 'Safety threshold verified'}
+            role={proposal.approvedBy || 'Not supplied'}
+            time={proposal.approvedAt ? new Date(proposal.approvedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Not supplied'}
+            reason={proposal.approvalReason || 'Not supplied'}
           />
         )}
         {isRejected && (
@@ -158,7 +158,7 @@ export default function ProposalCard({
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
-              onClick={() => setRejecting(true)}
+              disabled={!canApprove} onClick={() => setRejecting(true)}
               style={{
                 padding: '8px 16px',
                 borderRadius: 'var(--radius-pill)',

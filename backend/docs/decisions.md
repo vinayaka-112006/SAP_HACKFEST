@@ -60,3 +60,12 @@ Paths and npm commands in this document are relative to the `backend/` CAP proje
 - Repository backup/ remains the one ignored backup store; source operations use scripts/paths.js to resolve it independently of the working directory. Database maintenance permits only backend/ or that backup store, preserving the previous workspace guard. Restore arguments from backend/ now use ../backup/<file>.sqlite or an absolute path.
 - Root npm wrappers delegate through npm --prefix backend. There is no workspace framework, root dependency tree or frontend package. The original backend .gitkeep was removed because the directory now contains real source; frontend/.gitkeep remains unchanged.
 - Runtime dependencies and generated output were relocated into backend/ separately from git mv source moves, then dependencies/build outputs are revalidated there. Database state is backed up and verified before and after migration, never reset for restructuring.
+
+## Frontend integration
+
+- The new user request authorizes adapting the merged React/Vite frontend on integration/frontend-backend. Preserve its design/assets/routes; backend trace, schema, routes and approval checks remain unchanged.
+- Active frontend fixtures and locally fabricated IDs, audit events, confidence, approvals, receipts and return verification were replaced by real API calls or explicit unavailable states. Legacy fixture files/tests remain only as design reference.
+- The central client defaults to relative /api with a Vite proxy. Demo headers require Vite development mode and the demo flag; production assets never send them. Role/user switching is visibly local demo identity, not production login.
+- Browser tests use Node's existing runtime test runner with Playwright as a library, installed Edge/Chrome, a unique ignored SQLite database and separate Vite port 5174. No additional app/test framework, main database reset, AI backend or rules engine was introduced.
+- A deferred/cancellable resource loader prevents StrictMode's development remount from issuing duplicate trace requests and clears values immediately when incident/window/identity changes. Backend summaries remain authoritative; display aliases do not recompute counts or classify associations.
+- The normal Vite server was already running in this repository and was reused. Backend was started through its normal local script. Read-only browser checks on ports 5173/4004 and a table-data digest confirmed the original main database was preserved.

@@ -1,6 +1,6 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-10-31T11:07:30.178Z",
+  "executedAt": "2026-10-31T13:46:11.549Z",
   "passed": 61,
   "failed": 0,
   "skipped": 0,
@@ -51,7 +51,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 41.002300000000105,
+      "durationMs": 20.719600000000355,
       "status": 200
     },
     {
@@ -92,7 +92,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 36.62209999999686,
+      "durationMs": 16.169200000000274,
       "status": 200
     },
     {
@@ -133,7 +133,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 40.209600000001956,
+      "durationMs": 16.910099999999147,
       "status": 200
     }
   ]

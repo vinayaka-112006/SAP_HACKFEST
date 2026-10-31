@@ -255,7 +255,7 @@ export default function IntroSequence({ onComplete }) {
                 margin: '0 auto'
               }}
             >
-              Translating real-time spoken Kannada, Hindi, and English into structured SAP nonconformance drafts directly from plant assembly operators.
+              Review typed reports in Kannada, Hindi or English. AI structuring awaits the speech and AI adapter.
             </p>
           </div>
         )}
@@ -381,7 +381,7 @@ export default function IntroSequence({ onComplete }) {
               boxShadow: '0 0 16px rgba(16, 185, 129, 0.3)'
             }}>
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981', boxShadow: '0 0 10px #10B981' }} />
-              PHASE 4 • HUMAN-APPROVED SAP S/4HANA RECOVERY
+              PHASE 4 • HUMAN APPROVAL ? SIMULATED SAP ACTIONS
             </div>
 
             <h1
@@ -408,7 +408,7 @@ export default function IntroSequence({ onComplete }) {
                 margin: '0 auto'
               }}
             >
-              Physical interlock gates guard material actions. All containment orders dispatched with verifiable cryptographic audit stamps.
+              Consequential simulated actions require scoped human approvals. Application audit history records executed changes.
             </p>
           </div>
         )}

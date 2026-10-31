@@ -20,3 +20,5 @@ Executed evidence lives in tests/results/summary.json, trace-results.md, trace-v
 Final verification: 61 Jest tests passed across 12 suites, zero failed/skipped tests; see summary.json for the executed result. Standalone smoke, six health/stub checks and packaged-runtime validation have been executed.
 
 Repository restructuring: the sole CAP root is now backend/. Source/seed/API behavior is preserved; root docs and deploy are navigation. The pre-move database was verified, backed up and relocated intact. See repository-restructure.md for inventory, path decisions and executed migration checks.
+
+Frontend integration: merged React/Vite screens now use real tools, incident create/confirm/detail, history, trace/audit and simulated documents. Regression: 61 backend tests, 14 client tests and 7 browser checks pass; frontend production build passes. No backend implementation or trace expectations changed. Five AI/workflow stubs and real-cloud checks remain external. See ../../docs/frontend-backend-integration.md.

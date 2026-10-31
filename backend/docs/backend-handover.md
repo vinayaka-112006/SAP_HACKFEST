@@ -82,7 +82,7 @@ With all writers stopped, `npm run backup:db`, `npm run db:reset` and `npm run r
 
 - Jamuna has not signed off ground truth. Candidate results remain provisional; any supplied frozen-file difference fails.
 - The missing-end window assumption needs team review before treating the data contract as frozen.
-- Five teammate routes remain fixed stubs. Full proposal/approval/repair workflow and UI integration are not demonstrated.
+- Five teammate routes remain fixed stubs. Full proposal/approval/repair workflow remains pending. The supported frontend reporting/confirmation/trace/history/audit/document path is now integrated and browser-tested.
 - HANA/XSUAA/MTA are prepared and locally compiled; real entitlement, binding, token, MTAR and deployment checks remain unverified. HANA audit UPDATE/DELETE rejection must be provisioned and tested before claiming it in cloud.
 - Trace joins load the small synthetic dataset in memory. This is a 300-unit prototype, not a production-scale performance claim.
 - Physical referential constraints, migration lifecycle, production monitoring and real SAP API mapping are not claimed. Local services and construction checks enforce required links within this scope.
@@ -96,3 +96,5 @@ Final local verification: 61 tests passed in 12 suites; zero failed or skipped. 
 ## Repository organization update
 
 The complete CAP project now lives in backend/. Its package/lock and .cdsrc.json are the dependency/configuration source of truth; source behavior and all 18 API paths are preserved. Root docs/ provides navigation and ownership, deploy/ links to the backend-local deployment descriptors, and frontend/ remains unchanged. The existing closed database was relocated to backend/db.sqlite after integrity-checked backup; repository backup/ retains prior state. Root wrappers use npm --prefix backend, so they cannot create a second root CAP database. See [restructuring inventory](repository-restructure.md) and [repository architecture](../../docs/architecture/overview.md).
+
+Frontend integration update: [current UI/API handover](../../docs/frontend-backend-integration.md) supersedes earlier statements that the UI was unavailable. Backend source/schema/approval gates were not changed; the normal demo database was preserved and browser tests used isolated data.

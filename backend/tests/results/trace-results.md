@@ -4,8 +4,8 @@ Synthetic data, simulated services. Ground truth: PROVISIONAL candidate, awaitin
 
 | Window | Units expected/actual | C/P/U expected / actual | Stock/X/Y expected / actual | Score expected/actual | ms |
 |---|---|---|---|---|---|
-| 24 | 35 / 35 | 35/0/0 / 35/0/0 | 35/0/0 / 35/0/0 | 100 / 100 | 41.00 |
-| 72 | 100 / 100 | 90/4/6 / 90/4/6 | 40/35/25 / 40/35/25 | 82 / 82 | 36.62 |
-| 168 | 160 / 160 | 146/8/6 / 146/8/6 | 50/55/55 / 50/55/55 | 83 / 83 | 40.21 |
+| 24 | 35 / 35 | 35/0/0 / 35/0/0 | 35/0/0 / 35/0/0 | 100 / 100 | 20.72 |
+| 72 | 100 / 100 | 90/4/6 / 90/4/6 | 40/35/25 / 40/35/25 | 82 / 82 | 16.17 |
+| 168 | 160 / 160 | 146/8/6 / 146/8/6 | 50/55/55 / 50/55/55 | 83 / 83 | 16.91 |
 
 Exposure range expected 35/154/6; assertions verify every result. See summary.json for executed suite status.

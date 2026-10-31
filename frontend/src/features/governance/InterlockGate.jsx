@@ -47,7 +47,7 @@ export default function InterlockGate({
             color: 'var(--jade-ink)',
             letterSpacing: '0.04em'
           }}>
-            INTERLOCK UNLOCKED • AUTHORIZED S/4 DISPATCH ACTIVE
+            HUMAN APPROVAL RECORDED | SIMULATED ACTION
           </span>
         )}
       </div>

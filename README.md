@@ -6,7 +6,7 @@ A synthetic manufacturing incident and product-exposure investigation prototype.
 
 ```text
 backend/     CAP project: database, APIs, tests, operations, backend docs and deployment configuration
-frontend/    Vinayaka's UI area (currently only .gitkeep; no package/start command yet)
+frontend/    Vinayaka's React/Vite UI, now connected to the local CAP backend
 docs/        Repository architecture, API navigation and team ownership
 deploy/      Shared deployment guidance; executable MTA/XSUAA configuration lives in backend/
 backup/      Ignored database backups and isolated verification databases
@@ -30,12 +30,21 @@ In another backend terminal run `npm test`, `npm run verify:stubs` or `npm run s
 
 From the repository root, `npm run dev:backend`, `npm run test:backend` and `npm run build:backend` delegate to the same backend project. Root dependency installation is not required for these wrappers.
 
-## Frontend
+## Start the frontend independently
 
-`frontend/` is preserved unchanged. It has no package.json or implementation, so there is currently no valid frontend install/start command. Vinayaka should supply its independent package and scripts; this restructure does not generate UI code or assume a framework.
+In a second terminal:
+
+```powershell
+cd frontend
+npm ci
+npm run dev
+```
+
+Open **http://localhost:5173**. The existing design is preserved; /api is proxied to the backend. Local demo roles are explicitly labelled. Typed reporting, separate confirmation, incident lookup, tool history, trace windows, audit and simulated documents use real APIs. AI and workflow stubs stay unavailable. See [integration walkthrough and executed tests](docs/frontend-backend-integration.md).
 
 ## Documentation
 
+- [Frontend/backend integration](docs/frontend-backend-integration.md)
 - [Architecture and folder ownership](docs/architecture/overview.md)
 - [API documentation](docs/api/README.md)
 - [Team integration and ownership](docs/team/README.md)
