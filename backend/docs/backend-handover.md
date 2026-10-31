@@ -98,3 +98,7 @@ Final local verification: 61 tests passed in 12 suites; zero failed or skipped. 
 The complete CAP project now lives in backend/. Its package/lock and .cdsrc.json are the dependency/configuration source of truth; source behavior and all 18 API paths are preserved. Root docs/ provides navigation and ownership, deploy/ links to the backend-local deployment descriptors, and frontend/ remains unchanged. The existing closed database was relocated to backend/db.sqlite after integrity-checked backup; repository backup/ retains prior state. Root wrappers use npm --prefix backend, so they cannot create a second root CAP database. See [restructuring inventory](repository-restructure.md) and [repository architecture](../../docs/architecture/overview.md).
 
 Frontend integration update: [current UI/API handover](../../docs/frontend-backend-integration.md) supersedes earlier statements that the UI was unavailable. Backend source/schema/approval gates were not changed; the normal demo database was preserved and browser tests used isolated data.
+
+## HANA support continuation
+
+The same backend now has explicit HANA/SQLite selection, verified-TLS credential mapping, dedicated-target guards, create-only HANA DDL/HDI audit artifacts and transactional migration of every existing SQLite table. HANA connectivity and writes remain blocked by absent .env/binding credentials; no remote success is claimed. The default suite is pinned offline. See [HANA integration](hana-cloud-integration.md) and tests/results/hana-results.json for current capability and execution status.

@@ -1,0 +1,12 @@
+{
+  "mode": "hana",
+  "executedAt": "2026-10-31T15:39:35.768Z",
+  "status": "BLOCKED",
+  "checks": [],
+  "_label": "SIMULATED",
+  "failedAt": "configuration",
+  "error": {
+    "code": "HANA_CREDENTIALS_MISSING",
+    "message": "Configure backend/.env: HANA_SQL_ENDPOINT, HANA_USER, HANA_PASSWORD, HANA_SCHEMA."
+  }
+}

@@ -50,6 +50,7 @@ Open **http://localhost:5173**. The existing design is preserved; /api is proxie
 - [Team integration and ownership](docs/team/README.md)
 - [Backend setup and recovery](backend/docs/run-local.md)
 - [Backend handover](backend/docs/backend-handover.md)
+- [HANA Cloud connection and existing-data migration](backend/docs/hana-cloud-integration.md)
 - [Deployment navigation](deploy/README.md)
 - [Restructuring inventory and validation](backend/docs/repository-restructure.md)
 

@@ -1,4 +1,12 @@
+const databaseConfig = require("./lib/database-config");
+databaseConfig.loadEnvironment();
 const cds = require("@sap/cds");
+let database, configurationError;
+try {
+  database = databaseConfig.configureDatabase(cds, {
+    mode: process.argv.find(arg => arg.startsWith("--database="))?.split("=")[1],
+  });
+} catch (error) { configurationError = error; }
 const express = require("express");
 const cors = require("cors");
 const { loadRouters } = require("./lib/router-loader");
@@ -9,6 +17,10 @@ cds.on("served", async () => {
       "SELECT name FROM sqlite_master WHERE type='table' AND name='toolsathi_Tool'",
     );
     if (!existing.length) await cds.deploy(cds.model).to(cds.db);
+  } else {
+    // Fail on a real query before listening; never auto-deploy or seed remote HANA.
+    await cds.db.run("SELECT CURRENT_USER, CURRENT_SCHEMA FROM DUMMY");
+    await cds.db.run(cds.ql.SELECT.from("toolsathi.Tool").limit(1));
   }
   await require("./lib/db-protection").install(cds.db);
 });
@@ -40,6 +52,8 @@ cds.on("bootstrap", (app) => {
   app.use(errors);
 });
 module.exports = (options) => {
+  if (configurationError) throw configurationError;
+  if (database.mode === "hana" && database.connection === "direct") databaseConfig.assertTarget(database);
   if (
     process.env.NODE_ENV === "production" &&
     (process.env.AUTH_MODE === "header" ||
@@ -67,8 +81,8 @@ module.exports = (options) => {
   });
 };
 if (require.main === module)
-  module
-    .exports({})
+  Promise.resolve()
+    .then(() => module.exports({}))
     .then(async (server) => {
       if (!server.listening)
         await new Promise((resolve, reject) => {
@@ -78,6 +92,7 @@ if (require.main === module)
       console.log(
         `ToolSathi SIMULATED: http://localhost:${server.address().port}/api`,
       );
+      console.log(`ToolSathi database: ${database.mode}`);
       const shutdown = () =>
         server.close(async () => {
           await cds.emit("shutdown");
@@ -92,9 +107,8 @@ if (require.main === module)
         });
     })
     .catch(async (error) => {
-      console.error(
-        `ToolSathi startup failed (${error.code || "STARTUP_ERROR"})`,
-      );
+      const safe = database?.mode === "hana" || configurationError ? databaseConfig.diagnostic(error) : { code: error.code || "STARTUP_ERROR", message: "Check local database and port availability." };
+      console.error(`ToolSathi startup failed (${safe.code}): ${safe.message}`);
       await cds.db?.disconnect();
       process.exitCode = 1;
     });

@@ -23,6 +23,9 @@ test("MTA bindings and XSUAA role collections are structurally consistent", () =
   expect(security["role-collections"]).toHaveLength(5);
 });
 test("production profile selects HANA/XSUAA without local SQLite credentials", () => {
+  const env = { ...process.env, NODE_ENV: "production", CDS_ENV: "production" };
+  // Inspect production defaults independently of the offline test runner's database pins.
+  for (const key of Object.keys(env)) if (/^cds[_.]requires[_.]db/i.test(key)) delete env[key];
   const out = execFileSync(
     process.execPath,
     [
@@ -30,7 +33,7 @@ test("production profile selects HANA/XSUAA without local SQLite credentials", (
       "const cds=require('@sap/cds');process.stdout.write(JSON.stringify({kind:cds.env.requires.db.kind,url:cds.env.requires.db.credentials?.url,auth:cds.env.requires.auth.kind}))",
     ],
     {
-      env: { ...process.env, NODE_ENV: "production", CDS_ENV: "production" },
+      env,
       encoding: "utf8",
     },
   );

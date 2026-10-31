@@ -101,6 +101,7 @@ before(
         ...process.env,
         NODE_ENV: "development",
         CDS_ENV: "development",
+        DATABASE_MODE: "sqlite",
         AUTH_MODE: "header",
         ENFORCE_APPROVALS: "true",
         ALLOW_UNAPPROVED_MOCKS: "false",

@@ -46,7 +46,7 @@ Restore with the server stopped: `npm run restore:db -- ../backup/<selected-back
 | ENFORCE_APPROVALS | true; false alone does not bypass |
 | ALLOW_UNAPPROVED_MOCKS | false; combined with ENFORCE_APPROVALS=false is DEVELOPMENT ONLY, **never on for the demo build**; refused in production |
 
-XSUAA/HANA credentials come only from service bindings. No secrets belong in .env files committed to Git. Header auth and simulated adapters do not prove production security or SAP integration.
+Production XSUAA/HANA credentials come from service bindings. Local HANA mode can explicitly map credentials from ignored backend/.env; see [HANA connection and existing-data migration](hana-cloud-integration.md). start:local forces SQLite and npm test pins isolated SQLite even when .env selects HANA. No secrets belong in files committed to Git. Header auth and simulated adapters do not prove production security or SAP integration.
 
 After an abnormal termination with a WAL remaining, stop all writers, run `npm run db:checkpoint`, then retry offline backup/reset. The checkpoint refuses an active ToolSathi lock. `npm run verify:package` checks the built runtime locally after `npm run build`; it does not connect to HANA. Tested runtime: Node 24.11.0. Node 20 needs a compatible SQLite driver (the default native driver is unavailable there); revalidate that combination before use.
 

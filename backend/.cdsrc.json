@@ -4,6 +4,12 @@
       "kind": "sqlite"
     },
     "queue": false,
+    "[hana-local]": {
+      "db": {
+        "kind": "hana",
+        "impl": "@cap-js/hana"
+      }
+    },
     "[test]": {
       "db": {
         "kind": "sqlite",
@@ -35,6 +41,7 @@
         "for": "hana",
         "src": "db",
         "options": {
+          "contentHdbtabledata": false,
           "model": [
             "db",
             "srv"
