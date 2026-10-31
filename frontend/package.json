@@ -1,0 +1,27 @@
+{
+  "name": "toolsathi-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "seed": "node scripts/generate-seed.js",
+    "test:seed": "node src/tests/seed.test.js"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.0.20",
+    "@fontsource/ibm-plex-sans": "^5.0.21",
+    "@fontsource/noto-sans-devanagari": "^5.0.20",
+    "@fontsource/noto-sans-kannada": "^5.0.20",
+    "framer-motion": "^11.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  }
+}

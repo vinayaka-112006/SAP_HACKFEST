@@ -1,0 +1,69 @@
+{
+  "incidentId": "TS-0001",
+  "toolId": "TOOL-B",
+  "toolName": "Digital Angle Torque Wrench 120Nm",
+  "line": "Brake-Assembly Line 3",
+  "workCenter": "WC-BRK-04",
+  "reporterId": "OP-104",
+  "reporterName": "Basavaraj K.",
+  "language": "kn",
+  "rawText": "ಟೂಲ್ ಬಿ ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿ ಬಿಡುತ್ತಿದೆ, ಟಾರ್ಕ್ ಸರಿಯಾಗಿ ಹಿಡಿಯುತ್ತಿಲ್ಲ",
+  "translatedText": "Tool B is leaving bolts loose; torque is not gripping properly",
+  "category": "Torque Drift / Fastener Looseness",
+  "suggestedNcCode": "NC-FAST-042 (Bolt Torque Deviation)",
+  "suggestedNcDesc": "Assembly torque lower than threshold limits (62Nm vs 85Nm specification)",
+  "confidence": 0.88,
+  "confidenceLabel": "Needs technician verification",
+  "state": "Under review",
+  "reportedAt": "2026-10-31T10:42:00.000Z",
+  "evidenceCount": 4,
+  "activeInvestigationWindow": "72h",
+  "potentiallyExposedUnitsCount": 100,
+  "exposureRange": {
+    "min": 35,
+    "mid": 100,
+    "max": 160
+  },
+  "tiers": {
+    "confirmed": 90,
+    "probable": 4,
+    "unknown": 6
+  },
+  "locations": {
+    "factoryStock": 40,
+    "dealerX": 35,
+    "dealerY": 25
+  },
+  "dataQualityScore": 0.91,
+  "dataGaps": [
+    {
+      "type": "missing_tool_use",
+      "count": 6,
+      "label": "Missing tool-use event records for 6 units (Unknown tier)",
+      "unitIds": [
+        "TS-BRK-0095",
+        "TS-BRK-0096",
+        "TS-BRK-0097",
+        "TS-BRK-0098",
+        "TS-BRK-0099",
+        "TS-BRK-0100"
+      ]
+    },
+    {
+      "type": "stale_shipment",
+      "count": 1,
+      "label": "Stale Dealer Y shipment snapshot (overdue 48h)",
+      "unitIds": [
+        "TS-BRK-0085"
+      ]
+    },
+    {
+      "type": "conflicting_timestamps",
+      "count": 1,
+      "label": "Conflicting run timestamps in Run #398 (endTime < startTime)",
+      "unitIds": [
+        "TS-BRK-0023"
+      ]
+    }
+  ]
+}

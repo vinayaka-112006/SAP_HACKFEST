@@ -1,0 +1,42 @@
+[
+  {
+    "toolId": "TOOL-A",
+    "name": "Pneumatic Nutrunner 80Nm",
+    "type": "Pneumatic Fastener",
+    "line": "Chassis Line 1",
+    "workCenter": "WC-CHS-01",
+    "status": "Active",
+    "calibrationDue": "2026-11-28",
+    "lastVerifiedGood": "2026-10-15T08:00:00.000Z",
+    "usageCount": 14200
+  },
+  {
+    "toolId": "TOOL-B",
+    "name": "Digital Angle Torque Wrench 120Nm",
+    "type": "Digital Torque Wrench",
+    "line": "Brake-Assembly Line 3",
+    "workCenter": "WC-BRK-04",
+    "status": "Restricted",
+    "calibrationDue": "2026-11-05",
+    "lastVerifiedGood": "2026-10-24T06:30:00.000Z",
+    "usageCount": 28450,
+    "lockoutDetails": {
+      "isLockedOut": true,
+      "tagId": "LOTO-2026-B-09",
+      "lockedBy": "System AI Containment Interlock",
+      "lockReason": "Bolt looseness reported; torque calibration drift TS-0001",
+      "lockedAt": "2026-10-31T10:44:00.000Z"
+    }
+  },
+  {
+    "toolId": "TOOL-C",
+    "name": "Electric Spindle Driver 45Nm",
+    "type": "Electric Screwdriver",
+    "line": "Electronics Line 2",
+    "workCenter": "WC-ELC-02",
+    "status": "Active",
+    "calibrationDue": "2026-11-05",
+    "lastVerifiedGood": "2026-10-06T14:00:00.000Z",
+    "usageCount": 38900
+  }
+]

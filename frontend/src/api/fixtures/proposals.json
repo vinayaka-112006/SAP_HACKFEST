@@ -1,0 +1,78 @@
+[
+  {
+    "proposalId": "PROP-001",
+    "incidentId": "TS-0001",
+    "type": "restrict_tool",
+    "title": "Immediate Tool Containment: Restrict Tool B",
+    "description": "Prohibit further assembly runs with Tool B across all shifts in Digital Manufacturing.",
+    "targetSystem": "SAP Digital Manufacturing (DM) Resource Status",
+    "requiredRole": "Manager",
+    "status": "Approved",
+    "approvedBy": "Yogesh (Plant Manager)",
+    "approvedAt": "2026-10-31T10:45:12.000Z",
+    "approvalReason": "Confirmed torque drift on safety-critical brake caliper assembly",
+    "simulatedReceipt": {
+      "transactionId": "DM-RES-LOCK-90214",
+      "status": "RESOURCE_LOCKED_OUT",
+      "timestamp": "2026-10-31T10:45:13.000Z",
+      "chip": "Simulated: sent to mock SAP DM"
+    }
+  },
+  {
+    "proposalId": "PROP-002",
+    "incidentId": "TS-0001",
+    "type": "hold_stock",
+    "title": "Quarantine In-Plant Inventory: Hold 40 Units",
+    "description": "Execute QA Stock Block in SAP S/4HANA for 40 assemblies held in Plant Storage Location 0001.",
+    "targetSystem": "SAP S/4HANA Materials Management (MM) Stock Posting",
+    "requiredRole": "Quality",
+    "status": "Pending",
+    "approvedBy": null,
+    "approvedAt": null,
+    "approvalReason": null,
+    "simulatedReceipt": {
+      "transactionId": "S4-POSTING-BLK-48901",
+      "status": "STOCK_RESTRICTED_USE",
+      "timestamp": null,
+      "chip": "Simulated: sent to mock S/4"
+    }
+  },
+  {
+    "proposalId": "PROP-003",
+    "incidentId": "TS-0001",
+    "type": "quality_notification",
+    "title": "Draft S/4HANA Quality Notification (QM01)",
+    "description": "Create Category Q2 Supplier/Internal deviation notification for 100 potentially exposed assemblies.",
+    "targetSystem": "SAP S/4HANA Quality Management (QM)",
+    "requiredRole": "Quality",
+    "status": "Pending",
+    "approvedBy": null,
+    "approvedAt": null,
+    "approvalReason": null,
+    "simulatedReceipt": {
+      "transactionId": "QM-NOTIF-2026-00441",
+      "status": "DRAFT_CREATED",
+      "timestamp": null,
+      "chip": "Simulated: sent to mock S/4"
+    }
+  },
+  {
+    "proposalId": "PROP-004",
+    "incidentId": "TS-0001",
+    "type": "maintenance_notification",
+    "title": "Raise Asset Maintenance Order for Torque Calibrator",
+    "description": "Route recalibration work order to certified technician Ravi M. with transducer check.",
+    "targetSystem": "SAP S/4HANA Asset Management (PM)",
+    "requiredRole": "Manager",
+    "status": "Pending",
+    "approvedBy": null,
+    "approvedAt": null,
+    "approvalReason": null,
+    "simulatedReceipt": {
+      "transactionId": "PM-ORDER-88203",
+      "status": "DISPATCH_QUEUED",
+      "timestamp": null,
+      "chip": "Simulated: sent to mock S/4"
+    }
+  }
+]
