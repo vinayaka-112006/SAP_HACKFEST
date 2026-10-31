@@ -1,0 +1,1905 @@
+{
+  "label": "synthetic data, simulated services",
+  "groundTruth": "PROVISIONAL CANDIDATE ? Jamuna review pending",
+  "rows": [
+    {
+      "window": 24,
+      "expected": {
+        "units": [
+          {
+            "serial": "SN-000001",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000002",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000003",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000004",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000005",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000006",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000007",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000008",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000009",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000010",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000011",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000012",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000013",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000014",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000015",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000016",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000017",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000018",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000019",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000020",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000021",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000022",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000023",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000024",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000025",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000026",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000027",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000028",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000029",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000030",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000031",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000032",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000033",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000034",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000035",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          }
+        ],
+        "totalUnits": 35,
+        "byTier": {
+          "CONFIRMED": 35,
+          "PROBABLE": 0,
+          "UNKNOWN": 0
+        },
+        "inStock": 35,
+        "dealerX": 0,
+        "dealerY": 0,
+        "score": 100
+      },
+      "actual": {
+        "totalUnits": 35,
+        "byTier": {
+          "CONFIRMED": 35,
+          "PROBABLE": 0,
+          "UNKNOWN": 0
+        },
+        "byLocation": {
+          "IN_STOCK": 35,
+          "SHIPPED": 0,
+          "UNKNOWN_LOCATION": 0
+        },
+        "shippedByDealer": {
+          "DLR-X": 0,
+          "DLR-Y": 0
+        },
+        "score": 100,
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      "durationMs": 25.23610000000008,
+      "status": 200
+    },
+    {
+      "window": 72,
+      "expected": {
+        "units": [
+          {
+            "serial": "SN-000001",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000002",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000003",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000004",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000005",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000006",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000007",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000008",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000009",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000010",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000011",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000012",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000013",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000014",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000015",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000016",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000017",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000018",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000019",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000020",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000021",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000022",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000023",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000024",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000025",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000026",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000027",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000028",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000029",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000030",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000031",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000032",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000033",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000034",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000035",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000036",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000037",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000038",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000039",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000040",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000041",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000042",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000043",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000044",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000045",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000046",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000047",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000048",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000049",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000050",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000051",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000052",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000053",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000054",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000055",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000056",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000057",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000058",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000059",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000060",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000061",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000062",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000063",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000064",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000065",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000066",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000067",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000068",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000069",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000070",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000071",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000072",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000073",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000074",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000075",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000076",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000077",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000078",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000079",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000080",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000081",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000082",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000083",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000084",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000085",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000086",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000087",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000088",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000089",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000090",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000091",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000092",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000093",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000094",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000095",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000096",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000097",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000098",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000099",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000100",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          }
+        ],
+        "totalUnits": 100,
+        "byTier": {
+          "CONFIRMED": 90,
+          "PROBABLE": 4,
+          "UNKNOWN": 6
+        },
+        "inStock": 40,
+        "dealerX": 35,
+        "dealerY": 25,
+        "score": 82
+      },
+      "actual": {
+        "totalUnits": 100,
+        "byTier": {
+          "CONFIRMED": 90,
+          "PROBABLE": 4,
+          "UNKNOWN": 6
+        },
+        "byLocation": {
+          "IN_STOCK": 40,
+          "SHIPPED": 60,
+          "UNKNOWN_LOCATION": 0
+        },
+        "shippedByDealer": {
+          "DLR-X": 35,
+          "DLR-Y": 25
+        },
+        "score": 82,
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      "durationMs": 67.72859999999991,
+      "status": 200
+    },
+    {
+      "window": 168,
+      "expected": {
+        "units": [
+          {
+            "serial": "SN-000001",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000002",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000003",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000004",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000005",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000006",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000007",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000008",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000009",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000010",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000011",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000012",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000013",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000014",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000015",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000016",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000017",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000018",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000019",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000020",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000021",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000022",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000023",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000024",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000025",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000026",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000027",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000028",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000029",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000030",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000031",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000032",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000033",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000034",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000035",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000036",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000037",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000038",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000039",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000040",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000041",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000042",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000043",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000044",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000045",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000046",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000047",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000048",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000049",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000050",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000051",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000052",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000053",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000054",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000055",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000056",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000057",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000058",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000059",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000060",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000061",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000062",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000063",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000064",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000065",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000066",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000067",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000068",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000069",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000070",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000071",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000072",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000073",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000074",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000075",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000076",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000077",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000078",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000079",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000080",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000081",
+            "tier": "UNKNOWN",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000082",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000083",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000084",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000085",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000086",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000087",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000088",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000089",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000090",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000091",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000092",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000093",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000094",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000095",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000096",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000097",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000098",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000099",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000100",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000101",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000102",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000103",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000104",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000105",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000106",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000107",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000108",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000109",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000110",
+            "tier": "CONFIRMED",
+            "location": "IN_STOCK",
+            "dealerId": null
+          },
+          {
+            "serial": "SN-000111",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000112",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000113",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000114",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000115",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000116",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000117",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000118",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000119",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000120",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000121",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000122",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000123",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000124",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000125",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000126",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000127",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000128",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000129",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000130",
+            "tier": "PROBABLE",
+            "location": "SHIPPED",
+            "dealerId": "DLR-X"
+          },
+          {
+            "serial": "SN-000131",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000132",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000133",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000134",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000135",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000136",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000137",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000138",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000139",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000140",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000141",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000142",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000143",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000144",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000145",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000146",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000147",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000148",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000149",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000150",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000151",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000152",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000153",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000154",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000155",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000156",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000157",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000158",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000159",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          },
+          {
+            "serial": "SN-000160",
+            "tier": "CONFIRMED",
+            "location": "SHIPPED",
+            "dealerId": "DLR-Y"
+          }
+        ],
+        "totalUnits": 160,
+        "byTier": {
+          "CONFIRMED": 146,
+          "PROBABLE": 8,
+          "UNKNOWN": 6
+        },
+        "inStock": 50,
+        "dealerX": 55,
+        "dealerY": 55,
+        "score": 83
+      },
+      "actual": {
+        "totalUnits": 160,
+        "byTier": {
+          "CONFIRMED": 146,
+          "PROBABLE": 8,
+          "UNKNOWN": 6
+        },
+        "byLocation": {
+          "IN_STOCK": 50,
+          "SHIPPED": 110,
+          "UNKNOWN_LOCATION": 0
+        },
+        "shippedByDealer": {
+          "DLR-X": 55,
+          "DLR-Y": 55
+        },
+        "score": 83,
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      "durationMs": 40.380499999999756,
+      "status": 200
+    }
+  ]
+}

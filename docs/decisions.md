@@ -27,3 +27,6 @@
 - SQLite audit triggers and indexes install via db/init.js during deployment and again on CAP served. Fixed schema table names were checked against compiled CDS. HANA needs separate deployment artifacts/permissions; this is documented in Phase 5.
 - Header auth checks are applied when real routes replace stubs. They are local demo identity only and are refused in production. Stub verification now checks only health and five teammate endpoints; real business routes have behavioral tests.
 - Added .gitattributes to preserve generated LF bytes on Windows checkouts.
+
+- Trace loads the small synthetic manufacturing tables once per transaction and performs stable JavaScript joins; this is deliberately bounded to the 300-unit prototype, not a claim of production-scale query performance. Snapshot uses latest stored inventory snapshot, or incident anchor if no stock snapshot exists. Multiple conflicting stock/shipment locations remain UNKNOWN_LOCATION with an explicit gap. Missing required links produce gaps without invented serials.
+- Trace versions serialize on the incident row. Repeated results may differ only in generatedAt/version. Illustrative data-quality deductions are returned separately; stock location uncertainty does not upgrade an association tier.
