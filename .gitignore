@@ -20,3 +20,5 @@ default-env.json
 .cdsrc-private.json
 *service-key*
 *service_key*
+
+/frontend/.vite/
