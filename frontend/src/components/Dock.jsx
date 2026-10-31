@@ -77,12 +77,12 @@ export default function Dock() {
         alignItems: 'center',
         gap: '8px',
         padding: '6px 12px',
-        background: 'rgba(255, 255, 255, 0.82)',
-        backdropFilter: 'blur(26px) saturate(170%)',
-        WebkitBackdropFilter: 'blur(26px) saturate(170%)',
-        border: '1px solid rgba(255, 255, 255, 0.95)',
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(246, 250, 255, 0.82) 100%)',
+        backdropFilter: 'blur(28px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.98)',
         borderRadius: 'var(--radius-pill)',
-        boxShadow: '0 20px 48px rgba(14, 26, 47, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95)'
+        boxShadow: '0 20px 48px rgba(7, 17, 32, 0.14), 0 0 32px -4px rgba(0, 229, 255, 0.22), inset 0 1px 0 #FFFFFF'
       }}
     >
       <div style={{
@@ -90,20 +90,21 @@ export default function Dock() {
         alignItems: 'center',
         gap: '8px',
         padding: '0 12px 0 6px',
-        borderRight: '1px solid rgba(14, 26, 47, 0.12)'
+        borderRight: '1px solid rgba(7, 17, 32, 0.10)'
       }}>
         <div style={{
-          width: '20px',
-          height: '20px',
-          borderRadius: '6px',
-          background: 'linear-gradient(135deg, var(--cobalt) 0%, #1E38C4 100%)',
+          width: '22px',
+          height: '22px',
+          borderRadius: '7px',
+          background: 'var(--brand-gradient)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: '#FFFFFF',
           fontSize: '11px',
           fontWeight: 900,
-          fontFamily: 'var(--font-mono)'
+          fontFamily: 'var(--font-mono)',
+          boxShadow: '0 0 12px rgba(0, 184, 204, 0.4)'
         }}>
           TS
         </div>
@@ -121,14 +122,17 @@ export default function Dock() {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '7px 15px',
+              padding: '8px 16px',
               borderRadius: 'var(--radius-pill)',
               fontSize: '12px',
-              fontWeight: isActive ? 700 : 500,
+              fontWeight: isActive ? 800 : 600,
               color: isActive ? '#FFFFFF' : 'var(--ink)',
-              backgroundColor: isActive ? 'var(--ink)' : 'transparent',
+              background: isActive 
+                ? 'linear-gradient(135deg, #071120 0%, #15243B 100%)' 
+                : 'transparent',
               textDecoration: 'none',
-              transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              boxShadow: isActive ? '0 4px 16px rgba(7, 17, 32, 0.28), 0 0 16px rgba(0, 229, 255, 0.22)' : 'none',
+              transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
               whiteSpace: 'nowrap'
             })}
           >

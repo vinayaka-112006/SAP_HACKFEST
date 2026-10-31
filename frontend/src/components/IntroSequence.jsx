@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Logo from './Logo';
 
 /**
  * IntroSequence: Ultra-cinematic 5.5 second animated onboarding experience
@@ -121,48 +122,7 @@ export default function IntroSequence({ onComplete }) {
 
       {/* Top Header with ToolSathi AI Logo */}
       <div style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '12px',
-            padding: '3px',
-            background: 'linear-gradient(135deg, #00E5FF 0%, #0AB6FF 100%)',
-            boxShadow: '0 0 20px rgba(0, 229, 255, 0.5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#FFFFFF'
-          }}>
-            <img
-              src="/assets/toolsathi_logo.png"
-              alt="ToolSathi AI Logo"
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-            />
-          </div>
-
-          <div>
-            <div style={{
-              fontSize: '22px',
-              fontWeight: 900,
-              letterSpacing: '0.04em',
-              fontFamily: 'var(--font-mono)',
-              color: '#FFFFFF',
-              textShadow: '0 2px 8px rgba(0,0,0,0.8)'
-            }}>
-              TOOL<span style={{ color: '#00E5FF' }}>SATHI</span> AI
-            </div>
-            <div style={{
-              fontSize: '12px',
-              color: '#CBD5E1',
-              fontFamily: 'var(--font-mono)',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase'
-            }}>
-              Autonomous Manufacturing Cloud
-            </div>
-          </div>
-        </div>
+        <Logo variant="lockup" theme="dark" size={44} animate={true} />
 
         {/* Skip Button */}
         <button
@@ -189,24 +149,8 @@ export default function IntroSequence({ onComplete }) {
       {/* Central Sequence Stage with Logo Centerpiece */}
       <div style={{ position: 'relative', zIndex: 10, maxWidth: '880px', margin: '0 auto', textAlign: 'center' }}>
         {/* Glowing Logo Icon */}
-        <div style={{
-          width: '104px',
-          height: '104px',
-          borderRadius: '26px',
-          margin: '0 auto 24px auto',
-          padding: '4px',
-          background: 'linear-gradient(135deg, #00E5FF 0%, #0070F3 100%)',
-          boxShadow: '0 0 50px 14px rgba(0, 229, 255, 0.5)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#FFFFFF'
-        }}>
-          <img
-            src="/assets/toolsathi_logo.png"
-            alt="ToolSathi AI Logo"
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          />
+        <div style={{ margin: '0 auto 24px auto', display: 'flex', justifyContent: 'center' }}>
+          <Logo variant="mark" theme="dark" size={100} animate={true} />
         </div>
 
         {/* Phase 0: Multilingual Incident Intelligence */}

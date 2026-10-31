@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import GlassPanel from '../components/GlassPanel';
 import StatusBadge from '../components/StatusBadge';
 import RoleSwitch from '../components/RoleSwitch';
+import Logo from '../components/Logo';
 import { useStore } from '../state/store';
 
 export default function Launcher() {
@@ -71,48 +72,39 @@ export default function Launcher() {
   return (
     <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '40px 32px 140px 32px' }}>
       {/* Hero Welcome Showcase */}
-      <div style={{
-        textAlign: 'center',
-        marginBottom: '48px',
-        padding: '36px 20px',
-        borderRadius: '28px',
-        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(244, 247, 252, 0.85) 100%)',
-        border: '1px solid rgba(0, 184, 204, 0.25)',
-        boxShadow: '0 20px 60px rgba(7, 17, 32, 0.06)'
-      }}>
-        {/* Emblem Showcase with Official Logo */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-          <div style={{
-            width: '96px',
-            height: '96px',
-            borderRadius: '24px',
-            padding: '4px',
-            background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.85) 0%, rgba(10, 182, 255, 0.6) 100%)',
-            boxShadow: '0 12px 32px rgba(0, 194, 203, 0.35)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#FFFFFF',
-            overflow: 'hidden'
-          }}>
-            <img
-              src="/assets/toolsathi_logo.png"
-              alt="ToolSathi AI Logo"
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-            />
-          </div>
+      <div 
+        className="animate-fade-in-up"
+        style={{
+          textAlign: 'center',
+          marginBottom: '48px',
+          padding: '40px 24px',
+          borderRadius: '28px',
+          background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 249, 255, 0.88) 50%, rgba(235, 245, 255, 0.82) 100%)',
+          border: '1px solid rgba(0, 184, 204, 0.35)',
+          boxShadow: '0 24px 64px rgba(7, 17, 32, 0.10), 0 0 40px -6px rgba(0, 229, 255, 0.22), inset 0 1px 0 #FFFFFF'
+        }}
+      >
+        {/* Emblem Showcase with Official Floating Logo */}
+        <div 
+          className="animate-float"
+          style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}
+        >
+          <Logo variant="mark" theme="light" size={88} animate={true} />
         </div>
 
         {/* Enterprise Eyebrow */}
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-          <span style={{
-            display: 'inline-block',
-            width: '9px',
-            height: '9px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--brand-cyan)',
-            boxShadow: '0 0 12px var(--brand-cyan)'
-          }} />
+          <span 
+            className="animate-badge-ping"
+            style={{
+              display: 'inline-block',
+              width: '9px',
+              height: '9px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--brand-cyan)',
+              boxShadow: '0 0 12px var(--brand-cyan)'
+            }} 
+          />
           <span style={{
             fontSize: '13px',
             fontWeight: 800,
@@ -133,7 +125,8 @@ export default function Launcher() {
           letterSpacing: '-0.035em',
           color: 'var(--ink)',
           marginBottom: '16px',
-          lineHeight: 1.2
+          lineHeight: 1.2,
+          textShadow: '0 2px 14px rgba(0, 184, 204, 0.15)'
         }}>
           ToolSathi <span style={{
             background: 'var(--brand-gradient)',
@@ -160,38 +153,41 @@ export default function Launcher() {
           gap: '28px',
           padding: '12px 32px',
           borderRadius: 'var(--radius-pill)',
-          background: 'rgba(255, 255, 255, 0.95)',
-          border: '1px solid rgba(7, 17, 32, 0.12)',
-          boxShadow: '0 8px 24px rgba(7, 17, 32, 0.05)',
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 250, 255, 0.92) 100%)',
+          border: '1px solid rgba(0, 184, 204, 0.25)',
+          boxShadow: '0 8px 24px rgba(7, 17, 32, 0.06), 0 0 20px rgba(0, 229, 255, 0.16)',
           fontSize: '15px',
           color: 'var(--ink)'
         }}>
           <div>
-            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--brand-cyan-ink)' }}>100%</strong> Deterministic Trace
+            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--brand-cyan-ink)', textShadow: '0 0 10px rgba(0, 229, 255, 0.3)' }}>100%</strong> Deterministic Trace
           </div>
           <span style={{ opacity: 0.3 }}>|</span>
           <div>
-            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--jade-ink)' }}>3 Languages</strong> Native Intake
+            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--jade-ink)', textShadow: '0 0 10px rgba(5, 150, 105, 0.25)' }}>3 Languages</strong> Native Intake
           </div>
           <span style={{ opacity: 0.3 }}>|</span>
           <div>
-            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--ruby-ink)' }}>Zero</strong> Silent Escapes
+            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--ruby-ink)', textShadow: '0 0 10px rgba(220, 38, 38, 0.25)' }}>Zero</strong> Silent Escapes
           </div>
           <span style={{ opacity: 0.3 }}>|</span>
           <div>
-            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--cobalt-ink)' }}>4-Level</strong> Governance Ladder
+            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--cobalt-ink)', textShadow: '0 0 10px rgba(2, 132, 199, 0.25)' }}>4-Level</strong> Governance Ladder
           </div>
         </div>
       </div>
 
       {/* Role Switcher Toolbar */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '10px',
-        marginBottom: '44px'
-      }}>
+      <div 
+        className="animate-fade-in-up delay-1"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px',
+          marginBottom: '44px'
+        }}
+      >
         <div style={{ fontSize: '14px', color: 'var(--ink-secondary)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
           Select Active Industrial Persona:
         </div>
@@ -200,29 +196,32 @@ export default function Launcher() {
 
       {/* 4 Feature Portals Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '28px' }}>
-        {portals.map(portal => (
+        {portals.map((portal, idx) => (
           <GlassPanel
             key={portal.to}
             variant="strong"
             interactive
+            className={`animate-fade-in-up delay-${idx + 1}`}
             style={{
               padding: '36px 32px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              border: '1px solid rgba(7, 17, 32, 0.12)',
-              borderRadius: '24px'
+              border: '1px solid rgba(0, 184, 204, 0.20)',
+              borderRadius: '24px',
+              boxShadow: '0 16px 40px rgba(7, 17, 32, 0.08), 0 0 24px -4px rgba(0, 229, 255, 0.14), inset 0 1px 0 #FFFFFF'
             }}
           >
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
                 <div style={{
-                  width: '54px',
-                  height: '54px',
+                  width: '56px',
+                  height: '56px',
                   borderRadius: '16px',
                   backgroundColor: 'var(--brand-cyan-soft)',
                   color: 'var(--brand-cyan-ink)',
-                  border: '1px solid rgba(0, 184, 204, 0.3)',
+                  border: '1px solid rgba(0, 184, 204, 0.35)',
+                  boxShadow: '0 4px 18px rgba(0, 184, 204, 0.25)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
@@ -233,10 +232,11 @@ export default function Launcher() {
                   fontSize: '12px',
                   fontWeight: 800,
                   fontFamily: 'var(--font-mono)',
-                  padding: '4px 12px',
+                  padding: '5px 14px',
                   borderRadius: 'var(--radius-pill)',
-                  backgroundColor: 'rgba(7, 17, 32, 0.06)',
-                  color: 'var(--ink)'
+                  backgroundColor: 'rgba(0, 184, 204, 0.08)',
+                  color: 'var(--brand-cyan-ink)',
+                  border: '1px solid rgba(0, 184, 204, 0.2)'
                 }}>
                   {portal.badge}
                 </span>
@@ -264,13 +264,14 @@ export default function Launcher() {
                 width: '100%',
                 padding: '14px 24px',
                 borderRadius: 'var(--radius-pill)',
-                backgroundColor: 'var(--ink)',
+                background: 'linear-gradient(135deg, #071120 0%, #172A45 100%)',
                 color: '#FFFFFF',
                 fontWeight: 800,
                 fontSize: '15px',
                 textDecoration: 'none',
-                boxShadow: '0 6px 20px rgba(7, 17, 32, 0.18)',
-                transition: 'all 0.2s ease',
+                border: '1px solid rgba(0, 229, 255, 0.25)',
+                boxShadow: '0 8px 24px rgba(7, 17, 32, 0.20), 0 0 16px rgba(0, 229, 255, 0.18)',
+                transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
                 letterSpacing: '-0.01em'
               }}
             >
