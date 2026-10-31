@@ -1,0 +1,85 @@
+{
+  "label": "synthetic data, simulated services",
+  "executedAt": "2026-10-31T11:07:24.065Z",
+  "realBackend": [
+    "tools",
+    "incident-create",
+    "incident-confirm",
+    "tool-history",
+    "trace",
+    "trace",
+    "trace",
+    "audit",
+    "tool-history",
+    "incident-get",
+    "documents",
+    "health"
+  ],
+  "simulatedSAP": [
+    {
+      "action": "maintenance",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    },
+    {
+      "action": "quality",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    },
+    {
+      "action": "stock-block",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    },
+    {
+      "action": "restriction",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    }
+  ],
+  "teammateStubs": [
+    "ai-structure",
+    "duplicates",
+    "proposals",
+    "approval-decision",
+    "verify-return"
+  ],
+  "blocked": [
+    {
+      "step": "approved-workflow-and-verified-return",
+      "reason": "Jamuna proposal/approval/return endpoints are stubs. Approved action services are separately verified with persisted test-only approvals in Jest; no live approvals fabricated."
+    }
+  ],
+  "trace": [
+    {
+      "windowHours": 24,
+      "totalUnits": 35,
+      "byTier": {
+        "CONFIRMED": 35,
+        "PROBABLE": 0,
+        "UNKNOWN": 0
+      },
+      "score": 100,
+      "durationMs": 40.26980000000185
+    },
+    {
+      "windowHours": 72,
+      "totalUnits": 100,
+      "byTier": {
+        "CONFIRMED": 90,
+        "PROBABLE": 4,
+        "UNKNOWN": 6
+      },
+      "score": 82,
+      "durationMs": 34.35959999999977
+    },
+    {
+      "windowHours": 168,
+      "totalUnits": 160,
+      "byTier": {
+        "CONFIRMED": 146,
+        "PROBABLE": 8,
+        "UNKNOWN": 6
+      },
+      "score": 83,
+      "durationMs": 37.53669999999693
+    }
+  ],
+  "incidentId": "TS-0002"
+}
