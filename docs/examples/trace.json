@@ -1,15 +1,12 @@
 {
   "_label": "SIMULATED",
-  "_stub": true,
+  "_stub": false,
   "incidentId": "TS-0002",
   "toolId": "TOOL-B",
   "windowHours": 24,
-  "windowStart": "2026-11-03T05:12:00Z",
-  "windowEnd": "2026-11-04T05:12:00Z",
-  "snapshotTime": "2026-11-04T05:02:00Z",
-  "generatedAt": "2026-11-04T05:12:00Z",
-  "version": 1,
-  "disclaimer": "Potentially exposed units only. No fault or quality determination is made by this system.",
+  "windowStart": "2026-11-03T05:12:00.000Z",
+  "windowEnd": "2026-11-04T05:12:00.000Z",
+  "snapshotTime": "2026-11-04T05:02:00.000Z",
   "summary": {
     "totalUnits": 35,
     "byTier": {
@@ -28,15 +25,26 @@
       "DLR-Y": 0
     }
   },
-  "exposureRange": {
-    "low": 35,
-    "high": 154,
-    "unknownSeparate": 6,
-    "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
-  },
   "dataQuality": {
     "score": 100,
-    "deductions": []
+    "deductions": [
+      {
+        "code": "UNKNOWN_UNITS",
+        "amount": 0
+      },
+      {
+        "code": "PROBABLE_UNITS",
+        "amount": 0
+      },
+      {
+        "code": "STALE_SHIPMENT_RECORDS",
+        "amount": 0
+      },
+      {
+        "code": "CONFLICT_RUNS",
+        "amount": 0
+      }
+    ]
   },
   "valueAtRisk": {
     "amountINR": 112000,
@@ -46,7 +54,7 @@
     {
       "code": "DUPLICATE_TOOL_USE_LINK",
       "severity": "INFO",
-      "message": "Two links reference the same run; units counted once.",
+      "message": "Several tool-use links refer to this run; each serial is counted once.",
       "runId": "RUN-B-DUP",
       "affectedUnits": 10,
       "evidenceIds": [
@@ -65,7 +73,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -86,7 +94,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -107,7 +115,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -128,7 +136,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -149,7 +157,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -170,7 +178,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -191,7 +199,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -212,7 +220,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -233,7 +241,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -254,7 +262,7 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
@@ -275,11 +283,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000011",
@@ -295,11 +303,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000012",
@@ -315,11 +323,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000013",
@@ -335,11 +343,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000014",
@@ -355,11 +363,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000015",
@@ -375,11 +383,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000016",
@@ -395,11 +403,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000017",
@@ -415,11 +423,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000018",
@@ -435,11 +443,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000019",
@@ -455,11 +463,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000020",
@@ -475,11 +483,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000021",
@@ -495,11 +503,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000022",
@@ -515,11 +523,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000023",
@@ -535,11 +543,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000024",
@@ -555,11 +563,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000025",
@@ -575,11 +583,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000026",
@@ -595,11 +603,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000027",
@@ -615,11 +623,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000028",
@@ -635,11 +643,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000029",
@@ -655,11 +663,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000030",
@@ -675,11 +683,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000031",
@@ -695,11 +703,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000032",
@@ -715,11 +723,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000033",
@@ -735,11 +743,11 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000034",
@@ -755,16 +763,25 @@
       "tierReason": "Valid tool-use interval links tool and run.",
       "reasonCodes": [],
       "locationStatus": "IN_STOCK",
-      "location": "PLANT-01",
+      "location": "STORE-01",
       "dealerId": null,
       "flags": [],
       "evidenceIds": [
-        "TUE-B-0002",
+        "TUE-B-RECENT",
         "RUN-B-RECENT",
         "BATCH-B-RECENT",
         "SN-000035",
         "STOCK-BATCH-B-RECENT"
       ]
     }
-  ]
+  ],
+  "exposureRange": {
+    "low": 35,
+    "high": 154,
+    "unknownSeparate": 6,
+    "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+  },
+  "disclaimer": "Potentially exposed units only. No fault or quality determination is made by this system.",
+  "generatedAt": "2026-10-31T10:39:28.672Z",
+  "version": 2
 }

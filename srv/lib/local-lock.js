@@ -1,4 +1,40 @@
-const fs=require('node:fs');
-function assertStopped(database){const file=database+'.lock';if(!fs.existsSync(file))return;const pid=Number(fs.readFileSync(file,'utf8'));if(!Number.isInteger(pid)||pid<1)throw new Error('Invalid SQLite process lock; inspect it with server stopped');try{process.kill(pid,0);}catch(e){if(e.code==='ESRCH'){fs.unlinkSync(file);return;}throw e;}throw new Error('SQLite database is in use by a ToolSathi server; stop it first');}
-function acquire(database){assertStopped(database);const file=database+'.lock';fs.writeFileSync(file,String(process.pid),{flag:'wx'});let done=false;const release=()=>{if(!done&&fs.existsSync(file)&&fs.readFileSync(file,'utf8')===String(process.pid))fs.unlinkSync(file);done=true;};process.once('exit',release);return release;}
-module.exports={assertStopped,acquire};
+const fs = require("node:fs");
+function assertStopped(database) {
+  const file = database + ".lock";
+  if (!fs.existsSync(file)) return;
+  const pid = Number(fs.readFileSync(file, "utf8"));
+  if (!Number.isInteger(pid) || pid < 1)
+    throw new Error(
+      "Invalid SQLite process lock; inspect it with server stopped",
+    );
+  try {
+    process.kill(pid, 0);
+  } catch (e) {
+    if (e.code === "ESRCH") {
+      fs.unlinkSync(file);
+      return;
+    }
+    throw e;
+  }
+  throw new Error(
+    "SQLite database is in use by a ToolSathi server; stop it first",
+  );
+}
+function acquire(database) {
+  assertStopped(database);
+  const file = database + ".lock";
+  fs.writeFileSync(file, String(process.pid), { flag: "wx" });
+  let done = false;
+  const release = () => {
+    if (
+      !done &&
+      fs.existsSync(file) &&
+      fs.readFileSync(file, "utf8") === String(process.pid)
+    )
+      fs.unlinkSync(file);
+    done = true;
+  };
+  process.once("exit", release);
+  return release;
+}
+module.exports = { assertStopped, acquire };

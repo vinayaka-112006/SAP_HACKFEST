@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=20"
+    "node": "^24.11.0"
   },
   "scripts": {
     "dev": "node srv/server.js",
@@ -17,7 +17,10 @@
     "build": "node scripts/build.js",
     "db:reset": "node scripts/reset-db.js",
     "restore:db": "node scripts/restore-db.js",
-    "smoke": "node scripts/smoke.js"
+    "smoke": "node scripts/smoke.js",
+    "db:checkpoint": "node scripts/checkpoint-db.js",
+    "verify:package": "node scripts/verify-package.js",
+    "docs:contract": "node scripts/update-contract.js"
   },
   "dependencies": {
     "@cap-js/hana": "^3.1.2",
@@ -32,6 +35,8 @@
     "@cap-js/cds-test": "^1.0.2",
     "@sap/cds-dk": "^10.2.0",
     "@sap/hdi-deploy": "^5.7.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "jest": "^30.2.0",
     "supertest": "^7.1.4",
     "yaml": "^2.9.1"

@@ -1,23 +1,25 @@
 {
   "_label": "SIMULATED",
-  "_stub": true,
+  "_stub": false,
   "incident": {
     "incidentId": "TS-0002",
     "toolId": "TOOL-B",
     "reporterId": "WRK-014",
     "language": "kn",
-    "rawText": "?????? ??????????",
+    "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
     "translatedText": "Tool B is leaving bolts loose",
     "category": "TORQUE",
     "suggestedNcCode": "NC-TORQUE-LOOSE",
     "confidence": 0.82,
     "missingFields": [],
     "state": "Reported",
-    "reportedAt": "2026-11-04T05:12:00Z",
+    "createdAt": "2026-10-31T10:34:37.397Z",
+    "reportedAt": "2026-11-04T05:12:00.000Z",
     "reportedAtSource": "CLIENT_REPORTED",
-    "createdAt": "2026-11-04T05:12:00Z",
-    "modelVersion": "stub-0"
+    "confirmedAt": null,
+    "confirmedBy": null,
+    "modelVersion": "demo-structured-v1"
   },
   "warnings": [],
-  "auditId": "AUD-000001"
+  "auditId": "AUD-ff62a9a9-04d3-43dc-a381-0d963093a7c5"
 }

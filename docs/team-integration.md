@@ -20,7 +20,7 @@ Shared CAP helpers:
 - `toolState.setState({toolId,state,incidentId,actor,actorRole,reason,verified?,approvalId?}, tx?) -> tool`. Restrict requires approval. Return Active requires Verifier + verified=true in fallback rules; the workflow owner must validate repair readings/independent verification before passing it.
 - `rulesAdapter.canIncidentTransition(from,to,ctx)`, `canToolTransition(from,to,ctx)`, `requiredApproverRole(type)`. Missing modules log `using default rules`; present-but-broken modules fail, not silently fall back.
 - `auth.getUser(req) -> {id,role,roles}`; `requireRole(...roles)` middleware authenticates and sets req.user. For XSUAA, use middleware before getUser.
-- `approvals.assertApproved({approvalId,requiredRole,incidentId,proposalType,scope},tx)`. All action services supply full type/scope.
+- `approvals.assertApproved({approvalId,requiredRole,incidentId,proposalType,scope},tx?)`. All action services supply full type/scope.
 - `mockActions.maintenanceNotification(input,actor,tx?)`, `.qualityNotification`, `.stockBlock`, `.restrictTool`; actor `{id,role}` must originate from authenticated request or trusted in-process workflow, never request body. Supply one transaction across workflow writes/actions/audit for atomicity.
 
 Approval payload must contain the exact fields below (batchIds may approve a superset). Missing fields are not inferred:
@@ -35,3 +35,7 @@ Approval payload must contain the exact fields below (batchIds may approve a sup
 Every action also checks Proposal.incidentId and Approval.approverRole/decision. Supplied toolId must match the incident. Notification requester is recorded as supplied metadata; authenticated actor remains authoritative in audit. Synthetic plant PLANT-01/storage STORE-01. Approval creation/decision authorization and independent return verification remain Jamuna's responsibility.
 
 All JSON columns store serialized JSON; `decode()` restores them for responses. Transaction parameter is a CAP database transaction. Helpers start their own transaction only when omitted; always pass it for multi-table workflow changes. Use errors with status/code/details for the common JSON handler. The external x-system-call header is ignored.
+
+Approval records also require a named decidedBy and valid decidedAt; final platform guards reject incomplete decision provenance. The fallback incident side exit Closed with insufficient evidence is allowed from any known nonterminal incident state.
+
+The standalone approval check accepts an omitted transaction for compatibility, but action/workflow callers must pass their transaction to retain the lock through execution. Every action service does so.

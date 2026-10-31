@@ -3,7 +3,7 @@
   "_stub": true,
   "toolId": "TOOL-B",
   "language": "kn",
-  "rawText": "?????? ??????????",
+  "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
   "translatedText": "Tool B is leaving bolts loose",
   "category": "TORQUE",
   "suggestedNcCode": "NC-TORQUE-LOOSE",

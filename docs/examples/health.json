@@ -1,8 +1,8 @@
 {
-  "_label": "SIMULATED",
-  "_stub": false,
   "status": "ok",
   "db": "connected",
   "mode": "SIMULATED",
-  "seedVersion": "synthetic-v1"
+  "seedVersion": "synthetic-v1",
+  "_label": "SIMULATED",
+  "_stub": false
 }

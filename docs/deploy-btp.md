@@ -1,6 +1,6 @@
 # Deployment preparation (not deployed)
 
-Prerequisites: authorized BTP subaccount, CF org/space, running entitled HANA Cloud instance, XSUAA, Cloud Foundry CLI with multiapps plugin, Cloud MTA Build Tool (`mbt`) and Java/build prerequisites it requires. Use your account's actual API endpoint/org/space; none are assumed. Node 20+ and npm are required locally.
+Prerequisites: authorized BTP subaccount, CF org/space, running entitled HANA Cloud instance, XSUAA, Cloud Foundry CLI with multiapps plugin, Cloud MTA Build Tool (`mbt`) and Java/build prerequisites it requires. Use your account's actual API endpoint/org/space; none are assumed. Node 24.11+ and npm are required locally.
 
 ```powershell
 npm ci

@@ -1,15 +1,18 @@
 # Backend progress
 
-Baseline inspected: a5a9879, branch yogesh/platform, clean tree. CAP 10.2.2, SQLite, direct Express routers with replacement registry. Six baseline tests and 18 fixed-fixture HTTP checks passed. No teammate code or branches are available. No real business endpoints existed except health. Runtime used an in-memory probe.
+Baseline: a5a9879, yogesh/platform, clean working tree; six platform tests and 18 fixture checks passed. Existing CAP/SQLite/Express architecture retained. No teammate modules/branches were available. No frontend, AI adapter or rules source was modified. No push or merge performed.
 
-Continuation authorization supersedes previous Phase 1 STOP. Continue sequentially; use provisional ground truth and never create Jamuna's approved file.
+The continuation request authorized proceeding through all remaining phases, superseding the earlier STOP. Candidate ground truth remains provisional; tests/ground-truth.json was never created.
 
-Phase 1: full 21-entity CDS model, construction plan, deterministic CSVs, provisional serial/tier ground truth, demo payloads and independent CSV deployment checks. Approval of ground truth remains external.
+| Phase | Local status | Evidence / remaining dependency |
+|---|---|---|
+| 1 schema/seed/candidate | Completed | 21 CDS entities, 300 exact serials, byte-identical generator, full source relationship checks; Jamuna sign-off pending |
+| 2 APIs/audit/history | Completed | Persistent incidents/tools/history/audit, atomic IDs, transaction rollback and SQLite append-only tests |
+| 3 trace | Completed locally against provisional candidate | Exact serial/tier/location sets, 35/100/160 counts, scores 100/82/83, range 35/154/6; results generated on each full test run |
+| 4 mocks/auth | Completed locally | Four persisted simulations; approval action/resource binding, roles, replay/rollback tests; XSUAA adapter unit tested without real binding |
+| 5 deployment preparation | Partially completed | Production CAP build and packaged-runtime checks pass; MTA/HANA/XSUAA prepared; CF/mbt/cloud deployment and HANA audit enforcement unverified |
+| 6 reliability/handover | Completed locally | API smoke, fresh startup/restart/reset/backup/restore, OpenAPI response validation, team handoff and limitation records |
 
-Phase 2: CAP-backed incident create/confirm/detail, tools, history, audit; transaction-scoped audit/history/IDs; missing rules fallback; SQLite triggers and indexes installed both during deployment and after startup. Header demo role checks introduced ahead of Phase 4. Tests cover concurrency, rollback, audit protection and reassignment history.
+Executed evidence lives in tests/results/summary.json, trace-results.md, trace-validation.json, smoke-results.json, mock-responses.json and package-results.json. Tests are genuine assertions; stub responses do not count as business-workflow completion. Latest summary contains executed test counts and lists unexecuted external checks. See backend-handover.md for the final integration boundary.
 
-Phase 3: deterministic trace with exact evidence, all-window exposure range, data gaps, location uncertainty, synthetic value, version persistence, audit/history. 26 tests pass; B counts 35/100/160, scores 100/82/83, range 35/154/6. Results use provisional candidate, not Jamuna-approved ground truth.
-
-Phase 4: all four mock actions and document listing are real persisted simulations. Transactional approval checks bind role, incident, action and scope; restriction helper also gates directly. Role matrix, replay, missing/wrong-scope approvals, stock-only changes and rollback tests pass. XSUAA uses installed @sap/xssec verification API but no real binding/token has been tested. External workflow headers are ignored.
-
-Phase 5: persistent SQLite startup initializes only an absent schema; backups/reset/restore use a local server lock and refuse active writers/WAL. HANA/XSUAA production profile, role collections, MTA, HDI indexes and production CAP build prepared. Local build passed. No CF/mbt tool or cloud access verified. HANA audit protection requires deployment-time privileges/trigger work and verification. Team seams documented; five endpoints remain teammate stubs.
+Final verification: 61 Jest tests passed across 12 suites, zero failed/skipped tests; see summary.json for the executed result. Standalone smoke, six health/stub checks and packaged-runtime validation have been executed.

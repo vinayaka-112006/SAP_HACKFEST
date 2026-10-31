@@ -1,20 +1,100 @@
 {
   "_label": "SIMULATED",
-  "_stub": true,
+  "_stub": false,
   "toolId": "TOOL-B",
   "events": [
     {
-      "eventId": "HIST-0001",
-      "type": "INCIDENT",
-      "at": "2026-10-23T05:12:00Z",
-      "summary": "Prior torque incident",
-      "refId": "TS-0001",
+      "eventId": "HIST-59d5f12d-dbbc-46f0-ae3f-1db4b42d9dde",
+      "toolId": "TOOL-B",
+      "type": "TRACE",
+      "at": "2026-10-31T10:34:37.519Z",
+      "summary": "168h trace generated",
+      "refId": "TS-0002",
       "details": {
-        "state": "Closed"
+        "version": 1,
+        "totalUnits": 160
       }
+    },
+    {
+      "eventId": "HIST-79bcf59d-a8b1-4c60-a5b7-4f0d0fcde657",
+      "toolId": "TOOL-B",
+      "type": "TRACE",
+      "at": "2026-10-31T10:34:37.495Z",
+      "summary": "72h trace generated",
+      "refId": "TS-0002",
+      "details": {
+        "version": 1,
+        "totalUnits": 100
+      }
+    },
+    {
+      "eventId": "HIST-d8851620-a947-4427-9f1f-ea4fdc5255e1",
+      "toolId": "TOOL-B",
+      "type": "TRACE",
+      "at": "2026-10-31T10:34:37.470Z",
+      "summary": "24h trace generated",
+      "refId": "TS-0002",
+      "details": {
+        "version": 1,
+        "totalUnits": 35
+      }
+    },
+    {
+      "eventId": "HIST-5b4568c1-e2bd-453b-83c7-535ef5b77c9d",
+      "toolId": "TOOL-B",
+      "type": "INCIDENT",
+      "at": "2026-10-31T10:34:37.430Z",
+      "summary": "Incident confirmed",
+      "refId": "TS-0002",
+      "details": {
+        "fromTool": "TOOL-B",
+        "toTool": "TOOL-B",
+        "state": "Confirmed"
+      }
+    },
+    {
+      "eventId": "HIST-3b253125-8652-4deb-8c6c-037b74532ae5",
+      "toolId": "TOOL-B",
+      "type": "INCIDENT",
+      "at": "2026-10-31T10:34:37.412Z",
+      "summary": "Incident reported",
+      "refId": "TS-0002",
+      "details": {
+        "state": "Reported"
+      }
+    },
+    {
+      "eventId": "HIST-SEED-2",
+      "toolId": "TOOL-B",
+      "type": "REPAIR",
+      "at": "2026-10-23T23:12:00.000Z",
+      "summary": "Synthetic previous repair",
+      "refId": "REP-0001",
+      "details": {}
+    },
+    {
+      "eventId": "HIST-SEED-1",
+      "toolId": "TOOL-B",
+      "type": "INCIDENT",
+      "at": "2026-10-23T05:12:00.000Z",
+      "summary": "Synthetic previous incident",
+      "refId": "TS-0001",
+      "details": {}
+    },
+    {
+      "eventId": "HIST-SEED-3",
+      "toolId": "TOOL-B",
+      "type": "CALIBRATION",
+      "at": "2026-09-25T05:12:00.000Z",
+      "summary": "Synthetic previous calibration",
+      "refId": "CAL-0001",
+      "details": {}
     }
   ],
   "counts": {
-    "INCIDENT": 1
+    "TRACE": 3,
+    "INCIDENT": 3,
+    "REPAIR": 1,
+    "CALIBRATION": 1
   }
 }

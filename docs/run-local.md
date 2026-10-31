@@ -1,6 +1,6 @@
 # Run ToolSathi locally
 
-Synthetic data, simulated services; no SAP tenant connected. Node 20+ and npm required. Commands run from C:/Users/yoges/Desktop/hackfest/SAP_HACKFEST.
+Synthetic data, simulated services; no SAP tenant connected. Node 24.11+ and npm required. Commands run from C:/Users/yoges/Desktop/hackfest/SAP_HACKFEST.
 
 ```powershell
 npm ci
@@ -45,3 +45,5 @@ Restore with the server stopped: `npm run restore:db -- backup/<selected-backup>
 | ALLOW_UNAPPROVED_MOCKS | false; combined with ENFORCE_APPROVALS=false is DEVELOPMENT ONLY, **never on for the demo build**; refused in production |
 
 XSUAA/HANA credentials come only from service bindings. No secrets belong in .env files committed to Git. Header auth and simulated adapters do not prove production security or SAP integration.
+
+After an abnormal termination with a WAL remaining, stop all writers, run `npm run db:checkpoint`, then retry offline backup/reset. The checkpoint refuses an active ToolSathi lock. `npm run verify:package` checks the built runtime locally after `npm run build`; it does not connect to HANA. Tested runtime: Node 24.11.0. Node 20 needs a compatible SQLite driver (the default native driver is unavailable there); revalidate that combination before use.
