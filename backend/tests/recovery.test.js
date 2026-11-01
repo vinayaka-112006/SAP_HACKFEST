@@ -20,6 +20,7 @@ function app(client = provider()) {
   const value = express(); value.use(express.json());
   value.use('/api', createRouter({ clientFactory: () => client }));
   value.use('/api', require('../srv/routes/proposals.router').router);
+  value.use('/api', require('../srv/routes/incident.router').router);
   value.use(require('../srv/lib/errors'));
   return value;
 }
@@ -138,4 +139,22 @@ test('report reflects stored observations and state, not invented causes, readin
   expect(result.body.repairs).toEqual([]); expect(result.body.traces).toEqual([]);
   expect(JSON.stringify(result.body)).not.toMatch(/45\.2|spring relaxation|FULLY RESOLVED|cryptographic/);
   expect((await api(server, 'get', `/incidents/${id}/repair-records`, undefined, 'Technician')).status).toBe(200);
+});
+test('worker name and same-tool reporting history survive persistence without confusing reporter and submitter', async () => {
+  const server = app();
+  const created = await api(server, 'post', '/incidents', { toolId: 'TOOL-B', reporterId: 'WRK-NAMED',
+    reporterName: 'Test Worker <One>', language: 'en', rawText: 'Synthetic named-worker observation' }, 'Worker');
+  expect(created.status).toBe(201);
+  const id = created.body.incident.incidentId;
+  await incident(); // Another report on the same tool, without a stored name.
+  await cds.db.run(cds.ql.INSERT.into(entity('Incident')).entries({ incidentId: 'OTHER-TOOL-REPORT', toolId: 'TOOL-A', reporterId: 'OTHER', state: 'Reported' }));
+  const result = await api(server, 'get', `/incidents/${id}/executive-report`);
+  expect(result.status).toBe(200);
+  expect(result.body.reportingWorker).toMatchObject({ reporterId: 'WRK-NAMED', reporterName: 'Test Worker <One>',
+    submittedBy: 'RECOVERY-TEST', submitterRole: 'Worker', nameEvidenceId: expect.any(String), submissionAuditId: expect.any(String) });
+  expect(result.body.workerReportHistory.some(r => r.reporterName === null && r.reporterId === 'RECOVERY-WORKER')).toBe(true);
+  expect(result.body.workerReportHistory.some(r => r.incidentId === 'OTHER-TOOL-REPORT')).toBe(false);
+  for (const reporterName of [123, 'x'.repeat(121)]) {
+    expect((await api(server, 'post', '/incidents', { toolId: 'TOOL-B', reporterId: 'WRK-NAMED', reporterName, language: 'en', rawText: 'Synthetic' }, 'Worker')).status).toBe(400);
+  }
 });

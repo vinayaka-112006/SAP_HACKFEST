@@ -150,6 +150,8 @@ function Workflow({ client, incident, incidentId, currentRole, demoUserId, refre
       <div style={stack}><Button disabled={busy || !review || !reason.trim() || incident.state.startsWith('Closed')} onClick={() => run(() => client.closeIncident(incidentId, { reason, insufficientEvidence: insufficient }), 'Closure recorded by backend.')}>Close incident</Button></div>
     </Panel>
     <Panel title="4. Evidence-backed executive report">
+      <p><strong>Reporting worker:</strong> {report?.reportingWorker?.reporterName || 'Unknown — name not recorded'} · {incident.reporterId || 'Unknown worker ID'}</p>
+      <p>Worker reporting history: {report?.workerReportHistory?.length ?? 'Unknown'} stored reports for this tool. The download lists their worker IDs, available names, dates and observations.</p>
       <p>Includes persisted intake, trace snapshots, recommendations, decisions, simulated documents, repair observations and application audit history. Missing information stays Unknown.</p>
       <Button disabled={busy || !review} onClick={() => run(download, 'Evidence report downloaded. Open it in a browser to print to PDF.')}>Download executive evidence report</Button>
     </Panel>

@@ -19,6 +19,7 @@ function validate(body, { now } = {}) {
   for (const key of [
     "toolId",
     "reporterId",
+    "reporterName",
     "language",
     "category",
     "suggestedNcCode",

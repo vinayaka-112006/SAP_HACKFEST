@@ -43,6 +43,7 @@ export default function Worker() {
   const [language, setLanguage] = useState("kn");
   const [workerWords, setWorkerWords] = useState("");
   const [reporterId, setReporterId] = useState("");
+  const [reporterName, setReporterName] = useState('');
   const [fields, setFields] = useState(() => emptyFields("TOOL-B"));
   const [editedFields, setEditedFields] = useState({});
   const [saved, setSaved] = useState(null);
@@ -97,6 +98,7 @@ export default function Worker() {
     chooseTool(DEMO_INPUT.toolId);
     setLanguage(DEMO_INPUT.language);
     setReporterId(DEMO_INPUT.reporterId);
+    setReporterName('');
     setWorkerWords(DEMO_INPUT.rawText);
     setFields({
       tool: DEMO_INPUT.toolId,
@@ -228,6 +230,7 @@ export default function Worker() {
           missingFields: fields.missingFields,
           modelVersion: fields.modelVersion,
         });
+        if (reporterName.trim()) payload.reporterName = reporterName.trim();
         const result = await client.createIncident(payload);
         setSaved(result);
         setWarnings(result.warnings || []);
@@ -725,10 +728,14 @@ export default function Worker() {
               id="reporter-id"
               disabled={busy || recorder.transcribing || recorder.recording}
               value={reporterId}
-              onChange={(e) => setReporterId(e.target.value)}
+              onChange={(e) => { setReporterId(e.target.value); setReporterName(''); }}
               maxLength={120}
               placeholder="Your worker ID"
             />
+            <label htmlFor="reporter-name">Worker name (optional, reporter supplied)</label>
+            <input id="reporter-name" disabled={busy || recorder.transcribing || recorder.recording}
+              value={reporterName} onChange={e => setReporterName(e.target.value)} maxLength={120}
+              placeholder="Your name — not independently verified" />
             <button className="secondary-action" disabled={busy || recorder.transcribing} onClick={loadDemo}>
               Load synthetic demo report
             </button>
@@ -903,6 +910,7 @@ export default function Worker() {
           </div>
 
           {/* Confidence Badge & Needs Review Warning */}
+          <p>Reporting worker: <strong>{reporterName.trim() || 'Unknown — name not recorded'}</strong> · {reporterId} (reporter supplied)</p>
           <div
             style={{
               display: "flex",

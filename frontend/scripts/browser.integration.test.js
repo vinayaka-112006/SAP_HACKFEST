@@ -243,6 +243,7 @@ check(
     await page
       .getByRole("button", { name: "Load synthetic demo report" })
       .click();
+    await page.getByLabel('Worker name (optional, reporter supplied)', { exact: true }).fill('Synthetic Worker One');
     assert.equal(
       await page.getByLabel("Reporter ID (required)").inputValue(),
       "WRK-014",
@@ -543,6 +544,8 @@ check('recovery evidence is persisted, provider failure stays visible, and the e
   await download.saveAs(file);
   const html = fs.readFileSync(file, 'utf8');
   assert.match(html, /SYNTHETIC-E2E-SPEC/);
+  assert.match(html, /Synthetic Worker One/);
+  assert.match(html, /Worker reporting history/);
   assert.match(html, /Recorded state: <strong>Confirmed/);
   assert.match(html, /SIMULATED/);
   assert.match(html, /RECOVERY_EXECUTION/);

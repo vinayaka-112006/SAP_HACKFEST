@@ -51,6 +51,12 @@ router.post(
         modelVersion: body.modelVersion || null,
       };
       await tx.run(cds.ql.INSERT.into(entity("Incident")).entries(incident));
+      if (body.reporterName?.trim())
+        await tx.run(cds.ql.INSERT.into(entity('IncidentEvidence')).entries({
+          evidenceId: ids.uuid('EVID'), incidentId: incident.incidentId, type: 'REPORTER_PROFILE',
+          reference: JSON.stringify({ reporterId: incident.reporterId, reporterName: body.reporterName.trim(),
+            basis: 'Reporter-supplied name; identity not independently verified' }), sourceTime: now,
+        }));
       if (body.photoRef)
         await tx.run(
           cds.ql.INSERT.into(entity("IncidentEvidence")).entries({
@@ -72,6 +78,7 @@ router.post(
           details: {
             state: "Reported",
             reporterId: body.reporterId,
+            reporterName: body.reporterName?.trim() || null,
             reportedAtSource: incident.reportedAtSource,
           },
           modelVersion: incident.modelVersion,

@@ -2,6 +2,9 @@ const escape = value => String(value ?? 'Unknown').replace(/[&<>"']/g, c => ({ '
 const section = (title, value) => `<section><h2>${escape(title)}</h2><pre>${escape(JSON.stringify(value, null, 2))}</pre></section>`;
 const table = (headers, rows) => `<table><thead><tr>${headers.map(h => `<th>${escape(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${escape(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 export function renderExecutiveReport(report) {
+  const worker = report.reportingWorker || { reporterId: report.incident.reporterId };
+  const localTime = value => value && Number.isFinite(Date.parse(value))
+    ? new Date(value).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST' : 'Unknown — no timestamp recorded';
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolSathi evidence report ${escape(report.incident.incidentId)}</title>
   <style>body{font:15px system-ui;color:#0e1a2f;background:#f4f8fa;padding:24px}main{max-width:960px;margin:auto;background:white;padding:28px;border-radius:16px}h1,h2{color:#005662}section{border-top:1px solid #dce5eb;margin-top:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px ui-monospace,monospace}li{margin:8px 0}table{border-collapse:collapse;width:100%;overflow-wrap:anywhere}td,th{padding:10px;text-align:left;border:1px solid #dce5eb}@media print{body{padding:0}main{padding:12px}}</style></head><body><main>
   <p>SIMULATED manufacturing scenario · Application audit history</p><h1>ToolSathi Incident &amp; Recovery Evidence Report</h1>
@@ -13,6 +16,20 @@ export function renderExecutiveReport(report) {
     ['Recorded translation (review status not inferred)', report.incident.translatedText], ['Incident state', report.incident.state],
     ['Root cause', 'Unknown — not established by this report'], ['Measured downtime avoided', 'Unknown'],
     ['Proposals / approval decisions / simulated documents', `${report.proposals.length} / ${report.approvals.length} / ${report.documents.length}`]])}
+  <h2>Reporting worker</h2>
+  ${table(['Field', 'Recorded value'], [['Worker name', worker.reporterName || 'Unknown — no name recorded for this report'],
+    ['Worker ID', worker.reporterId], ['Name source', worker.nameBasis || 'No worker-name record available'],
+    ['Reported event time', localTime(worker.reportedAt || report.incident.reportedAt)],
+    ['Received by application', localTime(worker.receivedAt || report.incident.createdAt)],
+    ['Submitted through application by', worker.submittedBy || 'Unknown — no submission audit entry'],
+    ['Submitter role', worker.submitterRole], ['Submission audit ID', worker.submissionAuditId],
+    ['Worker-name evidence ID', worker.nameEvidenceId]])}
+  <h2>Worker reporting history for ${escape(report.incident.toolId)}</h2>
+  <p>${escape(report.workerHistoryScope || 'Unknown — reporting history was not returned by the backend.')}</p>
+  ${(report.workerReportHistory || []).length ? table(['Incident', 'Worker name / ID', 'Reported time', 'Worker observation', 'Category / state'],
+    report.workerReportHistory.map(r => [r.incidentId + (r.isSelectedIncident ? ' (selected)' : ''),
+      `${r.reporterName || 'Unknown — name not recorded'} / ${r.reporterId || 'Unknown'}`, localTime(r.reportedAt),
+      r.observation, `${r.category || 'Unknown'} / ${r.state || 'Unknown'}`])) : '<p>Unknown: no worker report history available.</p>'}
   <h2>Exposure snapshot overview</h2>
   <p>These are record linkage tiers, not product quality findings. Historical snapshots can differ; source IDs identify each result.</p>
   ${report.traces.length ? table(['Trace ID', 'Window (hours)', 'Linked records', 'Linkage tiers (Unknown retained)', 'Quality score'], report.traces.map(t => [t.traceId, t.windowHours, t.units?.length ?? 'Unknown', JSON.stringify(t.tiers), t.dataQualityScore])) : '<p>Unknown: no persisted trace snapshot.</p>'}

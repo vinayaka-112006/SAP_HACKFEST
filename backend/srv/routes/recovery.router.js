@@ -138,6 +138,7 @@ function createRouter({ clientFactory = () => createClient({ ...readConfig(), ma
       const proposals = await planner.rows(tx, 'Proposal', { incidentId: req.params.id });
       const proposalIds = new Set(proposals.map(p => p.proposalId));
       return { generatedAt: new Date().toISOString(), incident,
+        ...await require('../lib/report-workers').reportWorkers(tx, incident),
         tool: await one(tx, 'Tool', { toolId: incident.toolId }),
         traces: await planner.rows(tx, 'TraceResult', { incidentId: req.params.id }), proposals,
         approvals: (await planner.rows(tx, 'Approval', {})).filter(a => proposalIds.has(a.proposalId)),

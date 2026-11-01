@@ -1,5 +1,9 @@
 # Decisions
 
+## Worker names and reporting history
+
+- Store optional reporter-supplied names per incident using existing IncidentEvidence records and creation audit, avoiding a live schema migration. Never infer a worker name from a demo ID or another report. Executive reporting lists all same-tool incident records and distinguishes the reporting worker from the authenticated submitter. Unknown names stay explicit. A verified employee-directory integration can replace this self-reported identity seam later.
+
 ## Person 2 Phase 5 acceptance
 
 - Final 15-case live evaluation initially passed 13/15: two vague reports were categorized as OTHER without concrete observations. Increment prompt version to intake-2: OTHER requires a concrete observation, vague concern stays null, and local validation rejects missing-field contradictions. Preserve the initial report and final 15/15 rerun rather than claim held-out accuracy. One schema repair retry remains the only automatic provider retry.
