@@ -1,5 +1,11 @@
 # Decisions
 
+## Person 2 Phase 5 acceptance
+
+- Final 15-case live evaluation initially passed 13/15: two vague reports were categorized as OTHER without concrete observations. Increment prompt version to intake-2: OTHER requires a concrete observation, vague concern stays null, and local validation rejects missing-field contradictions. Preserve the initial report and final 15/15 rerun rather than claim held-out accuracy. One schema repair retry remains the only automatic provider retry.
+- Add explicit opt-in evaluation CLIs; defaults do not call Sarvam. Typed evaluation is capped at 30 calls/run and stops on auth/credit exhaustion. Synthetic speech checks use at most six calls through the existing proxy. Never record these as physical microphone/native-language acceptance.
+- Install existing test dependencies under ignored backup storage and run the full offline suite with NODE_PATH, leaving application dependencies and HANA untouched. Restore only test-generated tracked artifacts after checks. Full regression passed 190 tests; the retained retrieval miss and external human/catalogue/SOP/teammate acceptance dependencies are listed in the AI handoff, not hidden by fabricated data or relaxed thresholds.
+
 ## Person 2 Phase 4 communication
 
 - Use versioned English/Hindi/Kannada templates for status, trace explanation and dealer notices. Read canonical persisted fields and retain IDs/counts/gaps rather than ask a model to infer workflow decisions. This avoids translation calls for fixed text. Human plant-language review remains required; change wording in `srv/ai-adapter/communication.js` and increment its version.

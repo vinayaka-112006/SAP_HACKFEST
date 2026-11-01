@@ -33,6 +33,9 @@ function validateInput(input) {
 }
 function validateOutput(value, catalogue) {
   if (!conforms(value, schema)) throw error('AI_INVALID_OUTPUT', 'AI output did not match the incident schema.');
+  if (['symptom', 'category', 'suggestedNcCode'].some(field => value.missingFields.includes(field) && value[field] !== null) ||
+      value.symptom === null && (value.category !== null || value.suggestedNcCode !== null))
+    throw error('AI_INVALID_OUTPUT', 'AI output contradicts its missing observation fields.');
   const entry = catalogue.find(row => row.code === value.suggestedNcCode);
   if (value.suggestedNcCode !== null && (!entry || entry.group !== value.category))
     throw error('AI_INVALID_OUTPUT', 'AI suggested an unsupported catalogue code or category.');

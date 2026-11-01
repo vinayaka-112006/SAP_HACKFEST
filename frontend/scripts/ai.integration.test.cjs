@@ -76,7 +76,7 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     if (failing) return route.fulfill({ status: 503, json: { error: { code: 'AI_PROVIDER_UNAVAILABLE', message: 'Sarvam unavailable. Use manual reporting.' } } });
     const body = route.request().postDataJSON(); assert.equal(body.rawText, raw);
     await route.fulfill({ json: { _stub: false, translatedText: raw, category: 'TORQUE', suggestedNcCode: 'NC-TORQUE-LOOSE',
-      confidence: 0.9, modelVersion: 'sarvam-105b|intake-1|card-1', missingFields: conflict ? ['toolId'] : [],
+      confidence: 0.9, modelVersion: 'sarvam-105b|intake-2|card-1', missingFields: conflict ? ['toolId'] : [],
       warnings: conflict ? ['Tool mention differs from selected tool.'] : ['Provisional catalogue; worker review required.'] } });
   });
   async function reportScreen() {
@@ -118,7 +118,7 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     await page.getByRole('button', { name: 'Save Incident', exact: true }).click();
     const result = await (await saved).json();
     assert.equal(result.incident.state, 'Reported'); assert.equal(result.incident.rawText, raw);
-    assert.equal(result.incident.modelVersion, 'sarvam-105b|intake-1|card-1|asr:saaras:v3');
+    assert.equal(result.incident.modelVersion, 'sarvam-105b|intake-2|card-1|asr:saaras:v3');
     await page.getByRole('button', { name: 'Confirm Incident', exact: true }).click();
     await page.getByRole('heading', { name: `Incident Confirmed: ${result.incident.incidentId}` }).waitFor();
     await page.getByRole('button', { name: 'Refresh status in my language' }).click();

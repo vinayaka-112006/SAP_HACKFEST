@@ -32,7 +32,7 @@ test('preserves exact raw input and model provenance, without inventing identity
   const result = await createIntake({ client: { complete } })({ ...input, rawText });
   expect(result.rawText).toBe(rawText);
   expect(result.missingFields).toEqual(['reportedAt', 'reporterId']);
-  expect(result.modelVersion).toBe('sarvam-105b|intake-1|card-1');
+  expect(result.modelVersion).toBe('sarvam-105b|intake-2|card-1');
   expect(result.requiresWorkerConfirmation).toBe(true);
   expect(result.needsReview).toBe(true);
   expect(result).not.toHaveProperty('reportedAt');
@@ -44,6 +44,7 @@ test.each([
   { translatedText: '' }, { missingFields: ['arbitrary'] }, { extra: 'field' },
   { suggestedNcCode: 'NC-INVENTED' }, { suggestedNcCode: 'NC-WEAR' },
   { translatedText: 'The product is defective.' },
+  { symptom: null }, { missingFields: ['category'] },
 ])('rejects malformed or unsupported output %j', changes => {
   expect(() => validateOutput(card(changes), catalogue)).toThrow();
 });

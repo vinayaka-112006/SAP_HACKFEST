@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { schema, error, validateInput, validateOutput } = require('./validation');
-const PROMPT_VERSION = 'intake-1', SCHEMA_VERSION = 'card-1';
+const PROMPT_VERSION = 'intake-2', SCHEMA_VERSION = 'card-1';
 const prompt = fs.readFileSync(path.join(__dirname, 'prompts/intake.txt'), 'utf8');
 function loadCatalogue() {
   return fs.readFileSync(path.join(__dirname, '../../db/data/toolsathi-NcCode.csv'), 'utf8').trim()

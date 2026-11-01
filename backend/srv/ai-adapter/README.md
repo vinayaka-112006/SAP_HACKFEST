@@ -1,6 +1,18 @@
-# Person 2 — Phases 1–4
+# Person 2 — Phases 1–5
 
-Sarvam typed intake, transcription, readback, local evidence retrieval and grounded multilingual communication are connected to the existing screens. Database models, trace engine, approval workflows, startup scripts and private environment files are unchanged. Phase 5 final evaluation and teammate integration remain.
+Sarvam typed intake, transcription, readback, local evidence retrieval and grounded multilingual communication are connected to the existing screens. Database models, trace engine, approval workflows, startup scripts and private environment files are unchanged. Phase 5 automated evaluation and handoff are complete within Person 2's scope; human acceptance, reviewed plant data and real teammate workflow integration remain external dependencies.
+
+## Phase 5 — final evaluation and handoff
+
+See [HANDOFF.md](HANDOFF.md) for endpoint ownership, reproducible checks, teammate seams and remaining acceptance steps.
+
+- Full offline backend regression: **190 tests across 23 suites passed**, including AI, deterministic trace, schema/OpenAPI, permissions, incident persistence, approval checks, dealer-draft rollback and existing platform tests. The project's existing test dependencies were installed only in ignored `backup/phase5-tools`; application package files and runtime dependencies were not changed. The suite used `scripts/run-tests.js --reporters=default` with that directory and `backend/node_modules` on `NODE_PATH`, pinning in-memory SQLite. On a normal checkout with devDependencies installed, use `npm --prefix backend test`.
+- Live typed intake: baseline **13/15**, then **15/15** after the missing-observation fix, five per language. The second run used 16 provider calls including one schema retry. These are synthetic calibration checks against draft expectations, not held-out or production accuracy. Prompt provenance is now `intake-2|card-1`; raw text remains unchanged. Vague concern with no concrete symptom must retain null symptom/category/NC, and local validation rejects missing-field contradictions. Translation faithfulness still requires human review.
+- Live synthetic speech: **3/3** English/Hindi/Kannada TTS-generated WAVs returned nonempty, language-matched transcripts through the actual frontend proxy and authenticated speech endpoint. Maximum six Sarvam calls. This verifies the pipeline, not physical microphone behavior, transcription accuracy or pronunciation quality.
+- Live integration verified the corrected Kannada/Hindi ambiguous cases through the current HTTP endpoint and returned version 2 provenance. Read-only HANA retrieval returned actual prior-report source citations. Three placeholder SOPs are excluded; future-dated incidents are excluded by the existing past-record policy. No evaluation created incidents or approvals in HANA.
+- Local retrieval calibration remains **11/12**, with the known short Kannada wear miss. Reviewed English plus the original report retrieves that reference; unrelated-query exclusions remain intact. The evaluation intentionally exits nonzero rather than conceal the miss.
+
+`node backend/srv/ai-adapter/evaluate.js` validates fixtures offline. Add `--live` explicitly to spend credits on the 15-case evaluation, capped at 30 calls per run. `node backend/srv/ai-adapter/speech-check.js` defaults to no calls; `--live` needs the local services and runs three synthetic audio checks. Reports remain under ignored `backup/phase5-*.json`. No new API key or subscription was required.
 
 ## Phase 4 — readback and grounded communication
 
