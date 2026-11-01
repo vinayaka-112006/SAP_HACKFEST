@@ -1,5 +1,7 @@
 # Recovery planning and evidence reports
 
+Downloaded HTML uses responsive worker/history cards, exposure metrics, proposal and approval cards, recovery handoffs, repair readings and an ordered audit timeline. The main view shows the latest stored trace per window with separate Unknown counts. Complete original records and historical snapshots remain in collapsed Technical details. Print / Save as PDF uses A4 styling and excludes the raw JSON appendix. All displayed fields are HTML-escaped; missing data stays Unknown.
+
 Executive reports include a readable reporting-worker section and all currently stored same-tool report records, with reporter ID, recorded name, event time, observation and state. New worker submissions accept optional `reporterName` (120 characters), stored transactionally as REPORTER_PROFILE IncidentEvidence and in the creation audit. Names are reporter-supplied, not verified identity. Historical missing names remain Unknown. The authenticated application submitter is displayed separately from the worker reference. No schema migration or invented personnel mapping is used.
 
 The console now connects persisted intake to a bounded Recovery Planning Agent, human approval and a simulated operation pause or production reassignment. The agent uses the existing Sarvam configuration. The deterministic exposure engine is a read tool, not an AI agent. No external SAP operation, notification, physical production change or downtime saving is claimed.

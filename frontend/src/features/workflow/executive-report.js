@@ -1,47 +1,79 @@
 const escape = value => String(value ?? 'Unknown').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const section = (title, value) => `<section><h2>${escape(title)}</h2><pre>${escape(JSON.stringify(value, null, 2))}</pre></section>`;
-const table = (headers, rows) => `<table><thead><tr>${headers.map(h => `<th>${escape(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${escape(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const text = value => value === null || value === undefined || value === '' ? 'Unknown — not recorded' : value;
+const title = value => String(value).replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_-]/g, ' ').replace(/^./, c => c.toUpperCase());
+const time = value => value && Number.isFinite(Date.parse(value)) ? new Date(value).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST' : 'Unknown — no timestamp recorded';
+const badge = value => `<span class="badge">${escape(text(value))}</span>`;
+const empty = message => `<p class="empty">${escape(message)}</p>`;
+const source = value => `<p class="source">${escape(text(value))}</p>`;
+const fields = rows => `<dl class="fields">${rows.map(([key, value]) => `<div><dt>${escape(key)}</dt><dd>${escape(text(value))}</dd></div>`).join('')}</dl>`;
+const card = (heading, content, meta = '') => `<article class="card"><div class="card-heading"><h3>${escape(heading)}</h3>${meta}</div>${content}</article>`;
+const section = (number, heading, content, caption = '') => `<section><div class="section-heading"><span class="number">${number}</span><h2>${escape(heading)}</h2></div>${caption ? `<p class="caption">${escape(caption)}</p>` : ''}${content}</section>`;
+const list = values => values?.length ? `<ul>${values.map(v => `<li>${escape(text(v))}</li>`).join('')}</ul>` : empty('Unknown — no records supplied.');
+function readable(value, depth = 0) {
+  if (value === null || value === undefined || value === '') return '<span class="muted">Unknown — not recorded</span>';
+  if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+  if (typeof value !== 'object') return escape(value);
+  if (depth > 5) return '<span class="muted">See complete source record in Technical details.</span>';
+  if (Array.isArray(value)) return value.length ? `<ul>${value.map(v => `<li>${readable(v, depth + 1)}</li>`).join('')}</ul>` : '<span class="muted">No recorded entries</span>';
+  return `<dl class="record-fields">${Object.entries(value).map(([k, v]) => `<div><dt>${escape(title(k))}</dt><dd>${readable(v, depth + 1)}</dd></div>`).join('')}</dl>`;
+}
+const metric = (label, value) => `<div class="metric"><span>${escape(label)}</span><strong>${escape(text(value))}</strong></div>`;
+function traceCards(traces) {
+  const latest = new Map();
+  for (const t of traces) {
+    const p = latest.get(t.windowHours);
+    if (!p || String(t.generatedAt || '').localeCompare(String(p.generatedAt || '')) > 0 ||
+        (t.generatedAt === p.generatedAt && t.version > p.version)) latest.set(t.windowHours, t);
+  }
+  return [...latest.values()].sort((a, b) => a.windowHours - b.windowHours).map(t => card(`${t.windowHours}-hour investigation`,
+    `<div class="metrics compact">${metric('Potentially exposed records', Array.isArray(t.units) ? t.units.length : null)}${metric('Data quality', t.dataQualityScore == null ? null : `${t.dataQualityScore}/100`)}</div>` +
+    fields([['Record-linked (Confirmed)', t.tiers?.CONFIRMED], ['Probable association', t.tiers?.PROBABLE], ['Unknown — kept separate', t.tiers?.UNKNOWN],
+      ['Generated', time(t.generatedAt)], ['Snapshot time', time(t.snapshotTime)], ['Version', t.version]]) +
+    `<h4>Evidence gaps</h4>${t.gaps?.length ? readable(t.gaps) : empty('No gaps recorded in this snapshot; this is not a finding of safety.')}` + source(`Trace ID: ${t.traceId}`), badge('Deterministic trace'))).join('');
+}
+function documentCard(doc) {
+  const p = doc.payload || {};
+  let content;
+  if (doc.type === 'RECOVERY_PLAN') {
+    content = `<p class="recommendation">${escape(text(p.selectedOptionId))}</p><p>${escape(text(p.explanation))}</p>` +
+      fields([['AI model', p.modelVersion], ['Action executed by planning', p.actionExecuted === false ? 'No — recommendation only' : p.actionExecuted],
+        ['Downtime avoided', p.estimatedDowntimeAvoided == null ? 'Unknown — not measured' : p.estimatedDowntimeAvoided]]) +
+      `<h4>Agent handoffs</h4><ol class="handoffs">${(p.steps || []).map(s => `<li><strong>${escape(text(s.agent))}</strong><span>${escape(text(s.tool || s.sourceId || s.optionId))}</span><small>${escape(text(s.status || s.modelVersion))}</small></li>`).join('')}</ol>` +
+      `<h4>Sources cited by planner</h4>${list(p.citedEvidenceIds)}<h4>Alternative-tool eligibility</h4>` +
+      ((p.evidence?.candidates || []).map(c => `<div class="subcard"><strong>${escape(text(c.tool?.toolId))}</strong> ${badge(c.status)}${list(c.reasons?.length ? c.reasons : ['Recorded checks passed; approval and revalidation still required.'])}</div>`).join('') || empty('Unknown — no alternative-tool evidence recorded.'));
+  } else if (doc.type === 'RECOVERY_EXECUTION') {
+    content = `<p class="recommendation">${escape(text(p.outcome))}</p>` + fields([['Selected option', p.optionId], ['Alternative tool', p.alternativeToolId],
+      ['Executed by', p.executedBy], ['Executed at', time(p.executedAt)], ['Approval ID', p.approvalId], ['Proposal ID', p.proposalId],
+      ['Plan ID', p.planId], ['External SAP action', p.externalActionExecuted === false ? 'No — simulation only' : p.externalActionExecuted]]);
+  } else content = readable(p);
+  return card(title(doc.type), content + source(`Document ID: ${doc.docId} · System: ${doc.system || 'Unknown'} · ${time(doc.createdAt)}`), badge('SIMULATED'));
+}
 export function renderExecutiveReport(report) {
-  const worker = report.reportingWorker || { reporterId: report.incident.reporterId };
-  const localTime = value => value && Number.isFinite(Date.parse(value))
-    ? new Date(value).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST' : 'Unknown — no timestamp recorded';
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolSathi evidence report ${escape(report.incident.incidentId)}</title>
-  <style>body{font:15px system-ui;color:#0e1a2f;background:#f4f8fa;padding:24px}main{max-width:960px;margin:auto;background:white;padding:28px;border-radius:16px}h1,h2{color:#005662}section{border-top:1px solid #dce5eb;margin-top:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px ui-monospace,monospace}li{margin:8px 0}table{border-collapse:collapse;width:100%;overflow-wrap:anywhere}td,th{padding:10px;text-align:left;border:1px solid #dce5eb}@media print{body{padding:0}main{padding:12px}}</style></head><body><main>
-  <p>SIMULATED manufacturing scenario · Application audit history</p><h1>ToolSathi Incident &amp; Recovery Evidence Report</h1>
-  <p>Incident ${escape(report.incident.incidentId)} · Recorded state: <strong>${escape(report.incident.state)}</strong></p>
-  <p>Generated ${escape(new Date(report.generatedAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }))} IST</p>
-  <ul>${report.limitations.map(item => `<li>${escape(item)}</li>`).join('')}</ul>
-  <h2>Executive overview</h2>
-  ${table(['Record', 'Stored value'], [['Tool', report.incident.toolId], ['Worker observation', report.incident.rawText],
-    ['Recorded translation (review status not inferred)', report.incident.translatedText], ['Incident state', report.incident.state],
-    ['Root cause', 'Unknown — not established by this report'], ['Measured downtime avoided', 'Unknown'],
-    ['Proposals / approval decisions / simulated documents', `${report.proposals.length} / ${report.approvals.length} / ${report.documents.length}`]])}
-  <h2>Reporting worker</h2>
-  ${table(['Field', 'Recorded value'], [['Worker name', worker.reporterName || 'Unknown — no name recorded for this report'],
-    ['Worker ID', worker.reporterId], ['Name source', worker.nameBasis || 'No worker-name record available'],
-    ['Reported event time', localTime(worker.reportedAt || report.incident.reportedAt)],
-    ['Received by application', localTime(worker.receivedAt || report.incident.createdAt)],
-    ['Submitted through application by', worker.submittedBy || 'Unknown — no submission audit entry'],
-    ['Submitter role', worker.submitterRole], ['Submission audit ID', worker.submissionAuditId],
-    ['Worker-name evidence ID', worker.nameEvidenceId]])}
-  <h2>Worker reporting history for ${escape(report.incident.toolId)}</h2>
-  <p>${escape(report.workerHistoryScope || 'Unknown — reporting history was not returned by the backend.')}</p>
-  ${(report.workerReportHistory || []).length ? table(['Incident', 'Worker name / ID', 'Reported time', 'Worker observation', 'Category / state'],
-    report.workerReportHistory.map(r => [r.incidentId + (r.isSelectedIncident ? ' (selected)' : ''),
-      `${r.reporterName || 'Unknown — name not recorded'} / ${r.reporterId || 'Unknown'}`, localTime(r.reportedAt),
-      r.observation, `${r.category || 'Unknown'} / ${r.state || 'Unknown'}`])) : '<p>Unknown: no worker report history available.</p>'}
-  <h2>Exposure snapshot overview</h2>
-  <p>These are record linkage tiers, not product quality findings. Historical snapshots can differ; source IDs identify each result.</p>
-  ${report.traces.length ? table(['Trace ID', 'Window (hours)', 'Linked records', 'Linkage tiers (Unknown retained)', 'Quality score'], report.traces.map(t => [t.traceId, t.windowHours, t.units?.length ?? 'Unknown', JSON.stringify(t.tiers), t.dataQualityScore])) : '<p>Unknown: no persisted trace snapshot.</p>'}
-  <h2>Recovery handoffs and outcomes</h2>
-  ${table(['Record ID', 'Stage', 'Recorded outcome'], report.documents.filter(d => d.type.startsWith('RECOVERY_')).map(d => [d.docId, d.type, d.payload.selectedOptionId || d.payload.outcome || d.payload.sourceReference]))}
-  ${section('1. Worker report and intake provenance (reported observations)', report.incident)}
-  ${section('2. Current tool record', report.tool)}
-  ${section('3. Deterministic trace snapshots — potentially exposed records', report.traces.length ? report.traces : { status: 'Unknown', reason: 'No persisted trace snapshot' })}
-  ${section('4. Proposals — recommendations are separate from execution', report.proposals)}
-  ${section('5. Human approval decisions', report.approvals)}
-  ${section('6. Stored planning evidence and simulated action documents', report.documents)}
-  ${section('7. Submitted repair readings and independent verification records', report.repairs)}
-  ${section('8. Application audit history (actor IDs and roles; no credentials)', report.audit)}
-  </main></body></html>`;
+  const incident = report.incident || {}, worker = report.reportingWorker || { reporterId: incident.reporterId };
+  const history = report.workerReportHistory || [], traces = report.traces || [], proposals = report.proposals || [];
+  const approvals = report.approvals || [], documents = report.documents || [], repairs = report.repairs || [];
+  const audit = [...(report.audit || [])].sort((a, b) => String(a.timestamp || '').localeCompare(String(b.timestamp || '')) || String(a.auditId).localeCompare(String(b.auditId)));
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolSathi evidence report ${escape(incident.incidentId)}</title>
+  <style>
+  *{box-sizing:border-box}body{margin:0;background:#edf2f6;color:#152b3c;font:14px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1140px;margin:32px auto;background:white;border:1px solid #dce5eb;border-radius:20px;overflow:hidden;box-shadow:0 16px 64px #0d26300b}.hero{background:#102d3c;color:white;padding:40px 44px;border-top:5px solid #19c6c4}.brand{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#91e1df;font-weight:750}.hero h1{font-size:34px;line-height:1.2;letter-spacing:-1px;margin:16px 0}.hero p{color:#c4d5de;margin:8px 0}.hero .badge{background:#224c58;color:#c6fffc;border-color:#42757b}.content{padding:12px 44px 36px}.headline{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:24px 0}.metric{padding:18px;border:1px solid #dce7eb;border-radius:12px;background:#f5f9fa}.metric span{display:block;color:#5d7180;font-size:11px;text-transform:uppercase;letter-spacing:.6px;font-weight:750}.metric strong{display:block;font-size:22px;line-height:1.35;margin:8px 0;color:#005f68;overflow-wrap:anywhere}.compact{grid-template-columns:repeat(2,minmax(0,1fr));margin:16px 0}.compact .metric{padding:12px}section{margin-top:30px}.section-heading{display:flex;gap:12px;align-items:center;border-top:1px solid #e2eaf0;padding-top:26px;margin-bottom:16px}.number{font:700 11px ui-monospace,monospace;background:#e0f4f3;color:#00616b;border-radius:8px;padding:6px 9px}h2{font-size:19px;letter-spacing:-.3px;margin:0;color:#102d3c}h3{font-size:16px;margin:0;color:#174650}h4{font-size:12px;color:#56707f;text-transform:uppercase;letter-spacing:.5px;margin:22px 0 8px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{padding:22px;border:1px solid #dce5eb;border-radius:14px;background:white;min-width:0;overflow-wrap:anywhere}.card-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.badge{display:inline-block;border:1px solid #badcde;background:#eaf8f7;color:#08636b;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:750;letter-spacing:.4px;overflow-wrap:anywhere}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0 0}.fields dt,.record-fields dt{font-size:11px;font-weight:700;color:#637886;margin-bottom:4px}.fields dd,.record-fields dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.quote{font-size:17px;background:#f2f8fa;border-left:3px solid #00a9ae;margin:18px 0;padding:18px;color:#204653;white-space:pre-wrap}.source{font:10px/1.7 ui-monospace,monospace;color:#748692;border-top:1px dashed #dce5eb;margin:20px 0 0;padding-top:10px;overflow-wrap:anywhere}.caption,.muted{color:#657b89;font-size:12px}.empty{padding:16px;background:#f5f8fa;color:#607684;border:1px dashed #d7e2e8;border-radius:10px;font-size:13px}.recommendation{font-size:18px;font-weight:750;color:#006670}.record-fields{margin:8px 0}.record-fields>div{padding:8px 0;border-bottom:1px solid #edf1f4}.subcard{padding:12px;background:#f6f9fb;border-radius:8px;margin:10px 0}.handoffs{padding-left:22px}.handoffs li{padding:5px 0}.handoffs span,.handoffs small{display:block;color:#657b89}.timeline{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid #b9dfdf}.timeline>li{position:relative;margin:0 0 14px 12px}.timeline>li:before{content:"";position:absolute;width:10px;height:10px;border:2px solid white;background:#04979e;border-radius:50%;left:-32px;top:25px}.timeline .card{padding:18px}.notice{padding:16px 20px;background:#f7f9fb;border-radius:12px;margin-top:24px;color:#526b7b;font-size:12px}.technical{margin-top:28px;border:1px solid #dce5eb;border-radius:10px;padding:16px}summary{cursor:pointer;color:#476674}.technical pre{white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.6 ui-monospace,monospace;max-height:600px;overflow:auto}.footer{font-size:11px;color:#708693;border-top:1px solid #e2eaf0;margin-top:30px;padding-top:20px}
+  @media(max-width:720px){main{margin:0;border-radius:0}.hero{padding:28px 20px}.hero h1{font-size:27px}.content{padding:8px 18px 24px}.cards{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fields{grid-template-columns:1fr}.card{padding:18px}}
+  @page{size:A4;margin:14mm}@media print{body{background:white;font-size:10pt}main{margin:0;max-width:none;border:0;border-radius:0;box-shadow:none}.hero{padding:20px 24px;background:#102d3c!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}.hero h1{font-size:24pt}.content{padding:0}.card,.metric,.notice{break-inside:avoid}.cards{gap:10px}.card{padding:14px}h2,h3,h4,.section-heading{break-after:avoid}.technical{display:none}.timeline>li{break-inside:avoid}.metric strong{font-size:18px}.quote{font-size:12pt}.footer{font-size:8pt}}
+  </style></head><body><main>
+  <header class="hero"><div class="brand">ToolSathi / Manufacturing intelligence</div><div class="headline"><h1>Incident &amp; Recovery<br>Evidence Report</h1>${badge('SIMULATED')}</div><p>Incident ${escape(incident.incidentId)} · Recorded state: <strong>${escape(text(incident.state))}</strong></p><p>Generated ${escape(time(report.generatedAt))}</p></header>
+  <div class="content"><div class="metrics">${metric('Incident', incident.incidentId)}${metric('Asset', incident.toolId)}${metric('Approval decisions', approvals.length)}${metric('Repair records', repairs.length)}</div>
+  ${section('01', 'Reporting worker', `<div class="cards">${card(worker.reporterName || 'Unknown — name not recorded', `<p class="caption">Reporting worker reference; not independently verified identity</p>` + fields([['Worker ID', worker.reporterId], ['Reported event time', time(worker.reportedAt || incident.reportedAt)], ['Received by application', time(worker.receivedAt || incident.createdAt)], ['Name source', worker.nameBasis || 'Unknown — no name recorded for this report']]) + source(`Worker-name evidence ID: ${worker.nameEvidenceId || 'Unknown'}`))}${card('Submission provenance', fields([['Submitted through application by', worker.submittedBy], ['Submitter role', worker.submitterRole], ['Business confirmer reference', incident.confirmedBy], ['Confirmation time', time(incident.confirmedAt)]]) + source(`Submission audit ID: ${worker.submissionAuditId || 'Unknown'}`))}</div>`)}
+  ${section('02', 'Incident observation', card('Original worker report', `<blockquote class="quote">${escape(text(incident.rawText))}</blockquote>` + fields([['Stored translation — review status not inferred', incident.translatedText], ['Category', incident.category], ['Suggested NC code', incident.suggestedNcCode], ['Language', incident.language], ['Intake model', incident.modelVersion || 'Manual / Unknown'], ['Root cause', 'Unknown — not established by this report']]) + source(`Incident ID: ${incident.incidentId}`)))}
+  ${section('03', `Worker reporting history for ${incident.toolId || 'Unknown tool'}`, history.length ? `<div class="cards">${history.map(r => card(r.incidentId + (r.isSelectedIncident ? ' (selected)' : ''), `<p><strong>${escape(`${r.reporterName || 'Unknown — name not recorded'} / ${r.reporterId || 'Unknown'}`)}</strong></p><blockquote class="quote">${escape(text(r.observation))}</blockquote>` + fields([['Reported time', time(r.reportedAt)], ['Received time', time(r.receivedAt)], ['Category', r.category], ['Name basis', r.nameBasis]]) + source(`Submission audit ID: ${r.submissionAuditId || 'Unknown'}`), badge(r.state))).join('')}</div>` : empty('Unknown — no worker report history available.'), report.workerHistoryScope || 'Unknown — reporting history scope was not returned by the backend.')}
+  ${section('04', 'Current tool record', report.tool ? card(report.tool.toolId, fields([['Type', report.tool.type], ['Recorded state', report.tool.state], ['Line', report.tool.line], ['Work center', report.tool.workCenter], ['Calibration due', report.tool.calibrationDue], ['Last verified good', time(report.tool.lastVerifiedGood)]])) : empty('Unknown — no tool record available.'))}
+  ${section('05', 'Potential exposure & evidence gaps', traces.length ? `<div class="cards">${traceCards(traces)}</div>` : empty('Unknown — no persisted trace snapshot.'), 'Latest stored snapshot for each window. Linkage tiers describe potentially exposed records, not product quality. All historical snapshots remain in Technical details.')}
+  ${section('06', 'Recommendations & approval decisions', proposals.length ? `<div class="cards">${proposals.map(p => {
+    const decisions = approvals.filter(a => a.proposalId === p.proposalId);
+    return card(title(p.type), `<p>${escape(text(p.reason))}</p><h4>Proposed scope</h4>${readable(p.payload)}<h4>Human decision</h4>${decisions.length ? decisions.map(a => `<div class="subcard">${badge(a.decision)}${fields([['Reviewer', a.decidedBy], ['Role', a.approverRole], ['Decision time', time(a.decidedAt)], ['Reason', a.reason]])}${source(`Approval ID: ${a.approvalId}`)}</div>`).join('') : empty('No approval decision recorded. This proposal does not authorize execution.')} ${source(`Proposal ID: ${p.proposalId} · Created: ${time(p.createdAt)}`)}`, badge(p.state));
+  }).join('')}</div>` : empty('No recommendations or proposals recorded.'), 'Recommendations, human decisions and executed simulations are separate records.')}
+  ${section('07', 'Recovery handoffs & simulated action records', documents.length ? `<div class="cards">${documents.map(documentCard).join('')}</div>` : empty('No simulated action or planning documents recorded.'), 'Stored planning evidence and simulation outcomes. No physical production change is inferred.')}
+  ${section('08', 'Repair & independent verification', repairs.length ? `<div class="cards">${repairs.map(r => card('Repair observations', `<p>${escape(text(r.description))}</p>` + fields([['Technician', r.loggedBy], ['Logged at', time(r.loggedAt)], ['Recorded overall result', r.passed === true ? 'Pass recorded' : r.passed === false ? 'Not passed — inspect recorded readings' : null], ['Independent verifier', r.verifiedBy], ['Verification time', time(r.verifiedAt)]]) + `<h4>Submitted readings</h4>${r.testReadings?.length ? r.testReadings.map(reading => `<div class="subcard"><strong>${escape(text(reading.name))}</strong> ${badge(reading.passed === true ? 'Pass' : reading.passed === false ? 'Fail' : 'Unknown')}</div>`).join('') : empty('Unknown — no test readings recorded.')}` + source(`Repair ID: ${r.repairId}`))).join('')}</div>` : empty('No repair or independent verification records available.'), 'Submitted observations are not independently authenticated calibration certificates. Incident closure is shown only as its stored state.')}
+  ${section('09', 'Application audit history', audit.length ? `<ol class="timeline">${audit.map(a => `<li>${card(title(a.action), `<p>${escape(text(a.reason))}</p>` + fields([['Actor', a.actor], ['Role', a.actorRole], ['Recorded time', time(a.timestamp)], ['Model version', a.modelVersion || 'Not supplied']]) + `<details><summary>Recorded event fields</summary>${readable(a.details)}</details>` + source(`Audit ID: ${a.auditId}`))}</li>`).join('')}</ol>` : empty('Unknown — no application audit entries available.'))}
+  <aside class="notice"><strong>Scope &amp; limitations</strong>${list(report.limitations)}<p>Measured downtime avoided: <strong>Unknown — no measured business benefit is established by this report.</strong></p></aside>
+  <details class="technical"><summary>Technical details · complete source records (JSON)</summary><p>Optional reference data. These details are excluded from the printed report.</p><pre>${escape(JSON.stringify(report, null, 2))}</pre></details>
+  <footer class="footer">ToolSathi · Synthetic manufacturing scenario · S/4HANA and Digital Manufacturing actions are SIMULATED · Source references retained for review</footer></div></main></body></html>`;
 }
