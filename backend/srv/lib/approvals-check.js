@@ -1,6 +1,7 @@
 const { cds, entity, decode, transaction } = require("./db");
 const { fail } = require("./http");
 const fields = {
+  RECOVERY_PLAN: ["toolId", "planId", "optionId"],
   MAINTENANCE_NOTIFICATION: ["toolId", "shortText", "priority"],
   QUALITY_NOTIFICATION: ["toolId", "shortText", "batchIds"],
   STOCK_BLOCK: ["batchIds", "plant", "storageLocation", "reason"],

@@ -92,6 +92,7 @@ function check(name, fn) {
 before(
   async () => {
     backendProcess = fork("srv/server.js", [], {
+      execArgv: ['--require', path.join(backend, 'tests/fixtures/recovery-provider.cjs')],
       cwd: backend,
       silent: true,
       env: {
@@ -156,7 +157,9 @@ before(
     });
     page.on("response", async (response) => {
       if (response.url().includes("/trace?") && response.status() === 200) {
-        const trace = await response.json();
+        // Navigation can dispose a response body after its status event.
+        const trace = await response.json().catch(() => null);
+        if (!trace) return;
         traces.push({
           traceId: trace.traceId,
           windowHours: trace.windowHours,
@@ -463,7 +466,7 @@ check(
       "Trace audit did not load",
     );
     const body = await page.locator("body").textContent();
-    assert.match(body, /Authenticated actor/);
+    assert.match(body, /Authenticated principal/);
     assert.match(body, /Audit ID/);
     assert.doesNotMatch(body, /Subsystem: No model supplied/);
     for (const action of [
@@ -473,8 +476,8 @@ check(
     ])
       assert.ok(body.includes(action), `Expected audit label ${action}`);
     assert.match(body, /No simulated documents exist/);
-    assert.match(body, /Incident review and tool workflow/);
-    assert.match(body, /Incident evaluation/);
+    assert.match(body, /Containment & Recovery/);
+    assert.match(body, /Incident Evaluation/);
     assert.doesNotMatch(body, /Workflow unavailable|Awaiting Jamuna/);
     assert.doesNotMatch(body, /cryptographic|tamper-evident|LINK ACTIVE/i);
     await page.goto(frontendUrl + "/history");
@@ -496,6 +499,56 @@ check(
     );
   },
 );
+
+check('recovery evidence is persisted, provider failure stays visible, and the executive download contains stored facts', async () => {
+  await page.goto(frontendUrl + '/console');
+  await skipIntro(page);
+  await page.getByRole('heading', { name: '2. Recovery Planning Agent', exact: true }).waitFor();
+  await page.getByText('Record reviewed alternative-tool evidence', { exact: true }).click();
+  await page.getByLabel('Alternative tool', { exact: true }).selectOption('TOOL-C');
+  await page.getByLabel('Compatibility source reference').fill('SYNTHETIC-E2E-SPEC / SHIFT availability');
+  await page.getByLabel('Operation compatibility reviewed').check();
+  await page.getByLabel('Available for reassignment').check();
+  const saved = page.waitForResponse(r => r.url().endsWith(`/incidents/${incidentId}/recovery/evidence`));
+  await page.getByRole('button', { name: 'Save reviewed evidence' }).click();
+  assert.equal((await saved).status(), 201);
+  await page.getByText('Evidence recorded with selected manager identity.').waitFor();
+  await page.route('**/api/incidents/*/recovery/plans', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: { code: 'AI_UNAVAILABLE', message: 'Synthetic provider unavailable' } }) }));
+  await page.getByRole('button', { name: 'Generate recovery plan', exact: true }).click();
+  await page.getByText('Request failed: Synthetic provider unavailable').waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Submit recovery proposal' }).count(), 0);
+  await page.unroute('**/api/incidents/*/recovery/plans');
+  // Provider responses are mocked by a test-only Node preload; the actual read-tool
+  // loop, persistence, approval, revalidation and simulation services all execute.
+  const planned = page.waitForResponse(r => r.url().endsWith(`/incidents/${incidentId}/recovery/plans`));
+  await page.getByRole('button', { name: 'Generate recovery plan', exact: true }).click();
+  const generated = await (await planned).json();
+  assert.equal(generated.modelVersion, 'TEST-ONLY-MOCK-PROVIDER');
+  assert.equal(generated.actionExecuted, false);
+  assert.equal(generated.selectedOptionId, 'ALTERNATIVE:TOOL-C');
+  await page.getByText(/Recommendation: ALTERNATIVE:TOOL-C/).waitFor();
+  await page.getByLabel('Workflow reason').fill('Reviewed synthetic operation and availability evidence');
+  await page.getByRole('button', { name: 'Submit recovery proposal', exact: true }).click();
+  await page.getByRole('button', { name: 'Approve RECOVERY_PLAN', exact: true }).click();
+  const executing = page.waitForResponse(r => r.url().endsWith(`/incidents/${incidentId}/recovery/execute`));
+  await page.getByRole('button', { name: 'Execute simulated RECOVERY_PLAN', exact: true }).click();
+  const executed = await (await executing).json();
+  assert.equal(executed.externalActionExecuted, false);
+  assert.equal(executed.alternativeToolId, 'TOOL-C');
+  await page.getByText(/Simulated production reassignment recorded/).first().waitFor();
+  const downloading = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download executive evidence report' }).click();
+  const download = await downloading;
+  const file = path.join(output, download.suggestedFilename());
+  await download.saveAs(file);
+  const html = fs.readFileSync(file, 'utf8');
+  assert.match(html, /SYNTHETIC-E2E-SPEC/);
+  assert.match(html, /Recorded state: <strong>Confirmed/);
+  assert.match(html, /SIMULATED/);
+  assert.match(html, /RECOVERY_EXECUTION/);
+  assert.match(html, /TEST-ONLY-MOCK-PROVIDER/);
+  assert.doesNotMatch(html, /45\.2|FULLY RESOLVED|spring relaxation|cryptographic hash/);
+});
 
 check("console completes proposal approval, simulated restriction, repair and independent verification through the UI", async () => {
   const category = `E2E-LIFECYCLE-${crypto.randomUUID().slice(0, 8)}`;
@@ -534,51 +587,59 @@ check("console completes proposal approval, simulated restriction, repair and in
   await skipIntro(page);
   await page.getByLabel("Open incident ID").fill(activeIncident.incidentId);
   await page.getByRole("button", { name: "Open Incident", exact: true }).click();
-  await page.getByRole("heading", { name: "Incident review and tool workflow" }).waitFor();
-  await until(async () => (await page.getByLabel("Repeat-failure record count").textContent()).includes('"thresholdMet": true'), "Repeat-failure result did not load");
-  assert.match(await page.getByLabel("Potential duplicate candidates").textContent(), /"similarity": 1/);
+  await page.getByRole("heading", { name: /Containment & Recovery/ }).waitFor();
+  await page.getByText(/Threshold met/).first().waitFor();
 
-  await page.getByLabel("Reason", { exact: true }).fill("Review recurring synthetic fixture alignment reports");
+  await page.getByLabel("Workflow reason").fill("Review recurring synthetic fixture alignment reports");
   const proposalResponse = page.waitForResponse((response) => response.url().endsWith(`/api/incidents/${activeIncident.incidentId}/proposals`) && response.request().method() === "POST");
-  await page.getByRole("button", { name: "Create review proposal" }).click();
+  await page.getByRole("button", { name: "Create containment proposal" }).click();
   const proposalResult = await (await proposalResponse).json();
   assert.equal(proposalResult.proposal.state, "Pending");
   assert.equal(proposalResult.actionExecuted, false);
   const proposalId = proposalResult.proposal.proposalId;
-  await page.getByLabel("Proposal ID for decision").fill(proposalId);
-  await page.getByLabel("Approval reason").fill("Reviewed the evidence and approved the proposal");
+  await until(async () => (await page.getByRole('button', { name: 'Approve TOOL_RESTRICTION', exact: true }).count()) === 1, 'Persisted proposal did not load');
+  await page.route(`**/api/approvals/${proposalId}/decision`, route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: { code: 'TEST_UNAVAILABLE', message: 'Synthetic decision service unavailable' } }) }));
+  await page.getByRole('button', { name: 'Approve TOOL_RESTRICTION', exact: true }).click();
+  await page.getByText('Request failed: Synthetic decision service unavailable').waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Execute simulated TOOL_RESTRICTION' }).isDisabled(), true);
+  await page.unroute(`**/api/approvals/${proposalId}/decision`);
+  await page.getByLabel("Workflow reason").fill("Reviewed the evidence and approved the proposal");
   const approvalResponse = page.waitForResponse((response) => response.url().endsWith(`/api/approvals/${proposalId}/decision`));
-  await page.getByRole("button", { name: "Approve proposal" }).click();
+  await page.getByRole("button", { name: "Approve TOOL_RESTRICTION", exact: true }).click();
   const approvalResult = await (await approvalResponse).json();
   assert.equal(approvalResult.proposal.state, "Approved");
   assert.equal(approvalResult.actionExecuted, false);
   assert.ok(approvalResult.approval.approvalId);
   assert.equal(await page.getByLabel("Persisted Approval ID").count(), 0);
   assert.equal(await page.getByLabel("Approval ID").count(), 0);
-  await until(async () => page.getByRole("button", { name: "Run simulated tool restriction" }).isEnabled(), "Approved action did not become available after backend refresh");
-  assert.equal(await page.getByRole("button", { name: "Run simulated tool restriction" }).isEnabled(), true);
+  await until(async () => page.getByRole("button", { name: "Execute simulated TOOL_RESTRICTION" }).isEnabled(), "Approved action did not become available after backend refresh");
+  assert.equal(await page.getByRole("button", { name: "Execute simulated TOOL_RESTRICTION" }).isEnabled(), true);
   const restrictionResponse = page.waitForResponse((response) => response.url().endsWith("/api/mock/dm/tool-restrictions"));
-  await page.getByRole("button", { name: "Run simulated tool restriction" }).click();
+  await page.getByRole("button", { name: "Execute simulated TOOL_RESTRICTION" }).click();
   assert.equal((await restrictionResponse).status(), 200);
-  await page.getByText(/SIMULATED result persisted/).waitFor();
+  await page.getByText('Simulated action recorded by backend.').waitFor();
 
   await page.getByRole("button", { name: "Technician local demo role" }).first().click();
   await page.getByLabel("Local demo user ID").fill("E2E-TECHNICIAN");
-  await page.getByLabel("Repair record").fill("Adjusted synthetic fixture and documented inspection");
+  await page.getByLabel("Repair description").fill("Adjusted synthetic fixture and documented inspection");
   const repairStartResponse = page.waitForResponse((response) => response.url().endsWith(`/api/incidents/${activeIncident.incidentId}/repairs`));
-  await page.getByRole("button", { name: "Start repair as Technician" }).click();
+  await page.getByRole("button", { name: "Start repair", exact: true }).click();
   const repairStart = await (await repairStartResponse).json();
   const repairId = repairStart.repair.repairId;
-  await page.getByLabel("Repair ID").fill(repairId);
+  await page.getByText('Repair log saved.').waitFor();
   const completionResponse = page.waitForResponse((response) => response.url().endsWith(`/api/repairs/${repairId}/complete`));
-  await page.getByLabel(/Test readings/).fill("Fixture torque=pass\nAlignment=pass");
-  await page.getByRole("button", { name: "Record test readings" }).click();
+  for (const name of ['Fixture torque', 'Alignment']) {
+    await page.getByLabel('Reading name', { exact: true }).fill(name);
+    await page.getByLabel('Reading result', { exact: true }).selectOption('pass');
+    await page.getByRole('button', { name: 'Add reading', exact: true }).click();
+  }
+  await page.getByRole("button", { name: "Submit repair readings" }).click();
   assert.equal((await completionResponse).status(), 200);
 
   await page.getByRole("button", { name: "Verifier local demo role" }).first().click();
   await page.getByLabel("Local demo user ID").fill("E2E-INDEPENDENT-VERIFIER");
   const verificationResponse = page.waitForResponse((response) => response.url().endsWith(`/api/incidents/${activeIncident.incidentId}/verify-return`));
-  await page.getByRole("button", { name: "Verify return as independent Verifier" }).click();
+  await page.getByRole("button", { name: "Verify return to service", exact: true }).click();
   const verification = await (await verificationResponse).json();
   assert.equal(verification.toolState.to, "Active");
   assert.equal(verification._label, "SIMULATED");
@@ -589,10 +650,11 @@ check("console completes proposal approval, simulated restriction, repair and in
   await skipIntro(page);
   await page.getByLabel("Tool history register").selectOption("TOOL-C");
   const selectedHistoryIncident = incidentIds[0];
-  await page.getByText("No incident selected.").waitFor();
+  await page.getByRole('button', { name: `Evaluate incident ${selectedHistoryIncident}`, exact: true }).first().waitFor();
+  assert.equal(await page.getByRole('button', { name: `Evaluate incident ${selectedHistoryIncident}`, exact: true }).first().getAttribute('aria-pressed'), 'false');
   assert.doesNotMatch(await page.locator("body").textContent(), /REPEAT PATTERN FLAGGED/);
   await page.getByRole("button", { name: `Evaluate incident ${selectedHistoryIncident}` }).first().click();
-  await page.getByText(`Selected incident: ${selectedHistoryIncident}`).waitFor();
+  await page.getByText('Selected for duplicate and repeat-failure evaluation', { exact: true }).first().waitFor();
   await until(
     async () => requests.some((request) => request.url.endsWith(`/api/incidents/${selectedHistoryIncident}/repeat-failures`)),
     "History evaluation did not call the selected incident endpoint",

@@ -1,5 +1,7 @@
 # ToolSathi local demo readiness
 
+Later recovery-planning work adds a Sarvam read-tool planning loop, scoped Manager approval, simulated recovery execution and executive reports from persisted evidence. See [current recovery guide](../backend/docs/recovery-planning.md). Historical test counts and stub descriptions below describe their original verification passes; they do not replace that guide.
+
 ## Current result and scope
 
 The user's later instruction, **Use HANA; migrate existing data and test the application**, supersedes the earlier SQLite-only plan. The Windows-hosted frontend/backend now use real SAP HANA Cloud persistence. All 394 existing SQLite records across 21 modeled tables were copied and verified transactionally. A repeat import before application activity inserted zero rows and recognized all 394 identical rows. The original SQLite database and a verified ignored backup remain intact.

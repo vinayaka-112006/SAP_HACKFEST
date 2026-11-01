@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ResourceState from "../components/ResourceState";
 import { useStore } from "../state/store";
 import GlassPanel from "../components/GlassPanel";
@@ -25,7 +25,7 @@ export default function Console() {
   const {
     selectedWindow,
     setSelectedWindow,
-    incident,
+    incident: loadedIncident,
     incidentId,
     openIncident,
     incidentState,
@@ -50,6 +50,10 @@ export default function Console() {
     refresh,
     incidents,
   } = useStore();
+  const retainedIncident = useRef(null);
+  if (loadedIncident) retainedIncident.current = { incidentId, currentRole, incident: loadedIncident };
+  const incident = loadedIncident || (incidentState.loading && retainedIncident.current?.incidentId === incidentId &&
+    retainedIncident.current?.currentRole === currentRole ? retainedIncident.current.incident : null);
   const [lookup, setLookup] = useState(incidentId);
   const [showGaps, setShowGaps] = useState(false);
   const toolB = tools.find((tool) => tool.toolId === incident?.toolId);

@@ -56,6 +56,7 @@ function createAdapter(machine, approvals) {
     );
   }
   function requiredApproverRole(type) {
+    if (type === "RECOVERY_PLAN") return "Manager";
     if (approvals) return approvals.requiredApproverRole(type);
     if (!roleByType[type]) throw new Error("Unsupported proposal type");
     return roleByType[type];

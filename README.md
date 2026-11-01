@@ -60,6 +60,7 @@ Open **http://localhost:5173**. The existing design is preserved; /api is proxie
 
 ## Documentation
 
+- [Recovery Planning Agent, evidence-backed executive reports and demo steps](backend/docs/recovery-planning.md)
 - [Current demo readiness and HANA verification](docs/local-demo-readiness.md)
 - [Frontend/backend integration](docs/frontend-backend-integration.md)
 - [Architecture and folder ownership](docs/architecture/overview.md)
@@ -71,4 +72,4 @@ Open **http://localhost:5173**. The existing design is preserved; /api is proxie
 - [Deployment navigation](deploy/README.md)
 - [Restructuring inventory and validation](backend/docs/repository-restructure.md)
 
-Five teammate routes remain explicit stubs. Candidate ground truth awaits Jamuna's review. No push, merge or real-cloud deployment is implied.
+AI intake and the recovery-planning read-tool loop are implemented; recovery actions remain approval-bound simulations. See the recovery guide for current behavior and verification. Candidate ground truth awaits domain review. No push, merge or real-cloud deployment is implied.

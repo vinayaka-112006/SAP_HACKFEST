@@ -68,7 +68,13 @@ test("real endpoint status codes and response structures conform to OpenAPI", as
 });
 test("every declared endpoint is claimed by a real router or explicitly marked stub", () => {
   const registry = cds.app.locals.routeRegistry;
-  expect(registry.size).toBe(30);
+  expect(registry.size).toBe(37);
+  for (const [method, path] of [
+    ['GET', '/incidents/:param/recovery'], ['POST', '/incidents/:param/recovery/evidence'],
+    ['POST', '/incidents/:param/recovery/plans'], ['POST', '/incidents/:param/recovery/proposals'],
+    ['POST', '/incidents/:param/recovery/execute'], ['GET', '/incidents/:param/executive-report'],
+    ['GET', '/incidents/:param/repair-records'],
+  ]) expect(registry.get(`${method} /api${path}`)).toMatchObject({ stub: false, owner: 'platform' });
   for (const e of contract) {
     const key = e.method + " /api" + e.path.replace(/:[^/]+/g, ":param");
     expect(registry.get(key)).toMatchObject({ stub: e.owner === "Jamuna" });
