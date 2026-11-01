@@ -1,5 +1,9 @@
 # Decisions
 
+## Existing origin/main merge resolution
+
+Preserve Vinayaka's new SVG branding, glass/layout/motion changes and component showcase while retaining the integrated navbar identities, real API/store bindings and accurate uncertainty/approval descriptions. Missing tool-use records stay Unknown; labels cannot promise cryptographic verification, immutable audit or completed governance workflows. Reuse locally bundled fonts instead of duplicate Google Fonts requests and replace the stale PNG favicon with the incoming SVG. Backend source/model/persistence and live databases are unchanged. Alternative copy and exact conflict decisions are documented for Vinayaka in [merge resolution](../../docs/merge-resolution.md).
+
 ## Current HANA cutover and local application stabilization
 
 - The user's later explicit HANA choice supersedes the previous SQLite-only plan. Private `.env` selects direct HANA; explicit local/fresh launchers and default regression tests retain SQLite isolation. No HANA code was removed.

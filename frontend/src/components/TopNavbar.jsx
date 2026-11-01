@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import RoleSwitch from './RoleSwitch';
+import Logo from './Logo';
 import { useStore } from '../state/store';
 
 /**
@@ -35,11 +36,11 @@ export default function TopNavbar() {
         position: 'sticky',
         top: 0,
         zIndex: 90,
-        background: 'rgba(255, 255, 255, 0.88)',
+        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(246, 250, 255, 0.85) 100%)',
         backdropFilter: 'blur(24px) saturate(160%)',
         WebkitBackdropFilter: 'blur(24px) saturate(160%)',
-        borderBottom: '1px solid rgba(7, 17, 32, 0.1)',
-        boxShadow: '0 4px 20px rgba(7, 17, 32, 0.05)',
+        borderBottom: '1px solid rgba(0, 184, 204, 0.18)',
+        boxShadow: '0 4px 24px rgba(7, 17, 32, 0.06), 0 1px 0 rgba(255, 255, 255, 0.95)',
         padding: '12px 32px'
       }}
     >
@@ -62,61 +63,8 @@ export default function TopNavbar() {
             textDecoration: 'none'
           }}
         >
-          {/* Official ToolSathi AI Logo with subtle glow */}
-          <div style={{
-            position: 'relative',
-            width: '46px',
-            height: '46px',
-            borderRadius: '12px',
-            padding: '2px',
-            background: 'linear-gradient(135deg, rgba(0, 229, 255, 0.6) 0%, rgba(10, 182, 255, 0.4) 100%)',
-            boxShadow: '0 4px 16px rgba(0, 194, 203, 0.25)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#FFFFFF',
-            overflow: 'hidden'
-          }}>
-            <img
-              src="/assets/toolsathi_logo.png"
-              alt="ToolSathi AI Logo"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain'
-              }}
-            />
-          </div>
-
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{
-                fontSize: '22px',
-                fontWeight: 900,
-                letterSpacing: '-0.03em',
-                color: 'var(--ink)'
-              }}>
-                ToolSathi <span style={{
-                  background: 'var(--brand-gradient)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontWeight: 900
-                }}>AI</span>
-              </span>
-              <span style={{
-                fontSize: '10px',
-                fontFamily: 'var(--font-mono)',
-                fontWeight: 700,
-                color: 'var(--brand-cyan-ink)',
-                backgroundColor: 'var(--brand-cyan-soft)',
-                border: '1px solid rgba(0, 184, 204, 0.3)',
-                padding: '2px 7px',
-                borderRadius: '6px'
-              }}>
-                ENTERPRISE
-              </span>
-            </div>
-
+            <Logo variant="lockup" theme="light" size={40} />
             <div style={{
               fontSize: '12px',
               color: 'var(--ink-muted)',
@@ -135,31 +83,36 @@ export default function TopNavbar() {
           gap: '10px',
           padding: '6px 16px',
           borderRadius: 'var(--radius-pill)',
-          backgroundColor: 'rgba(7, 17, 32, 0.04)',
-          border: '1px solid rgba(7, 17, 32, 0.08)'
+          backgroundColor: 'rgba(255, 255, 255, 0.85)',
+          border: '1px solid rgba(0, 184, 204, 0.22)',
+          boxShadow: '0 2px 10px rgba(7, 17, 32, 0.04), 0 0 14px rgba(0, 229, 255, 0.12)'
         }}>
           <span style={{
             fontSize: '10px',
             fontFamily: 'var(--font-mono)',
-            fontWeight: 700,
-            color: 'var(--ink-muted)',
-            backgroundColor: 'rgba(7, 17, 32, 0.08)',
-            padding: '2px 6px',
-            borderRadius: '4px'
+            fontWeight: 800,
+            color: 'var(--brand-cyan-ink)',
+            backgroundColor: 'var(--brand-cyan-soft)',
+            padding: '2px 7px',
+            borderRadius: '4px',
+            border: '1px solid rgba(0, 184, 204, 0.25)'
           }}>
             {pageInfo.code}
           </span>
           <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--ink)' }}>
             {pageInfo.title}
           </span>
-          <span style={{
-            display: 'inline-block',
-            width: '6px',
-            height: '6px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--jade)',
-            boxShadow: '0 0 6px var(--jade)'
-          }} />
+          <span
+            className="animate-badge-ping"
+            style={{
+              display: 'inline-block',
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--jade)',
+              boxShadow: '0 0 8px var(--jade)'
+            }}
+          />
         </div>
 
         {/* Persona Role Switcher */}
