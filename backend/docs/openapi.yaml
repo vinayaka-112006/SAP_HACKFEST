@@ -3,7 +3,7 @@
   "info": {
     "title": "ToolSathi simulated platform",
     "version": "0.1.0",
-    "description": "13 implemented operations including 4 persisted SAP simulations; 5 teammate stubs. No real SAP connection. Provisional ground truth."
+    "description": "Synthetic manufacturing data, simulated SAP actions, live Sarvam intake/transcription; four pending workflow stubs. AI suggestions require human review."
   },
   "servers": [
     {
@@ -4422,166 +4422,17 @@
           "Shashank"
         ],
         "x-owner": "Shashank",
-        "x-implementation": "stub",
-        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
-        "responses": {
-          "200": {
-            "description": "Fixed fixture",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "_label",
-                    "_stub",
-                    "toolId",
-                    "language",
-                    "rawText",
-                    "translatedText",
-                    "category",
-                    "suggestedNcCode",
-                    "confidence",
-                    "missingFields",
-                    "modelVersion"
-                  ],
-                  "properties": {
-                    "_label": {
-                      "type": "string",
-                      "enum": [
-                        "SIMULATED"
-                      ]
-                    },
-                    "_stub": {
-                      "type": "boolean",
-                      "enum": [
-                        true
-                      ]
-                    },
-                    "toolId": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "language": {
-                      "type": "string"
-                    },
-                    "rawText": {
-                      "type": "string"
-                    },
-                    "translatedText": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "category": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "suggestedNcCode": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "confidence": {
-                      "type": "number",
-                      "nullable": true
-                    },
-                    "missingFields": {
-                      "type": "array",
-                      "items": {}
-                    },
-                    "modelVersion": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  },
-                  "additionalProperties": true
-                },
-                "example": {
-                  "_label": "SIMULATED",
-                  "_stub": true,
-                  "toolId": "TOOL-B",
-                  "language": "kn",
-                  "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
-                  "translatedText": "Tool B is leaving bolts loose",
-                  "category": "TORQUE",
-                  "suggestedNcCode": "NC-TORQUE-LOOSE",
-                  "confidence": 0.82,
-                  "missingFields": [],
-                  "modelVersion": "stub-0"
-                }
-              }
-            }
+        "x-implementation": "real",
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
           },
-          "400": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Identity missing or unverified",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Role forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Record not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Invalid state or approval required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error; details withheld",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable configuration or database",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+          {
+            "bearerAuth": []
           }
-        },
-        "parameters": [],
+        ],
+        "description": "Live Sarvam extraction with local schema/catalogue validation. Worker/Manager only. Does not create or confirm incidents. Provisional NC catalogue; explicit worker review required.",
         "requestBody": {
           "required": true,
           "content": {
@@ -4596,21 +4447,260 @@
                 "properties": {
                   "toolId": {
                     "type": "string",
-                    "nullable": true
+                    "maxLength": 120
                   },
                   "language": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                      "kn",
+                      "hi",
+                      "en"
+                    ]
                   },
                   "rawText": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  },
+                  "reporterId": {
+                    "type": "string",
+                    "maxLength": 120
+                  },
+                  "reportedAt": {
+                    "type": "string",
+                    "format": "date-time"
                   }
-                },
-                "additionalProperties": true
-              },
-              "example": {
-                "toolId": "TOOL-B",
-                "language": "kn",
-                "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Editable suggestions, not confirmation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "required": [
+                    "detectedLanguage",
+                    "translatedText",
+                    "symptom",
+                    "category",
+                    "suggestedNcCode",
+                    "mentionedToolId",
+                    "confidence",
+                    "missingFields"
+                  ],
+                  "properties": {
+                    "detectedLanguage": {
+                      "type": "string",
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en",
+                        null
+                      ],
+                      "nullable": true
+                    },
+                    "translatedText": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4000
+                    },
+                    "symptom": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1000,
+                      "nullable": true
+                    },
+                    "category": {
+                      "type": "string",
+                      "enum": [
+                        "TORQUE",
+                        "WEAR",
+                        "CALIBRATION",
+                        "ELECTRICAL",
+                        "OTHER",
+                        null
+                      ],
+                      "nullable": true
+                    },
+                    "suggestedNcCode": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120,
+                      "nullable": true
+                    },
+                    "mentionedToolId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120,
+                      "nullable": true
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "missingFields": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "maxItems": 7,
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "language",
+                          "symptom",
+                          "category",
+                          "suggestedNcCode",
+                          "toolId",
+                          "reporterId",
+                          "reportedAt"
+                        ]
+                      }
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "toolId": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string",
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en"
+                      ]
+                    },
+                    "rawText": {
+                      "type": "string"
+                    },
+                    "modelVersion": {
+                      "type": "string"
+                    },
+                    "needsReview": {
+                      "type": "boolean"
+                    },
+                    "requiresWorkerConfirmation": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
@@ -5539,6 +5629,219 @@
                 "verifiedBy": "VER-01",
                 "repairId": "REP-0001",
                 "passed": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/transcribe": {
+      "post": {
+        "operationId": "ai-transcribe",
+        "tags": [
+          "Shashank"
+        ],
+        "x-owner": "Shashank",
+        "x-implementation": "real",
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Raw audio up to 2 MiB. UI limits recordings to 20 seconds; Sarvam rejects audio exceeding its 30-second synchronous limit. In-memory upload only. Review transcript before extracting fields.",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "kn",
+                "hi",
+                "en"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "audio/webm": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "audio/ogg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "audio/mp4": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "audio/wav": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "audio/mpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transcript in the source language.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "transcript",
+                    "detectedLanguage",
+                    "modelVersion",
+                    "requiresTranscriptReview"
+                  ],
+                  "properties": {
+                    "transcript": {
+                      "type": "string"
+                    },
+                    "detectedLanguage": {
+                      "type": "string",
+                      "nullable": true,
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en",
+                        null
+                      ]
+                    },
+                    "modelVersion": {
+                      "type": "string"
+                    },
+                    "requiresTranscriptReview": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }

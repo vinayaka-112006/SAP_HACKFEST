@@ -12,7 +12,6 @@ test("real API smoke creates TS-0002, confirms, traces, audits and distinguishes
   expect(report.simulatedSAP).toHaveLength(4);
   expect(report.teammateStubs.sort()).toEqual(
     [
-      "ai-structure",
       "approval-decision",
       "duplicates",
       "proposals",

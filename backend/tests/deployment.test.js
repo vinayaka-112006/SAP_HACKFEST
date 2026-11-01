@@ -39,7 +39,7 @@ test("production profile selects HANA/XSUAA without local SQLite credentials", (
   );
   expect(JSON.parse(out)).toEqual({ kind: "hana", auth: "xsuaa" });
 });
-test("OpenAPI is a valid document with all 18 contract operations", async () => {
+test("OpenAPI is a valid document with all 19 operations including audio intake", async () => {
   const out = execFileSync(
     process.execPath,
     [
@@ -48,5 +48,5 @@ test("OpenAPI is a valid document with all 18 contract operations", async () => 
     ],
     { encoding: "utf8" },
   );
-  expect(Number(out)).toBe(18);
+  expect(Number(out)).toBe(19);
 });

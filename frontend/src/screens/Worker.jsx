@@ -6,6 +6,7 @@ import ResourceState from "../components/ResourceState";
 import MicOrb from "../features/worker/MicOrb";
 import { useStore } from "../state/store";
 import { buildIncidentPayload, resolveToolCode } from "../api/mappings";
+import useSarvamRecorder from "../features/worker/useSarvamRecorder";
 const DEMO_INPUT = {
   toolId: "TOOL-B",
   reporterId: "WRK-014",
@@ -38,7 +39,6 @@ export default function Worker() {
   const [selectedToolId, setSelectedToolId] = useState("TOOL-B");
   const [toolCode, setToolCode] = useState("");
   const [language, setLanguage] = useState("kn");
-  const [isRecording, setIsRecording] = useState(false);
   const [workerWords, setWorkerWords] = useState("");
   const [reporterId, setReporterId] = useState("");
   const [fields, setFields] = useState(() => emptyFields("TOOL-B"));
@@ -47,22 +47,29 @@ export default function Worker() {
   const [warnings, setWarnings] = useState([]);
   const [busy, setBusy] = useState(false);
   const [actionError, setActionError] = useState("");
-  const pending = useRef(false),
-    recognition = useRef(null);
-  const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const [speechSource, setSpeechSource] = useState(null);
+  const [aiWarnings, setAiWarnings] = useState([]);
+  const [toolConflict, setToolConflict] = useState(false);
+  const [conflictReviewed, setConflictReviewed] = useState(false);
+  const pending = useRef(false), aiRequest = useRef(null);
   const canReport = ["Worker", "Manager"].includes(currentRole);
-  useEffect(() => () => {
-    const rec = recognition.current;
-    recognition.current = null;
-    if (rec) { rec.onresult = rec.onerror = rec.onend = null; rec.abort(); }
-  }, []);
+  const recorder = useSarvamRecorder({ client, language, enabled: canReport && apiConfig.aiEnabled,
+    onError: setActionError,
+    onTranscript: (result) => {
+      setWorkerWords(result.transcript);
+      setSpeechSource(result);
+      setFields(emptyFields(selectedToolId));
+      setAiWarnings([]); setToolConflict(false); setConflictReviewed(false);
+      setActionError(result.detectedLanguage && result.detectedLanguage !== language
+        ? "Detected speech language differs from your selection. Review the transcript and language." : "");
+    },
+  });
+  useEffect(() => () => { aiRequest.current?.abort(); }, [client, language]);
   const stopRecording = () => {
-    const rec = recognition.current;
-    recognition.current = null;
-    if (rec) { rec.onresult = rec.onerror = rec.onend = null; rec.abort(); }
-    setIsRecording(false);
+    recorder.cancel();
   };
   const handleFieldChange = (key, value) => {
+    if (key === "tool") setConflictReviewed(false);
     setFields((previous) => ({ ...previous, [key]: value }));
     setEditedFields((previous) => ({ ...previous, [key]: true }));
   };
@@ -84,6 +91,7 @@ export default function Worker() {
   };
   const loadDemo = () => {
     stopRecording();
+    setSpeechSource(null); setAiWarnings([]); setToolConflict(false); setConflictReviewed(false);
     chooseTool(DEMO_INPUT.toolId);
     setLanguage(DEMO_INPUT.language);
     setReporterId(DEMO_INPUT.reporterId);
@@ -101,31 +109,8 @@ export default function Worker() {
     setActionError("");
   };
   const handleMicToggle = () => {
-    if (!Speech) return;
-    if (isRecording) {
-      recognition.current?.stop();
-      return;
-    }
-    const rec = new Speech();
-    recognition.current = rec;
-    rec.lang = { kn: "kn-IN", hi: "hi-IN", en: "en-IN" }[language];
-    rec.interimResults = false;
-    rec.onresult = (e) => {
-      if (recognition.current === rec) setWorkerWords(e.results[0][0].transcript);
-    };
-    rec.onerror = () =>
-      setActionError(
-        "Speech input is unavailable. You can type your report below.",
-      );
-    rec.onend = () => {
-      if (recognition.current === rec) { recognition.current = null; setIsRecording(false); }
-    };
-    try {
-      rec.start();
-      setIsRecording(true);
-    } catch {
-      setActionError("Could not start speech input. Use typed reporting.");
-    }
+    setActionError("");
+    void recorder.toggle();
   };
   const prepareCard = () => {
     if (!workerWords.trim() || !reporterId.trim()) {
@@ -134,11 +119,14 @@ export default function Worker() {
     }
     setActionError("");
     stopRecording();
+    if (speechSource) setFields(previous => ({ ...previous, modelVersion: `asr:${speechSource.modelVersion}` }));
     setCurrentStep("card");
   };
   const structureWithAI = async () => {
-    if (pending.current) return;
+    if (pending.current || recorder.transcribing || recorder.recording) return;
     pending.current = true;
+    const controller = new AbortController();
+    aiRequest.current = controller;
     setBusy(true);
     setActionError("");
     try {
@@ -146,7 +134,10 @@ export default function Worker() {
         toolId: selectedToolId,
         language,
         rawText: workerWords,
-      });
+        ...(reporterId.trim() ? { reporterId } : {}),
+        ...(fields.time ? { reportedAt: fields.time } : {}),
+      }, { signal: controller.signal });
+      if (controller.signal.aborted) return;
       if (
         ["translatedText", "category", "suggestedNcCode", "modelVersion"].some(
           (key) => result[key] != null && typeof result[key] !== "string",
@@ -170,12 +161,17 @@ export default function Worker() {
         suggestedNc: result.suggestedNcCode || "",
         confidence: result.confidence ?? null,
         missingFields: result.missingFields || [],
-        modelVersion: result.modelVersion || null,
+        modelVersion: result.modelVersion ? result.modelVersion + (speechSource ? `|asr:${speechSource.modelVersion}` : "") : null,
       }));
+      setAiWarnings(result.warnings || []);
+      setToolConflict(result.missingFields?.includes("toolId") || false);
+      setConflictReviewed(false);
+      stopRecording();
       setCurrentStep("card");
     } catch (error) {
-      setActionError(error.message);
+      if (!controller.signal.aborted) setActionError(error.message);
     } finally {
+      if (aiRequest.current === controller) aiRequest.current = null;
       pending.current = false;
       setBusy(false);
     }
@@ -190,6 +186,7 @@ export default function Worker() {
         throw new Error(
           "Select the Worker or Manager local demo role to submit a report.",
         );
+      if (toolConflict && !conflictReviewed) throw new Error("Review the tool conflict and explicitly confirm your selected tool.");
       if (currentStep === "confirm") {
         const corrections = {};
         for (const [key, value] of Object.entries({
@@ -695,37 +692,39 @@ export default function Worker() {
               marginBottom: "28px",
             }}
           >
-            Type your original report. Browser speech recognition, where
-            available, fills the same editable text; AI extraction is not yet
-            integrated.
+            Speak for up to 20 seconds using Sarvam, or type your report.
+            Review and correct the transcript before creating the incident card.
           </p>
 
           {/* The Glossy Mic Orb */}
           <div style={{ marginBottom: "32px" }}>
             <MicOrb
-              disabled={!Speech}
-              isRecording={isRecording}
+              disabled={!recorder.supported || !apiConfig.aiEnabled || !canReport || busy || recorder.transcribing}
+              isRecording={recorder.recording}
               onToggleRecord={handleMicToggle}
               language={language}
             />
           </div>
 
-          {!Speech && (
+          {!recorder.supported && (
             <p className="resource-message">
               Speech recognition is unavailable on this device. Typed reporting
               is ready.
             </p>
           )}
+          {recorder.transcribing && <p role="status">Transcribing with Sarvam… Your typed text stays available if this fails.</p>}
+          {speechSource && <p className="resource-message">Sarvam transcript ({speechSource.modelVersion}): {speechSource.transcript}. Review the text below; corrections are welcome.</p>}
           <div className="integration-fields">
             <label htmlFor="reporter-id">Reporter ID (required)</label>
             <input
               id="reporter-id"
+              disabled={busy || recorder.transcribing || recorder.recording}
               value={reporterId}
               onChange={(e) => setReporterId(e.target.value)}
               maxLength={120}
               placeholder="Your worker ID"
             />
-            <button className="secondary-action" onClick={loadDemo}>
+            <button className="secondary-action" disabled={busy || recorder.transcribing} onClick={loadDemo}>
               Load synthetic demo report
             </button>
             <p className="muted">
@@ -749,7 +748,12 @@ export default function Worker() {
               aria-label="Original report"
               rows="3"
               value={workerWords}
-              onChange={(e) => setWorkerWords(e.target.value)}
+              disabled={busy || recorder.transcribing}
+              onChange={(e) => {
+                setWorkerWords(e.target.value);
+                setFields(previous => previous.modelVersion ? { ...emptyFields(selectedToolId), time: previous.time } : previous);
+                setAiWarnings([]); setToolConflict(false); setConflictReviewed(false);
+              }}
               placeholder="Describe the issue with the tool..."
               style={{
                 width: "100%",
@@ -771,6 +775,7 @@ export default function Worker() {
           <div style={{ display: "flex", gap: "12px" }}>
             <button
               onClick={() => setCurrentStep("lang")}
+              disabled={busy || recorder.transcribing || recorder.recording}
               style={{
                 minHeight: "56px",
                 flex: 1,
@@ -783,6 +788,7 @@ export default function Worker() {
             </button>
             <button
               onClick={prepareCard}
+              disabled={busy || recorder.transcribing || recorder.recording}
               style={{
                 minHeight: "56px",
                 flex: 2,
@@ -803,15 +809,15 @@ export default function Worker() {
         <div className="resource-message">
           <button
             className="secondary-action"
-            disabled={!apiConfig.aiEnabled || busy || !workerWords.trim()}
+            disabled={!apiConfig.aiEnabled || !canReport || busy || recorder.transcribing || recorder.recording || !workerWords.trim()}
             onClick={structureWithAI}
           >
             Structure with AI
           </button>
           <p>
             {apiConfig.aiEnabled
-              ? "AI output must be reviewed before saving."
-              : "AI extraction unavailable: the adapter endpoint remains a stub. Use the manual card."}
+              ? "Sarvam suggestions require worker review. Manual reporting always remains available."
+              : "AI extraction unavailable: disabled by configuration. Use the manual card."}
           </p>
         </div>
       )}
@@ -915,7 +921,7 @@ export default function Worker() {
                 "Manual entry ? no AI confidence supplied"
               ) : (
                 <>
-                  AI confidence:{" "}
+                  AI self-assessment (not measured accuracy):{" "}
                   <strong>{Math.round(fields.confidence * 100)}%</strong>
                 </>
               )}
@@ -946,6 +952,9 @@ export default function Worker() {
               {warning}
             </p>
           ))}
+          {aiWarnings.map(warning => <p className="resource-message" key={warning}>{warning}</p>)}
+          {toolConflict && <label className="resource-message"><input type="checkbox" checked={conflictReviewed}
+            onChange={event => setConflictReviewed(event.target.checked)} /> I reviewed the conflicting tool mention and confirm the tool ID entered below.</label>}
           {fields.missingFields.length > 0 && (
             <p className="resource-message">
               Missing fields: {fields.missingFields.join(", ")}
@@ -1184,6 +1193,7 @@ export default function Worker() {
               setCurrentStep("scan");
               setSaved(null);
               setWorkerWords("");
+              setSpeechSource(null); setAiWarnings([]); setToolConflict(false); setConflictReviewed(false);
               setWarnings([]);
               setFields(emptyFields(selectedToolId));
               setEditedFields({});

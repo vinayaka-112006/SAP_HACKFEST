@@ -19,7 +19,8 @@ Base URL `http://localhost:4004/api`. Synthetic data, simulated SAP services; no
 | POST | /api/mock/s4/stock-blocks | platform | Real local simulation | [JSON](examples/stock-block.json) |
 | POST | /api/mock/dm/tool-restrictions | platform | Real local simulation | [JSON](examples/restriction.json) |
 | GET | /api/mock/documents | platform | Real local simulation | [JSON](examples/documents.json) |
-| POST | /api/ai/structure-report | Shashank | Stub | [JSON](examples/ai-structure.json) |
+| POST | /api/ai/structure-report | Shashank | Live Sarvam, schema validated | [Current contract](../srv/ai-adapter/README.md) |
+| POST | /api/ai/transcribe?language=kn\|hi\|en | Shashank | Live Sarvam transcription, raw audio ≤2 MiB | [Current contract](../srv/ai-adapter/README.md) |
 | GET | /api/incidents/:id/duplicates | Jamuna | Stub | [JSON](examples/duplicates.json) |
 | POST | /api/incidents/:id/proposals | Jamuna | Stub | [JSON](examples/proposals.json) |
 | POST | /api/approvals/:id/decision | Jamuna | Stub | [JSON](examples/approval-decision.json) |

@@ -57,7 +57,7 @@ async function verify() {
         reject(new Error("Packaged startup exited " + code + ": " + output));
       });
     });
-    assert.equal(await require("./verify-stubs")(base), 6);
+    assert.equal(await require("./verify-stubs")(base), 5);
     const tools = await fetch(base + "/api/tools", {
       headers: { "x-demo-user": "PACKAGE-TEST", "x-demo-role": "Manager" },
     });
@@ -69,7 +69,7 @@ async function verify() {
       checks: [
         "compiled CSN loads",
         "packaged stub fixtures resolve",
-        "health and five teammate stubs verified",
+        "health and four workflow stubs verified; real AI tested separately",
         "seeded CAP queries work",
       ],
       cloudDeployment: "NOT_EXECUTED",

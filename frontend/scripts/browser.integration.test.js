@@ -568,22 +568,14 @@ check('existing backend smoke and health/stub verification pass on isolated data
  const env={...process.env,BASE_URL:apiUrl};
  for(const command of ['smoke','verify:stubs']){
   const text=execFileSync(process.execPath,[npm,'run',command],{cwd:backend,env,encoding:'utf8',timeout:30000});
-  assert.ok(command==='smoke'?text.includes('VERIFIED_APPROVAL_REJECTION'):text.includes('6 endpoints passed'));
+  assert.ok(command==='smoke'?text.includes('VERIFIED_APPROVAL_REJECTION'):text.includes('5 endpoints passed'));
  }
  report.backendSmoke='PASSED';report.backendStubVerification='PASSED';
 });
 
-check("review freezes late speech input and the next report clears old structured fields", async () => {
+check("manual fallback with AI disabled works and the next report clears old structured fields", async () => {
   const worker = await context.newPage();
   worker.on("pageerror", error => pageErrors.push(error.message));
-  await worker.addInitScript(() => {
-    window.SpeechRecognition = class {
-      constructor() { window.__testSpeech = this; }
-      start() { window.__lateSpeechResult = this.onresult; }
-      abort() { this.aborted = true; }
-      stop() { this.onend?.(); }
-    };
-  });
   try {
     await worker.goto(frontendUrl + "/worker");
     await skipIntro(worker);
@@ -594,10 +586,8 @@ check("review freezes late speech input and the next report clears old structure
     await worker.getByRole("button", { name: "Load synthetic demo report" }).click();
     const reviewed = "Typed text explicitly reviewed before saving";
     await worker.getByLabel("Original report").fill(reviewed);
-    await worker.getByRole("button", { name: "Start recording voice report" }).click();
+    assert.equal(await worker.getByRole("button", { name: "Start recording voice report" }).isDisabled(), true);
     await worker.getByRole("button", { name: "Review Manual Incident Card" }).click();
-    assert.equal(await worker.evaluate(() => window.__testSpeech.aborted), true);
-    await worker.evaluate(() => window.__lateSpeechResult({ results: [[{ transcript: "Late speech must not replace the reviewed text" }]] }));
     const saved = worker.waitForResponse(response => response.url().endsWith("/api/incidents") && response.request().method() === "POST");
     await worker.getByRole("button", { name: "Save Incident", exact: true }).click();
     const created = await (await saved).json();
@@ -612,7 +602,7 @@ check("review freezes late speech input and the next report clears old structure
     await worker.getByRole("button", { name: "Review Manual Incident Card" }).click();
     for (const label of ["Category (optional)", "Reported at (UTC ISO timestamp, optional)", "Translated report", "Suggested NC code"])
       assert.equal(await worker.getByLabel(label, { exact: true }).inputValue(), "");
-    report.speechLifecycleMocked = true;
+    report.manualFallbackWithAiDisabled = true;
     report.microphoneHardwareVerified = false;
     assert.equal(pageErrors.length, 0);
   } finally { await worker.close(); }

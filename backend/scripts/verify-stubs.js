@@ -3,6 +3,8 @@ const endpoints = require("../srv/routes/_stubs/contract.json");
 async function verify(base = process.env.BASE_URL || "http://localhost:4004") {
   let checked = 0;
   for (const endpoint of endpoints) {
+    // The AI route is real and authenticated; never spend credits in a stub probe.
+    if (endpoint.owner === "Shashank") continue;
     if (endpoint.owner === "platform" && endpoint.name !== "health") continue;
     checked++;
     const route = endpoint.path.replace(

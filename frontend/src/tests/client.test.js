@@ -206,3 +206,14 @@ test("unknown location is explicit and does not become stock or a dealer", () =>
   assert.equal(view.units[0].location, "Unknown location");
   assert.equal(view.tankCounts.factoryStock, 0);
 });
+test("speech uploads audio bytes with identity headers rather than JSON encoding", async () => {
+  const { api, calls } = setup({ transcript: 'Tool B leaves bolts loose.' }, {
+    demoMode: true, getSession: () => ({ userId: 'VOICE-TEST', role: 'Worker' }),
+  });
+  const audio = new Blob(['audio'], { type: 'audio/webm;codecs=opus' });
+  await api.transcribe(audio, 'kn');
+  assert.equal(calls[0].url, 'http://test/api/ai/transcribe?language=kn');
+  assert.equal(calls[0].body, audio);
+  assert.equal(calls[0].headers['Content-Type'], audio.type);
+  assert.equal(calls[0].headers['x-demo-role'], 'Worker');
+});
