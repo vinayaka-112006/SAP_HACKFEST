@@ -1,35 +1,21 @@
 {
   "_label": "SIMULATED",
-  "_stub": true,
-  "incident": {
-    "incidentId": "TS-0002",
-    "toolId": "TOOL-B",
-    "reporterId": "WRK-014",
-    "language": "kn",
-    "rawText": "?????? ??????????",
-    "translatedText": "Tool B is leaving bolts loose",
-    "category": "TORQUE",
-    "suggestedNcCode": "NC-TORQUE-LOOSE",
-    "confidence": 0.82,
-    "missingFields": [],
-    "state": "Closed",
-    "reportedAt": "2026-11-04T05:12:00Z",
-    "reportedAtSource": "CLIENT_REPORTED",
-    "createdAt": "2026-11-04T05:12:00Z",
-    "modelVersion": "stub-0"
-  },
-  "tool": {
-    "toolId": "TOOL-B",
-    "type": "TORQUE",
-    "line": "LINE-BRAKE-1",
-    "workCenter": "WC-B",
-    "state": "Active",
-    "calibrationDue": "2026-11-09",
-    "usageCount": 200,
-    "lastVerifiedGood": "2026-10-23T05:12:00Z"
+  "_stub": false,
+  "incidentId": "TS-0001",
+  "toolId": "TOOL-B",
+  "toolState": {
+    "from": "Awaiting verification",
+    "to": "Active"
   },
   "verification": {
-    "verifiedBy": "VER-01",
-    "passed": true
-  }
+    "repairId": "REP-0001",
+    "repairTechnicianId": "TECH-01",
+    "verifiedBy": "VER-02",
+    "verifiedAt": "2026-10-31T05:15:00.000Z",
+    "readings": [
+      { "name": "Torque check 1", "value": 40, "unit": "Nm", "passed": true },
+      { "name": "Torque check 2", "value": 40, "unit": "Nm", "passed": true }
+    ]
+  },
+  "auditId": "AUD-SAMPLE"
 }

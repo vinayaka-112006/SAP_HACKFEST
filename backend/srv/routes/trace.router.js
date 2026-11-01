@@ -29,10 +29,11 @@ router.get(
           .orderBy("version desc"),
       );
       const version = (previous?.version || 0) + 1,
-        generatedAt = new Date().toISOString();
+        generatedAt = new Date().toISOString(),
+        traceId = uuid("TRACE");
       await tx.run(
         cds.ql.INSERT.into(entity("TraceResult")).entries({
-          traceId: uuid("TRACE"),
+          traceId,
           incidentId: incident.incidentId,
           windowHours: hours,
           units: JSON.stringify(trace.units),
@@ -54,6 +55,7 @@ router.get(
           action: "TRACE_GENERATED",
           reason: "Human requested deterministic exposure review",
           details: {
+            traceId,
             windowHours: hours,
             version,
             totalUnits: trace.summary.totalUnits,
@@ -67,12 +69,13 @@ router.get(
           type: "TRACE",
           summary: `${hours}h trace generated`,
           refId: incident.incidentId,
-          details: { version, totalUnits: trace.summary.totalUnits },
+          details: { traceId, windowHours: hours, version, totalUnits: trace.summary.totalUnits },
         },
         tx,
       );
       return {
         incidentId: incident.incidentId,
+        traceId,
         ...trace,
         generatedAt,
         version,

@@ -59,24 +59,24 @@ For a main SQLite backup: `npm --prefix backend run backup:db`. Retain the resul
 |---|---|
 | `/` | Existing navigation and visibly local demo identities |
 | `/worker` | Real tool register/manual code fallback; typed report, editable manual fields, one save and separate worker confirmation |
-| `/console` | Stored incident, actual 24/72/168h trace, uncertainty/evidence/gaps, stock/dealer distribution, read-only audit and persisted SIMULATED documents |
-| `/history` | Real tool history, previous TS-0001 incident, repair and calibration records |
+| `/console` | Stored incident, actual 24/72/168h trace, uncertainty/evidence/gaps, read-only audit, duplicate/repeat-failure results, proposal review, simulated action, and repair/verification workflow |
+| `/history` | Real tool history; duplicate and repeat-failure evaluation is bound to the explicitly selected incident/repair history event. Selecting another tool clears the selection. |
 | `/kitchen` | Labelled design examples; no operational approval execution |
 
-Thirteen implemented routes: GET `/api/health`; POST `/api/incidents`; POST `/api/incidents/:id/confirm`; GET `/api/incidents/:id`; GET `/api/tools`; GET `/api/tools/:id/history`; GET `/api/incidents/:id/trace`; GET `/api/audit`; GET `/api/mock/documents`; POST `/api/mock/s4/maintenance-notifications`, `/api/mock/s4/quality-notifications`, `/api/mock/s4/stock-blocks`, and `/api/mock/dm/tool-restrictions`.
+Implemented routes include GET `/api/health`, `/api/incidents/:id`, `/api/incidents/:id/duplicates`, `/api/incidents/:id/repeat-failures`, `/api/tools`, `/api/tools/:id/history`, `/api/incidents/:id/trace`, `/api/audit`, and `/api/mock/documents`; POST `/api/incidents`, `/api/incidents/:id/confirm`, `/api/incidents/:id/proposals`, `/api/approvals/:id/decision`, `/api/incidents/:id/repairs`, `/api/repairs/:id/complete`, `/api/incidents/:id/verify-return`, the four `/api/mock/...` action routes, and the single `/api/ai/structure-report` stub. See the [API contract](../backend/docs/api-contract.md) for methods, owners and request/response examples.
 
-The four action routes implement persisted simulations with authorization, action/resource-bound approvals, replay checks and transactions. Regression tests verify successful approved execution on isolated data. All four reject missing approvals in the live HANA verification. The UI cannot generate approvals through pending workflow endpoints; those controls remain unavailable. Empty documents are shown honestly when no action has created any.
+The simulated action routes require authenticated platform roles and matching persisted approvals. The console exposes separate proposal, approval, and action steps for tool restriction, stock block, quality notification, and maintenance notification; every action posts the approved scope and persisted Approval ID to the existing guarded route. Proposal creation and approval do not execute actions. Repair submissions are retained individually in append-only application audit and tool history, including failed readings followed by later passing readings. Repair readings must explicitly state `pass` or `fail`; no domain measurement catalogue or tolerances are defined. Empty documents are shown honestly when no action has created any.
 
-Five routes remain explicit stubs: AI structuring (Shashank), duplicate evaluation, proposals, approval decision and verified return (Jamuna's workflow/rules integration). See [exact API contract](../backend/docs/api-contract.md) and [ownership](../backend/docs/team-integration.md). No new AI adapter or competing rules implementation was added. Jamuna's ground-truth sign-off is still pending.
+AI structuring remains an explicit stub. Duplicate and repeat-failure evaluation, proposal creation, approval decisions, repair start/completion, and return verification are implemented platform routes and are exercised by the isolated browser lifecycle test. This does not imply live SAP service execution: action adapters remain labelled SIMULATED. See [exact API contract](../backend/docs/api-contract.md) and [ownership](../backend/docs/team-integration.md).
 
 ## Repeatable demonstration
 
 1. Open `/worker`, select Worker local demo role and Tool B from the real register. Confirm the tool and continue to reporting. Manual tool/code entry is available without a camera.
-2. Choose **Load synthetic demo report** to use the deliberate scenario anchor `2026-11-04T05:12:00.000Z`. Enter the reporter and review the manual incident card. Sample input does not represent an AI result.
+2. Choose **Load synthetic demo report** to use the fixed past scenario anchor `2026-10-31T05:12:00.000Z`. This is the event time for synthetic trace data; server receipt and audit timestamps are recorded separately. Enter the reporter and review the manual incident card. Sample input does not represent an AI result.
 3. Save once. Observe the returned real incident ID and Reported state. Click the separate **Confirm Incident** action. A second click on Save cannot create another report.
 4. Choose Manager and open `/console` using that ID. The latest fully verified report is **TS-0007**; existing **TS-0001** remains historical. Select each trace window and inspect evidence, missing association records, timestamp conflict, stale shipment warnings and the read-only audit.
 5. At 72h, inspect factory stock 40, Dealer X 35, Dealer Y 25; five stale location records; exposure range low 35 / high 154 / Unknown separately 6. These are potential record associations, not proven defects or a finding that Unknown is safe.
-6. Open `/history` and select Tool B to see existing incident/repair/calibration and new application activity. Return to the console: pending workflow and return controls remain disabled; documents remain explicitly SIMULATED.
+6. On `/console`, inspect duplicate and repeat-failure results. Generate an eligible containment proposal, decide it with an authorized reviewer, then execute only through the separately labelled simulated action using its persisted Approval ID. To exercise repair, use a confirmed incident and Restricted tool, switch to Technician to record the repair and explicit readings, then switch to a different Verifier identity for return-to-service. The browser test runs this sequence against isolated synthetic SQLite data.
 
 | Window | Units | Confirmed | Probable | Unknown | Quality score |
 |---|---:|---:|---:|---:|---:|
@@ -90,20 +90,21 @@ These results require the seeded Tool B scenario and its anchor; arbitrary new t
 
 | Check | Actual result |
 |---|---|
-| Backend regression | 101 tests, 16 suites; zero failed/skipped |
-| Frontend API client | 17 tests; zero failed/skipped |
-| Isolated SQLite browser integration | 8 checks; zero failed/skipped |
-| Real HANA backend/application verification | 11 checks; zero failed/skipped |
-| Real HANA browser integration | 7 checks; zero failed/skipped; no browser/page errors or non-abort failed requests |
-| Legacy design fixture validation | 15 checks passed; not operational UI data |
+| Backend regression | 163 tests, 22 suites; zero failed/skipped (rerun 2026-11-01) |
+| Frontend client/history tests | 26 tests; zero failed/skipped (rerun 2026-11-01) |
+| Frontend seed checks | 15 passed (rerun 2026-11-01) |
+| Isolated SQLite browser integration | 9 checks; zero failed/skipped, including automatic approval handoff and selected-history context (rerun 2026-11-01) |
+| Real HANA backend/application verification | 11 checks; previously recorded; not rerun in this hardening pass |
+| Real HANA browser integration | 7 checks; previously recorded; not rerun in this hardening pass |
+| Legacy design fixture validation | 15 checks passed; historical design data, not operational UI data |
 | Ground-truth generator verification | Passed against provisional candidate |
-| Frontend production build | Passed |
-| CAP production build and packaged runtime | Passed; packaged runtime checked with isolated SQLite |
-| API smoke and six health/stub checks | Passed on isolated SQLite |
+| Frontend production build | Passed (rerun 2026-11-01) |
+| CAP production build and packaged runtime | Passed (rerun 2026-11-01); packaged runtime checked using disposable SQLite under `backend/` |
+| API smoke and current health/stub checks | Passed on isolated SQLite; current contract has the health route and one AI structure-report stub; packaged verifier checked 2 operations |
 | HANA import integrity | All 394 imported rows retained; 393 unchanged and one incident counter advanced normally |
 | Original SQLite integrity | All 394 records in 21 tables unchanged |
 
-Backend and isolated browser tests were also executed with external sockets blocked by a temporary local test guard; this guard is not shipped as product behavior. Live HANA checks ran separately with actual database access. CAP build is not evidence of deployment: it packages 21 table artifacts and two audit triggers with automatic HDI seed imports disabled. There is no lint script.
+Browser tests create and remove their own temporary SQLite directory under `backend/` and their result directory under the OS temp path; they do not use repository `backup/`. Backend tests run in-memory SQLite even when the private backend `.env` selects HANA. The packaged-runtime check also creates and removes an isolated SQLite directory under `backend/`. CAP build is not evidence of deployment: it packages 21 table artifacts and two audit triggers with automatic HDI seed imports disabled. There is no lint script.
 
 Reproduce: `npm --prefix backend test`, `npm --prefix backend run verify-ground-truth`, `npm --prefix backend run build`, `npm --prefix backend run verify:package`, `npm --prefix frontend test`, `npm --prefix frontend run test:seed`, `npm --prefix frontend run test:e2e`, `npm --prefix frontend run build`.
 
@@ -119,4 +120,4 @@ HANA catalog validation now recognizes the target schema's own catalog row and p
 
 The API client now rejects malformed JSON root shapes as invalid responses. Worker review freezes late speech callbacks; starting another report clears previous category, translation, time and model metadata. Missing favicon requests and ambiguous display separators were corrected. Mobile trace buttons/headlines wrap, long identifiers stay inside cards and the evidence SVG scales to the available width. The existing visual design is retained.
 
-Physical microphone capture and camera QR scanning are unverified/unavailable; speech lifecycle was tested with a controlled browser mock and typed/manual input works. Production identity/XSUAA, BTP/HDI service deployment, live S/4HANA/DM actions, teammate AI/workflow logic and Jamuna's approved ground truth remain outside the completed verification. No SQLite reset, credential commit, Git push or merge was performed.
+Physical microphone capture and camera QR scanning are unverified/unavailable; speech lifecycle was tested with a controlled browser mock and typed/manual input works. Production XSUAA login, BTP/HDI deployment, live S/4HANA/DM actions, AI structuring, and domain approval of required inspection readings/tolerances remain outside local verification. No synthetic tests establish production safety. Do not run the live HANA application-check suite without an explicitly assigned test schema because it writes test incidents and workflow records. The existing private `backend/.env` was not displayed or modified; local SQLite is available via `npm run start:local`/`npm run dev:local` and the isolated test harness. No packages were installed and no Git commit was made.

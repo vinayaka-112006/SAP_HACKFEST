@@ -14,7 +14,7 @@
     "missingFields": [],
     "state": "Confirmed",
     "createdAt": "2026-10-31T10:34:37.397Z",
-    "reportedAt": "2026-11-04T05:12:00.000Z",
+    "reportedAt": "2026-10-31T05:12:00.000Z",
     "reportedAtSource": "CLIENT_REPORTED",
     "confirmedAt": "2026-10-31T10:34:37.428Z",
     "confirmedBy": "WRK-014",
@@ -93,7 +93,7 @@
             "missingFields": [],
             "state": "Reported",
             "createdAt": "2026-10-31T10:34:37.397Z",
-            "reportedAt": "2026-11-04T05:12:00.000Z",
+            "reportedAt": "2026-10-31T05:12:00.000Z",
             "reportedAtSource": "CLIENT_REPORTED",
             "confirmedAt": null,
             "confirmedBy": null,
@@ -112,7 +112,7 @@
             "missingFields": [],
             "state": "Confirmed",
             "createdAt": "2026-10-31T10:34:37.397Z",
-            "reportedAt": "2026-11-04T05:12:00.000Z",
+            "reportedAt": "2026-10-31T05:12:00.000Z",
             "reportedAtSource": "CLIENT_REPORTED",
             "confirmedAt": "2026-10-31T10:34:37.428Z",
             "confirmedBy": "WRK-014",
@@ -144,6 +144,7 @@
   "traceResults": [
     {
       "windowHours": 24,
+      "traceId": "TRACE-SAMPLE-24",
       "version": 1,
       "totalUnits": 35,
       "byTier": {
@@ -152,10 +153,11 @@
         "UNKNOWN": 0
       },
       "dataQualityScore": 100,
-      "snapshotTime": "2026-11-04T05:02:00.000Z"
+      "snapshotTime": "2026-10-31T05:02:00.000Z"
     },
     {
       "windowHours": 72,
+      "traceId": "TRACE-SAMPLE-72",
       "version": 1,
       "totalUnits": 100,
       "byTier": {
@@ -164,10 +166,11 @@
         "UNKNOWN": 6
       },
       "dataQualityScore": 82,
-      "snapshotTime": "2026-11-04T05:02:00.000Z"
+      "snapshotTime": "2026-10-31T05:02:00.000Z"
     },
     {
       "windowHours": 168,
+      "traceId": "TRACE-SAMPLE-168",
       "version": 1,
       "totalUnits": 160,
       "byTier": {
@@ -176,7 +179,7 @@
         "UNKNOWN": 6
       },
       "dataQualityScore": 83,
-      "snapshotTime": "2026-11-04T05:02:00.000Z"
+      "snapshotTime": "2026-10-31T05:02:00.000Z"
     }
   ]
 }

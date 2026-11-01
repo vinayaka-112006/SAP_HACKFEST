@@ -13,7 +13,7 @@ npm run verify-ground-truth
 npm run start:local
 ```
 
-API: http://localhost:4004/api . Protected local calls need x-demo-user and x-demo-role. `npm test` verifies real behavior; `npm run smoke` runs API-level checks against the started server. Five teammate endpoints remain explicit stubs. Ground truth is provisional until Jamuna signs off.
+API: http://localhost:4004/api. Protected local calls use demo-only x-demo-user and x-demo-role headers. `npm test` verifies platform behavior; `npm run smoke` runs API-level checks against the started server. The AI structure-report route is the single remaining external stub; duplicate/repeat evaluation and workflow routes are platform implementations. Ground truth is provisional pending domain sign-off.
 
 Read [handover](docs/backend-handover.md), [local operations](docs/run-local.md), [API contract](docs/api-contract.md), [OpenAPI](docs/openapi.yaml), [integration seams](docs/team-integration.md), [decisions](docs/decisions.md), and [executed trace results](tests/results/trace-results.md).
 

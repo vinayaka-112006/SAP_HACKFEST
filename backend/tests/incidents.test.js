@@ -3,6 +3,7 @@ const request = require("supertest");
 const { entity, transaction } = require("../srv/lib/db");
 const ids = require("../srv/lib/ids");
 const audit = require("../srv/lib/audit");
+const incidents = require("../srv/lib/incidents");
 cds.test(__dirname + "/..");
 jest.setTimeout(30000);
 const payload = () => ({ ...require("../docs/demo-incidents.json")[0] });
@@ -59,6 +60,39 @@ test("validation and lookup errors preserve database", async () => {
       .error.code,
   ).toBe("TOOL_NOT_FOUND");
   expect((await api("get", "/incidents/NO-INCIDENT")).status).toBe(404);
+});
+test("reportedAt is a past UTC event time; server receipt remains separate", async () => {
+  const body = payload();
+  const fixedNow = new Date("2026-11-01T09:04:00.000Z");
+  expect(() => incidents.validate({ ...body, reportedAt: "2026-11-01T09:03:00Z" }, { now: fixedNow })).not.toThrow();
+  expect(() => incidents.validate({ ...body, reportedAt: "2026-11-01T09:05:00Z" }, { now: fixedNow })).toThrow(/cannot be in the future/);
+  const response = await api("post", "/incidents", { ...body, reportedAt: "2026-11-01T05:12:00Z" });
+  expect(response.status).toBe(201);
+  expect(response.body.incident.reportedAt).toBe("2026-11-01T05:12:00.000Z");
+  expect(Date.parse(response.body.incident.createdAt)).toBeGreaterThan(Date.parse(response.body.incident.reportedAt));
+  const auditEntry = (await api("get", `/audit?incident=${response.body.incident.incidentId}`, undefined, "Manager")).body.entries[0];
+  expect(Date.parse(auditEntry.timestamp)).toBeGreaterThan(Date.parse(response.body.incident.reportedAt));
+});
+test("confirmedBy is business metadata while the authenticated principal remains the audit actor", async () => {
+  const created = await api("post", "/incidents", payload());
+  const incidentId = created.body.incident.incidentId;
+  const confirmed = await api("post", `/incidents/${incidentId}/confirm`, { confirmedBy: "WRK-014" }, "Manager");
+  expect(confirmed.status).toBe(200);
+  expect(confirmed.body.incident.reporterId).toBe("WRK-014");
+  expect(confirmed.body.incident.confirmedBy).toBe("WRK-014");
+  const event = (await api("get", `/audit?incident=${incidentId}`, undefined, "Manager")).body.entries.find((entry) => entry.action === "INCIDENT_CONFIRMED");
+  expect(event.actor).toBe("TEST-ACTOR");
+  expect(event.actorRole).toBe("Manager");
+  expect(event.details.after.confirmedBy).toBe("WRK-014");
+});
+test("confirmation rejects malformed business confirmer and non-review roles", async () => {
+  const created = await api("post", "/incidents", payload());
+  const incidentId = created.body.incident.incidentId;
+  for (const confirmedBy of ["", 42, {}])
+    expect((await api("post", `/incidents/${incidentId}/confirm`, { confirmedBy })).status).toBe(400);
+  for (const role of ["Quality", "Technician", "Verifier"])
+    expect((await api("post", `/incidents/${incidentId}/confirm`, { confirmedBy: "WRK-014" }, role)).status).toBe(403);
+  expect((await api("get", `/incidents/${incidentId}`)).body.incident.state).toBe("Reported");
 });
 test("server receive timestamp is explicit when omitted", async () => {
   const body = payload();
@@ -174,4 +208,41 @@ test("protected real endpoints reject missing identity and wrong roles", async (
     expect(
       (await api("get", `/audit?incident=${id}`, undefined, role)).status,
     ).toBe(403);
+});
+
+test("GET /incidents returns list of seeded and created incidents", async () => {
+  const r = await api("get", "/incidents", undefined, "Worker");
+  expect(r.status).toBe(200);
+  expect(r.body._label).toBe("SIMULATED");
+  expect(Array.isArray(r.body.incidents)).toBe(true);
+  expect(r.body.count).toBeGreaterThanOrEqual(1);
+  const found = r.body.incidents.find((inc) => inc.incidentId === "TS-0001");
+  expect(found).toBeDefined();
+  expect(found.state).toBe("Closed");
+
+  const byTool = await api("get", "/incidents?toolId=TOOL-B", undefined, "Manager");
+  expect(byTool.status).toBe(200);
+  expect(byTool.body.incidents.every((inc) => inc.toolId === "TOOL-B")).toBe(true);
+});
+
+test("POST /incidents/:id/close rejects invalid transition and allows valid close with audit", async () => {
+  const noReason = await api("post", `/incidents/${id}/close`, {}, "Manager");
+  expect(noReason.status).toBe(400);
+
+  // Closing directly from Confirmed to Closed is rejected by state machine
+  const invalidTransition = await api("post", `/incidents/${id}/close`, { reason: "Direct close" }, "Manager");
+  expect(invalidTransition.status).toBe(409);
+
+  // Closing with insufficient evidence is allowed from Confirmed / Reported
+  const closeInsufficient = await api("post", `/incidents/${id}/close`, {
+    reason: "Evidence was insufficient upon review",
+    insufficientEvidence: true,
+  }, "Manager");
+  expect(closeInsufficient.status).toBe(200);
+  expect(closeInsufficient.body.toState).toBe("Closed with insufficient evidence");
+  expect(closeInsufficient.body.auditId).toBeTruthy();
+
+  // Subsequent close attempt fails with 409 already closed
+  const repeat = await api("post", `/incidents/${id}/close`, { reason: "Repeat close" }, "Manager");
+  expect(repeat.status).toBe(409);
 });

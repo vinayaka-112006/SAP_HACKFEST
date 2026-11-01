@@ -305,7 +305,8 @@
                           "format": "date-time"
                         },
                         "reportedAtSource": {
-                          "type": "string"
+                          "type": "string",
+                          "nullable": true
                         },
                         "confirmedAt": {
                           "type": "string",
@@ -348,7 +349,7 @@
                     "missingFields": [],
                     "state": "Reported",
                     "createdAt": "2026-10-31T10:34:37.397Z",
-                    "reportedAt": "2026-11-04T05:12:00.000Z",
+                    "reportedAt": "2026-10-31T05:12:00.000Z",
                     "reportedAtSource": "CLIENT_REPORTED",
                     "confirmedAt": null,
                     "confirmedBy": null,
@@ -499,6 +500,251 @@
             }
           }
         }
+      },
+      "get": {
+        "operationId": "incident-list",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "incidents",
+                    "count",
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "incidents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "incidentId",
+                          "toolId",
+                          "reporterId",
+                          "language",
+                          "rawText",
+                          "translatedText",
+                          "category",
+                          "suggestedNcCode",
+                          "confidence",
+                          "missingFields",
+                          "state",
+                          "createdAt",
+                          "reportedAt",
+                          "reportedAtSource",
+                          "confirmedAt",
+                          "confirmedBy",
+                          "modelVersion"
+                        ],
+                        "properties": {
+                          "incidentId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "toolId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "reporterId": {
+                            "type": "string"
+                          },
+                          "language": {
+                            "type": "string"
+                          },
+                          "rawText": {
+                            "type": "string"
+                          },
+                          "translatedText": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "category": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "suggestedNcCode": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "confidence": {
+                            "type": "number",
+                            "nullable": true
+                          },
+                          "missingFields": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "reportedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "reportedAtSource": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "confirmedAt": {
+                            "type": "string",
+                            "nullable": true,
+                            "format": "date-time"
+                          },
+                          "confirmedBy": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "modelVersion": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "count": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "incidents": [
+                    {
+                      "incidentId": "TS-0001",
+                      "toolId": "TOOL-B",
+                      "reporterId": "WRK-009",
+                      "language": "hi",
+                      "rawText": "Previous torque report (synthetic)",
+                      "translatedText": "Previous torque report",
+                      "category": "TORQUE",
+                      "suggestedNcCode": "NC-TORQUE-LOOSE",
+                      "confidence": 0.9,
+                      "missingFields": [],
+                      "state": "Closed",
+                      "createdAt": "2026-10-19T05:12:00.000Z",
+                      "reportedAt": "2026-10-19T05:12:00.000Z",
+                      "reportedAtSource": "CLIENT_REPORTED",
+                      "confirmedAt": "2026-10-19T06:12:00.000Z",
+                      "confirmedBy": "WRK-009",
+                      "modelVersion": "seed-v1"
+                    }
+                  ],
+                  "count": 1,
+                  "_label": "SIMULATED",
+                  "_stub": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/incidents/{id}/confirm": {
@@ -608,7 +854,8 @@
                           "format": "date-time"
                         },
                         "reportedAtSource": {
-                          "type": "string"
+                          "type": "string",
+                          "nullable": true
                         },
                         "confirmedAt": {
                           "type": "string",
@@ -652,7 +899,7 @@
                     "missingFields": [],
                     "state": "Confirmed",
                     "createdAt": "2026-10-31T10:34:37.397Z",
-                    "reportedAt": "2026-11-04T05:12:00.000Z",
+                    "reportedAt": "2026-10-31T05:12:00.000Z",
                     "reportedAtSource": "CLIENT_REPORTED",
                     "confirmedAt": "2026-10-31T10:34:37.428Z",
                     "confirmedBy": "WRK-014",
@@ -893,7 +1140,8 @@
                           "format": "date-time"
                         },
                         "reportedAtSource": {
-                          "type": "string"
+                          "type": "string",
+                          "nullable": true
                         },
                         "confirmedAt": {
                           "type": "string",
@@ -923,7 +1171,8 @@
                       ],
                       "properties": {
                         "count": {
-                          "type": "number"
+                          "type": "integer",
+                          "minimum": 0
                         },
                         "last": {
                           "type": "array",
@@ -990,6 +1239,7 @@
                         "type": "object",
                         "required": [
                           "windowHours",
+                          "traceId",
                           "version",
                           "totalUnits",
                           "byTier",
@@ -999,6 +1249,9 @@
                         "properties": {
                           "windowHours": {
                             "type": "number"
+                          },
+                          "traceId": {
+                            "type": "string"
                           },
                           "version": {
                             "type": "number"
@@ -1056,7 +1309,7 @@
                     "missingFields": [],
                     "state": "Confirmed",
                     "createdAt": "2026-10-31T10:34:37.397Z",
-                    "reportedAt": "2026-11-04T05:12:00.000Z",
+                    "reportedAt": "2026-10-31T05:12:00.000Z",
                     "reportedAtSource": "CLIENT_REPORTED",
                     "confirmedAt": "2026-10-31T10:34:37.428Z",
                     "confirmedBy": "WRK-014",
@@ -1135,7 +1388,7 @@
                             "missingFields": [],
                             "state": "Reported",
                             "createdAt": "2026-10-31T10:34:37.397Z",
-                            "reportedAt": "2026-11-04T05:12:00.000Z",
+                            "reportedAt": "2026-10-31T05:12:00.000Z",
                             "reportedAtSource": "CLIENT_REPORTED",
                             "confirmedAt": null,
                             "confirmedBy": null,
@@ -1154,7 +1407,7 @@
                             "missingFields": [],
                             "state": "Confirmed",
                             "createdAt": "2026-10-31T10:34:37.397Z",
-                            "reportedAt": "2026-11-04T05:12:00.000Z",
+                            "reportedAt": "2026-10-31T05:12:00.000Z",
                             "reportedAtSource": "CLIENT_REPORTED",
                             "confirmedAt": "2026-10-31T10:34:37.428Z",
                             "confirmedBy": "WRK-014",
@@ -1186,6 +1439,7 @@
                   "traceResults": [
                     {
                       "windowHours": 24,
+                      "traceId": "TRACE-SAMPLE-24",
                       "version": 1,
                       "totalUnits": 35,
                       "byTier": {
@@ -1194,10 +1448,11 @@
                         "UNKNOWN": 0
                       },
                       "dataQualityScore": 100,
-                      "snapshotTime": "2026-11-04T05:02:00.000Z"
+                      "snapshotTime": "2026-10-31T05:02:00.000Z"
                     },
                     {
                       "windowHours": 72,
+                      "traceId": "TRACE-SAMPLE-72",
                       "version": 1,
                       "totalUnits": 100,
                       "byTier": {
@@ -1206,10 +1461,11 @@
                         "UNKNOWN": 6
                       },
                       "dataQualityScore": 82,
-                      "snapshotTime": "2026-11-04T05:02:00.000Z"
+                      "snapshotTime": "2026-10-31T05:02:00.000Z"
                     },
                     {
                       "windowHours": 168,
+                      "traceId": "TRACE-SAMPLE-168",
                       "version": 1,
                       "totalUnits": 160,
                       "byTier": {
@@ -1218,7 +1474,7 @@
                         "UNKNOWN": 6
                       },
                       "dataQualityScore": 83,
-                      "snapshotTime": "2026-11-04T05:02:00.000Z"
+                      "snapshotTime": "2026-10-31T05:02:00.000Z"
                     }
                   ]
                 }
@@ -1831,6 +2087,7 @@
                     "toolId",
                     "windowHours",
                     "windowStart",
+                    "traceId",
                     "windowEnd",
                     "snapshotTime",
                     "summary",
@@ -1870,6 +2127,9 @@
                     "windowStart": {
                       "type": "string",
                       "format": "date-time"
+                    },
+                    "traceId": {
+                      "type": "string"
                     },
                     "windowEnd": {
                       "type": "string",
@@ -2149,9 +2409,10 @@
                   "incidentId": "TS-0002",
                   "toolId": "TOOL-B",
                   "windowHours": 24,
-                  "windowStart": "2026-11-03T05:12:00.000Z",
-                  "windowEnd": "2026-11-04T05:12:00.000Z",
-                  "snapshotTime": "2026-11-04T05:02:00.000Z",
+                  "windowStart": "2026-10-30T05:12:00.000Z",
+                  "traceId": "TRACE-SAMPLE",
+                  "windowEnd": "2026-10-31T05:12:00.000Z",
+                  "snapshotTime": "2026-10-31T05:02:00.000Z",
                   "summary": {
                     "totalUnits": 35,
                     "byTier": {
@@ -3181,7 +3442,7 @@
                           "missingFields": [],
                           "state": "Reported",
                           "createdAt": "2026-10-31T10:34:37.397Z",
-                          "reportedAt": "2026-11-04T05:12:00.000Z",
+                          "reportedAt": "2026-10-31T05:12:00.000Z",
                           "reportedAtSource": "CLIENT_REPORTED",
                           "confirmedAt": null,
                           "confirmedBy": null,
@@ -3200,7 +3461,7 @@
                           "missingFields": [],
                           "state": "Confirmed",
                           "createdAt": "2026-10-31T10:34:37.397Z",
-                          "reportedAt": "2026-11-04T05:12:00.000Z",
+                          "reportedAt": "2026-10-31T05:12:00.000Z",
                           "reportedAtSource": "CLIENT_REPORTED",
                           "confirmedAt": "2026-10-31T10:34:37.428Z",
                           "confirmedBy": "WRK-014",
@@ -4281,7 +4542,52 @@
                     },
                     "documents": {
                       "type": "array",
-                      "items": {}
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "docId",
+                          "system",
+                          "type",
+                          "incidentId",
+                          "payload",
+                          "createdAt",
+                          "_label",
+                          "approvalId"
+                        ],
+                        "properties": {
+                          "docId": {
+                            "type": "string"
+                          },
+                          "system": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "incidentId": {
+                            "type": "string"
+                          },
+                          "payload": {
+                            "type": "object",
+                            "additionalProperties": true
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "_label": {
+                            "type": "string",
+                            "enum": [
+                              "SIMULATED"
+                            ]
+                          },
+                          "approvalId": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        },
+                        "additionalProperties": true
+                      }
                     },
                     "limit": {
                       "type": "number"
@@ -4711,14 +5017,14 @@
       "get": {
         "operationId": "duplicates",
         "tags": [
-          "Jamuna"
+          "platform"
         ],
-        "x-owner": "Jamuna",
-        "x-implementation": "stub",
-        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "x-owner": "platform",
+        "x-implementation": "read-only duplicate evaluation",
+        "description": "Authenticated deterministic candidate detection over same-tool/category incidents. Uses translatedText or rawText fallback and reportedAt with an inclusive 30-day window. Similarity is a human-review signal, not proof of identity. No state filtering or mutation.",
         "responses": {
           "200": {
-            "description": "Fixed fixture",
+            "description": "Implemented response on synthetic data",
             "content": {
               "application/json": {
                 "schema": {
@@ -4727,6 +5033,8 @@
                     "_label",
                     "_stub",
                     "incidentId",
+                    "descriptionSource",
+                    "evaluation",
                     "candidates"
                   ],
                   "properties": {
@@ -4739,12 +5047,32 @@
                     "_stub": {
                       "type": "boolean",
                       "enum": [
-                        true
+                        false
                       ]
                     },
                     "incidentId": {
                       "type": "string",
                       "nullable": true
+                    },
+                    "descriptionSource": {
+                      "type": "string"
+                    },
+                    "evaluation": {
+                      "type": "object",
+                      "required": [
+                        "valid",
+                        "reason"
+                      ],
+                      "properties": {
+                        "valid": {
+                          "type": "boolean"
+                        },
+                        "reason": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
                     },
                     "candidates": {
                       "type": "array",
@@ -4752,12 +5080,25 @@
                         "type": "object",
                         "required": [
                           "incidentId",
+                          "reportedAt",
+                          "state",
+                          "similarity",
                           "reason"
                         ],
                         "properties": {
                           "incidentId": {
                             "type": "string",
                             "nullable": true
+                          },
+                          "reportedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "similarity": {
+                            "type": "number"
                           },
                           "reason": {
                             "type": "string"
@@ -4771,12 +5112,20 @@
                 },
                 "example": {
                   "_label": "SIMULATED",
-                  "_stub": true,
+                  "_stub": false,
                   "incidentId": "TS-0002",
+                  "descriptionSource": "translatedText",
+                  "evaluation": {
+                    "valid": true,
+                    "reason": null
+                  },
                   "candidates": [
                     {
                       "incidentId": "TS-0001",
-                      "reason": "Same tool and category; human review required."
+                      "reportedAt": "2026-10-30T05:12:00.000Z",
+                      "state": "Reported",
+                      "similarity": 0.9,
+                      "reason": "Same tool, category, and sufficiently similar description; human review required."
                     }
                   ]
                 }
@@ -4863,21 +5212,30 @@
               "type": "string"
             }
           }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
-    "/incidents/{id}/proposals": {
-      "post": {
-        "operationId": "proposals",
+    "/incidents/{id}/repeat-failures": {
+      "get": {
+        "operationId": "repeat-failures",
         "tags": [
-          "Jamuna"
+          "platform"
         ],
-        "x-owner": "Jamuna",
-        "x-implementation": "stub",
-        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "x-owner": "platform",
+        "x-implementation": "read-only repeat-failure evaluation",
+        "description": "Authenticated read-only count of unique prior same-tool/category Incident records. Uses reportedAt, excludes the current incident, includes both time-window boundaries, and does not filter states. Potential duplicate IDs are surfaced separately but not excluded. Threshold reports records only; it does not establish distinct real-world occurrences.",
         "responses": {
           "200": {
-            "description": "Fixed fixture",
+            "description": "Implemented response on synthetic data",
             "content": {
               "application/json": {
                 "schema": {
@@ -4885,8 +5243,22 @@
                   "required": [
                     "_label",
                     "_stub",
-                    "proposal",
-                    "approval"
+                    "incidentId",
+                    "toolId",
+                    "category",
+                    "referenceAt",
+                    "referenceAtSource",
+                    "currentIncidentExcluded",
+                    "windowDays",
+                    "minimumReports",
+                    "valid",
+                    "thresholdMet",
+                    "count",
+                    "matchingIncidentIds",
+                    "potentialDuplicateIncidentIds",
+                    "matchingIncidents",
+                    "countBasis",
+                    "reason"
                   ],
                   "properties": {
                     "_label": {
@@ -4898,7 +5270,643 @@
                     "_stub": {
                       "type": "boolean",
                       "enum": [
-                        true
+                        false
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "referenceAt": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "referenceAtSource": {
+                      "type": "string"
+                    },
+                    "currentIncidentExcluded": {
+                      "type": "boolean"
+                    },
+                    "windowDays": {
+                      "type": "number"
+                    },
+                    "minimumReports": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "thresholdMet": {
+                      "type": "boolean"
+                    },
+                    "count": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "matchingIncidentIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "potentialDuplicateIncidentIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "matchingIncidents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "incidentId",
+                          "reportedAt",
+                          "reportedAtSource",
+                          "state"
+                        ],
+                        "properties": {
+                          "incidentId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "reportedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "reportedAtSource": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "state": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "countBasis": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incidentId": "TS-0002",
+                  "toolId": "TOOL-B",
+                  "category": "TORQUE",
+                  "referenceAt": "2026-10-31T05:12:00.000Z",
+                  "referenceAtSource": "CLIENT_REPORTED",
+                  "currentIncidentExcluded": true,
+                  "windowDays": 30,
+                  "minimumReports": 2,
+                  "valid": true,
+                  "thresholdMet": true,
+                  "count": 2,
+                  "matchingIncidentIds": [
+                    "TS-0001",
+                    "TS-0003"
+                  ],
+                  "potentialDuplicateIncidentIds": [
+                    "TS-0001"
+                  ],
+                  "matchingIncidents": [
+                    {
+                      "incidentId": "TS-0001",
+                      "reportedAt": "2026-10-20T05:12:00.000Z",
+                      "reportedAtSource": "CLIENT_REPORTED",
+                      "state": "Reported"
+                    },
+                    {
+                      "incidentId": "TS-0003",
+                      "reportedAt": "2026-10-28T05:12:00.000Z",
+                      "reportedAtSource": "SERVER_RECEIVED",
+                      "state": "Confirmed"
+                    }
+                  ],
+                  "countBasis": "unique prior incident records; potential duplicates remain in the count and distinct real-world events are not verified",
+                  "reason": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "windowDays",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "default": 30,
+              "description": "Must be greater than zero"
+            }
+          },
+          {
+            "name": "minimumReports",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 2
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/proposals": {
+      "post": {
+        "operationId": "proposals",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "Authenticated advisory proposal generation for Confirmed incidents. Requires explicit incident evidence; stock and quality batch scope comes only from persisted CONFIRMED trace links in the latest 168-hour trace and existing batch records, and stock proposals additionally require current unrestricted STORE-01 inventory with no shipment record. Persists Pending Proposal and application audit history idempotently. Does not create Approval records, change incident/tool state, or execute actions. Reusing an Approved proposal includes its persisted Approval record for client handoff.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "proposal",
+                    "requiredApproverRole",
+                    "created",
+                    "evidence",
+                    "actionExecuted",
+                    "auditId"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "proposal": {
+                      "type": "object",
+                      "required": [
+                        "proposalId",
+                        "incidentId",
+                        "type",
+                        "payload",
+                        "reason",
+                        "state",
+                        "createdAt"
+                      ],
+                      "properties": {
+                        "proposalId": {
+                          "type": "string"
+                        },
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "payload": {
+                          "type": "object",
+                          "additionalProperties": true
+                        },
+                        "reason": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "requiredApproverRole": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "boolean"
+                    },
+                    "evidence": {
+                      "type": "object",
+                      "required": [
+                        "trace",
+                        "exposure",
+                        "affectedQuantity"
+                      ],
+                      "properties": {
+                        "trace": {
+                          "type": "object",
+                          "required": [
+                            "traceId",
+                            "version",
+                            "generatedAt"
+                          ],
+                          "properties": {
+                            "traceId": {
+                              "type": "string"
+                            },
+                            "version": {
+                              "type": "number"
+                            },
+                            "generatedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "exposure": {
+                          "type": "string"
+                        },
+                        "affectedQuantity": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "actionExecuted": {
+                      "type": "boolean"
+                    },
+                    "auditId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "approval": {
+                      "type": "object",
+                      "description": "Present when this idempotent request reuses an already Approved proposal.",
+                      "required": [
+                        "approvalId",
+                        "proposalId",
+                        "approverRole",
+                        "decision",
+                        "decidedBy",
+                        "decidedAt"
+                      ],
+                      "properties": {
+                        "approvalId": {
+                          "type": "string"
+                        },
+                        "proposalId": {
+                          "type": "string"
+                        },
+                        "approverRole": {
+                          "type": "string"
+                        },
+                        "decision": {
+                          "type": "string",
+                          "enum": [
+                            "APPROVED"
+                          ]
+                        },
+                        "decidedBy": {
+                          "type": "string"
+                        },
+                        "decidedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reason": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "proposal": {
+                    "proposalId": "PROP-SAMPLE",
+                    "incidentId": "TS-SAMPLE",
+                    "type": "STOCK_BLOCK",
+                    "payload": {
+                      "batchIds": [
+                        "BATCH-SAMPLE"
+                      ],
+                      "plant": "PLANT-01",
+                      "storageLocation": "STORE-01",
+                      "reason": "Review trace-linked in-stock batch",
+                      "evidence": {
+                        "trace": {
+                          "traceId": "TRACE-SAMPLE",
+                          "version": 1,
+                          "windowHours": 168,
+                          "generatedAt": "2026-10-31T05:12:00.000Z"
+                        },
+                        "exposure": "Potentially exposed",
+                        "affectedQuantity": null,
+                        "basis": {
+                          "traceId": "TRACE-SAMPLE",
+                          "version": 1,
+                          "windowHours": 168,
+                          "confirmedInStockBatchIds": [
+                            "BATCH-SAMPLE"
+                          ]
+                        }
+                      }
+                    },
+                    "reason": "Review trace-linked in-stock batch",
+                    "state": "Pending",
+                    "createdAt": "2026-10-31T05:14:00.000Z"
+                  },
+                  "requiredApproverRole": "Quality",
+                  "created": true,
+                  "evidence": {
+                    "trace": {
+                      "traceId": "TRACE-SAMPLE",
+                      "version": 1,
+                      "generatedAt": "2026-10-31T05:12:00.000Z"
+                    },
+                    "exposure": "Potentially exposed",
+                    "affectedQuantity": null
+                  },
+                  "actionExecuted": false,
+                  "auditId": "AUD-SAMPLE"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "reason"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "TOOL_RESTRICTION",
+                      "STOCK_BLOCK",
+                      "QUALITY_NOTIFICATION",
+                      "MAINTENANCE_NOTIFICATION"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "description": "Must contain non-whitespace text"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "example": {
+                "type": "TOOL_RESTRICTION",
+                "reason": "Review torque report"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/approvals/{id}/decision": {
+      "post": {
+        "operationId": "approval-decision",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "persisted approval workflow",
+        "description": "Authenticated decision for a Pending proposal. The path id is proposalId. Uses the current requiredApproverRole policy, requires an auditable reason, derives reviewer identity from authentication, and atomically updates Proposal plus creates Approval plus writes application audit history. A decision is one-way; repeated/conflicting decisions are rejected. Approval creates no action side effect.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "proposal",
+                    "approval",
+                    "actionExecuted",
+                    "auditId"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
                       ]
                     },
                     "proposal": {
@@ -4946,202 +5954,6 @@
                         "approvalId",
                         "proposalId",
                         "approverRole",
-                        "decision"
-                      ],
-                      "properties": {
-                        "approvalId": {
-                          "type": "string"
-                        },
-                        "proposalId": {
-                          "type": "string"
-                        },
-                        "approverRole": {
-                          "type": "string"
-                        },
-                        "decision": {
-                          "type": "string"
-                        }
-                      },
-                      "additionalProperties": true
-                    }
-                  },
-                  "additionalProperties": true
-                },
-                "example": {
-                  "_label": "SIMULATED",
-                  "_stub": true,
-                  "proposal": {
-                    "proposalId": "PROP-0001",
-                    "incidentId": "TS-0002",
-                    "type": "TOOL_RESTRICTION",
-                    "payload": {
-                      "toolId": "TOOL-B",
-                      "action": "RESTRICT"
-                    },
-                    "reason": "Review torque report",
-                    "state": "Pending",
-                    "createdAt": "2026-11-04T05:14:00Z"
-                  },
-                  "approval": {
-                    "approvalId": "APR-0001",
-                    "proposalId": "PROP-0001",
-                    "approverRole": "Manager",
-                    "decision": "PENDING"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Identity missing or unverified",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Role forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Record not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Invalid state or approval required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error; details withheld",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Unavailable configuration or database",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "type",
-                  "reason"
-                ],
-                "properties": {
-                  "type": {
-                    "type": "string"
-                  },
-                  "reason": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": true
-              },
-              "example": {
-                "type": "TOOL_RESTRICTION",
-                "reason": "Review torque report"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/approvals/{id}/decision": {
-      "post": {
-        "operationId": "approval-decision",
-        "tags": [
-          "Jamuna"
-        ],
-        "x-owner": "Jamuna",
-        "x-implementation": "stub",
-        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
-        "responses": {
-          "200": {
-            "description": "Fixed fixture",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "_label",
-                    "_stub",
-                    "approval"
-                  ],
-                  "properties": {
-                    "_label": {
-                      "type": "string",
-                      "enum": [
-                        "SIMULATED"
-                      ]
-                    },
-                    "_stub": {
-                      "type": "boolean",
-                      "enum": [
-                        true
-                      ]
-                    },
-                    "approval": {
-                      "type": "object",
-                      "required": [
-                        "approvalId",
-                        "proposalId",
-                        "approverRole",
                         "decision",
                         "reason",
                         "decidedAt",
@@ -5172,22 +5984,44 @@
                         }
                       },
                       "additionalProperties": true
+                    },
+                    "actionExecuted": {
+                      "type": "boolean"
+                    },
+                    "auditId": {
+                      "type": "string"
                     }
                   },
                   "additionalProperties": true
                 },
                 "example": {
                   "_label": "SIMULATED",
-                  "_stub": true,
+                  "_stub": false,
+                  "proposal": {
+                    "proposalId": "PROP-SAMPLE",
+                    "incidentId": "TS-SAMPLE",
+                    "type": "TOOL_RESTRICTION",
+                    "payload": {
+                      "toolId": "TOOL-B",
+                      "action": "RESTRICT",
+                      "reason": "Review recurring torque reports",
+                      "evidence": {}
+                    },
+                    "reason": "Review recurring torque reports",
+                    "state": "Approved",
+                    "createdAt": "2026-10-31T05:14:00.000Z"
+                  },
                   "approval": {
-                    "approvalId": "APR-0001",
-                    "proposalId": "PROP-0001",
+                    "approvalId": "APR-SAMPLE",
+                    "proposalId": "PROP-SAMPLE",
                     "approverRole": "Manager",
                     "decision": "APPROVED",
                     "reason": "Containment approved",
-                    "decidedAt": "2026-11-04T05:15:00Z",
+                    "decidedAt": "2026-10-31T05:15:00.000Z",
                     "decidedBy": "MGR-01"
-                  }
+                  },
+                  "actionExecuted": false,
+                  "auditId": "AUD-SAMPLE"
                 }
               }
             }
@@ -5270,7 +6104,17 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "The proposalId of the Pending proposal to decide"
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -5281,26 +6125,28 @@
                 "type": "object",
                 "required": [
                   "decision",
-                  "reason",
-                  "decidedBy"
+                  "reason"
                 ],
                 "properties": {
                   "decision": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                      "APPROVED",
+                      "REJECTED"
+                    ]
                   },
                   "reason": {
-                    "type": "string"
-                  },
-                  "decidedBy": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000,
+                    "description": "Required for audit; mandatory as the rejection explanation"
                   }
                 },
-                "additionalProperties": true
+                "additionalProperties": false
               },
               "example": {
                 "decision": "APPROVED",
-                "reason": "Containment approved",
-                "decidedBy": "MGR-01"
+                "reason": "Containment approved"
               }
             }
           }
@@ -5311,14 +6157,14 @@
       "post": {
         "operationId": "verify-return",
         "tags": [
-          "Jamuna"
+          "platform"
         ],
-        "x-owner": "Jamuna",
-        "x-implementation": "stub",
-        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "x-owner": "platform",
+        "x-implementation": "repair evidence validation and tool state transition",
+        "description": "Authenticated Verifier-only return-to-service workflow. The path id is incidentId; request supplies only a persisted repairId. Requires an unverified matching RepairLog with description, technician, timestamp, aggregate pass and non-empty named readings each explicitly marked passed:true. Verifier must differ from loggedBy. Uses Awaiting verification to Active through the tool-state workflow and commits repair verification, state, history and audit together. No approval can substitute for physical repair evidence.",
         "responses": {
           "200": {
-            "description": "Fixed fixture",
+            "description": "Implemented response on synthetic data",
             "content": {
               "application/json": {
                 "schema": {
@@ -5326,9 +6172,11 @@
                   "required": [
                     "_label",
                     "_stub",
-                    "incident",
-                    "tool",
-                    "verification"
+                    "incidentId",
+                    "toolId",
+                    "toolState",
+                    "verification",
+                    "auditId"
                   ],
                   "properties": {
                     "_label": {
@@ -5340,125 +6188,29 @@
                     "_stub": {
                       "type": "boolean",
                       "enum": [
-                        true
+                        false
                       ]
                     },
-                    "incident": {
-                      "type": "object",
-                      "required": [
-                        "incidentId",
-                        "toolId",
-                        "reporterId",
-                        "language",
-                        "rawText",
-                        "translatedText",
-                        "category",
-                        "suggestedNcCode",
-                        "confidence",
-                        "missingFields",
-                        "state",
-                        "reportedAt",
-                        "reportedAtSource",
-                        "createdAt",
-                        "modelVersion"
-                      ],
-                      "properties": {
-                        "incidentId": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "toolId": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "reporterId": {
-                          "type": "string"
-                        },
-                        "language": {
-                          "type": "string"
-                        },
-                        "rawText": {
-                          "type": "string"
-                        },
-                        "translatedText": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "category": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "suggestedNcCode": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "confidence": {
-                          "type": "number",
-                          "nullable": true
-                        },
-                        "missingFields": {
-                          "type": "array",
-                          "items": {}
-                        },
-                        "state": {
-                          "type": "string"
-                        },
-                        "reportedAt": {
-                          "type": "string",
-                          "format": "date-time"
-                        },
-                        "reportedAtSource": {
-                          "type": "string"
-                        },
-                        "createdAt": {
-                          "type": "string",
-                          "format": "date-time"
-                        },
-                        "modelVersion": {
-                          "type": "string",
-                          "nullable": true
-                        }
-                      },
-                      "additionalProperties": true
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
                     },
-                    "tool": {
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "toolState": {
                       "type": "object",
                       "required": [
-                        "toolId",
-                        "type",
-                        "line",
-                        "workCenter",
-                        "state",
-                        "calibrationDue",
-                        "usageCount",
-                        "lastVerifiedGood"
+                        "from",
+                        "to"
                       ],
                       "properties": {
-                        "toolId": {
-                          "type": "string",
-                          "nullable": true
-                        },
-                        "type": {
+                        "from": {
                           "type": "string"
                         },
-                        "line": {
+                        "to": {
                           "type": "string"
-                        },
-                        "workCenter": {
-                          "type": "string"
-                        },
-                        "state": {
-                          "type": "string"
-                        },
-                        "calibrationDue": {
-                          "type": "string"
-                        },
-                        "usageCount": {
-                          "type": "number"
-                        },
-                        "lastVerifiedGood": {
-                          "type": "string",
-                          "format": "date-time"
                         }
                       },
                       "additionalProperties": true
@@ -5466,56 +6218,347 @@
                     "verification": {
                       "type": "object",
                       "required": [
+                        "repairId",
+                        "repairTechnicianId",
                         "verifiedBy",
-                        "passed"
+                        "verifiedAt",
+                        "readings"
                       ],
                       "properties": {
+                        "repairId": {
+                          "type": "string"
+                        },
+                        "repairTechnicianId": {
+                          "type": "string"
+                        },
                         "verifiedBy": {
                           "type": "string"
                         },
-                        "passed": {
-                          "type": "boolean"
+                        "verifiedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "readings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "name",
+                              "value",
+                              "unit",
+                              "passed"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "string"
+                              },
+                              "passed": {
+                                "type": "boolean"
+                              }
+                            },
+                            "additionalProperties": true
+                          }
                         }
                       },
                       "additionalProperties": true
+                    },
+                    "auditId": {
+                      "type": "string"
                     }
                   },
                   "additionalProperties": true
                 },
                 "example": {
                   "_label": "SIMULATED",
-                  "_stub": true,
-                  "incident": {
-                    "incidentId": "TS-0002",
-                    "toolId": "TOOL-B",
-                    "reporterId": "WRK-014",
-                    "language": "kn",
-                    "rawText": "?????? ??????????",
-                    "translatedText": "Tool B is leaving bolts loose",
-                    "category": "TORQUE",
-                    "suggestedNcCode": "NC-TORQUE-LOOSE",
-                    "confidence": 0.82,
-                    "missingFields": [],
-                    "state": "Closed",
-                    "reportedAt": "2026-11-04T05:12:00Z",
-                    "reportedAtSource": "CLIENT_REPORTED",
-                    "createdAt": "2026-11-04T05:12:00Z",
-                    "modelVersion": "stub-0"
-                  },
-                  "tool": {
-                    "toolId": "TOOL-B",
-                    "type": "TORQUE",
-                    "line": "LINE-BRAKE-1",
-                    "workCenter": "WC-B",
-                    "state": "Active",
-                    "calibrationDue": "2026-11-09",
-                    "usageCount": 200,
-                    "lastVerifiedGood": "2026-10-23T05:12:00Z"
+                  "_stub": false,
+                  "incidentId": "TS-0001",
+                  "toolId": "TOOL-B",
+                  "toolState": {
+                    "from": "Awaiting verification",
+                    "to": "Active"
                   },
                   "verification": {
-                    "verifiedBy": "VER-01",
-                    "passed": true
+                    "repairId": "REP-0001",
+                    "repairTechnicianId": "TECH-01",
+                    "verifiedBy": "VER-02",
+                    "verifiedAt": "2026-10-31T05:15:00.000Z",
+                    "readings": [
+                      {
+                        "name": "Torque check 1",
+                        "value": 40,
+                        "unit": "Nm",
+                        "passed": true
+                      },
+                      {
+                        "name": "Torque check 2",
+                        "value": 40,
+                        "unit": "Nm",
+                        "passed": true
+                      }
+                    ]
+                  },
+                  "auditId": "AUD-SAMPLE"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The incidentId associated with the persisted repair log and tool"
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "repairId"
+                ],
+                "properties": {
+                  "repairId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120,
+                    "description": "Persisted repair log for this incident/tool; verifier identity and readings are loaded from trusted records"
                   }
+                },
+                "additionalProperties": false
+              },
+              "example": {
+                "repairId": "REP-0001"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/repairs": {
+      "post": {
+        "operationId": "repair-create",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "technician repair lifecycle",
+        "description": "Technician-only repair start for a Confirmed incident and a Restricted or Under repair tool. Identity and time are taken from authenticated request context and server time. Persists an uncompleted RepairLog and transitions Restricted to Under repair when needed. Does not activate the tool.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incidentId",
+                    "toolId",
+                    "repairStatus",
+                    "completed",
+                    "repair",
+                    "auditId"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "repairStatus": {
+                      "type": "string"
+                    },
+                    "completed": {
+                      "type": "boolean"
+                    },
+                    "repair": {
+                      "type": "object",
+                      "required": [
+                        "repairId",
+                        "toolId",
+                        "incidentId",
+                        "description",
+                        "loggedBy",
+                        "loggedAt",
+                        "testReadings",
+                        "passed",
+                        "verifiedBy",
+                        "verifiedAt"
+                      ],
+                      "properties": {
+                        "repairId": {
+                          "type": "string"
+                        },
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "loggedBy": {
+                          "type": "string"
+                        },
+                        "loggedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "testReadings": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "passed": {
+                          "type": "boolean"
+                        },
+                        "verifiedBy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "verifiedAt": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "auditId": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incidentId": "TS-SAMPLE",
+                  "toolId": "TOOL-B",
+                  "repairStatus": "Under repair",
+                  "completed": false,
+                  "repair": {
+                    "repairId": "REP-SAMPLE",
+                    "toolId": "TOOL-B",
+                    "incidentId": "TS-SAMPLE",
+                    "description": "Replaced the worn synthetic fixture and recorded the adjustment",
+                    "loggedBy": "TECH-01",
+                    "loggedAt": "2026-10-31T10:00:00.000Z",
+                    "testReadings": [],
+                    "passed": false,
+                    "verifiedBy": null,
+                    "verifiedAt": null
+                  },
+                  "auditId": "AUD-SAMPLE"
                 }
               }
             }
@@ -5601,6 +6644,15 @@
             }
           }
         ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -5608,27 +6660,532 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "verifiedBy",
-                  "repairId",
-                  "passed"
+                  "description"
                 ],
                 "properties": {
-                  "verifiedBy": {
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "additionalProperties": false
+              },
+              "example": {
+                "description": "Replaced the worn synthetic fixture and recorded the adjustment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repairs/{id}/complete": {
+      "post": {
+        "operationId": "repair-complete",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "technician repair lifecycle",
+        "description": "Only the Technician who recorded the repair may submit explicit named boolean readings. The RepairLog retains the latest submission, while every submission's full readings, authenticated actor, timestamp and aggregate outcome are appended to application audit history and tool history in the same transaction. Failed readings leave the tool Under repair; all-passing readings mark the RepairLog passed and move the tool to Awaiting verification. This does not return the tool to Active, and named booleans do not prove domain-required inspection coverage or tolerances.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incidentId",
+                    "toolId",
+                    "repairStatus",
+                    "completed",
+                    "repair",
+                    "toolState",
+                    "auditId"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "repairStatus": {
+                      "type": "string"
+                    },
+                    "completed": {
+                      "type": "boolean"
+                    },
+                    "repair": {
+                      "type": "object",
+                      "required": [
+                        "repairId",
+                        "toolId",
+                        "incidentId",
+                        "description",
+                        "loggedBy",
+                        "loggedAt",
+                        "testReadings",
+                        "passed",
+                        "verifiedBy",
+                        "verifiedAt"
+                      ],
+                      "properties": {
+                        "repairId": {
+                          "type": "string"
+                        },
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "loggedBy": {
+                          "type": "string"
+                        },
+                        "loggedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "testReadings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "name",
+                              "passed"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "passed": {
+                                "type": "boolean"
+                              }
+                            },
+                            "additionalProperties": true
+                          }
+                        },
+                        "passed": {
+                          "type": "boolean"
+                        },
+                        "verifiedBy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "verifiedAt": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "toolState": {
+                      "type": "object",
+                      "required": [
+                        "from",
+                        "to"
+                      ],
+                      "properties": {
+                        "from": {
+                          "type": "string"
+                        },
+                        "to": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "auditId": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incidentId": "TS-SAMPLE",
+                  "toolId": "TOOL-B",
+                  "repairStatus": "Awaiting verification",
+                  "completed": true,
+                  "repair": {
+                    "repairId": "REP-SAMPLE",
+                    "toolId": "TOOL-B",
+                    "incidentId": "TS-SAMPLE",
+                    "description": "Replaced the worn synthetic fixture and recorded the adjustment",
+                    "loggedBy": "TECH-01",
+                    "loggedAt": "2026-10-31T10:00:00.000Z",
+                    "testReadings": [
+                      {
+                        "name": "Fixture torque check",
+                        "passed": true
+                      },
+                      {
+                        "name": "Alignment check",
+                        "passed": true
+                      }
+                    ],
+                    "passed": true,
+                    "verifiedBy": null,
+                    "verifiedAt": null
+                  },
+                  "toolState": {
+                    "from": "Under repair",
+                    "to": "Awaiting verification"
+                  },
+                  "auditId": "AUD-SAMPLE"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "testReadings"
+                ],
+                "properties": {
+                  "testReadings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name",
+                        "passed"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        },
+                        "passed": {
+                          "type": "boolean"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "minItems": 1,
+                    "maxItems": 100
+                  }
+                },
+                "additionalProperties": false
+              },
+              "example": {
+                "testReadings": [
+                  {
+                    "name": "Fixture torque check",
+                    "passed": true
+                  },
+                  {
+                    "name": "Alignment check",
+                    "passed": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/close": {
+      "post": {
+        "operationId": "incident-close",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "incidentId",
+                    "fromState",
+                    "toState",
+                    "closedAt",
+                    "auditId",
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "fromState": {
+                      "type": "string"
+                    },
+                    "toState": {
+                      "type": "string"
+                    },
+                    "closedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "auditId": {
+                      "type": "string"
+                    },
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "incidentId": "TS-0002",
+                  "fromState": "Awaiting verification",
+                  "toState": "Closed",
+                  "closedAt": "2026-11-01T10:00:00.000Z",
+                  "auditId": "AUD-0099",
+                  "_label": "SIMULATED",
+                  "_stub": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reason"
+                ],
+                "properties": {
+                  "reason": {
                     "type": "string"
                   },
-                  "repairId": {
-                    "type": "string"
-                  },
-                  "passed": {
+                  "insufficientEvidence": {
                     "type": "boolean"
                   }
                 },
                 "additionalProperties": true
               },
               "example": {
-                "verifiedBy": "VER-01",
-                "repairId": "REP-0001",
-                "passed": true
+                "reason": "Verified resolution",
+                "insufficientEvidence": false
               }
             }
           }

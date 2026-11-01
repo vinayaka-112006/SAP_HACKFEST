@@ -50,7 +50,7 @@ export default function Launcher() {
         </svg>
       ),
       highlight: 'Repeat Failure Detection & Duplicate Case Correlation',
-      description: 'Chronological asset registry tracking tool repairs, calibration drift, and recurring torque clutch slippage. Duplicate review awaits the workflow adapter.',
+      description: 'Chronological asset registry with live duplicate and repeat-failure evaluation, proposal review, simulated containment, and technician-to-verifier repair workflow.',
       cta: 'Inspect Asset Lifecycle →'
     },
     {

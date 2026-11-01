@@ -2,7 +2,7 @@
 
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
-Anchor T = 2026-11-04T05:12:00Z, stock snapshot T-10min, stale threshold 48h. 300 serials, INR 3200 each, LINE-BRAKE-1 / BRAKE-ASM-01. Tools A/B/C at WC-A/B/C. All data is synthetic; services simulated.
+Anchor T = 2026-10-31T05:12:00Z, stock snapshot T-10min, stale threshold 48h. 300 serials, INR 3200 each, LINE-BRAKE-1 / BRAKE-ASM-01. Tools A/B/C at WC-A/B/C. All data is synthetic; services simulated.
 
 `db/seed/plan.js` is the construction specification. `npm run seed` produces CSVs, two demo incidents and tests/ground-truth.candidate.json. It does not reset a live database. `npm run verify-ground-truth` checks bytes against the plan, independently loads CSVs through CAP into SQLite, and checks exact serial ranges and source links without importing trace code. Repeated generation is byte-identical. Jamuna must review/freeze tests/ground-truth.json; it is not created here. If present, any difference fails loudly.
 

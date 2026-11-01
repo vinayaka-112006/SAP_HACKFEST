@@ -73,7 +73,7 @@ Production frontend assets do not provide an XSUAA login flow; production identi
 7. Open Incident Details. Select Manager, Quality or Verifier in local demo mode for trace/audit access. Worker/Technician see the permission explanation instead of stale restricted data.
 8. Switch 24h/72h/7d. Review potentially exposed associations, data quality, distribution and range. Use Why? for actual gaps/deductions and inspect a serial for all evidence IDs. Unknown is never shown as safe.
 9. Review application audit history and simulated documents. Open Tool History to see the seeded earlier incident and calibration/repair events.
-10. Proposal, approval, duplicate merge and return controls stay clearly unavailable while Jamuna's routes remain stubs; no success receipt or audit record is fabricated in the browser.
+10. Duplicate and repeat-failure results are displayed for review; potential duplicates cannot be merged in the UI. The console supports proposal creation, separate approval/rejection, separately guarded SIMULATED action, Technician repair recording and independent Verifier return. No success receipt or audit record is fabricated in the browser.
 
 The Evidence Yard shows only serials actually returned in the selected trace. It does not invent an all-300-unit universe or label unreturned units outside/safe. Chart fill is illustrative; numeric counts come from backend summaries.
 
@@ -81,7 +81,7 @@ The Evidence Yard shows only serials actually returned in the selected trace. It
 
 Shashank's POST /api/ai/structure-report still returns a stub. AI input remains manual by default, the button explains its status, and the common client rejects any _stub:true result. The prepared client validates supplied structured fields and preserves original language/text; it never confirms or saves without user action.
 
-Jamuna's duplicate/proposal/approval/verify-return routes remain stubs. Central client methods use their documented POST/GET paths, but the active UI does not execute fake approvals or bypass protected SAP actions. No Proposal/Approval records were manufactured in the normal database. Supplied future workflow modules still need actual contract and human-approval testing before those controls can be connected.
+The AI-structure route remains a stub. Duplicate/repeat evaluation, proposal, approval, repair and return routes are real platform routes. The console uses current request/response contracts; approval and action execution remain separate, and the backend's persisted approval scope check is preserved. The synthetic browser lifecycle creates and audits records only in its isolated SQLite database.
 
 All four mock SAP services and their approval checks are unchanged. No real S/4HANA, DM or BTP connection is claimed. Ground truth remains the existing provisional candidate pending Jamuna's sign-off.
 
@@ -89,14 +89,14 @@ All four mock SAP services and their approval checks are unchanged. No real S/4H
 
 | Check | Passed | Failed | Skipped |
 |---|---:|---:|---:|
-| Existing backend Jest tests (12 suites) | 61 | 0 | 0 |
-| Frontend native Node API/mapping tests | 14 | 0 | 0 |
-| Native Node + Playwright/Edge browser checks | 7 | 0 | 0 |
+| Current backend Jest suite (22 suites; 2026-11-01 rerun) | 163 | 0 | 0 |
+| Frontend native Node API/history tests (2026-11-01 rerun) | 26 | 0 | 0 |
+| Native Node + Playwright browser checks | 9 | 0 | 0 |
 | Legacy frontend design-fixture checks | 15 | 0 | 0 |
 
-Frontend Vite production build passed. No frontend lint script existed; lint was not claimed. The legacy fixture checks are preserved design tests, not the live source of trace truth. The active application does not import operational fixtures.
+Frontend Vite and backend CAP production builds passed. The packaged runtime verifier passed using temporary SQLite. No frontend lint script exists; lint is not claimed. The legacy fixture checks are preserved design tests, not the live source of trace truth. The active application does not import operational fixtures.
 
-Browser automation covered the real register, unknown QR contents, manual reporting with exact Unicode/whitespace preservation, double-submit protection, explicit correction/confirmation, window switching without stale values, all counts/scores/range, gap/evidence inspection, duplicate-link evidence preservation, real audit/history, empty documents, disabled stub workflows, role changes, network retry, CORS and 390px mobile rendering. There were zero browser page errors. Desktop/mobile screenshots were inspected. Actual microphone capture and physical camera scanning were not verified; camera scanning is explicitly unavailable.
+Browser automation covered the real register, unknown QR contents, manual reporting with exact Unicode/whitespace preservation, double-submit protection, confirmation, trace, gaps, evidence, audit/history/documents, duplicate/repeat results, network retry, role changes and mobile rendering. It also completed proposal → approval → SIMULATED restriction and repair → independent Verifier return. There were zero browser page errors. The 2026-11-01 rerun additionally verified automatic Approval ID handoff without manual entry and selected-history-incident evaluation while a different incident remained globally remembered. Actual microphone capture and physical camera scanning were not verified; camera scanning is explicitly unavailable.
 
 | Tool B window | Total | Confirmed | Probable | Unknown | Factory | X | Y | Quality |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -106,7 +106,7 @@ Browser automation covered the real register, unknown QR contents, manual report
 
 Exposure range matched 35 / 154 / 6 in every window. Backend trace implementation, schema, routes, approval gates and expectations were not changed.
 
-Browser checks create a unique ignored database under repository backup/, start an isolated CAP server and Vite on 5174, and shut those test processes down. They also run the existing backend smoke and health/stub verification commands against the isolated server. Normal frontend 5173/backend 4004 were checked separately with read-only browser requests. Main db.sqlite table contents were compared to a pre-start digest and remained identical: 300 units and only seeded incident TS-0001. No main database reset was performed.
+Browser checks create a unique database in a constrained temporary directory under `backend/`, start an isolated CAP server and Vite on 5174, then remove only their own temporary directories. Screenshots/results use a unique OS temporary directory and are also cleaned. Smoke and health/stub checks run against the isolated server with artifact writing disabled. The tests do not connect to HANA or use repository `backup/`; no main database reset is performed.
 
 Run checks independently:
 
@@ -130,7 +130,8 @@ Node's native test runner was used; Playwright is a browser automation library o
 - frontend/src/state/store.jsx, useResource.js: server-backed resources with cancellation, cleared stale data and no fabricated business changes.
 - frontend/src/screens/Worker.jsx, Console.jsx, ToolHistory.jsx: real reporting, confirmation, lookup, trace, history, audit and documents.
 - frontend/src/components/ResourceState.jsx and existing role/nav/status/ribbon/intro components: loading/error handling, honest simulation labels and local demo identity.
-- Existing evidence/governance/history components: preserve design while using server fields/evidence and disabling unavailable workflow; no invented approval metadata.
+- `frontend/src/features/workflow/WorkflowPanel.jsx`: live review, proposal/approval, separate simulated action, repair and return workflow using persisted identifiers across local role changes.
+- Existing evidence/governance/history components: preserve design while using server fields/evidence and no fabricated approval metadata.
 - frontend/src/styles/base.css: integration forms/states and mobile navigation fixes within existing tokens.
 - frontend/vite.config.js, .env.example, package/lock: proxy/public configuration and test scripts; Playwright is development-only.
 - frontend/src/tests/client.test.js and scripts/browser.integration.test.js: focused native-runner tests and real browser checks.

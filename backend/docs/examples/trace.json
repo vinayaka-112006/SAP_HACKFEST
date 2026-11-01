@@ -4,9 +4,10 @@
   "incidentId": "TS-0002",
   "toolId": "TOOL-B",
   "windowHours": 24,
-  "windowStart": "2026-11-03T05:12:00.000Z",
-  "windowEnd": "2026-11-04T05:12:00.000Z",
-  "snapshotTime": "2026-11-04T05:02:00.000Z",
+  "windowStart": "2026-10-30T05:12:00.000Z",
+  "traceId": "TRACE-SAMPLE",
+  "windowEnd": "2026-10-31T05:12:00.000Z",
+  "snapshotTime": "2026-10-31T05:02:00.000Z",
   "summary": {
     "totalUnits": 35,
     "byTier": {

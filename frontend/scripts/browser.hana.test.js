@@ -117,9 +117,10 @@ check("HANA-backed console shows 35/100/160, uncertainty, evidence and audit", a
   await page.getByText("TRACE_GENERATED", { exact: true }).first().waitFor();
   await page.screenshot({ path: path.join(output, "hana-console-desktop.png"), fullPage: true });
 });
-check("unavailable workflows stay disabled and all four actions reject missing approvals", async () => {
-  assert.equal(await page.getByRole("button", { name: "Approve and Dispatch" }).isDisabled(), true);
-  assert.equal(await page.getByRole("button", { name: "Verify Return to Service" }).isDisabled(), true);
+check("implemented workflows are visible without mutating HANA, and all four actions reject missing approvals", async () => {
+  await page.getByRole("heading", { name: "Incident review and tool workflow" }).waitFor();
+  assert.match(await page.locator("body").textContent(), /Potential candidates are suggestions for human review/);
+  assert.match(await page.locator("body").textContent(), /Approval is not execution|does not execute the action/);
   assert.match(await page.locator("body").textContent(), /No simulated documents exist/);
   for (const route of ["s4/maintenance-notifications", "s4/quality-notifications", "s4/stock-blocks", "dm/tool-restrictions"]) {
     const payload = { incidentId, toolId: "TOOL-B", shortText: "Browser integration check", priority: "2", requestedBy: "HANA-BROWSER-VERIFY", batchIds: ["BATCH-B-DUP"], plant: "PLANT-01", storageLocation: "STORE-01", reason: "Unapproved verification request", action: "RESTRICT" };

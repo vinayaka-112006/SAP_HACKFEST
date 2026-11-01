@@ -43,6 +43,7 @@ router.get(
           .map((d) => ({
             ...d,
             _label: "SIMULATED",
+            approvalId: d.payload.approvalId || null,
             payload: d.payload.result || d.payload,
           })),
         limit,

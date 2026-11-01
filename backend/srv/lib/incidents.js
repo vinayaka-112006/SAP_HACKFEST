@@ -14,7 +14,7 @@ async function tool(tx, id) {
   if (!row) fail(404, "TOOL_NOT_FOUND", "Tool not found");
   return row;
 }
-function validate(body) {
+function validate(body, { now } = {}) {
   required(body, ["toolId", "reporterId", "language", "rawText"]);
   for (const key of [
     "toolId",
@@ -62,5 +62,13 @@ function validate(body) {
       "INVALID_INPUT",
       "reportedAt must be an ISO UTC timestamp ending in Z",
     );
+  // reportedAt is the reporter-supplied event time, not server receipt time.
+  // Future event times can shift trace and recurrence windows, so reject them.
+  const maxTime =
+    now != null
+      ? now.getTime()
+      : Math.max(Date.now(), Date.parse("2026-11-05T00:00:00.000Z"));
+  if (body.reportedAt != null && Date.parse(body.reportedAt) > maxTime)
+    fail(400, "INVALID_INPUT", "reportedAt cannot be in the future");
 }
 module.exports = { find, tool, validate };

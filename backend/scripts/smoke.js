@@ -1,5 +1,6 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
+const { randomUUID } = require("node:crypto");
 const { performance } = require("node:perf_hooks");
 async function smoke(
   base = process.env.BASE_URL || "http://localhost:4004",
@@ -10,7 +11,7 @@ async function smoke(
     executedAt: new Date().toISOString(),
     realBackend: [],
     simulatedSAP: [],
-    teammateStubs: [],
+    remainingStubs: [],
     blocked: [],
     trace: [],
   };
@@ -56,7 +57,11 @@ async function smoke(
       "incident-create",
       "POST",
       "/incidents",
-      require("../docs/demo-incidents.json")[0],
+      {
+        ...require("../docs/demo-incidents.json")[0],
+        // Isolate the expected ineligible proposal check from prior synthetic runs.
+        category: `SMOKE-${randomUUID()}`,
+      },
       "Worker",
       201,
     )
@@ -71,6 +76,30 @@ async function smoke(
     { confirmedBy: "WRK-014", corrections: {} },
     "Worker",
   );
+  const proposalResponse = await fetch(
+    base + `/api/incidents/${id}/proposals`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-demo-user": "DEMO-MANAGER",
+        "x-demo-role": "Manager",
+      },
+      body: JSON.stringify({
+        type: "TOOL_RESTRICTION",
+        reason: "Review recurring synthetic torque reports",
+      }),
+    },
+  );
+  const proposalAttempt = await proposalResponse.json();
+  assert.notEqual(proposalAttempt._stub, true);
+  assert.equal(proposalResponse.status, 409);
+  assert.equal(proposalAttempt.error.code, "INSUFFICIENT_EVIDENCE");
+  report.proposalAttempt = {
+    status: proposalResponse.status,
+    code: proposalAttempt.error.code,
+    actionExecuted: false,
+  };
   const history = (await real("tool-history", "GET", "/tools/TOOL-B/history"))
     .value;
   assert(history.events.some((e) => e.refId === "TS-0001"));
@@ -167,10 +196,12 @@ async function smoke(
     });
   }
   const contract = require("../srv/routes/_stubs/contract.json");
-  for (const e of contract.filter((e) => e.owner === "Jamuna")) {
-    // Read-only duplicate lookup and AI/proposal stub probes are enough to identify current seams.
-    // Avoid deciding a real approval or verified return without a persisted workflow/repair setup.
-    if (["approval-decision", "verify-return"].includes(e.name)) continue;
+  for (const e of contract.filter((e) => e.owner !== "platform" && e.owner !== "Shashank")) {
+    // Avoid deciding a real approval or verified return without persisted workflow/repair setup.
+    if (["approval-decision", "verify-return"].includes(e.name)) {
+      report.remainingStubs.push(e.name);
+      continue;
+    }
     const route = e.path.replace(":id", id);
     const response = await fetch(base + "/api" + route, {
       method: e.method,
@@ -180,42 +211,20 @@ async function smoke(
         "x-demo-role": "Manager",
       },
       ...(e.method === "POST"
-        ? {
-            body: JSON.stringify(
-              e.name === "proposals"
-                ? {
-                    type: "TOOL_RESTRICTION",
-                    reason: "Review torque report",
-                    payload: {
-                      toolId: "TOOL-B",
-                      action: "RESTRICT",
-                      reason: "Review torque report",
-                    },
-                  }
-                : e.request,
-            ),
-          }
+        ? { body: JSON.stringify(e.request) }
         : {}),
     });
     const value = await response.json();
     if (value._stub === true) {
-      report.teammateStubs.push(e.name);
-      if (e.name === "proposals")
-        report.teammateStubs.push("approval-decision", "verify-return");
+      report.remainingStubs.push(e.name);
     } else
       report.blocked.push({
         step: e.name,
         reason:
-          "Real teammate implementation detected; owner-specific workflow integration requires its persisted proposal/repair contract to be reviewed.",
+          "A non-stub route answered an endpoint declared as a remaining external stub; review the contract ownership mapping.",
         httpStatus: response.status,
       });
   }
-  if (report.teammateStubs.includes("proposals"))
-    report.blocked.push({
-      step: "approved-workflow-and-verified-return",
-      reason:
-        "Jamuna proposal/approval/return endpoints are stubs. Approved action services are separately verified with persisted test-only approvals in Jest; no live approvals fabricated.",
-    });
   const audit = (await real("audit", "GET", `/audit?incident=${id}`)).value
     .entries;
   for (const action of [
@@ -239,11 +248,13 @@ async function smoke(
         "docs/examples/" + name + ".json",
         JSON.stringify(value, null, 2) + "\n",
       );
-  fs.mkdirSync("tests/results", { recursive: true });
-  fs.writeFileSync(
-    "tests/results/smoke-results.json",
-    JSON.stringify(report, null, 2) + "\n",
-  );
+  if (process.env.SMOKE_NO_ARTIFACTS !== "true") {
+    fs.mkdirSync("tests/results", { recursive: true });
+    fs.writeFileSync(
+      "tests/results/smoke-results.json",
+      JSON.stringify(report, null, 2) + "\n",
+    );
+  }
   console.log(JSON.stringify(report, null, 2));
   return report;
 }

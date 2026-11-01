@@ -18,8 +18,8 @@ export function createApiClient({
   timeoutMs = 15000,
 } = {}) {
   const base = baseUrl.replace(/\/$/, "");
-  async function request(path, { method = "GET", body, signal, requestTimeoutMs = timeoutMs } = {}) {
-    const headers = { Accept: "application/json" };
+  async function request(path, { method = "GET", body, headers: customHeaders, signal, requestTimeoutMs = timeoutMs } = {}) {
+    const headers = { Accept: "application/json", ...customHeaders };
     const binary = typeof Blob !== "undefined" && body instanceof Blob;
     if (body !== undefined) headers["Content-Type"] = binary ? body.type : "application/json";
     if (demoMode) {
@@ -28,8 +28,8 @@ export function createApiClient({
         throw new ApiError("Enter a local demo user ID and select a role.", {
           code: "DEMO_IDENTITY_REQUIRED",
         });
-      headers["x-demo-user"] = userId;
-      headers["x-demo-role"] = role;
+      if (!headers["x-demo-user"]) headers["x-demo-user"] = userId;
+      if (!headers["x-demo-role"]) headers["x-demo-role"] = role;
     }
     const controller = new AbortController();
     const abort = () => controller.abort();
@@ -99,6 +99,21 @@ export function createApiClient({
     },
     getIncident: (incidentId, options) =>
       request(`/incidents/${id(incidentId)}`, options),
+    getIncidents: async (params = {}, options) => {
+      const search = new URLSearchParams();
+      if (params.toolId) search.set("toolId", params.toolId);
+      if (params.state) search.set("state", params.state);
+      if (params.limit) search.set("limit", String(params.limit));
+      const qs = search.toString();
+      const value = await request(`/incidents${qs ? `?${qs}` : ""}`, options);
+      if (!Array.isArray(value.incidents))
+        throw new ApiError("The incident list response is invalid.", {
+          code: "INVALID_RESPONSE",
+        });
+      return value.incidents;
+    },
+    closeIncident: (incidentId, body, options = {}) =>
+      request(`/incidents/${id(incidentId)}/close`, { method: "POST", body, ...options }),
     createIncident: (body) => request("/incidents", { method: "POST", body }),
     confirmIncident: (incidentId, body) =>
       request(`/incidents/${id(incidentId)}/confirm`, { method: "POST", body }),
@@ -127,20 +142,37 @@ export function createApiClient({
       request(`/incidents/${id(incidentId)}/similar?scope=${id(scope)}`, { ...options, requestTimeoutMs: 60000 }),
     getDuplicates: (incidentId, options) =>
       request(`/incidents/${id(incidentId)}/duplicates`, options),
-    createProposal: (incidentId, body) =>
+    getRepeatFailures: (incidentId, options) =>
+      request(`/incidents/${id(incidentId)}/repeat-failures`, options),
+    createProposal: (incidentId, body, options = {}) =>
       request(`/incidents/${id(incidentId)}/proposals`, {
         method: "POST",
         body,
+        ...options,
       }),
-    decideApproval: (approvalId, body) =>
+    decideApproval: (approvalId, body, options = {}) =>
       request(`/approvals/${id(approvalId)}/decision`, {
         method: "POST",
         body,
+        ...options,
       }),
-    verifyReturn: (incidentId, body) =>
+    restrictTool: (body, options = {}) =>
+      request("/mock/dm/tool-restrictions", { method: "POST", body, ...options }),
+    blockStock: (body, options = {}) =>
+      request("/mock/s4/stock-blocks", { method: "POST", body, ...options }),
+    notifyQuality: (body, options = {}) =>
+      request("/mock/s4/quality-notifications", { method: "POST", body, ...options }),
+    notifyMaintenance: (body, options = {}) =>
+      request("/mock/s4/maintenance-notifications", { method: "POST", body, ...options }),
+    startRepair: (incidentId, body, options = {}) =>
+      request(`/incidents/${id(incidentId)}/repairs`, { method: "POST", body, ...options }),
+    completeRepair: (repairId, body, options = {}) =>
+      request(`/repairs/${id(repairId)}/complete`, { method: "POST", body, ...options }),
+    verifyReturn: (incidentId, body, options = {}) =>
       request(`/incidents/${id(incidentId)}/verify-return`, {
         method: "POST",
         body,
+        ...options,
       }),
   };
 }

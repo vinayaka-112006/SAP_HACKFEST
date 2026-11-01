@@ -143,7 +143,7 @@ async function main() {
 main().catch(error => {
   report.status = report.checks.length || connected ? "FAILED" : "BLOCKED";
   report.failedAt = currentCheck;
-  report.error = error.code === "ERR_ASSERTION" ? { code: "HANA_VERIFICATION_ASSERTION", message: "Application verification assertion failed; inspect the named failed check." } : configuration.diagnostic(error);
+  report.error = error.code === "ERR_ASSERTION" ? { code: "HANA_VERIFICATION_ASSERTION", message: error.message } : configuration.diagnostic(error);
   process.exitCode = 1;
 }).finally(async () => {
   await stop();

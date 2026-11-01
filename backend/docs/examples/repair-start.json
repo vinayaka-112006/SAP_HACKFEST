@@ -1,0 +1,21 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "incidentId": "TS-SAMPLE",
+  "toolId": "TOOL-B",
+  "repairStatus": "Under repair",
+  "completed": false,
+  "repair": {
+    "repairId": "REP-SAMPLE",
+    "toolId": "TOOL-B",
+    "incidentId": "TS-SAMPLE",
+    "description": "Replaced the worn synthetic fixture and recorded the adjustment",
+    "loggedBy": "TECH-01",
+    "loggedAt": "2026-10-31T10:00:00.000Z",
+    "testReadings": [],
+    "passed": false,
+    "verifiedBy": null,
+    "verifiedAt": null
+  },
+  "auditId": "AUD-SAMPLE"
+}

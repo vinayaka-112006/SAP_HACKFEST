@@ -6,6 +6,9 @@ const fields = {
   STOCK_BLOCK: ["batchIds", "plant", "storageLocation", "reason"],
   TOOL_RESTRICTION: ["toolId", "action", "reason"],
 };
+function requiredScopeFields(type) {
+  return fields[type] ? [...fields[type]] : null;
+}
 function bypassEnabled() {
   return (
     process.env.NODE_ENV !== "production" &&
@@ -63,6 +66,7 @@ async function assertApproved(
   );
   if (!proposal || proposal.incidentId !== incidentId)
     return deny("INCIDENT_MISMATCH");
+  if (proposal.state !== "Approved") return deny("PROPOSAL_NOT_APPROVED");
   if (!proposalType) return { approval, proposal }; // Backward-compatible base check; action services always pass type and scope.
   if (!fields[proposalType] || proposal.type !== proposalType)
     return deny("ACTION_MISMATCH");
@@ -79,4 +83,4 @@ async function assertApproved(
   }
   return { approval, proposal };
 }
-module.exports = { assertApproved, bypassEnabled };
+module.exports = { assertApproved, bypassEnabled, requiredScopeFields };

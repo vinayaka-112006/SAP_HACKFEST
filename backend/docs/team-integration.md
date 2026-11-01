@@ -2,7 +2,7 @@
 
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
-During the original backend implementation, teammate branches/modules were unavailable. No code was merged, pushed or edited in teammate-owned directories. Five teammate endpoints remain _stub:true; their fixtures are provisional contract proposals, not implemented workflow.
+During the original backend implementation, teammate branches/modules were unavailable. No code was merged, pushed or edited in teammate-owned directories. The AI-structure endpoint remains _stub:true; its fixture is a provisional contract proposal, not implemented workflow.
 
 | Owner | Files/endpoints to provide | Expected seam |
 |---|---|---|
@@ -10,7 +10,9 @@ During the original backend implementation, teammate branches/modules were unava
 | Vinayaka | repository frontend/ | Consume /api, send demo headers locally / verified token on BTP; tools envelope is {tools:[...]}; display uncertainty and simulation labels. |
 | Jamuna | srv/rules/state-machine.js | Export canIncidentTransition(from,to,ctx), canToolTransition(from,to,ctx). Boolean or Promise<boolean>; ctx includes role, tx and incident/tool references where applicable. |
 | Jamuna | srv/rules/approvals.js | Export requiredApproverRole(type); Manager for MAINTENANCE_NOTIFICATION / TOOL_RESTRICTION, Quality for QUALITY_NOTIFICATION / STOCK_BLOCK. |
-| Jamuna | real routers | GET duplicates; POST proposals, approvals/:id/decision, verify-return. Preserve fixtures' envelopes or coordinate an explicit contract update. Persist Proposal/Approval; never rely on stub JSON to approve. |
+| Platform | POST /incidents/:id/proposals | Implemented in `srv/routes/proposals.router.js`; persists an evidence-backed Pending Proposal and audit entry only. It does not create Approval or execute actions. |
+| Platform | POST /approvals/:id/decision | Implemented in `srv/routes/proposals.router.js`; path `:id` is the proposalId, role is derived from authentication and `rulesAdapter.requiredApproverRole`, and one-way decisions persist Proposal + Approval + audit atomically. It does not execute actions. |
+| Platform | POST /incidents/:id/verify-return | Implemented in `srv/routes/incident.router.js`; accepts persisted `repairId`, requires authenticated Verifier, validates RepairLog/readings and independent identity, then uses the existing tool-state, audit and history transaction. |
 | Jamuna | tests/ground-truth.json | Review candidate and freeze identical expected data. Difference is a hard failure; do not silently replace either file. |
 
 Every real router exports `{ mount:'/api', router, owner }` in srv/routes/*.router.js. Direct Express route handlers only; attach auth to each protected route using requireRole. Loader claims exact method/path (parameter names normalized), rejects collisions and registers only missing stubs. Routes load on restart, not hot reload.
@@ -34,7 +36,7 @@ Approval payload must contain the exact fields below (batchIds may approve a sup
 | STOCK_BLOCK | batchIds, plant, storageLocation, reason |
 | TOOL_RESTRICTION | toolId, action:RESTRICT, reason |
 
-Every action also checks Proposal.incidentId and Approval.approverRole/decision. Supplied toolId must match the incident. Notification requester is recorded as supplied metadata; authenticated actor remains authoritative in audit. Synthetic plant PLANT-01/storage STORE-01. Approval creation/decision authorization and independent return verification remain Jamuna's responsibility.
+Every action also checks Proposal.incidentId and Approval.approverRole/decision. Supplied toolId must match the incident. Notification requester is recorded as supplied metadata; authenticated actor remains authoritative in audit. Synthetic plant PLANT-01/storage STORE-01. Approval decisions and return-to-service verification are persisted by platform routes. Return verification requires explicit passing reading records and remains separate from proposal approval and simulated actions.
 
 All JSON columns store serialized JSON; `decode()` restores them for responses. Transaction parameter is a CAP database transaction. Helpers start their own transaction only when omitted; always pass it for multi-table workflow changes. Use errors with status/code/details for the common JSON handler. The external x-system-call header is ignored.
 
@@ -44,6 +46,6 @@ The standalone approval check accepts an omitted transaction for compatibility, 
 
 ## Current repository paths
 
-All backend paths above are CAP-root relative: use backend/srv/routes for teammate routers, backend/srv/ai-adapter for Shashank, backend/srv/rules for Jamuna and backend/tests/ground-truth.json for reviewed data. Vinayaka owns the independent repository frontend/ directory. No AI/rules source existed during restructuring. Vinayaka's real frontend has since been merged and its supported screens now use the backend; the five AI/workflow routes remain stubs. Run npm commands inside backend/; the root package has only explicit backend wrappers.
+All backend paths above are CAP-root relative: use backend/srv/routes for routers, backend/srv/ai-adapter for Shashank, backend/srv/rules for Jamuna and backend/tests/ground-truth.json for reviewed data. Vinayaka owns the independent repository frontend/ directory. No AI/rules source existed during restructuring. Vinayaka's real frontend has since been merged and its supported screens now use the backend; AI-structure remains a stub. Return verification is backend-only unless a corresponding frontend flow is separately verified. Run npm commands inside backend/; the root package has only explicit backend wrappers.
 
 Frontend integration status and browser evidence: [integration handover](../../docs/frontend-backend-integration.md). The active UI no longer uses fake incidents, trace arrays, approval receipts or browser-generated audit records.

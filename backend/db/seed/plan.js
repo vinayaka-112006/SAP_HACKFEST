@@ -1,4 +1,5 @@
-const T = "2026-11-04T05:12:00.000Z";
+// Fixed synthetic event-time anchor. It is intentionally a past UTC instant.
+const T = "2026-10-31T05:12:00.000Z";
 const at = (hours) => new Date(Date.parse(T) - hours * 3600000).toISOString();
 const serial = (n) => `SN-${String(n).padStart(6, "0")}`;
 // Fixed construction plan: start/end serial, tool, age hours, location, special run.

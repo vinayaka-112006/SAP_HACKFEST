@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ResourceState from "../components/ResourceState";
-import InterlockGate from "../features/governance/InterlockGate";
 import { useStore } from "../state/store";
 import GlassPanel from "../components/GlassPanel";
 import StatusBadge from "../components/StatusBadge";
@@ -15,6 +14,12 @@ import GapsPanel from "../features/evidence/GapsPanel";
 import EvidenceDrawer from "../features/evidence/EvidenceDrawer";
 import SimilarEvidence from "../features/memory/SimilarEvidence";
 import Communication from "../features/worker/Communication";
+import WorkflowPanel from "../features/workflow/WorkflowPanel";
+
+function displayLocalTime(value) {
+  const time = new Date(value);
+  return Number.isFinite(time.getTime()) ? time.toLocaleString() : String(value || "Unknown");
+}
 
 export default function Console() {
   const {
@@ -43,11 +48,13 @@ export default function Console() {
     tankCounts,
     tierCounts,
     refresh,
+    incidents,
   } = useStore();
   const [lookup, setLookup] = useState(incidentId);
   const [showGaps, setShowGaps] = useState(false);
   const toolB = tools.find((tool) => tool.toolId === incident?.toolId);
   const isToolRestricted = toolB?.state === "Restricted";
+  const confirmationEvent = auditLog.find((entry) => entry.action === "INCIDENT_CONFIRMED");
   const picker = (
     <GlassPanel
       variant="clear"
@@ -65,7 +72,7 @@ export default function Console() {
           id="incident-lookup"
           value={lookup}
           onChange={(event) => setLookup(event.target.value)}
-          placeholder="TS-0002"
+          placeholder="TS-0001"
           required
         />
         <button className="primary-action" type="submit">
@@ -75,6 +82,33 @@ export default function Console() {
           Refresh Records
         </button>
       </form>
+      {Array.isArray(incidents) && incidents.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '14px', alignItems: 'center' }}>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--ink-secondary)' }}>Available incidents:</span>
+          {incidents.slice(0, 10).map((inc) => (
+            <button
+              key={inc.incidentId}
+              type="button"
+              className="secondary-action"
+              style={{
+                padding: '4px 10px',
+                fontSize: '12px',
+                cursor: 'pointer',
+                borderRadius: 'var(--radius-pill)',
+                borderColor: inc.incidentId === incidentId ? 'var(--brand-cyan)' : 'rgba(7, 17, 32, 0.15)',
+                backgroundColor: inc.incidentId === incidentId ? 'rgba(0, 184, 204, 0.15)' : 'rgba(255, 255, 255, 0.8)',
+                color: 'var(--ink)',
+              }}
+              onClick={() => {
+                setLookup(inc.incidentId);
+                openIncident(inc.incidentId);
+              }}
+            >
+              <strong>{inc.incidentId}</strong> ({inc.state} &bull; {inc.toolId})
+            </button>
+          ))}
+        </div>
+      )}
     </GlassPanel>
   );
   if (!incident)
@@ -84,10 +118,59 @@ export default function Console() {
         style={{ maxWidth: "1440px", margin: "0 auto", padding: "24px" }}
       >
         {picker}
-        <ResourceState
-          state={incidentState}
-          empty="Report an incident from the Worker Terminal, or open an existing incident ID."
-        />
+        {Array.isArray(incidents) && incidents.length > 0 ? (
+          <GlassPanel variant="strong" style={{ padding: '24px', marginTop: '16px' }}>
+            <h3 style={{ marginTop: 0, marginBottom: '12px' }}>Select an Incident to Inspect</h3>
+            <p style={{ color: 'var(--ink-secondary)', marginBottom: '16px' }}>
+              Choose an incident below to examine its deterministic trace results, uncertainty tier classifications, containment proposals, and application audit history.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
+              {incidents.map((inc) => (
+                <div
+                  key={inc.incidentId}
+                  onClick={() => {
+                    setLookup(inc.incidentId);
+                    openIncident(inc.incidentId);
+                  }}
+                  style={{
+                    padding: '16px',
+                    borderRadius: '16px',
+                    border: '1px solid rgba(0, 184, 204, 0.25)',
+                    background: 'rgba(255, 255, 255, 0.85)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--brand-cyan)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 184, 204, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(0, 184, 204, 0.25)';
+                    e.currentTarget.style.transform = 'none';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '15px' }}>{inc.incidentId}</span>
+                    <StatusBadge status={inc.state} />
+                  </div>
+                  <div style={{ fontSize: '13px', color: 'var(--ink)', fontWeight: 600, marginBottom: '6px' }}>
+                    Tool: {inc.toolId} {inc.category ? `• ${inc.category}` : ''}
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--ink-secondary)', maxHeight: '36px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {inc.translatedText || inc.rawText}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </GlassPanel>
+        ) : (
+          <ResourceState
+            state={incidentState}
+            empty="Report an incident from the Worker Terminal, or open an existing incident ID."
+          />
+        )}
       </div>
     );
   return (
@@ -273,9 +356,11 @@ export default function Console() {
         <p className="original-report">{incident.rawText}</p>
         {incident.translatedText && <p>{incident.translatedText}</p>}
         <p className="muted">
-          Reported: {incident.reportedAt} ({incident.reportedAtSource}) | State:{" "}
-          {incident.state}
+          Reported event time: {displayLocalTime(incident.reportedAt)} · UTC {incident.reportedAt || "Unknown"} ({incident.reportedAtSource || "source unavailable"}). Client-reported times are not independently verified.
         </p>
+        <p className="muted">Received by server: {displayLocalTime(incident.createdAt)} · UTC {incident.createdAt || "Unknown"}.</p>
+        <p className="muted">Reporter reference: {incident.reporterId || "Unknown"}.</p>
+        {incident.confirmedBy ? <p className="muted">Business confirmer value submitted: {incident.confirmedBy}. Authenticated principal: {confirmationEvent?.actor || (auditState.loading ? "Loading audit record…" : "Not present in the returned audit records")} ({confirmationEvent?.actorRole || "role unavailable"}).</p> : null}
         <p className="muted">
           {incident.confidence == null
             ? "No AI confidence supplied"
@@ -331,6 +416,7 @@ export default function Console() {
               </section>
               <div className="resource-message">
                 <p>{trace.disclaimer}</p>
+                <p data-testid="trace-run-context">Trace run ID: {trace.traceId || "unavailable"} · Window: {trace.windowHours} hours · Version: {trace.version} · Generated: {displayLocalTime(trace.generatedAt)} (UTC {trace.generatedAt || "Unknown"}).</p>
                 <p>
                   Shipped units: {trace.summary.byLocation.SHIPPED} | Unknown
                   location: {trace.summary.byLocation.UNKNOWN_LOCATION} | Stale
@@ -380,35 +466,7 @@ export default function Console() {
           )}
         </>
       )}
-      <section style={{ marginBottom: "24px" }}>
-        <h2>Governance Interlock Gates (Containment Proposals)</h2>
-        <div className="integration-grid">
-          <GlassPanel variant="strong" style={{ padding: "24px" }}>
-            <InterlockGate requiredRole="Manager / Quality" />
-            <h3>Human-approved containment</h3>
-            <p>
-              Workflow unavailable: proposal and approval endpoints are still
-              stubs. No containment has been proposed or executed here.
-            </p>
-            <button className="secondary-action" disabled>
-              Propose Containment
-            </button>
-            <button className="secondary-action" disabled>
-              Approve and Dispatch
-            </button>
-          </GlassPanel>
-          <GlassPanel variant="strong" style={{ padding: "24px" }}>
-            <h3>Verified Return to Service</h3>
-            <p>
-              Awaiting Jamuna's repair and verification workflow. The displayed
-              tool state is read from the database.
-            </p>
-            <button className="secondary-action" disabled>
-              Verify Return to Service
-            </button>
-          </GlassPanel>
-        </div>
-      </section>
+      <WorkflowPanel />
       <section style={{ marginBottom: "24px" }}>
         <h2>SIMULATED SAP Documents</h2>
         <ResourceState state={documentsState} />

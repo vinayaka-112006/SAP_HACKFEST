@@ -6,8 +6,8 @@
     "node": "^24.11.0"
   },
   "scripts": {
-    "dev": "node srv/server.js",
-    "start": "node srv/server.js",
+    "dev": "node srv/server.js --database=sqlite",
+    "start": "node srv/server.js --database=sqlite",
     "start:local": "node srv/server.js --database=sqlite",
     "start:hana": "node srv/server.js --database=hana",
     "hana:check": "node scripts/hana.js check",
@@ -31,7 +31,8 @@
     "smoke": "node scripts/smoke.js",
     "db:checkpoint": "node scripts/checkpoint-db.js",
     "verify:package": "node scripts/verify-package.js",
-    "docs:contract": "node scripts/update-contract.js"
+    "docs:contract": "node scripts/update-contract.js",
+    "db:unlock": "node -e \"const fs=require('fs');const f='db.sqlite.lock';if(fs.existsSync(f)){fs.unlinkSync(f);console.log('Lock removed')}else{console.log('No lock file')}\""
   },
   "dependencies": {
     "@cap-js/hana": "^3.1.2",

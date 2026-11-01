@@ -42,7 +42,7 @@ CAP configuration was extracted without semantic changes into backend/.cdsrc.jso
 - npm test from backend/: 61 passed, 12 suites, zero failed/skipped (same as baseline).
 - npm run build and npm run verify:package from backend/: passed; compiled runtime includes .cdsrc.json and public stub fixtures.
 - Standalone npm run smoke -- --fresh on isolated copy: passed; counts 35/100/160, scores 100/82/83 and range 35/154/6 matched. Incident confirmation, audit, history and all four approval rejections verified.
-- npm run verify:stubs against that copy: health and all five teammate fixtures passed.
+- Historical npm run verify:stubs snapshot against that copy: health and the five external fixtures present in that earlier contract passed. The current contract now has one AI structure-report stub; platform-owned workflow routes are not stubs.
 - All 52 db/srv source and seed files compared byte-for-byte (normalizing Git line endings) with b9e9894: unchanged. Frontend unchanged. All 18 endpoint paths and OpenAPI remain unchanged.
 - Main database integrity/data digest after smoke remained identical to the pre-move source and backup.
 
@@ -50,7 +50,7 @@ Root convenience commands and final link/staging review are recorded below after
 
 ## Final review
 
-- Root npm run test:backend: 61 passed across 12 suites, zero failed/skipped. Root npm run dev:backend starts the backend with its correct working directory/database; health, authenticated tool register and six health/stub checks pass on unchanged localhost:4004/api.
+- Historical root npm run test:backend: 61 passed across 12 suites, zero failed/skipped. The six health/stub checks and fixture counts in this section describe the earlier restructuring snapshot, not the current API contract. Current results are in `tests/results/summary.json` and `tests/results/package-results.json`.
 - Main database checked again after startup: integrity ok, canonical data digest unchanged, 300 units, TS-0002 not allocated. Backup and all runtime/generated/dependency files are ignored.
 - Original CAP configuration equals backend/.cdsrc.json exactly; backend package/dependency semantics remain identical after extracting that configuration. Backend lock, MTA, XSUAA, Jest config, OpenAPI and candidate ground truth match their originals byte-for-byte apart from Git newline normalization.
 - Relative Markdown links were checked across repository/backend documents: no missing targets. No source, API behavior or test assertion was removed; only operational/test database paths changed.
@@ -90,4 +90,4 @@ SAP_HACKFEST/
   README.md
 ```
 
-Existing external limitations persist: provisional ground truth, five teammate stubs and unverified real-cloud deployment/audit/token checks. No push or merge is part of this work.
+Existing external limitations persist: provisional ground truth, the single AI structure-report stub, and unverified real-cloud deployment/audit/token checks. Duplicate/repeat evaluation, proposal/approval workflows, repair verification and simulated actions are platform implementations; none proves live SAP execution. No push or merge is part of this work.

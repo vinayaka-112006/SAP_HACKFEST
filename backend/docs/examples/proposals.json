@@ -1,22 +1,51 @@
 {
   "_label": "SIMULATED",
-  "_stub": true,
+  "_stub": false,
   "proposal": {
-    "proposalId": "PROP-0001",
-    "incidentId": "TS-0002",
-    "type": "TOOL_RESTRICTION",
+    "proposalId": "PROP-SAMPLE",
+    "incidentId": "TS-SAMPLE",
+    "type": "STOCK_BLOCK",
     "payload": {
-      "toolId": "TOOL-B",
-      "action": "RESTRICT"
+      "batchIds": [
+        "BATCH-SAMPLE"
+      ],
+      "plant": "PLANT-01",
+      "storageLocation": "STORE-01",
+      "reason": "Review trace-linked in-stock batch",
+      "evidence": {
+        "trace": {
+          "traceId": "TRACE-SAMPLE",
+          "version": 1,
+          "windowHours": 168,
+          "generatedAt": "2026-10-31T05:12:00.000Z"
+        },
+        "exposure": "Potentially exposed",
+        "affectedQuantity": null,
+        "basis": {
+          "traceId": "TRACE-SAMPLE",
+          "version": 1,
+          "windowHours": 168,
+          "confirmedInStockBatchIds": [
+            "BATCH-SAMPLE"
+          ]
+        }
+      }
     },
-    "reason": "Review torque report",
+    "reason": "Review trace-linked in-stock batch",
     "state": "Pending",
-    "createdAt": "2026-11-04T05:14:00Z"
+    "createdAt": "2026-10-31T05:14:00.000Z"
   },
-  "approval": {
-    "approvalId": "APR-0001",
-    "proposalId": "PROP-0001",
-    "approverRole": "Manager",
-    "decision": "PENDING"
-  }
+  "requiredApproverRole": "Quality",
+  "created": true,
+  "evidence": {
+    "trace": {
+      "traceId": "TRACE-SAMPLE",
+      "version": 1,
+      "generatedAt": "2026-10-31T05:12:00.000Z"
+    },
+    "exposure": "Potentially exposed",
+    "affectedQuantity": null
+  },
+  "actionExecuted": false,
+  "auditId": "AUD-SAMPLE"
 }

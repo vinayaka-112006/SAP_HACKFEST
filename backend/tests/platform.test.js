@@ -8,14 +8,18 @@ const { loadRouters } = require("../srv/lib/router-loader");
 const verify = require("../scripts/verify-stubs");
 cds.test(__dirname + "/..");
 jest.setTimeout(30000);
-test("remaining teammate stubs and live health match documented fixtures", async () => {
+test("remaining AI stub and live health match documented fixtures", async () => {
   expect(
     await verify(
       cds.app.server
         ? `http://localhost:${cds.app.server.address().port}`
         : cds.test.url,
     ),
-  ).toBe(5);
+  ).toBe(
+    require("../srv/routes/_stubs/contract.json").filter(
+      (endpoint) => (endpoint.owner !== "platform" && endpoint.owner !== "Shashank") || endpoint.name === "health",
+    ).length,
+  );
 });
 test("unknown route returns contract error", async () => {
   const response = await request(cds.app).get("/api/no-such-route");

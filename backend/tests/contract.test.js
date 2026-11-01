@@ -47,6 +47,8 @@ test("real endpoint status codes and response structures conform to OpenAPI", as
     confirmedBy: "WRK-014",
   });
   check("/incidents/{id}/confirm", "post", confirmed.status, confirmed.body);
+  const repeatFailures = await api("get", `/incidents/${id}/repeat-failures`);
+  check("/incidents/{id}/repeat-failures", "get", repeatFailures.status, repeatFailures.body);
   for (const [url, template] of [
     [`/incidents/${id}/trace?window=72`, "/incidents/{id}/trace"],
     [`/incidents/${id}`, "/incidents/{id}"],
@@ -66,7 +68,7 @@ test("real endpoint status codes and response structures conform to OpenAPI", as
 });
 test("every declared endpoint is claimed by a real router or explicitly marked stub", () => {
   const registry = cds.app.locals.routeRegistry;
-  expect(registry.size).toBe(25);
+  expect(registry.size).toBe(30);
   for (const e of contract) {
     const key = e.method + " /api" + e.path.replace(/:[^/]+/g, ":param");
     expect(registry.get(key)).toMatchObject({ stub: e.owner === "Jamuna" });

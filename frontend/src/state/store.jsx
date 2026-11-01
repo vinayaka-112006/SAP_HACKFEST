@@ -35,6 +35,10 @@ export function StoreProvider({ children }) {
   const toolsState = useResource("tools:" + identityKey, (signal) =>
     client.getTools({ signal }),
   );
+  const incidentsState = useResource(
+    `incidents:${identityKey}:${revision}`,
+    (signal) => client.getIncidents({}, { signal }),
+  );
   const incidentState = useResource(
     `incident:${incidentId}:${identityKey}:${revision}`,
     (signal) => client.getIncident(incidentId, { signal }),
@@ -42,6 +46,7 @@ export function StoreProvider({ children }) {
   );
   const incident = incidentState.data?.incident || null;
   const tools = toolsState.data || [];
+  const incidents = incidentsState.data || [];
   const historyToolId =
     pathname === "/console" && incident ? incident.toolId : selectedToolId;
   const historyState = useResource(
@@ -101,6 +106,8 @@ export function StoreProvider({ children }) {
         openIncident,
         incident,
         incidentState,
+        incidents,
+        incidentsState,
         selectedToolId,
         setSelectedToolId,
         tools,

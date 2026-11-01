@@ -5,7 +5,7 @@ Paths and npm commands in this document are relative to the `backend/` CAP proje
 - HANA trial stopped: check HANA Central, authorized instance status and entitlement. Restart through cockpit if permitted. Local SQLite remains available.
 - Wrong profile: production selects HANA and requires service bindings; clear NODE_ENV/CDS_ENV for local use. Tests use their own in-memory database and never your demo file.
 - 401 locally: send x-demo-user and one valid x-demo-role. 403: use a permitted role. These are demo headers, not verified production identities.
-- 409 APPROVAL_REQUIRED: Jamuna must create an APPROVED record with correct role, incident, action and payload scope. Stub approval responses do not create records. Do not enable bypass for the demo.
+- 409 APPROVAL_REQUIRED: decide the Pending proposal through the authenticated approval route using the role required by platform policy. The resulting Approval must match incident, action and payload scope. Approval is separate from execution; do not enable bypass for the demo.
 - XSUAA: production never accepts unverified claims or demo headers. Bind the correct service, map role collections and obtain a verified token. Local code cannot verify an unavailable real binding.
 - Port busy / old Phase 0 server: stop the previous terminal/process, then restart this branch. Do not run stale and current servers on the same port. PORT can select another local port.
 - Schema mismatch: back up and stop the local demo database, then db:reset. Never auto-reset a nonempty existing database on startup.

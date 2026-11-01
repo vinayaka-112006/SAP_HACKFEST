@@ -157,11 +157,12 @@ test("nested windows exclude out-of-scope units and repeated output is determini
   ).toBe(false);
   const again = (await api("get", `/incidents/${id}/trace?window=72h`)).body;
   const normalized = (x) => {
-    const { generatedAt, version, ...rest } = x;
+    const { generatedAt, version, traceId, ...rest } = x;
     return rest;
   };
   expect(normalized(again)).toEqual(normalized(results[72].body));
   expect(again.version).toBe(results[72].body.version + 1);
+  expect(again.traceId).not.toBe(results[72].body.traceId);
 });
 test("other tools have exact selectivity including valid empty trace", async () => {
   for (const toolId of ["TOOL-A", "TOOL-C"]) {
@@ -195,7 +196,7 @@ test("invalid window, incident and underlying tool return contract errors", asyn
     cds.ql.INSERT.into(entity("Incident")).entries({
       incidentId: "ORPHAN",
       toolId: "MISSING",
-      reportedAt: "2026-11-04T05:12:00Z",
+      reportedAt: "2026-10-31T05:12:00Z",
     }),
   );
   expect(
@@ -206,13 +207,15 @@ test("trace persists version, audit and tool history for each successful call", 
   const detail = await api("get", "/incidents/" + id);
   expect(detail.body.traceResults).toHaveLength(4);
   const log = await api("get", "/audit?incident=" + id);
-  expect(
-    log.body.entries.filter((e) => e.action === "TRACE_GENERATED"),
-  ).toHaveLength(4);
+  const traceAudits = log.body.entries.filter((e) => e.action === "TRACE_GENERATED");
+  expect(traceAudits).toHaveLength(4);
+  expect(new Set(traceAudits.map((e) => e.details.traceId)).size).toBe(4);
+  expect(new Set(detail.body.traceResults.map((trace) => trace.traceId)).size).toBe(4);
+  expect(traceAudits.map((e) => e.details.traceId).sort()).toEqual(detail.body.traceResults.map((trace) => trace.traceId).sort());
   const h = await api("get", "/tools/TOOL-B/history");
-  expect(
-    h.body.events.filter((e) => e.type === "TRACE" && e.refId === id),
-  ).toHaveLength(4);
+  const traceEvents = h.body.events.filter((e) => e.type === "TRACE" && e.refId === id);
+  expect(traceEvents).toHaveLength(4);
+  expect(new Set(traceEvents.map((event) => event.details.traceId)).size).toBe(4);
 });
 test("missing batch, unit and location evidence produces explicit gaps", () => {
   const data = {
@@ -221,16 +224,16 @@ test("missing batch, unit and location evidence produces explicit gaps", () => {
         eventId: "E",
         toolId: "T",
         runId: "R",
-        start: "2026-11-04T01:00:00Z",
-        end: "2026-11-04T02:00:00Z",
+        start: "2026-10-31T01:00:00Z",
+        end: "2026-10-31T02:00:00Z",
       },
     ],
     ProductionRun: [
       {
         runId: "R",
         workCenter: "W",
-        startTime: "2026-11-04T01:00:00Z",
-        endTime: "2026-11-04T02:00:00Z",
+        startTime: "2026-10-31T01:00:00Z",
+        endTime: "2026-10-31T02:00:00Z",
       },
     ],
     Batch: [],
@@ -240,17 +243,17 @@ test("missing batch, unit and location evidence produces explicit gaps", () => {
     Dealer: [],
   };
   const tool = { toolId: "T", workCenter: "W" };
-  expect(buildWindow(data, tool, "2026-11-04T05:12:00Z", 24).gaps[0].code).toBe(
+  expect(buildWindow(data, tool, "2026-10-31T05:12:00Z", 24).gaps[0].code).toBe(
     "MISSING_BATCH_LINK",
   );
   data.Batch = [{ batchId: "B", runId: "R" }];
   expect(
-    buildWindow(data, tool, "2026-11-04T05:12:00Z", 24).gaps.some(
+    buildWindow(data, tool, "2026-10-31T05:12:00Z", 24).gaps.some(
       (g) => g.code === "MISSING_UNIT_RECORDS",
     ),
   ).toBe(true);
   data.Unit = [{ serial: "S", batchId: "B", value: 3200 }];
-  const result = buildWindow(data, tool, "2026-11-04T05:12:00Z", 24);
+  const result = buildWindow(data, tool, "2026-10-31T05:12:00Z", 24);
   expect(result.units[0].locationStatus).toBe("UNKNOWN_LOCATION");
   expect(result.gaps.some((g) => g.code === "UNKNOWN_LOCATION")).toBe(true);
 });

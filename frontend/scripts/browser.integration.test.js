@@ -2,6 +2,7 @@ import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { fileURLToPath } from "node:url";
 import { fork, execFileSync } from "node:child_process";
 import { chromium } from "playwright";
@@ -11,13 +12,10 @@ const frontend = path.resolve(
 );
 const repo = path.dirname(frontend),
   backend = path.join(repo, "backend");
-const output = path.join(frontend, "test-results");
+const output = fs.mkdtempSync(path.join(os.tmpdir(), "toolsathi-browser-"));
 fs.mkdirSync(output, { recursive: true });
-const database = path.join(
-  repo,
-  "backup",
-  `browser-integration-${crypto.randomUUID()}.sqlite`,
-);
+const testTemp = fs.mkdtempSync(path.join(backend, ".browser-integration-"));
+const database = path.join(testTemp, "runtime.sqlite");
 const frontendPort = Number(process.env.E2E_FRONTEND_PORT || 5174);
 const frontendUrl = `http://localhost:${frontendPort}`;
 let apiUrl, backendProcess, viteProcess, browser, page, context;
@@ -93,7 +91,6 @@ function check(name, fn) {
 }
 before(
   async () => {
-    fs.mkdirSync(path.dirname(database), { recursive: true });
     backendProcess = fork("srv/server.js", [], {
       cwd: backend,
       silent: true,
@@ -127,7 +124,6 @@ before(
           VITE_API_BASE_URL: "/api",
           VITE_DEMO_AUTH: "true",
           VITE_AI_ENABLED: "false",
-          VITE_WORKFLOW_ENABLED: "false",
           API_PROXY_TARGET: apiUrl,
           TOOLSATHI_VITE_CACHE_DIR: path.join(output, `vite-${frontendPort}`),
         },
@@ -162,6 +158,7 @@ before(
       if (response.url().includes("/trace?") && response.status() === 200) {
         const trace = await response.json();
         traces.push({
+          traceId: trace.traceId,
           windowHours: trace.windowHours,
           summary: trace.summary,
           dataQuality: trace.dataQuality,
@@ -177,6 +174,10 @@ before(
 after(async () => {
   report.trace = traces;
   report.executedAt = new Date().toISOString();
+  fs.writeFileSync(
+    path.join(repo, "docs", "frontend-integration-results.json"),
+    JSON.stringify({ browser: report }, null, 2) + "\n",
+  );
   fs.writeFileSync(
     path.join(output, "browser-summary.json"),
     JSON.stringify(report, null, 2) + "\n",
@@ -194,6 +195,16 @@ after(async () => {
     backendProcess.send({ type: "toolsathi:shutdown" });
     await closed;
   }
+  const resolvedTemp = path.resolve(testTemp);
+  if (
+    path.dirname(resolvedTemp) === path.resolve(backend) &&
+    path.basename(resolvedTemp).startsWith(".browser-integration-")
+  ) fs.rmSync(resolvedTemp, { recursive: true, force: true });
+  const resolvedOutput = path.resolve(output);
+  if (
+    path.dirname(resolvedOutput) === path.resolve(os.tmpdir()) &&
+    path.basename(resolvedOutput).startsWith("toolsathi-browser-")
+  ) fs.rmSync(resolvedOutput, { recursive: true, force: true });
 });
 check(
   "real register, manual QR fallback and explicit synthetic input",
@@ -343,6 +354,10 @@ check(
       1,
       "Duplicate rendering-triggered trace requests",
     );
+    const traceRun = traces.find((run) => run.windowHours === 72);
+    assert.ok(traceRun?.traceId, "The persisted trace must expose its run ID");
+    const persistedAudit = await fetch(`${apiUrl}/api/audit?incident=${incidentId}`, { headers }).then((response) => response.json());
+    assert.ok(persistedAudit.entries.some((entry) => entry.action === "TRACE_GENERATED" && entry.details.traceId === traceRun.traceId));
     await page.getByRole("button", { name: "Why?", exact: true }).click();
     for (const code of [
       "MISSING_TOOL_USE_RECORD",
@@ -437,37 +452,30 @@ check(
   },
 );
 check(
-  "audit/documents/history are real and unavailable human workflow stays blocked",
+  "audit, documents, history and implemented workflow evaluation are shown honestly",
   async () => {
     await page
       .getByRole("heading", { name: "Application Audit History" })
       .waitFor();
     await until(
       async () =>
-        (await page.locator("body").textContent()).includes("TRACE_GENERATED"),
+        (await page.locator("body").textContent()).includes("Trace generated"),
       "Trace audit did not load",
     );
     const body = await page.locator("body").textContent();
+    assert.match(body, /Authenticated actor/);
+    assert.match(body, /Audit ID/);
+    assert.doesNotMatch(body, /Subsystem: No model supplied/);
     for (const action of [
-      "INCIDENT_CREATED",
-      "INCIDENT_CONFIRMED",
-      "TRACE_GENERATED",
+      "Incident reported",
+      "Incident confirmed",
+      "Trace generated",
     ])
-      assert.match(body, new RegExp(action));
+      assert.ok(body.includes(action), `Expected audit label ${action}`);
     assert.match(body, /No simulated documents exist/);
-    assert.match(body, /Workflow unavailable/);
-    assert.equal(
-      await page
-        .getByRole("button", { name: "Approve and Dispatch" })
-        .isDisabled(),
-      true,
-    );
-    assert.equal(
-      await page
-        .getByRole("button", { name: "Verify Return to Service" })
-        .isDisabled(),
-      true,
-    );
+    assert.match(body, /Incident review and tool workflow/);
+    assert.match(body, /Incident evaluation/);
+    assert.doesNotMatch(body, /Workflow unavailable|Awaiting Jamuna/);
     assert.doesNotMatch(body, /cryptographic|tamper-evident|LINK ACTIVE/i);
     await page.goto(frontendUrl + "/history");
     await skipIntro(page);
@@ -477,10 +485,7 @@ check(
       "Seeded tool history missing",
     );
     assert.match(await page.locator("body").textContent(), /CALIBRATION/);
-    assert.equal(
-      await page.getByRole("button", { name: "Merge Reports" }).isDisabled(),
-      true,
-    );
+    assert.doesNotMatch(await page.locator("body").textContent(), /Merge Reports/);
     await page.getByLabel("Tool history register").selectOption("TOOL-C");
     await until(
       async () =>
@@ -491,6 +496,110 @@ check(
     );
   },
 );
+
+check("console completes proposal approval, simulated restriction, repair and independent verification through the UI", async () => {
+  const category = `E2E-LIFECYCLE-${crypto.randomUUID().slice(0, 8)}`;
+  let activeIncident;
+  const incidentIds = [];
+  for (const [index, reportedAt] of [
+    "2026-10-30T12:00:00.000Z",
+    "2026-10-31T12:00:00.000Z",
+    "2026-10-31T13:00:00.000Z",
+  ].entries()) {
+    const created = await fetch(apiUrl + "/api/incidents", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        toolId: "TOOL-C",
+        reporterId: `E2E-REPAIR-${index}`,
+        language: "en",
+        rawText: "Synthetic fixture alignment slips under torque",
+        translatedText: "Synthetic fixture alignment slips under torque",
+        category,
+        reportedAt,
+      }),
+    }).then((response) => response.json());
+    const incident = created.incident;
+    incidentIds.push(incident.incidentId);
+    const confirmed = await fetch(apiUrl + `/api/incidents/${incident.incidentId}/confirm`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ confirmedBy: "E2E-REVIEW" }),
+    });
+    assert.equal(confirmed.status, 200);
+    activeIncident = incident;
+  }
+
+  await page.goto(frontendUrl + "/console");
+  await skipIntro(page);
+  await page.getByLabel("Open incident ID").fill(activeIncident.incidentId);
+  await page.getByRole("button", { name: "Open Incident", exact: true }).click();
+  await page.getByRole("heading", { name: "Incident review and tool workflow" }).waitFor();
+  await until(async () => (await page.getByLabel("Repeat-failure record count").textContent()).includes('"thresholdMet": true'), "Repeat-failure result did not load");
+  assert.match(await page.getByLabel("Potential duplicate candidates").textContent(), /"similarity": 1/);
+
+  await page.getByLabel("Reason", { exact: true }).fill("Review recurring synthetic fixture alignment reports");
+  const proposalResponse = page.waitForResponse((response) => response.url().endsWith(`/api/incidents/${activeIncident.incidentId}/proposals`) && response.request().method() === "POST");
+  await page.getByRole("button", { name: "Create review proposal" }).click();
+  const proposalResult = await (await proposalResponse).json();
+  assert.equal(proposalResult.proposal.state, "Pending");
+  assert.equal(proposalResult.actionExecuted, false);
+  const proposalId = proposalResult.proposal.proposalId;
+  await page.getByLabel("Proposal ID for decision").fill(proposalId);
+  await page.getByLabel("Approval reason").fill("Reviewed the evidence and approved the proposal");
+  const approvalResponse = page.waitForResponse((response) => response.url().endsWith(`/api/approvals/${proposalId}/decision`));
+  await page.getByRole("button", { name: "Approve proposal" }).click();
+  const approvalResult = await (await approvalResponse).json();
+  assert.equal(approvalResult.proposal.state, "Approved");
+  assert.equal(approvalResult.actionExecuted, false);
+  assert.ok(approvalResult.approval.approvalId);
+  assert.equal(await page.getByLabel("Persisted Approval ID").count(), 0);
+  assert.equal(await page.getByLabel("Approval ID").count(), 0);
+  await until(async () => page.getByRole("button", { name: "Run simulated tool restriction" }).isEnabled(), "Approved action did not become available after backend refresh");
+  assert.equal(await page.getByRole("button", { name: "Run simulated tool restriction" }).isEnabled(), true);
+  const restrictionResponse = page.waitForResponse((response) => response.url().endsWith("/api/mock/dm/tool-restrictions"));
+  await page.getByRole("button", { name: "Run simulated tool restriction" }).click();
+  assert.equal((await restrictionResponse).status(), 200);
+  await page.getByText(/SIMULATED result persisted/).waitFor();
+
+  await page.getByRole("button", { name: "Technician local demo role" }).first().click();
+  await page.getByLabel("Local demo user ID").fill("E2E-TECHNICIAN");
+  await page.getByLabel("Repair record").fill("Adjusted synthetic fixture and documented inspection");
+  const repairStartResponse = page.waitForResponse((response) => response.url().endsWith(`/api/incidents/${activeIncident.incidentId}/repairs`));
+  await page.getByRole("button", { name: "Start repair as Technician" }).click();
+  const repairStart = await (await repairStartResponse).json();
+  const repairId = repairStart.repair.repairId;
+  await page.getByLabel("Repair ID").fill(repairId);
+  const completionResponse = page.waitForResponse((response) => response.url().endsWith(`/api/repairs/${repairId}/complete`));
+  await page.getByLabel(/Test readings/).fill("Fixture torque=pass\nAlignment=pass");
+  await page.getByRole("button", { name: "Record test readings" }).click();
+  assert.equal((await completionResponse).status(), 200);
+
+  await page.getByRole("button", { name: "Verifier local demo role" }).first().click();
+  await page.getByLabel("Local demo user ID").fill("E2E-INDEPENDENT-VERIFIER");
+  const verificationResponse = page.waitForResponse((response) => response.url().endsWith(`/api/incidents/${activeIncident.incidentId}/verify-return`));
+  await page.getByRole("button", { name: "Verify return as independent Verifier" }).click();
+  const verification = await (await verificationResponse).json();
+  assert.equal(verification.toolState.to, "Active");
+  assert.equal(verification._label, "SIMULATED");
+
+  // The remembered console incident is the third report; explicitly select the first
+  // history item and verify that both read-only evaluations follow that selection.
+  await page.goto(frontendUrl + "/history");
+  await skipIntro(page);
+  await page.getByLabel("Tool history register").selectOption("TOOL-C");
+  const selectedHistoryIncident = incidentIds[0];
+  await page.getByText("No incident selected.").waitFor();
+  assert.doesNotMatch(await page.locator("body").textContent(), /REPEAT PATTERN FLAGGED/);
+  await page.getByRole("button", { name: `Evaluate incident ${selectedHistoryIncident}` }).first().click();
+  await page.getByText(`Selected incident: ${selectedHistoryIncident}`).waitFor();
+  await until(
+    async () => requests.some((request) => request.url.endsWith(`/api/incidents/${selectedHistoryIncident}/repeat-failures`)),
+    "History evaluation did not call the selected incident endpoint",
+  );
+  assert.equal(selectedHistoryIncident !== activeIncident.incidentId, true);
+  assert.equal(pageErrors.length, 0, JSON.stringify(pageErrors));
+});
 check(
   "network error recovery, role access and mobile layout do not crash",
   async () => {
@@ -565,10 +674,10 @@ check(
 
 check('existing backend smoke and health/stub verification pass on isolated data',async()=>{
  const npm=path.join(path.dirname(process.execPath),'node_modules/npm/bin/npm-cli.js');
- const env={...process.env,BASE_URL:apiUrl};
+ const env={...process.env,BASE_URL:apiUrl,SMOKE_NO_ARTIFACTS:"true"};
  for(const command of ['smoke','verify:stubs']){
   const text=execFileSync(process.execPath,[npm,'run',command],{cwd:backend,env,encoding:'utf8',timeout:30000});
-  assert.ok(command==='smoke'?text.includes('VERIFIED_APPROVAL_REJECTION'):text.includes('5 endpoints passed'));
+  assert.ok(command==='smoke'?text.includes('VERIFIED_APPROVAL_REJECTION'):/\b\d+ endpoints passed\b/.test(text));
  }
  report.backendSmoke='PASSED';report.backendStubVerification='PASSED';
 });

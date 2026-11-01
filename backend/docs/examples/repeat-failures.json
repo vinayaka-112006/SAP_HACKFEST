@@ -1,0 +1,23 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "incidentId": "TS-0002",
+  "toolId": "TOOL-B",
+  "category": "TORQUE",
+  "referenceAt": "2026-10-31T05:12:00.000Z",
+  "referenceAtSource": "CLIENT_REPORTED",
+  "currentIncidentExcluded": true,
+  "windowDays": 30,
+  "minimumReports": 2,
+  "valid": true,
+  "thresholdMet": true,
+  "count": 2,
+  "matchingIncidentIds": ["TS-0001", "TS-0003"],
+  "potentialDuplicateIncidentIds": ["TS-0001"],
+  "matchingIncidents": [
+    { "incidentId": "TS-0001", "reportedAt": "2026-10-20T05:12:00.000Z", "reportedAtSource": "CLIENT_REPORTED", "state": "Reported" },
+    { "incidentId": "TS-0003", "reportedAt": "2026-10-28T05:12:00.000Z", "reportedAtSource": "SERVER_RECEIVED", "state": "Confirmed" }
+  ],
+  "countBasis": "unique prior incident records; potential duplicates remain in the count and distinct real-world events are not verified",
+  "reason": null
+}

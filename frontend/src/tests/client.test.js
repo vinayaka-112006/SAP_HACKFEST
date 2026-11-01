@@ -76,6 +76,42 @@ test("confirmation sends named confirmer and only supplied corrections", async (
   assert.equal(calls[0].url, "http://test/api/incidents/TS-0002/confirm");
   assert.deepEqual(JSON.parse(calls[0].body), body);
 });
+test("workflow client uses the implemented read, approval, action and repair routes", async () => {
+  const { api, calls } = setup({ _label: "SIMULATED", _stub: false });
+  await api.getDuplicates("TS/0001");
+  await api.getRepeatFailures("TS/0001");
+  await api.createProposal("TS/0001", { type: "TOOL_RESTRICTION", reason: "Review evidence" });
+  await api.decideApproval("PROP-1", { decision: "APPROVED", reason: "Reviewed" });
+  await api.restrictTool({ toolId: "TOOL-B", approvalId: "APR-1" });
+  await api.blockStock({ incidentId: "TS-0001", batchIds: ["B-1"], approvalId: "APR-1" });
+  await api.notifyQuality({ incidentId: "TS-0001", batchIds: ["B-1"], approvalId: "APR-1" });
+  await api.notifyMaintenance({ incidentId: "TS-0001", toolId: "TOOL-B", approvalId: "APR-1" });
+  await api.startRepair("TS/0001", { description: "Synthetic repair" });
+  await api.completeRepair("REP-1", { testReadings: [{ name: "Torque", passed: true }] });
+  await api.verifyReturn("TS/0001", { repairId: "REP-1" });
+  await api.closeIncident("TS/0001", { reason: "Resolved" });
+  assert.deepEqual(calls.map(({ url, method = "GET" }) => [method, url.replace("http://test/api", "")]), [
+    ["GET", "/incidents/TS%2F0001/duplicates"],
+    ["GET", "/incidents/TS%2F0001/repeat-failures"],
+    ["POST", "/incidents/TS%2F0001/proposals"],
+    ["POST", "/approvals/PROP-1/decision"],
+    ["POST", "/mock/dm/tool-restrictions"],
+    ["POST", "/mock/s4/stock-blocks"],
+    ["POST", "/mock/s4/quality-notifications"],
+    ["POST", "/mock/s4/maintenance-notifications"],
+    ["POST", "/incidents/TS%2F0001/repairs"],
+    ["POST", "/repairs/REP-1/complete"],
+    ["POST", "/incidents/TS%2F0001/verify-return"],
+    ["POST", "/incidents/TS%2F0001/close"],
+  ]);
+});
+test("incident list query formats parameters and validates response", async () => {
+  const { api, calls } = setup({ incidents: [{ incidentId: "TS-0001" }] });
+  const result = await api.getIncidents({ toolId: "TOOL-B", state: "Reported", limit: 10 });
+  assert.equal(calls[0].url, "http://test/api/incidents?toolId=TOOL-B&state=Reported&limit=10");
+  assert.equal(result.length, 1);
+  assert.equal(result[0].incidentId, "TS-0001");
+});
 test("trace requests bind the actual incident and selected window", async () => {
   const { api, calls } = setup({});
   for (const window of [24, 72, 168]) await api.getTrace("TS-0042", window);
@@ -146,7 +182,7 @@ for (const [label, value] of [["null", null], ["array", []], ["string", "unexpec
 test("display mapping preserves backend totals, evidence IDs and Unknown tier", () => {
   const trace = {
     toolId: "TOOL-B",
-    snapshotTime: "2026-11-04T05:02:00Z",
+    snapshotTime: "2026-10-31T05:02:00Z",
     summary: {
       byTier: { CONFIRMED: 90, PROBABLE: 4, UNKNOWN: 6 },
       byLocation: { IN_STOCK: 40 },

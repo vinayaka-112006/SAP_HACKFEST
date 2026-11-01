@@ -162,15 +162,23 @@
     "name": "duplicates",
     "method": "GET",
     "path": "/incidents/:id/duplicates",
-    "owner": "Jamuna",
-    "example": "duplicates.json",
+    "owner": "platform",
+    "example": "duplicates-real.json",
+    "request": null
+  },
+  {
+    "name": "repeat-failures",
+    "method": "GET",
+    "path": "/incidents/:id/repeat-failures",
+    "owner": "platform",
+    "example": "repeat-failures.json",
     "request": null
   },
   {
     "name": "proposals",
     "method": "POST",
     "path": "/incidents/:id/proposals",
-    "owner": "Jamuna",
+    "owner": "platform",
     "example": "proposals.json",
     "request": {
       "type": "TOOL_RESTRICTION",
@@ -181,24 +189,63 @@
     "name": "approval-decision",
     "method": "POST",
     "path": "/approvals/:id/decision",
-    "owner": "Jamuna",
+    "owner": "platform",
     "example": "approval-decision.json",
     "request": {
       "decision": "APPROVED",
-      "reason": "Containment approved",
-      "decidedBy": "MGR-01"
+      "reason": "Containment approved"
     }
   },
   {
     "name": "verify-return",
     "method": "POST",
     "path": "/incidents/:id/verify-return",
-    "owner": "Jamuna",
+    "owner": "platform",
     "example": "verify-return.json",
     "request": {
-      "verifiedBy": "VER-01",
-      "repairId": "REP-0001",
-      "passed": true
+      "repairId": "REP-0001"
+    }
+  },
+  {
+    "name": "repair-create",
+    "method": "POST",
+    "path": "/incidents/:id/repairs",
+    "owner": "platform",
+    "example": "repair-start.json",
+    "request": {
+      "description": "Replaced the worn synthetic fixture and recorded the adjustment"
+    }
+  },
+  {
+    "name": "repair-complete",
+    "method": "POST",
+    "path": "/repairs/:id/complete",
+    "owner": "platform",
+    "example": "repair-complete.json",
+    "request": {
+      "testReadings": [
+        { "name": "Fixture torque check", "passed": true },
+        { "name": "Alignment check", "passed": true }
+      ]
+    }
+  },
+  {
+    "name": "incident-list",
+    "method": "GET",
+    "path": "/incidents",
+    "owner": "platform",
+    "example": "incidents.json",
+    "request": null
+  },
+  {
+    "name": "incident-close",
+    "method": "POST",
+    "path": "/incidents/:id/close",
+    "owner": "platform",
+    "example": "incident-close.json",
+    "request": {
+      "reason": "Verified resolution",
+      "insufficientEvidence": false
     }
   }
 ]

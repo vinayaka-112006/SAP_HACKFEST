@@ -53,12 +53,12 @@ test("read-only SQLite snapshot preserves existing non-seed reports, Unicode, JS
   const source = new DatabaseSync(file);
   for (const statement of cds.compile.to.sql(model, { dialect: "sqlite" })) source.exec(statement);
   const raw = "  \u0c9f\u0cc2\u0cb2\u0ccd B\n  ";
-  source.prepare("INSERT INTO toolsathi_Incident (incidentId,rawText,missingFields,reportedAt) VALUES (?,?,?,?)").run("TS-0027", raw, '["photo"]', "2026-11-04T05:12:00.1234567Z");
+  source.prepare("INSERT INTO toolsathi_Incident (incidentId,rawText,missingFields,reportedAt) VALUES (?,?,?,?)").run("TS-0027", raw, '["photo"]', "2026-10-31T05:12:00.1234567Z");
   source.prepare("INSERT INTO toolsathi_Counter (name,value) VALUES (?,?)").run("incident", 9007199254740993n);
   source.close();
   const before = fs.readFileSync(file);
   const result = transfer.snapshotSqlite(file, model);
-  expect(result.data["toolsathi.Incident"][0]).toMatchObject({ incidentId: "TS-0027", rawText: raw, missingFields: '["photo"]', reportedAt: "2026-11-04T05:12:00.1234567Z" });
+  expect(result.data["toolsathi.Incident"][0]).toMatchObject({ incidentId: "TS-0027", rawText: raw, missingFields: '["photo"]', reportedAt: "2026-10-31T05:12:00.1234567Z" });
   expect(result.data["toolsathi.Counter"][0].value).toBe("9007199254740993");
   expect(fs.readFileSync(file)).toEqual(before);
 });

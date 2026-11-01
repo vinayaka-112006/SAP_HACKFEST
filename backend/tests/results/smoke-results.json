@@ -1,6 +1,6 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-11-01T03:57:53.825Z",
+  "executedAt": "2026-11-01T14:13:52.032Z",
   "realBackend": [
     "tools",
     "incident-create",
@@ -33,19 +33,8 @@
       "status": "VERIFIED_APPROVAL_REJECTION"
     }
   ],
-  "teammateStubs": [
-    "ai-structure",
-    "duplicates",
-    "proposals",
-    "approval-decision",
-    "verify-return"
-  ],
-  "blocked": [
-    {
-      "step": "approved-workflow-and-verified-return",
-      "reason": "Jamuna proposal/approval/return endpoints are stubs. Approved action services are separately verified with persisted test-only approvals in Jest; no live approvals fabricated."
-    }
-  ],
+  "remainingStubs": [],
+  "blocked": [],
   "trace": [
     {
       "windowHours": 24,
@@ -56,7 +45,7 @@
         "UNKNOWN": 0
       },
       "score": 100,
-      "durationMs": 18.486699999999985
+      "durationMs": 10.927700000000186
     },
     {
       "windowHours": 72,
@@ -67,7 +56,7 @@
         "UNKNOWN": 6
       },
       "score": 82,
-      "durationMs": 17.566299999999984
+      "durationMs": 10.211500000001251
     },
     {
       "windowHours": 168,
@@ -78,8 +67,13 @@
         "UNKNOWN": 6
       },
       "score": 83,
-      "durationMs": 15.624200000000002
+      "durationMs": 10.73320000000058
     }
   ],
-  "incidentId": "TS-0003"
+  "incidentId": "TS-0002",
+  "proposalAttempt": {
+    "status": 409,
+    "code": "INSUFFICIENT_EVIDENCE",
+    "actionExecuted": false
+  }
 }

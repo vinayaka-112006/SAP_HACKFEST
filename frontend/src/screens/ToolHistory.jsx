@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ResourceState from "../components/ResourceState";
 import GlassPanel from "../components/GlassPanel";
 import StatusBadge from "../components/StatusBadge";
 import DuplicatePrompt from "../features/history/DuplicatePrompt";
 import LockoutTag from "../features/governance/LockoutTag";
 import { useStore } from "../state/store";
+import { incidentIdFromHistoryEvent } from "../features/history/incident-context";
 
 export default function ToolHistory() {
   const {
@@ -15,6 +16,8 @@ export default function ToolHistory() {
     selectedToolId,
     setSelectedToolId,
   } = useStore();
+  const [selectedIncidentId, setSelectedIncidentId] = useState("");
+  useEffect(() => setSelectedIncidentId(""), [selectedToolId]);
   const history = events.map((event) => ({
     ...event,
     title: event.summary,
@@ -138,7 +141,7 @@ export default function ToolHistory() {
 
       {/* DUPLICATE PROMPT INTERACTIVE BANNER */}
       <section style={{ marginBottom: "28px" }}>
-        <DuplicatePrompt />
+        <DuplicatePrompt incidentId={selectedIncidentId} />
       </section>
 
       <ResourceState state={historyState} />
@@ -194,9 +197,8 @@ export default function ToolHistory() {
           />
 
           {history.map((item) => {
-            const isRepeat = item.isRepeatFlag;
-            const isDuplicate = item.type === "duplicate_report";
-            const isCurrent = item.incidentId === "TS-0001";
+            const incidentContextId = incidentIdFromHistoryEvent(item);
+            const isSelectedIncident = incidentContextId === selectedIncidentId;
 
             return (
               <div key={item.eventId} style={{ position: "relative" }}>
@@ -209,12 +211,8 @@ export default function ToolHistory() {
                     width: "14px",
                     height: "14px",
                     borderRadius: "50%",
-                    backgroundColor: isRepeat
-                      ? "var(--ruby)"
-                      : isCurrent
-                        ? "var(--cobalt)"
-                        : "#FFFFFF",
-                    border: `3px solid ${isRepeat ? "var(--ruby-glow)" : "var(--cobalt)"}`,
+                    backgroundColor: isSelectedIncident ? "var(--cobalt)" : "#FFFFFF",
+                    border: "3px solid var(--cobalt)",
                     boxShadow: "0 0 8px rgba(0,0,0,0.1)",
                   }}
                 />
@@ -223,11 +221,9 @@ export default function ToolHistory() {
                   variant="strong"
                   style={{
                     padding: "20px 24px",
-                    border: isRepeat
-                      ? "2px solid rgba(224, 49, 75, 0.4)"
-                      : isCurrent
-                        ? "1px solid rgba(59, 91, 255, 0.35)"
-                        : "1px solid rgba(14, 26, 47, 0.1)",
+                    border: isSelectedIncident
+                      ? "2px solid rgba(59, 91, 255, 0.55)"
+                      : "1px solid rgba(14, 26, 47, 0.1)",
                   }}
                 >
                   <div
@@ -256,38 +252,6 @@ export default function ToolHistory() {
                         >
                           {item.title}
                         </span>
-                        {isRepeat && (
-                          <span
-                            style={{
-                              fontSize: "11px",
-                              fontWeight: 700,
-                              fontFamily: "var(--font-mono)",
-                              padding: "2px 8px",
-                              borderRadius: "var(--radius-pill)",
-                              backgroundColor: "var(--ruby-soft)",
-                              color: "var(--ruby-ink)",
-                              display: "inline-flex",
-                              alignItems: "center",
-                              gap: "4px",
-                            }}
-                          >
-                            <svg
-                              width="11"
-                              height="11"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <circle cx="12" cy="12" r="10" />
-                              <line x1="12" y1="8" x2="12" y2="12" />
-                              <line x1="12" y1="16" x2="12.01" y2="16" />
-                            </svg>
-                            REPEAT PATTERN FLAGGED (12 DAYS AGO)
-                          </span>
-                        )}
                         {item.badge && (
                           <span
                             style={{
@@ -316,6 +280,18 @@ export default function ToolHistory() {
                       </div>
                     </div>
                   </div>
+
+                  {incidentContextId && (
+                    <button
+                      type="button"
+                      className="secondary-action"
+                      aria-pressed={isSelectedIncident}
+                      onClick={() => setSelectedIncidentId(incidentContextId)}
+                    >
+                      {`Evaluate incident ${incidentContextId}`}
+                    </button>
+                  )}
+                  {isSelectedIncident ? <span role="status">Selected for duplicate and repeat-failure evaluation</span> : null}
 
                   {/* Multilingual transcript if present */}
                   {item.rawText && (
@@ -351,6 +327,12 @@ export default function ToolHistory() {
                         Translated: "{item.translatedText}"
                       </div>
                     </div>
+                  )}
+
+                  {item.type === "TRACE" && item.details?.traceId && (
+                    <p className="muted" data-testid="trace-history-context">
+                      Trace run {item.details.traceId} · {item.details.windowHours} hours · version {item.details.version}.
+                    </p>
                   )}
 
                   {item.resolution && (

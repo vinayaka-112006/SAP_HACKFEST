@@ -160,6 +160,16 @@ test.each([0, 1, 2, 3])(
       }),
     );
     expect(docs.length).toBeGreaterThan(0);
+    const documentsResponse = await request(cds.app)
+      .get(`/api/mock/documents?incident=${id}`)
+      .set("x-demo-user", "MOCK-TEST")
+      .set("x-demo-role", "Manager");
+    expect(documentsResponse.status).toBe(200);
+    expect(documentsResponse.body.documents).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ type, approvalId, _label: "SIMULATED" }),
+      ]),
+    );
     expect(
       (
         await cds.db.run(

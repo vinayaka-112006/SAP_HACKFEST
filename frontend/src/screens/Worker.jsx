@@ -18,7 +18,7 @@ const DEMO_INPUT = {
   translatedText: "Tool B is leaving bolts loose",
   category: "TORQUE",
   suggestedNcCode: "NC-TORQUE-LOOSE",
-  reportedAt: "2026-11-04T05:12:00.000Z",
+  reportedAt: "2026-10-31T05:12:00.000Z",
 };
 const emptyFields = (tool) => ({
   tool, symptom: "", category: "", time: "", suggestedNc: "",
@@ -981,10 +981,10 @@ export default function Worker() {
               value={fields.time}
               disabled={currentStep === "confirm"}
               onChange={(e) => handleFieldChange("time", e.target.value)}
-              placeholder="2026-11-04T05:12:00Z"
+              placeholder="2026-10-31T05:12:00Z"
             />
             <p className="muted">
-              If omitted, the backend records server receive time and a warning.
+              This is the reporter-supplied event time, not the submit time. Use a past UTC instant; future values are rejected. If omitted, the backend records server receive time and a warning.
             </p>
           </div>
           {/* Editable Fields Form */}

@@ -1,15 +1,149 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-10-31T17:36:27.422Z",
-  "passed": 101,
-  "failed": 0,
+  "executedAt": "2026-11-01T11:04:18.211Z",
+  "passed": 164,
+  "failed": 1,
   "skipped": 0,
-  "suitesFailed": 0,
+  "suitesFailed": 1,
+  "testFiles": [
+    {
+      "file": "tests/reliability.test.js",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/local-launcher.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/incidents.test.js",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/data-transfer.test.js",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/seed.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/hana-config.test.js",
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/deployment.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/mocks.test.js",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/proposals.test.js",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/roles.test.js",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/contract.test.js",
+      "passed": 2,
+      "failed": 1,
+      "skipped": 0
+    },
+    {
+      "file": "tests/repeat-failure.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/trace.test.js",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/repairs.test.js",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/duplicates.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/approval-workflow.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/return-to-service.test.js",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/platform.test.js",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/smoke.test.js",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/hana-sql.test.js",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/xsuaa-unit.test.js",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/rules-adapter.test.js",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
   "externalChecksNotExecuted": [
     "Jamuna ground truth sign-off",
-    "Real teammate workflow and verified return",
     "Real XSUAA binding/token",
-    "BTP/HDI service deployment (direct HANA checks are reported separately)"
+    "BTP/HDI deployment",
+    "Domain-defined inspection requirements and tolerances"
   ],
   "groundTruth": "PROVISIONAL CANDIDATE; Jamuna review pending",
   "trace": [
@@ -51,7 +185,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 20.204899999996996,
+      "durationMs": 20.547300000000178,
       "status": 200
     },
     {
@@ -92,7 +226,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 20.133799999995972,
+      "durationMs": 15.90480000000025,
       "status": 200
     },
     {
@@ -133,7 +267,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 15.977500000000873,
+      "durationMs": 13.922299999998359,
       "status": 200
     }
   ]

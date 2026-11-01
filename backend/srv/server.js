@@ -109,7 +109,9 @@ if (require.main === module)
         });
     })
     .catch(async (error) => {
-      const safe = database?.mode === "hana" || configurationError ? databaseConfig.diagnostic(error) : { code: error.code || "STARTUP_ERROR", message: "Check local database and port availability." };
+      const safe = database?.mode === "hana" || configurationError
+        ? databaseConfig.diagnostic(error)
+        : { code: error.code || "STARTUP_ERROR", message: error.message || "Check local database and port availability." };
       console.error(`ToolSathi startup failed (${safe.code}): ${safe.message}`);
       await cds.db?.disconnect();
       process.exitCode = 1;
