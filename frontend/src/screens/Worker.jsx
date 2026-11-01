@@ -7,6 +7,7 @@ import MicOrb from "../features/worker/MicOrb";
 import { useStore } from "../state/store";
 import { buildIncidentPayload, resolveToolCode } from "../api/mappings";
 import useSarvamRecorder from "../features/worker/useSarvamRecorder";
+import SimilarEvidence from "../features/memory/SimilarEvidence";
 const DEMO_INPUT = {
   toolId: "TOOL-B",
   reporterId: "WRK-014",
@@ -1170,6 +1171,9 @@ export default function Worker() {
         </GlassPanel>
       )}
 
+      {["card", "confirm", "status"].includes(currentStep) && <SimilarEvidence
+        query={[fields.symptom, workerWords].filter(Boolean).join('\n').slice(0, 2000)} toolId={fields.tool}
+        category={fields.category || undefined} asOf={fields.time || undefined} incidentId={saved?.incident?.incidentId} />}
       {currentStep === "status" && (
         <GlassPanel variant="strong" style={{ padding: "28px" }}>
           <h2>Incident Confirmed: {saved?.incident.incidentId}</h2>

@@ -40,7 +40,16 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
   browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
   const page = await browser.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
   const raw = 'Tool B leaves bolts loose.';
-  let aiCalls = 0, speechCalls = 0, failing = false, conflict = false;
+  let aiCalls = 0, speechCalls = 0, failing = false, conflict = false, searchFail = false;
+  const evidence = { _stub: false, method: 'HYBRID', indexedPassages: 2, scoreMeaning: 'Relevance, not fault confidence.',
+    embeddingModelVersion: 'test-local-model', warnings: [], matches: [{ sourceId: 'SOP-TEST', sourceType: 'SOP', title: 'Synthetic test reference', section: '2.1',
+      sourceVersion: 'a'.repeat(64), chunkId: 'SOP:SOP-TEST:test:1', span: { start: 0, end: 25, unit: 'unicode_code_points' }, excerpt: 'Recorded evidence excerpt.',
+      lexicalScore: 0.5, semanticSimilarity: 0.9, label: 'Needs technician verification' }] };
+  await page.route('**/api/ai/search', async route => {
+    assert.equal(route.request().postDataJSON().toolId, 'TOOL-B');
+    await route.fulfill(searchFail ? { status: 503, json: { error: { code: 'SEARCH_UNAVAILABLE', message: 'Search temporarily unavailable.' } } } : { json: evidence });
+  });
+  await page.route('**/api/incidents/*/similar?*', route => route.fulfill({ json: evidence }));
   await page.addInitScript(() => {
     window.__stoppedTracks = 0;
     Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: { getUserMedia: async () => ({ getTracks: () => [{ stop: () => { window.__stoppedTracks++; } }] }) } });
@@ -85,6 +94,13 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     await page.getByRole('button', { name: 'Structure with AI' }).click();
     await page.getByRole('heading', { name: 'Review Incident Card' }).waitFor();
     assert.equal(await page.getByLabel('Category (optional)').inputValue(), 'TORQUE');
+    await page.getByRole('button', { name: 'Find similar records' }).click();
+    await page.getByTestId('similar-results').waitFor();
+    assert.match(await page.getByTestId('similar-results').textContent(), /SOP-TEST/);
+    assert.match(await page.getByTestId('similar-results').textContent(), /Needs technician verification/);
+    await page.getByLabel('Category (optional)').fill('WEAR');
+    assert.equal(await page.getByTestId('similar-results').count(), 0);
+    await page.getByLabel('Category (optional)').fill('TORQUE');
     await page.getByLabel('Translated report', { exact: true }).fill('Worker-reviewed English explanation');
     assert.equal(await page.getByRole('button', { name: 'Confirm Incident', exact: true }).count(), 0);
     const saved = page.waitForResponse(r => r.url().endsWith('/api/incidents') && r.request().method() === 'POST');
@@ -113,9 +129,17 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     await page.getByRole('heading', { name: 'Review Incident Card' }).waitFor();
     await page.getByRole('button', { name: 'Save Incident', exact: true }).click();
     await page.getByRole('alert').filter({ hasText: 'Review the tool conflict' }).waitFor();
-    await page.getByRole('checkbox').check();
+    await page.getByRole('checkbox', { name: /I reviewed the conflicting tool/ }).check();
     await page.getByLabel('Card tool ID').fill('TOOL-C');
-    assert.equal(await page.getByRole('checkbox').isChecked(), false);
+    assert.equal(await page.getByRole('checkbox', { name: /I reviewed the conflicting tool/ }).isChecked(), false);
+  });
+  await t.test('evidence search failure leaves manual review available', async () => {
+    searchFail = true; await reportScreen();
+    await page.getByLabel('Original report').fill(raw);
+    await page.getByRole('button', { name: 'Review Manual Incident Card' }).click();
+    await page.getByRole('button', { name: 'Find similar records' }).click();
+    await page.getByRole('alert').filter({ hasText: 'Search temporarily unavailable' }).waitFor();
+    assert.equal(await page.getByRole('button', { name: 'Save Incident', exact: true }).isEnabled(), true);
   });
   assert.equal(aiCalls, 3); assert.deepEqual(errors, []);
 });

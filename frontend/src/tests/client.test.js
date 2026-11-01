@@ -217,3 +217,12 @@ test("speech uploads audio bytes with identity headers rather than JSON encoding
   assert.equal(calls[0].headers['Content-Type'], audio.type);
   assert.equal(calls[0].headers['x-demo-role'], 'Worker');
 });
+test('evidence search uses explicit filters and saved incident scope', async () => {
+  const { api, calls } = setup({ matches: [] });
+  const body = { query: 'loose bolts', toolId: 'TOOL-B', category: 'TORQUE' };
+  await api.searchEvidence(body);
+  await api.getSimilar('TS-0042', { scope: 'all-tools' });
+  assert.equal(calls[0].url, 'http://test/api/ai/search');
+  assert.deepEqual(JSON.parse(calls[0].body), body);
+  assert.equal(calls[1].url, 'http://test/api/incidents/TS-0042/similar?scope=all-tools');
+});

@@ -1,6 +1,6 @@
-# Person 2 — Phases 1 and 2
+# Person 2 — Phases 1–3
 
-Sarvam typed intake and speech are connected through `srv/routes/ai.router.js` to the existing worker screen. No package, database model, trace, approval, startup or private environment-file changes. Embeddings, similarity search, read-back and message drafting remain later phases.
+Sarvam typed intake/speech and local evidence retrieval are connected to the existing worker screen. Phase 3 adds one optional embedding-runtime dependency and its lockfile entries. Database models, trace, approvals, startup scripts and private environment files are unchanged. Read-back, explanations and message drafting remain later phases.
 
 ## Setup and run
 
@@ -51,3 +51,38 @@ Live Sarvam checks through the running frontend proxy passed one typed torque sa
 Sarvam contract reference: https://docs.sarvam.ai/api/token-factory/chat-completions
 
 The user's explicit request authorizes Shashank's AI module despite the older platform-only ownership instructions. Changes outside this folder are limited to its router, worker/API bindings, and directly affected contract/test tooling. Existing `.env` and the pre-existing removal of `backend/.env.example` are untouched. Stub probes and ordinary smoke checks skip real AI so they cannot silently consume credits.
+
+## Phase 3 — local evidence retrieval
+
+### Setup and usage
+
+`@huggingface/transformers` 3.8.1 is an optional backend dependency. Failure to install/load the native inference runtime does not prevent backend startup or reporting; search explicitly falls back to keywords. No embedding API key or Sarvam credits are needed.
+
+```powershell
+# One-time public model download, then offline CPU inference:
+node backend/srv/ai-adapter/similarity/embeddings.js --download
+# Small local calibration evaluation (exit 1 if any case misses):
+node backend/srv/ai-adapter/similarity/evaluate.js
+```
+
+Model: Xenova/multilingual-e5-small, revision `761b726dd34fb83930e26aab4e9ac3899aa1fa78`, q8 ONNX, mean pooling, L2-normalized 384-dimensional vectors. Query/passages use the E5 `query:` and `passage:` prefixes. Native CPU inference is limited to two intra-operation threads. Model files are about 135 MB and live under ignored `backup/ai-models`; hashed-vector cache lives under ignored `backup/ai-search`. Neither is committed. Runtime requests never download a model or call an external embedding provider. A fresh checkout requires the explicit download command for semantic search.
+
+On a worker's reviewed card or the incident console, click **Find similar records**. Retrieval is on demand and read-only. **Include other tools** changes the scope and clears prior results. Source IDs, exact excerpts, SOP sections where recorded, content-version hashes, Unicode character spans and embedding provenance are inspectable. Relevance scores are not probabilities or physical fault findings. Source text is displayed as evidence, never executed as instructions or rewritten into invented repair steps.
+
+### Endpoints and boundaries
+
+- `POST /api/ai/search`: `{query, toolId?, category?, asOf?, limit?}`; 1–2000 query characters and limit 1–10 (default 5). Uses existing incident/history read permissions: any authenticated application role.
+- `GET /api/incidents/:id/similar?scope=same-tool|all-tools&limit=5`: derives query and anchor from the stored incident; excludes that incident and its linked repair notes. Same-tool is the default. Jamuna's `/duplicates` endpoint and workflow are untouched; no record is merged or flagged as a confirmed duplicate.
+- Sources are current CAP Incident, RepairLog and SopDoc rows, read in one transaction. No HANA model changes or business-record writes. Invalid/missing repair descriptions and conflicting tool links are excluded with warnings. Future incidents/repairs are excluded relative to the supplied/incident anchor. SOP revision dates do not exist in the current schema, so current text is searched with that limitation stated.
+- Every request rebuilds its source manifest from current rows; changed text produces a new content version, and deleted records cannot remain in results through an old persisted text index. Only reusable hashes/vectors are cached.
+- Prototype limits: first 500 records per source table, at most 1000 passages, 900 Unicode-code-point chunks with 120-character overlap, bounded 4000-vector cache. Source/passage limits produce warnings. This is a small-corpus prototype, not production-scale search.
+- Keyword scoring uses query coverage weighted by document frequency. Hybrid ranking adds cosine similarity; provisional policy `hybrid-1` uses keyword minimum 0.2, semantic minimum 0.8 and a 0.03 window from the best semantic candidate. Model/policy versions and score meaning are returned. No result is manufactured to fill a requested limit.
+- The three live SOP entries are placeholders and are excluded explicitly. Reviewed SOP text must be supplied through the existing data-owner process before useful live procedure retrieval is possible. Test SOP passages exist only in isolated evaluation fixtures.
+
+### Phase 3 verification and limitations
+
+61 offline Jest tests and 19 frontend client tests pass. Eight existing browser regression checks pass. Extended isolated AI browser checks cover citation display, clearing results when card context changes, retrieval failure preserving manual review, and the existing speech/save/confirm path. Provider responses in those UI checks are mocked; actual HANA/local-model retrieval was checked separately through the running frontend proxy, with no Sarvam calls.
+
+Local calibration: **11/12 cases**, not a held-out accuracy estimate. Eight of nine raw English/Hindi/Kannada positive queries found their expected source within the first three results; two unrelated queries returned no matches; the additional reviewed-English-assisted Kannada wear query passed. The short raw Kannada wear query missed and the evaluation deliberately retains a nonzero exit status for it. Results must not be presented as 100% multilingual accuracy. The worker search includes the reviewed English intake translation when available and explains the no-match fallback. Raw calibration and live read-only result metadata are in ignored `backup/phase3-retrieval-evaluation.json` and `backup/phase3-live-results.json`.
+
+References: https://huggingface.co/Xenova/multilingual-e5-small and https://huggingface.co/intfloat/multilingual-e5-small . Installed Transformers.js and ONNX Runtime type definitions were checked for local-only loading and session/thread options.

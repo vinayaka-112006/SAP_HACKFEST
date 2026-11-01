@@ -117,6 +117,10 @@ export function createApiClient({
       request("/ai/structure-report", { ...options, method: "POST", body, requestTimeoutMs: 45000 }),
     transcribe: (body, language, options = {}) =>
       request(`/ai/transcribe?language=${id(language)}`, { ...options, method: "POST", body, requestTimeoutMs: 25000 }),
+    searchEvidence: (body, options = {}) =>
+      request('/ai/search', { ...options, method: 'POST', body, requestTimeoutMs: 60000 }),
+    getSimilar: (incidentId, { scope = 'same-tool', ...options } = {}) =>
+      request(`/incidents/${id(incidentId)}/similar?scope=${id(scope)}`, { ...options, requestTimeoutMs: 60000 }),
     getDuplicates: (incidentId, options) =>
       request(`/incidents/${id(incidentId)}/duplicates`, options),
     createProposal: (incidentId, body) =>

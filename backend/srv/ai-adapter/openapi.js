@@ -37,6 +37,27 @@ function applyAiSpec(spec) {
       modelVersion: { type: 'string' }, requiresTranscriptReview: { type: 'boolean', enum: [true] },
     }, additionalProperties: true } } } } },
   } };
+  const searchResponse = { description: 'Ranked source passages with exact excerpts, content versions and model/policy provenance. Empty matches are a valid result.', content: { 'application/json': { schema: {
+    type: 'object', required: ['method', 'matches', 'warnings', 'corpusVersion', 'scoreMeaning'],
+    properties: { method: { type: 'string', enum: ['HYBRID', 'KEYWORD'] }, warnings: { type: 'array', items: { type: 'string' } }, corpusVersion: { type: 'string' }, scoreMeaning: { type: 'string' },
+      matches: { type: 'array', items: { type: 'object', required: ['sourceId', 'sourceType', 'excerpt', 'citation', 'label'], properties: {
+        sourceId: { type: 'string' }, sourceType: { type: 'string', enum: ['INCIDENT', 'REPAIR', 'SOP'] }, excerpt: { type: 'string' }, citation: { type: 'object', additionalProperties: true }, label: { type: 'string' },
+      }, additionalProperties: true } },
+    }, additionalProperties: true,
+  } } } };
+  const searchBase = { tags: ['Shashank'], 'x-owner': 'Shashank', 'x-implementation': 'real', security,
+    description: 'Read-only local embeddings plus keyword retrieval. No Sarvam calls. Placeholder SOPs are excluded. Does not decide duplicates, repairs or exposure. Local model unavailable means explicitly labelled keyword fallback.',
+    responses: { ...responses, 200: searchResponse },
+  };
+  spec.paths['/ai/search'] = { post: { ...searchBase, operationId: 'ai-search', requestBody: { required: true, content: { 'application/json': { schema: {
+    type: 'object', required: ['query'], properties: { query: { type: 'string', minLength: 1, maxLength: 2000 }, toolId: { type: 'string', maxLength: 120 }, category: { type: 'string', maxLength: 120 },
+      limit: { type: 'integer', minimum: 1, maximum: 10, default: 5 }, asOf: { type: 'string', format: 'date-time' } },
+  } } } } } };
+  spec.paths['/incidents/{id}/similar'] = { get: { ...searchBase, operationId: 'incident-similar', parameters: [
+    { name: 'id', in: 'path', required: true, schema: { type: 'string' } },
+    { name: 'scope', in: 'query', schema: { type: 'string', enum: ['same-tool', 'all-tools'], default: 'same-tool' } },
+    { name: 'limit', in: 'query', schema: { type: 'integer', minimum: 1, maximum: 10, default: 5 } },
+  ] } };
   spec.info.description = 'Synthetic manufacturing data, simulated SAP actions, live Sarvam intake/transcription; four pending workflow stubs. AI suggestions require human review.';
   return spec;
 }
