@@ -8,6 +8,7 @@ import { useStore } from "../state/store";
 import { buildIncidentPayload, resolveToolCode } from "../api/mappings";
 import useSarvamRecorder from "../features/worker/useSarvamRecorder";
 import SimilarEvidence from "../features/memory/SimilarEvidence";
+import Communication from "../features/worker/Communication";
 const DEMO_INPUT = {
   toolId: "TOOL-B",
   reporterId: "WRK-014",
@@ -1171,6 +1172,9 @@ export default function Worker() {
         </GlassPanel>
       )}
 
+      {apiConfig.aiEnabled && ["card", "confirm"].includes(currentStep) && <Communication mode="readback" language={language}
+        card={{ toolId: fields.tool, rawText: workerWords, translatedText: fields.symptom, category: fields.category, suggestedNcCode: fields.suggestedNc, reporterId, reportedAt: fields.time }} />}
+      {currentStep === "status" && <Communication incidentId={saved?.incident?.incidentId} language={language} />}
       {["card", "confirm", "status"].includes(currentStep) && <SimilarEvidence
         query={[fields.symptom, workerWords].filter(Boolean).join('\n').slice(0, 2000)} toolId={fields.tool}
         category={fields.category || undefined} asOf={fields.time || undefined} incidentId={saved?.incident?.incidentId} />}

@@ -1,6 +1,26 @@
-# Person 2 — Phases 1–3
+# Person 2 — Phases 1–4
 
-Sarvam typed intake/speech and local evidence retrieval are connected to the existing worker screen. Phase 3 adds one optional embedding-runtime dependency and its lockfile entries. Database models, trace, approvals, startup scripts and private environment files are unchanged. Read-back, explanations and message drafting remain later phases.
+Sarvam typed intake, transcription, readback, local evidence retrieval and grounded multilingual communication are connected to the existing screens. Database models, trace engine, approval workflows, startup scripts and private environment files are unchanged. Phase 5 final evaluation and teammate integration remain.
+
+## Phase 4 — readback and grounded communication
+
+No additional key, subscription or dependency is required. Readback uses the existing `SARVAM_API_KEY`; status, trace explanation and dealer text use versioned fixed English/Hindi/Kannada templates with no paid model call. Canonical codes, original reports, gap reasons and source IDs are retained; English translations stored in the card are explicitly labelled English. Plant-language review of wording and pronunciation remains part of final acceptance.
+
+- **Worker card:** click **I reviewed this card — read aloud**, then use the audio controls. Sarvam `bulbul:v3` produces WAV in the selected language. The complete card includes original text, any stored English translation, tool, category, suggested NC, reporter and report time. A complete readback over 2400 characters is rejected rather than truncated. Review/Save/Confirm remain distinct; listening never confirms anything. Editing any card field, language or identity clears old audio, stops playback and cancels pending output. Audio is transient browser memory, with no auto-play or backend audio persistence.
+- **Worker status or console:** click **Refresh status in my language**. The adapter reads the current incident from the database, returns its canonical state plus localized wording and read timestamp. Unrecognized state becomes Unknown. Status does not infer approval from a tool state or manufacture a repair decision. Refresh after workflow changes.
+- **Review console:** after a normal deterministic trace has loaded, click **Explain this trace**. The adapter reads the latest stored snapshot for that window and returns its ID/version, exact tier counts, snapshot time and recorded gaps. It verifies counts against stored units and fails closed on inconsistencies. The UI rejects a version/window mismatch rather than present an explanation of another trace. CONFIRMED/PROBABLE are linkage tiers, never product-quality findings. Unknown is kept separate. Missing snapshots return 404; explanation never generates a trace or alters membership.
+- **Quality console:** expand **Approval-bound dealer notice draft**, enter an approved Quality-notification approval ID and dealer ID, and click **Create dealer draft**. A matching approved record, incident/tool, approving role and dealer shipments inside approved batch scope are mandatory, even when development mock approval bypass is enabled. Only matching shipped batches appear. An unsent SIMULATED draft and application audit history are stored in one transaction. No emails or external messages are sent. Jamuna's workflow remains necessary to create approvals; its current stub cannot supply one. Positive persistence tests use isolated SQLite fixtures, never fabricated approvals in HANA.
+
+Verification: 84 isolated AI/backend tests (including real SQLite persistence and rollback on failed audit), 20 frontend client tests, six AI browser subchecks plus their parent, eight existing browser regressions and the production build passed. An initial concurrent browser run timed out taking a screenshot; the complete existing suite passed when rerun alone. Full backend regression, cloud deployment, all 15 live intake cases and physical audio acceptance are not claimed here.
+
+### Phase 4 endpoints
+
+- `POST /api/ai/readback`: Worker/Manager; `{language, reviewed:true, card:{toolId,rawText,translatedText?,category?,suggestedNcCode?,reporterId?,reportedAt?}}` or `{language,reviewed:true,incidentId}`. With an incident ID, server fields take precedence. Returns text, content version, source IDs and base64 WAV. Six requests per actor/minute, two concurrent; the Phase 4 client caps provider use at 30 calls per process, separate from the existing intake client. Safe failure leaves on-screen review available.
+- `GET /api/incidents/:id/status-text?language=kn|hi|en`: any authenticated application role. Read-only, no Sarvam calls.
+- `GET /api/incidents/:id/trace-explanation?window=24|72|168&language=kn|hi|en`: Manager/Quality/Verifier. Existing trace snapshot only, no provider calls.
+- `POST /api/incidents/:id/dealer-draft`: Quality; `{approvalId,dealerId,language?}`. Returns 201 with stored draft ID, source IDs and `sent:false`. Uses existing `MockDocument`/`AuditLog`; no model or schema changes.
+
+Provider contract: https://docs.sarvam.ai/api-reference/text-to-speech/convert . Stable `bulbul:v3`, `language_code`, `shubh`, WAV/22050 Hz, server timeout and local credit cap. Live checks passed one English synthetic-card readback (valid 771500-byte WAV) and read-only English/Hindi/Kannada status against HANA. The chosen live incident had no stored 24h trace, and correctly returned 404 without creating one. Actual explanation and dealer draft persistence are checked against isolated SQLite. Browser provider audio is mocked; physical speaker/microphone and native-language pronunciation acceptance remain Phase 5 work.
 
 ## Setup and run
 

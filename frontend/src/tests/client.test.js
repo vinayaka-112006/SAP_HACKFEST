@@ -226,3 +226,14 @@ test('evidence search uses explicit filters and saved incident scope', async () 
   assert.deepEqual(JSON.parse(calls[0].body), body);
   assert.equal(calls[1].url, 'http://test/api/incidents/TS-0042/similar?scope=all-tools');
 });
+test('communication binds language, trace window, review and approval to explicit requests', async () => {
+  const { api, calls } = setup({ text: 'Stored status' });
+  await api.getStatusText('TS-1', 'kn');
+  await api.getTraceExplanation('TS-1', 72, 'hi');
+  await api.readback({ reviewed: true, language: 'en', incidentId: 'TS-1' });
+  await api.createDealerDraft('TS-1', { approvalId: 'A1', dealerId: 'D1', language: 'kn' });
+  assert.equal(calls[0].url, 'http://test/api/incidents/TS-1/status-text?language=kn');
+  assert.equal(calls[1].url, 'http://test/api/incidents/TS-1/trace-explanation?window=72&language=hi');
+  assert.equal(JSON.parse(calls[2].body).reviewed, true);
+  assert.deepEqual(JSON.parse(calls[3].body), { approvalId: 'A1', dealerId: 'D1', language: 'kn' });
+});

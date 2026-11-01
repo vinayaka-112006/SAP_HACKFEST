@@ -3,7 +3,7 @@
   "info": {
     "title": "ToolSathi simulated platform",
     "version": "0.1.0",
-    "description": "Synthetic manufacturing data, simulated SAP actions, live Sarvam intake/transcription; four pending workflow stubs. AI suggestions require human review."
+    "description": "Synthetic manufacturing data, simulated SAP actions, live Sarvam intake/transcription/readback and grounded multilingual communication; four pending workflow stubs. Human review and approval remain separate."
   },
   "servers": [
     {
@@ -6312,6 +6312,1050 @@
             }
           }
         ]
+      }
+    },
+    "/ai/readback": {
+      "post": {
+        "tags": [
+          "Shashank"
+        ],
+        "x-owner": "Shashank",
+        "x-implementation": "real",
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Versioned communication text grounded in the current card or stored records. Audio is optional; drafts are unsent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "text",
+                    "language",
+                    "sourceIds",
+                    "modelVersion",
+                    "contentVersion",
+                    "requiresHumanReview"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string",
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en"
+                      ]
+                    },
+                    "sourceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "modelVersion": {
+                      "type": "string"
+                    },
+                    "contentVersion": {
+                      "type": "string"
+                    },
+                    "requiresHumanReview": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "audio": {
+                      "type": "string",
+                      "format": "byte"
+                    },
+                    "mimeType": {
+                      "type": "string",
+                      "enum": [
+                        "audio/wav"
+                      ]
+                    },
+                    "traceVersion": {
+                      "type": "integer"
+                    },
+                    "sent": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ai-readback",
+        "description": "Worker/Manager only. Sarvam bulbul:v3 WAV readback of an explicitly reviewed editable card or server-loaded incident. No confirmation or workflow write. 2400-character complete readback limit; no silent truncation. Six requests per actor/minute, two concurrent, 30 provider calls per process for this adapter.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "language",
+                  "reviewed"
+                ],
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "enum": [
+                      "kn",
+                      "hi",
+                      "en"
+                    ]
+                  },
+                  "reviewed": {
+                    "type": "boolean",
+                    "enum": [
+                      true
+                    ]
+                  },
+                  "incidentId": {
+                    "type": "string",
+                    "maxLength": 120
+                  },
+                  "card": {
+                    "type": "object",
+                    "required": [
+                      "toolId",
+                      "rawText"
+                    ],
+                    "properties": {
+                      "toolId": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "rawText": {
+                        "type": "string",
+                        "maxLength": 2000
+                      },
+                      "translatedText": {
+                        "type": "string",
+                        "maxLength": 4000
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "suggestedNcCode": {
+                        "type": "string"
+                      },
+                      "reporterId": {
+                        "type": "string"
+                      },
+                      "reportedAt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "incidentId"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "card"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/status-text": {
+      "get": {
+        "tags": [
+          "Shashank"
+        ],
+        "x-owner": "Shashank",
+        "x-implementation": "real",
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Versioned communication text grounded in the current card or stored records. Audio is optional; drafts are unsent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "text",
+                    "language",
+                    "sourceIds",
+                    "modelVersion",
+                    "contentVersion",
+                    "requiresHumanReview"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string",
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en"
+                      ]
+                    },
+                    "sourceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "modelVersion": {
+                      "type": "string"
+                    },
+                    "contentVersion": {
+                      "type": "string"
+                    },
+                    "requiresHumanReview": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "audio": {
+                      "type": "string",
+                      "format": "byte"
+                    },
+                    "mimeType": {
+                      "type": "string",
+                      "enum": [
+                        "audio/wav"
+                      ]
+                    },
+                    "traceVersion": {
+                      "type": "integer"
+                    },
+                    "sent": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "incident-status-text",
+        "description": "Any authenticated role. Fresh persisted incident status with a read timestamp, localized fixed wording, canonical state and source ID. No provider calls or inferred approvals.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "kn",
+                "hi",
+                "en"
+              ],
+              "default": "en"
+            }
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/trace-explanation": {
+      "get": {
+        "tags": [
+          "Shashank"
+        ],
+        "x-owner": "Shashank",
+        "x-implementation": "real",
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Versioned communication text grounded in the current card or stored records. Audio is optional; drafts are unsent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "text",
+                    "language",
+                    "sourceIds",
+                    "modelVersion",
+                    "contentVersion",
+                    "requiresHumanReview"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string",
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en"
+                      ]
+                    },
+                    "sourceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "modelVersion": {
+                      "type": "string"
+                    },
+                    "contentVersion": {
+                      "type": "string"
+                    },
+                    "requiresHumanReview": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "audio": {
+                      "type": "string",
+                      "format": "byte"
+                    },
+                    "mimeType": {
+                      "type": "string",
+                      "enum": [
+                        "audio/wav"
+                      ]
+                    },
+                    "traceVersion": {
+                      "type": "integer"
+                    },
+                    "sent": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "incident-trace-explanation",
+        "description": "Manager/Quality/Verifier. Explains latest existing snapshot for the requested window. Does not generate a trace. Returns trace ID/version, exact counts, gaps and tier meanings; inconsistent snapshots fail closed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "kn",
+                "hi",
+                "en"
+              ],
+              "default": "en"
+            }
+          },
+          {
+            "name": "window",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                24,
+                72,
+                168
+              ],
+              "default": 24
+            }
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/dealer-draft": {
+      "post": {
+        "tags": [
+          "Shashank"
+        ],
+        "x-owner": "Shashank",
+        "x-implementation": "real",
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Versioned communication text grounded in the current card or stored records. Audio is optional; drafts are unsent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "text",
+                    "language",
+                    "sourceIds",
+                    "modelVersion",
+                    "contentVersion",
+                    "requiresHumanReview"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string",
+                      "enum": [
+                        "kn",
+                        "hi",
+                        "en"
+                      ]
+                    },
+                    "sourceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "modelVersion": {
+                      "type": "string"
+                    },
+                    "contentVersion": {
+                      "type": "string"
+                    },
+                    "requiresHumanReview": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "audio": {
+                      "type": "string",
+                      "format": "byte"
+                    },
+                    "mimeType": {
+                      "type": "string",
+                      "enum": [
+                        "audio/wav"
+                      ]
+                    },
+                    "traceVersion": {
+                      "type": "integer"
+                    },
+                    "sent": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Validation, authorization, audio, quota or provider error; manual reporting remains available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "incident-dealer-draft",
+        "description": "Quality only. Requires a real approved QUALITY_NOTIFICATION for this incident/tool and matching dealer shipments within its batch scope. Development approval bypass is ignored. Atomically stores an unsent SIMULATED MockDocument plus application audit history; no external messages.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "approvalId",
+                  "dealerId"
+                ],
+                "properties": {
+                  "approvalId": {
+                    "type": "string",
+                    "maxLength": 120
+                  },
+                  "dealerId": {
+                    "type": "string",
+                    "maxLength": 120
+                  },
+                  "language": {
+                    "type": "string",
+                    "enum": [
+                      "kn",
+                      "hi",
+                      "en"
+                    ],
+                    "default": "en"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

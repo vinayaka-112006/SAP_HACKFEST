@@ -117,6 +117,10 @@ export function createApiClient({
       request("/ai/structure-report", { ...options, method: "POST", body, requestTimeoutMs: 45000 }),
     transcribe: (body, language, options = {}) =>
       request(`/ai/transcribe?language=${id(language)}`, { ...options, method: "POST", body, requestTimeoutMs: 25000 }),
+    readback: (body, options = {}) => request('/ai/readback', { ...options, method: 'POST', body, requestTimeoutMs: 25000 }),
+    getStatusText: (incidentId, language, options) => request(`/incidents/${id(incidentId)}/status-text?language=${id(language)}`, options),
+    getTraceExplanation: (incidentId, windowHours, language, options) => request(`/incidents/${id(incidentId)}/trace-explanation?window=${id(windowHours)}&language=${id(language)}`, options),
+    createDealerDraft: (incidentId, body, options = {}) => request(`/incidents/${id(incidentId)}/dealer-draft`, { ...options, method: 'POST', body }),
     searchEvidence: (body, options = {}) =>
       request('/ai/search', { ...options, method: 'POST', body, requestTimeoutMs: 60000 }),
     getSimilar: (incidentId, { scope = 'same-tool', ...options } = {}) =>

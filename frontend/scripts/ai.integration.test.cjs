@@ -50,6 +50,12 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     await route.fulfill(searchFail ? { status: 503, json: { error: { code: 'SEARCH_UNAVAILABLE', message: 'Search temporarily unavailable.' } } } : { json: evidence });
   });
   await page.route('**/api/incidents/*/similar?*', route => route.fulfill({ json: evidence }));
+  await page.route('**/api/ai/readback', async route => {
+    const body = route.request().postDataJSON();
+    assert.equal(body.reviewed, true); assert.equal(body.card.toolId, 'TOOL-B');
+    const wav = Buffer.alloc(44); wav.write('RIFF'); wav.write('WAVE', 8);
+    await route.fulfill({ json: { _stub: false, text: body.card.rawText, language: body.language, audio: wav.toString('base64'), mimeType: 'audio/wav', sourceIds: [], modelVersion: 'bulbul:v3' } });
+  });
   await page.addInitScript(() => {
     window.__stoppedTracks = 0;
     Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: { getUserMedia: async () => ({ getTracks: () => [{ stop: () => { window.__stoppedTracks++; } }] }) } });
@@ -94,6 +100,11 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     await page.getByRole('button', { name: 'Structure with AI' }).click();
     await page.getByRole('heading', { name: 'Review Incident Card' }).waitFor();
     assert.equal(await page.getByLabel('Category (optional)').inputValue(), 'TORQUE');
+    await page.getByRole('button', { name: 'I reviewed this card — read aloud' }).click();
+    await page.getByLabel('Reviewed card readback').waitFor();
+    await page.getByLabel('Category (optional)').fill('WEAR');
+    assert.equal(await page.getByLabel('Reviewed card readback').count(), 0);
+    await page.getByLabel('Category (optional)').fill('TORQUE');
     await page.getByRole('button', { name: 'Find similar records' }).click();
     await page.getByTestId('similar-results').waitFor();
     assert.match(await page.getByTestId('similar-results').textContent(), /SOP-TEST/);
@@ -110,8 +121,29 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     assert.equal(result.incident.modelVersion, 'sarvam-105b|intake-1|card-1|asr:saaras:v3');
     await page.getByRole('button', { name: 'Confirm Incident', exact: true }).click();
     await page.getByRole('heading', { name: `Incident Confirmed: ${result.incident.incidentId}` }).waitFor();
+    await page.getByRole('button', { name: 'Refresh status in my language' }).click();
+    await page.getByTestId('communication-result').waitFor();
+    assert.match(await page.getByTestId('communication-result').textContent(), new RegExp(result.incident.incidentId));
+    await page.getByLabel('Update language').selectOption('hi');
+    assert.equal(await page.getByTestId('communication-result').count(), 0);
+    await page.getByRole('button', { name: 'Refresh status in my language' }).click();
+    await page.getByTestId('communication-result').waitFor();
+    assert.match(await page.getByTestId('communication-result').textContent(), /पुष्टि हुई/);
     const audit = await fetch(`${base}/api/audit?incident=${result.incident.incidentId}`, { headers: { 'x-demo-user': 'AI-BROWSER-TEST', 'x-demo-role': 'Manager' } }).then(r => r.json());
     assert.ok(audit.entries.some(row => row.action === 'INCIDENT_CONFIRMED' && row.modelVersion === result.incident.modelVersion));
+  });
+  await t.test('trace explanation uses actual stored snapshot and retains its counts', async () => {
+    await page.getByRole('button', { name: 'Open Incident Details' }).click();
+    await page.getByRole('button', { name: 'Manager local demo role' }).first().click();
+    await page.getByTestId('trace-result').waitFor();
+    const response = page.waitForResponse(r => r.url().includes('/trace-explanation?') && r.status() === 200);
+    await page.getByRole('button', { name: 'Explain this trace' }).click();
+    const data = await (await response).json();
+    await page.getByTestId('communication-result').waitFor();
+    assert.match(await page.getByTestId('communication-result').textContent(), new RegExp(`UNKNOWN: ${data.counts.UNKNOWN}`));
+    assert.match(await page.getByTestId('communication-result').textContent(), new RegExp(data.traceId));
+    await page.getByRole('button', { name: 'Trace 24 hours', exact: true }).click();
+    assert.equal(await page.getByTestId('communication-result').count(), 0);
   });
   await t.test('provider failure retains typed input and permits manual review', async () => {
     failing = true; await reportScreen();

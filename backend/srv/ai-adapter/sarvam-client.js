@@ -11,6 +11,33 @@ function createClient(config, fetchImpl = globalThis.fetch) {
   let calls = 0;
   return {
     get calls() { return calls; },
+    async speak(text, language) {
+      if (typeof text !== 'string' || !text.trim() || text.length > 2400 || !['kn', 'hi', 'en'].includes(language))
+        throw error('AI_INVALID_INPUT', 'Readback requires text under 2400 characters and language kn, hi or en.');
+      if (calls >= config.maxCalls) throw error('AI_CALL_LIMIT', 'Local AI call cap reached. Read the card on screen.');
+      calls++;
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), config.timeoutMs);
+      try {
+        const response = await fetchImpl('https://api.sarvam.ai/text-to-speech', {
+          method: 'POST', signal: controller.signal,
+          headers: { 'Content-Type': 'application/json', 'api-subscription-key': config.apiKey },
+          body: JSON.stringify({ text, language_code: `${language}-IN`, model: 'bulbul:v3', speaker: 'shubh', output_audio_codec: 'wav', speech_sample_rate: 22050 }),
+        });
+        if (!response.ok) throw error(({ 402: 'AI_CREDITS_EXHAUSTED', 401: 'AI_AUTH_FAILED', 403: 'AI_AUTH_FAILED', 429: 'AI_RATE_LIMITED' })[response.status] || 'AI_PROVIDER_UNAVAILABLE', 'Readback is unavailable. Read the card on screen and check Sarvam configuration or credits.');
+        const body = await response.json();
+        const audio = body.audios?.[0];
+        if (!Array.isArray(body.audios) || body.audios.length !== 1 || typeof audio !== 'string' || audio.length > 8000000 || !/^[A-Za-z0-9+/]+={0,2}$/.test(audio))
+          throw error('AI_INVALID_OUTPUT', 'Speech service returned unusable audio.');
+        const bytes = Buffer.from(audio, 'base64');
+        if (bytes.length < 44 || bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WAVE')
+          throw error('AI_INVALID_OUTPUT', 'Speech service returned invalid WAV audio.');
+        return { audio, mimeType: 'audio/wav', modelVersion: 'bulbul:v3' };
+      } catch (cause) {
+        if (/^AI_/.test(cause.code || '')) throw cause;
+        throw error(controller.signal.aborted ? 'AI_TIMEOUT' : 'AI_PROVIDER_UNAVAILABLE', 'Readback failed. Read the card on screen.');
+      } finally { clearTimeout(timer); }
+    },
     async transcribe(audio, mimeType, language) {
       if (calls >= config.maxCalls) throw error('AI_CALL_LIMIT', 'Local AI call cap reached. Report manually.');
       calls++;

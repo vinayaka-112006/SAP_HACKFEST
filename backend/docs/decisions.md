@@ -1,5 +1,12 @@
 # Decisions
 
+## Person 2 Phase 4 communication
+
+- Use versioned English/Hindi/Kannada templates for status, trace explanation and dealer notices. Read canonical persisted fields and retain IDs/counts/gaps rather than ask a model to infer workflow decisions. This avoids translation calls for fixed text. Human plant-language review remains required; change wording in `srv/ai-adapter/communication.js` and increment its version.
+- Spoken readback uses the existing private Sarvam key with stable `bulbul:v3`, documented `language_code`, WAV output and a 2400-character complete-card bound. No fields are silently truncated. No auto-confirmation, auto-play or persistent raw audio. Edits, language/identity changes or leaving the view cancel and clear audio. Phase 4 has a separate 30-call-per-process cap, six requests per actor/minute and two concurrent requests.
+- Explanation reads the latest stored TraceResult for the selected window without calling or changing the trace engine. Counts must agree with stored units. The UI rejects a different version/window from the displayed trace. Missing snapshots require an explicit normal trace request first.
+- Dealer drafts use the existing approved QUALITY_NOTIFICATION scope and matching dealer Shipment rows. Require its incident/tool, right approving role, decision, approver and timestamp; ignore development approval bypass. Store an unsent SIMULATED MockDocument and application audit history atomically. No schema migration or new proposal type. Jamuna's workflow is required to create real approvals; this adapter never fabricates one or sends a message. Change the mapping when that owner supplies a revised approved contract.
+
 ## Existing origin/main merge resolution
 
 Preserve Vinayaka's new SVG branding, glass/layout/motion changes and component showcase while retaining the integrated navbar identities, real API/store bindings and accurate uncertainty/approval descriptions. Missing tool-use records stay Unknown; labels cannot promise cryptographic verification, immutable audit or completed governance workflows. Reuse locally bundled fonts instead of duplicate Google Fonts requests and replace the stale PNG favicon with the incoming SVG. Backend source/model/persistence and live databases are unchanged. Alternative copy and exact conflict decisions are documented for Vinayaka in [merge resolution](../../docs/merge-resolution.md).

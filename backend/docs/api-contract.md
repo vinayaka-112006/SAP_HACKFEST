@@ -1,5 +1,7 @@
 # ToolSathi API contract
 
+Phase 4 communication: `POST /api/ai/readback` (Worker/Manager, explicit review, Sarvam WAV); `GET /api/incidents/:id/status-text?language=kn|hi|en` (authenticated roles); `GET /api/incidents/:id/trace-explanation?window=24|72|168&language=kn|hi|en` (Manager/Quality/Verifier, stored snapshot); `POST /api/incidents/:id/dealer-draft` (Quality, approved notification and shipped batch scope, returns 201). Drafts are stored and audited, never sent. See [AI adapter documentation](../srv/ai-adapter/README.md) and OpenAPI for fields, provenance and limits.
+
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
 Base URL `http://localhost:4004/api`. Synthetic data, simulated SAP services; no tenant connected. JSON UTC timestamps end in Z. Tools use `{ tools: [...] }`. Real responses carry `_label:SIMULATED`, `_stub:false`; fixed teammate fixtures carry `_stub:true`. Examples are recorded synthetic responses.

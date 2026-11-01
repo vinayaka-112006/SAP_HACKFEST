@@ -14,6 +14,7 @@ import GlassTanks from "../features/evidence/GlassTanks";
 import GapsPanel from "../features/evidence/GapsPanel";
 import EvidenceDrawer from "../features/evidence/EvidenceDrawer";
 import SimilarEvidence from "../features/memory/SimilarEvidence";
+import Communication from "../features/worker/Communication";
 
 export default function Console() {
   const {
@@ -296,6 +297,7 @@ export default function Console() {
         )}
       </GlassPanel>
       <SimilarEvidence incidentId={incident.incidentId} />
+      <Communication incidentId={incident.incidentId} language={incident.language || 'en'} traceWindow={trace?.windowHours} traceVersion={trace?.version} />
       {!canReview && (
         <div className="resource-message">
           Trace and audit require Manager, Quality or Verifier. Current local
