@@ -85,6 +85,12 @@ test('AI worker browser flow on isolated SQLite; provider responses mocked', { t
     await page.getByRole('button', { name: 'Worker local demo role' }).first().click();
     await page.getByLabel('Tool register').locator('option').filter({ hasText: 'TOOL-B' }).waitFor({ state: 'attached' });
     await page.getByRole('button', { name: 'Confirm Tool & Proceed' }).click();
+    // Exercise actual language buttons; the removed browser-recognition ref must never be used.
+    for (const name of [/Hindi/, /Kannada/, /English Standard Plant English/]) {
+      const choice = page.getByRole('button', { name });
+      await choice.click();
+      assert.equal(await choice.getAttribute('aria-pressed'), 'true');
+    }
     await page.getByRole('button', { name: 'Continue to Report' }).click();
     await page.getByLabel('Reporter ID (required)').fill('AI-BROWSER-TEST');
   }

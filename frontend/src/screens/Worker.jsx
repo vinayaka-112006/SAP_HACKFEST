@@ -486,9 +486,10 @@ export default function Worker() {
             {/* Kannada */}
             <button
               onClick={() => {
-                recognition.current?.abort();
+                stopRecording();
                 setLanguage("kn");
               }}
+              aria-pressed={language === "kn"}
               style={{
                 minHeight: "64px",
                 padding: "12px 20px",
@@ -538,9 +539,10 @@ export default function Worker() {
             {/* Hindi */}
             <button
               onClick={() => {
-                recognition.current?.abort();
+                stopRecording();
                 setLanguage("hi");
               }}
+              aria-pressed={language === "hi"}
               style={{
                 minHeight: "64px",
                 padding: "12px 20px",
@@ -590,9 +592,10 @@ export default function Worker() {
             {/* English */}
             <button
               onClick={() => {
-                recognition.current?.abort();
+                stopRecording();
                 setLanguage("en");
               }}
+              aria-pressed={language === "en"}
               style={{
                 minHeight: "64px",
                 padding: "12px 20px",
