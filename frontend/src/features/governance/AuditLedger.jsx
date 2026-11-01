@@ -40,12 +40,12 @@ export default function AuditLedger({ auditLog = [] }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--ink)' }}>
-                Immutable Governance Audit Ledger
+                Application Audit History
               </h3>
               <StatusBadge status="Built" size="small" />
             </div>
             <div style={{ fontSize: '12px', color: 'var(--ink-soft)', fontFamily: 'var(--font-mono)' }}>
-              Cryptographic Append-Only Ledger • {auditLog.length} Records Verified
+              Read-only Application History • {auditLog.length} Stored Records
             </div>
           </div>
         </div>
@@ -60,11 +60,12 @@ export default function AuditLedger({ auditLog = [] }) {
           color: 'var(--jade-ink)',
           border: '1px solid rgba(14, 163, 122, 0.3)'
         }}>
-          TAMPER-EVIDENT RECORD STREAM
+          APPEND-ONLY APPLICATION HISTORY
         </span>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {!auditLog.length&&<p>No audit entries returned.</p>}
         {auditLog.map(entry => (
           <div
             key={entry.auditId}
@@ -108,12 +109,13 @@ export default function AuditLedger({ auditLog = [] }) {
             </div>
 
             <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.4, margin: 0 }}>
-              {entry.details}
+              {entry.reason}
             </p>
+            <details><summary>Event details</summary><pre>{JSON.stringify(entry.details,null,2)}</pre></details>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', color: 'var(--ink-soft)', fontFamily: 'var(--font-mono)' }}>
-              <span>Operator / Authority: <strong style={{ color: 'var(--ink)' }}>{entry.actor}</strong> ({entry.role})</span>
-              <span>Subsystem: {entry.modelVersion}</span>
+              <span>Operator / Authority: <strong style={{ color: 'var(--ink)' }}>{entry.actor}</strong> ({entry.actorRole})</span>
+              <span>Subsystem: {entry.modelVersion || 'No model supplied'}</span>
             </div>
           </div>
         ))}

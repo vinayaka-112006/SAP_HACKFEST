@@ -1,0 +1,28 @@
+[
+  {
+    "toolId": "TOOL-B",
+    "reporterId": "WRK-014",
+    "language": "kn",
+    "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+    "translatedText": "Tool B is leaving bolts loose",
+    "category": "TORQUE",
+    "suggestedNcCode": "NC-TORQUE-LOOSE",
+    "confidence": 0.82,
+    "missingFields": [],
+    "reportedAt": "2026-11-04T05:12:00.000Z",
+    "modelVersion": "demo-structured-v1"
+  },
+  {
+    "toolId": "TOOL-B",
+    "reporterId": "WRK-015",
+    "language": "hi",
+    "rawText": "बोल्ट ढीला है",
+    "translatedText": "Tool B is leaving bolts loose",
+    "category": "TORQUE",
+    "suggestedNcCode": "NC-TORQUE-LOOSE",
+    "confidence": 0.82,
+    "missingFields": [],
+    "reportedAt": "2026-11-04T07:12:00.000Z",
+    "modelVersion": "demo-structured-v1"
+  }
+]

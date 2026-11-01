@@ -1,0 +1,182 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "incident": {
+    "incidentId": "TS-0002",
+    "toolId": "TOOL-B",
+    "reporterId": "WRK-014",
+    "language": "kn",
+    "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+    "translatedText": "Tool B is leaving bolts loose",
+    "category": "TORQUE",
+    "suggestedNcCode": "NC-TORQUE-LOOSE",
+    "confidence": 0.82,
+    "missingFields": [],
+    "state": "Confirmed",
+    "createdAt": "2026-10-31T10:34:37.397Z",
+    "reportedAt": "2026-11-04T05:12:00.000Z",
+    "reportedAtSource": "CLIENT_REPORTED",
+    "confirmedAt": "2026-10-31T10:34:37.428Z",
+    "confirmedBy": "WRK-014",
+    "modelVersion": "demo-structured-v1"
+  },
+  "evidence": [],
+  "auditSummary": {
+    "count": 5,
+    "last": [
+      {
+        "auditId": "AUD-b5d997eb-63b2-4176-a05b-ede43cb11064",
+        "incidentId": "TS-0002",
+        "toolId": "TOOL-B",
+        "actor": "DEMO-MANAGER",
+        "actorRole": "Manager",
+        "action": "TRACE_GENERATED",
+        "details": {
+          "windowHours": 168,
+          "version": 1,
+          "totalUnits": 160
+        },
+        "reason": "Human requested deterministic exposure review",
+        "modelVersion": null,
+        "timestamp": "2026-10-31T10:34:37.518Z"
+      },
+      {
+        "auditId": "AUD-94e25716-a79b-44c0-aa91-59118e809cdb",
+        "incidentId": "TS-0002",
+        "toolId": "TOOL-B",
+        "actor": "DEMO-MANAGER",
+        "actorRole": "Manager",
+        "action": "TRACE_GENERATED",
+        "details": {
+          "windowHours": 72,
+          "version": 1,
+          "totalUnits": 100
+        },
+        "reason": "Human requested deterministic exposure review",
+        "modelVersion": null,
+        "timestamp": "2026-10-31T10:34:37.494Z"
+      },
+      {
+        "auditId": "AUD-fc335b4f-892d-45a9-b0ce-3d09a4b4762a",
+        "incidentId": "TS-0002",
+        "toolId": "TOOL-B",
+        "actor": "DEMO-MANAGER",
+        "actorRole": "Manager",
+        "action": "TRACE_GENERATED",
+        "details": {
+          "windowHours": 24,
+          "version": 1,
+          "totalUnits": 35
+        },
+        "reason": "Human requested deterministic exposure review",
+        "modelVersion": null,
+        "timestamp": "2026-10-31T10:34:37.468Z"
+      },
+      {
+        "auditId": "AUD-94952be3-9ee4-4bfe-9a44-fb3f1aa78290",
+        "incidentId": "TS-0002",
+        "toolId": "TOOL-B",
+        "actor": "WRK-014",
+        "actorRole": "Worker",
+        "action": "INCIDENT_CONFIRMED",
+        "details": {
+          "before": {
+            "incidentId": "TS-0002",
+            "toolId": "TOOL-B",
+            "reporterId": "WRK-014",
+            "language": "kn",
+            "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+            "translatedText": "Tool B is leaving bolts loose",
+            "category": "TORQUE",
+            "suggestedNcCode": "NC-TORQUE-LOOSE",
+            "confidence": 0.82,
+            "missingFields": [],
+            "state": "Reported",
+            "createdAt": "2026-10-31T10:34:37.397Z",
+            "reportedAt": "2026-11-04T05:12:00.000Z",
+            "reportedAtSource": "CLIENT_REPORTED",
+            "confirmedAt": null,
+            "confirmedBy": null,
+            "modelVersion": "demo-structured-v1"
+          },
+          "after": {
+            "incidentId": "TS-0002",
+            "toolId": "TOOL-B",
+            "reporterId": "WRK-014",
+            "language": "kn",
+            "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+            "translatedText": "Tool B is leaving bolts loose",
+            "category": "TORQUE",
+            "suggestedNcCode": "NC-TORQUE-LOOSE",
+            "confidence": 0.82,
+            "missingFields": [],
+            "state": "Confirmed",
+            "createdAt": "2026-10-31T10:34:37.397Z",
+            "reportedAt": "2026-11-04T05:12:00.000Z",
+            "reportedAtSource": "CLIENT_REPORTED",
+            "confirmedAt": "2026-10-31T10:34:37.428Z",
+            "confirmedBy": "WRK-014",
+            "modelVersion": "demo-structured-v1"
+          }
+        },
+        "reason": "Worker confirmed report",
+        "modelVersion": "demo-structured-v1",
+        "timestamp": "2026-10-31T10:34:37.429Z"
+      },
+      {
+        "auditId": "AUD-ff62a9a9-04d3-43dc-a381-0d963093a7c5",
+        "incidentId": "TS-0002",
+        "toolId": "TOOL-B",
+        "actor": "WRK-014",
+        "actorRole": "Worker",
+        "action": "INCIDENT_CREATED",
+        "details": {
+          "state": "Reported",
+          "reporterId": "WRK-014",
+          "reportedAtSource": "CLIENT_REPORTED"
+        },
+        "reason": "Worker report received",
+        "modelVersion": "demo-structured-v1",
+        "timestamp": "2026-10-31T10:34:37.410Z"
+      }
+    ]
+  },
+  "traceResults": [
+    {
+      "windowHours": 24,
+      "version": 1,
+      "totalUnits": 35,
+      "byTier": {
+        "CONFIRMED": 35,
+        "PROBABLE": 0,
+        "UNKNOWN": 0
+      },
+      "dataQualityScore": 100,
+      "snapshotTime": "2026-11-04T05:02:00.000Z"
+    },
+    {
+      "windowHours": 72,
+      "version": 1,
+      "totalUnits": 100,
+      "byTier": {
+        "CONFIRMED": 90,
+        "PROBABLE": 4,
+        "UNKNOWN": 6
+      },
+      "dataQualityScore": 82,
+      "snapshotTime": "2026-11-04T05:02:00.000Z"
+    },
+    {
+      "windowHours": 168,
+      "version": 1,
+      "totalUnits": 160,
+      "byTier": {
+        "CONFIRMED": 146,
+        "PROBABLE": 8,
+        "UNKNOWN": 6
+      },
+      "dataQualityScore": 83,
+      "snapshotTime": "2026-11-04T05:02:00.000Z"
+    }
+  ]
+}

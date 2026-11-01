@@ -1,0 +1,4 @@
+toolId;type;line;workCenter;state;calibrationDue;usageCount;lastVerifiedGood
+"TOOL-A";"TORQUE";"LINE-BRAKE-1";"WC-A";"Active";"2026-12-01";"50";"2026-10-25T05:12:00.000Z"
+"TOOL-B";"TORQUE";"LINE-BRAKE-1";"WC-B";"Active";"2026-12-01";"200";"2026-10-25T05:12:00.000Z"
+"TOOL-C";"TORQUE";"LINE-BRAKE-1";"WC-C";"Active";"2026-11-09";"50";"2026-10-25T05:12:00.000Z"

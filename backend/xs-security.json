@@ -1,0 +1,100 @@
+{
+  "xsappname": "toolsathi",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Worker",
+      "description": "Worker access"
+    },
+    {
+      "name": "$XSAPPNAME.Manager",
+      "description": "Manager access"
+    },
+    {
+      "name": "$XSAPPNAME.Quality",
+      "description": "Quality access"
+    },
+    {
+      "name": "$XSAPPNAME.Technician",
+      "description": "Technician access"
+    },
+    {
+      "name": "$XSAPPNAME.Verifier",
+      "description": "Verifier access"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Worker",
+      "description": "Worker",
+      "scope-references": [
+        "$XSAPPNAME.Worker"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Manager",
+      "scope-references": [
+        "$XSAPPNAME.Manager"
+      ]
+    },
+    {
+      "name": "Quality",
+      "description": "Quality",
+      "scope-references": [
+        "$XSAPPNAME.Quality"
+      ]
+    },
+    {
+      "name": "Technician",
+      "description": "Technician",
+      "scope-references": [
+        "$XSAPPNAME.Technician"
+      ]
+    },
+    {
+      "name": "Verifier",
+      "description": "Verifier",
+      "scope-references": [
+        "$XSAPPNAME.Verifier"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "ToolSathi_Worker",
+      "description": "Worker role collection",
+      "role-template-references": [
+        "$XSAPPNAME.Worker"
+      ]
+    },
+    {
+      "name": "ToolSathi_Manager",
+      "description": "Manager role collection",
+      "role-template-references": [
+        "$XSAPPNAME.Manager"
+      ]
+    },
+    {
+      "name": "ToolSathi_Quality",
+      "description": "Quality role collection",
+      "role-template-references": [
+        "$XSAPPNAME.Quality"
+      ]
+    },
+    {
+      "name": "ToolSathi_Technician",
+      "description": "Technician role collection",
+      "role-template-references": [
+        "$XSAPPNAME.Technician"
+      ]
+    },
+    {
+      "name": "ToolSathi_Verifier",
+      "description": "Verifier role collection",
+      "role-template-references": [
+        "$XSAPPNAME.Verifier"
+      ]
+    }
+  ]
+}

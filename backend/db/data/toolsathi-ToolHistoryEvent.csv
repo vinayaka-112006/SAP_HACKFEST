@@ -1,0 +1,4 @@
+eventId;toolId;type;at;summary;refId;details
+"HIST-SEED-1";"TOOL-B";"INCIDENT";"2026-10-23T05:12:00.000Z";"Synthetic previous incident";"TS-0001";"{}"
+"HIST-SEED-2";"TOOL-B";"REPAIR";"2026-10-23T23:12:00.000Z";"Synthetic previous repair";"REP-0001";"{}"
+"HIST-SEED-3";"TOOL-B";"CALIBRATION";"2026-09-25T05:12:00.000Z";"Synthetic previous calibration";"CAL-0001";"{}"

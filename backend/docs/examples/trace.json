@@ -1,0 +1,787 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "incidentId": "TS-0002",
+  "toolId": "TOOL-B",
+  "windowHours": 24,
+  "windowStart": "2026-11-03T05:12:00.000Z",
+  "windowEnd": "2026-11-04T05:12:00.000Z",
+  "snapshotTime": "2026-11-04T05:02:00.000Z",
+  "summary": {
+    "totalUnits": 35,
+    "byTier": {
+      "CONFIRMED": 35,
+      "PROBABLE": 0,
+      "UNKNOWN": 0
+    },
+    "byLocation": {
+      "IN_STOCK": 35,
+      "SHIPPED": 0,
+      "UNKNOWN_LOCATION": 0
+    },
+    "staleLocationUnits": 0,
+    "shippedByDealer": {
+      "DLR-X": 0,
+      "DLR-Y": 0
+    }
+  },
+  "dataQuality": {
+    "score": 100,
+    "deductions": [
+      {
+        "code": "UNKNOWN_UNITS",
+        "amount": 0
+      },
+      {
+        "code": "PROBABLE_UNITS",
+        "amount": 0
+      },
+      {
+        "code": "STALE_SHIPMENT_RECORDS",
+        "amount": 0
+      },
+      {
+        "code": "CONFLICT_RUNS",
+        "amount": 0
+      }
+    ]
+  },
+  "valueAtRisk": {
+    "amountINR": 112000,
+    "label": "ESTIMATE_SYNTHETIC"
+  },
+  "gaps": [
+    {
+      "code": "DUPLICATE_TOOL_USE_LINK",
+      "severity": "INFO",
+      "message": "Several tool-use links refer to this run; each serial is counted once.",
+      "runId": "RUN-B-DUP",
+      "affectedUnits": 10,
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "serial": "SN-000001",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000001",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000002",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000002",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000003",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000003",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000004",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000004",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000005",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000005",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000006",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000006",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000007",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000007",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000008",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000008",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000009",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000009",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000010",
+      "batchId": "BATCH-B-DUP",
+      "runId": "RUN-B-DUP",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-0001",
+        "TUE-B-0001-DUP",
+        "RUN-B-DUP",
+        "BATCH-B-DUP",
+        "SN-000010",
+        "STOCK-BATCH-B-DUP"
+      ]
+    },
+    {
+      "serial": "SN-000011",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000011",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000012",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000012",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000013",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000013",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000014",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000014",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000015",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000015",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000016",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000016",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000017",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000017",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000018",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000018",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000019",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000019",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000020",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000020",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000021",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000021",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000022",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000022",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000023",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000023",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000024",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000024",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000025",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000025",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000026",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000026",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000027",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000027",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000028",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000028",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000029",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000029",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000030",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000030",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000031",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000031",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000032",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000032",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000033",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000033",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000034",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000034",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    },
+    {
+      "serial": "SN-000035",
+      "batchId": "BATCH-B-RECENT",
+      "runId": "RUN-B-RECENT",
+      "tier": "CONFIRMED",
+      "tierLabel": "Record-linked association",
+      "tierReason": "Valid tool-use interval links tool and run.",
+      "reasonCodes": [],
+      "locationStatus": "IN_STOCK",
+      "location": "STORE-01",
+      "dealerId": null,
+      "flags": [],
+      "evidenceIds": [
+        "TUE-B-RECENT",
+        "RUN-B-RECENT",
+        "BATCH-B-RECENT",
+        "SN-000035",
+        "STOCK-BATCH-B-RECENT"
+      ]
+    }
+  ],
+  "exposureRange": {
+    "low": 35,
+    "high": 154,
+    "unknownSeparate": 6,
+    "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+  },
+  "disclaimer": "Potentially exposed units only. No fault or quality determination is made by this system.",
+  "generatedAt": "2026-10-31T10:39:28.672Z",
+  "version": 2
+}

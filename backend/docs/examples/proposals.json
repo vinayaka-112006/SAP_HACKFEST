@@ -1,0 +1,22 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "proposal": {
+    "proposalId": "PROP-0001",
+    "incidentId": "TS-0002",
+    "type": "TOOL_RESTRICTION",
+    "payload": {
+      "toolId": "TOOL-B",
+      "action": "RESTRICT"
+    },
+    "reason": "Review torque report",
+    "state": "Pending",
+    "createdAt": "2026-11-04T05:14:00Z"
+  },
+  "approval": {
+    "approvalId": "APR-0001",
+    "proposalId": "PROP-0001",
+    "approverRole": "Manager",
+    "decision": "PENDING"
+  }
+}

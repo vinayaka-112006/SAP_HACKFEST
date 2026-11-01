@@ -91,8 +91,6 @@ export default function Logo({ variant = 'lockup', theme = 'dark', size = 40, an
 
       {/* Entrance animation keyframes + hover */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700;800&display=swap');
-
         .logo-mark-container:hover {
           transform: scale(1.08) !important;
           box-shadow: 0 0 28px rgba(0, 229, 255, 0.55) !important;

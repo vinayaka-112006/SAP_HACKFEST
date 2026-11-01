@@ -13,7 +13,7 @@ export default function Kitchen() {
 
   /* Color swatch helper */
   const Swatch = ({ color, name, children }) => (
-    <div style={{
+    <div className="kitchen-swatch" style={{
       display: 'flex', alignItems: 'flex-start', gap: '18px',
       padding: '22px', borderRadius: '16px',
       background: 'rgba(255,255,255,0.65)',
@@ -36,7 +36,7 @@ export default function Kitchen() {
   );
 
   return (
-    <div style={{ padding: '40px 32px 120px 32px', maxWidth: '1280px', margin: '0 auto' }}>
+    <div className="kitchen-container" style={{ padding: '40px 32px 120px 32px', maxWidth: '1280px', margin: '0 auto' }}>
       <header style={{ marginBottom: '36px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
           <Logo variant="mark" theme="light" size={48} />
@@ -49,6 +49,9 @@ export default function Kitchen() {
             </p>
           </div>
         </div>
+        <p style={{ fontSize: '16px', color: 'var(--ink-soft)' }}>
+          Visual examples only; not incident records, approvals or real SAP execution.
+        </p>
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
@@ -63,7 +66,7 @@ export default function Kitchen() {
             while keeping the manufacturing blueprint pattern visible behind.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+          <div className="kitchen-materials" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
             <GlassPanel variant="clear" style={{ padding: '28px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
                 <span style={{ fontWeight: 700, fontSize: '17px' }}>Light Glass</span>
@@ -119,8 +122,8 @@ export default function Kitchen() {
               involvement with an assembly. The less evidence we have, the foggier the visual treatment.
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
-              <Swatch color="#E0314B" name="Confirmed Exposure">
+            <div className="kitchen-tiers" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+              <Swatch color="#E0314B" name="Confirmed Association">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                   <TierBlock tier="confirmed" size={32} lifted />
                   <span style={{
@@ -129,12 +132,11 @@ export default function Kitchen() {
                   }}>Ruby</span>
                 </div>
                 <p style={{ fontSize: '14px', color: 'var(--ink-soft)', margin: 0 }}>
-                  Tool-use records, run data, and batch timestamps are all cryptographically verified.
-                  Sharp-edged, crystal-clear glass — no ambiguity.
+                  Crisp, sharp-edged facet glass. Used exclusively when tool-use, run, and batch records have a direct valid association.
                 </p>
               </Swatch>
 
-              <Swatch color="#F2A100" name="Probable Exposure">
+              <Swatch color="#F2A100" name="Probable Association">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                   <TierBlock tier="probable" size={32} lifted />
                   <span style={{
@@ -143,8 +145,7 @@ export default function Kitchen() {
                   }}>Saffron</span>
                 </div>
                 <p style={{ fontSize: '14px', color: 'var(--ink-soft)', margin: 0 }}>
-                  Inferred from workcenter and timestamp overlap. Tool-use log may be missing,
-                  but circumstantial evidence is strong. Translucent amber tint.
+                  Translucent tinted amber. An explicit tool-use link has a missing end or conflicting timestamps. Missing tool-use records remain Unknown.
                 </p>
               </Swatch>
 
@@ -225,7 +226,7 @@ export default function Kitchen() {
 
             {/* Author Provenance */}
             <h3 style={{ fontSize: '17px', fontWeight: 700, marginBottom: '14px' }}>Decision Provenance Chain</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="kitchen-provenance" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{
                 display: 'flex', alignItems: 'center', gap: '16px', padding: '16px 20px',
                 borderRadius: '14px', background: 'rgba(0, 229, 255, 0.06)',
@@ -253,7 +254,7 @@ export default function Kitchen() {
               }}>
                 <AuthorChip type="rejected" reason="Calibration test discrepancy requires re-inspection" />
                 <span style={{ fontSize: '15px', color: 'var(--ink-soft)' }}>
-                  Proposal rejected — justification recorded to immutable audit trail
+                  Example rejection reason recorded in application audit history
                 </span>
               </div>
             </div>

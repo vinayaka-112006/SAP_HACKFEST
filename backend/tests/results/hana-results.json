@@ -1,0 +1,55 @@
+{
+  "mode": "hana",
+  "executedAt": "2026-10-31T16:35:16.197Z",
+  "status": "PASSED",
+  "verificationScope": "new uniquely identified synthetic incident in the confirmed application schema",
+  "checks": [
+    {
+      "name": "HANA database identity and schema",
+      "status": "PASSED"
+    },
+    {
+      "name": "real tools and health APIs",
+      "status": "PASSED"
+    },
+    {
+      "name": "incident creation actually writes to HANA",
+      "status": "PASSED"
+    },
+    {
+      "name": "explicit confirmation persists in HANA",
+      "status": "PASSED"
+    },
+    {
+      "name": "incident survives backend process restart",
+      "status": "PASSED"
+    },
+    {
+      "name": "24h HANA trace matches SQLite serials, tiers, locations and evidence",
+      "status": "PASSED"
+    },
+    {
+      "name": "72h HANA trace matches SQLite serials, tiers, locations and evidence",
+      "status": "PASSED"
+    },
+    {
+      "name": "168h HANA trace matches SQLite serials, tiers, locations and evidence",
+      "status": "PASSED"
+    },
+    {
+      "name": "trace and audit rows exist in the actual HANA database",
+      "status": "PASSED"
+    },
+    {
+      "name": "database audit UPDATE and DELETE are rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "persisted traces and audit survive another backend restart",
+      "status": "PASSED"
+    }
+  ],
+  "_label": "SIMULATED",
+  "incidentId": "TS-0002",
+  "groundTruth": "PROVISIONAL; Jamuna sign-off pending"
+}

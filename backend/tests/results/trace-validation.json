@@ -1,0 +1,129 @@
+{
+  "label": "synthetic data, simulated services",
+  "groundTruth": "PROVISIONAL CANDIDATE; Jamuna review pending",
+  "rows": [
+    {
+      "window": 24,
+      "expected": {
+        "totalUnits": 35,
+        "byTier": {
+          "CONFIRMED": 35,
+          "PROBABLE": 0,
+          "UNKNOWN": 0
+        },
+        "inStock": 35,
+        "dealerX": 0,
+        "dealerY": 0,
+        "score": 100
+      },
+      "actual": {
+        "totalUnits": 35,
+        "byTier": {
+          "CONFIRMED": 35,
+          "PROBABLE": 0,
+          "UNKNOWN": 0
+        },
+        "byLocation": {
+          "IN_STOCK": 35,
+          "SHIPPED": 0,
+          "UNKNOWN_LOCATION": 0
+        },
+        "shippedByDealer": {
+          "DLR-X": 0,
+          "DLR-Y": 0
+        },
+        "score": 100,
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      "durationMs": 20.204899999996996,
+      "status": 200
+    },
+    {
+      "window": 72,
+      "expected": {
+        "totalUnits": 100,
+        "byTier": {
+          "CONFIRMED": 90,
+          "PROBABLE": 4,
+          "UNKNOWN": 6
+        },
+        "inStock": 40,
+        "dealerX": 35,
+        "dealerY": 25,
+        "score": 82
+      },
+      "actual": {
+        "totalUnits": 100,
+        "byTier": {
+          "CONFIRMED": 90,
+          "PROBABLE": 4,
+          "UNKNOWN": 6
+        },
+        "byLocation": {
+          "IN_STOCK": 40,
+          "SHIPPED": 60,
+          "UNKNOWN_LOCATION": 0
+        },
+        "shippedByDealer": {
+          "DLR-X": 35,
+          "DLR-Y": 25
+        },
+        "score": 82,
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      "durationMs": 20.133799999995972,
+      "status": 200
+    },
+    {
+      "window": 168,
+      "expected": {
+        "totalUnits": 160,
+        "byTier": {
+          "CONFIRMED": 146,
+          "PROBABLE": 8,
+          "UNKNOWN": 6
+        },
+        "inStock": 50,
+        "dealerX": 55,
+        "dealerY": 55,
+        "score": 83
+      },
+      "actual": {
+        "totalUnits": 160,
+        "byTier": {
+          "CONFIRMED": 146,
+          "PROBABLE": 8,
+          "UNKNOWN": 6
+        },
+        "byLocation": {
+          "IN_STOCK": 50,
+          "SHIPPED": 110,
+          "UNKNOWN_LOCATION": 0
+        },
+        "shippedByDealer": {
+          "DLR-X": 55,
+          "DLR-Y": 55
+        },
+        "score": 83,
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      "durationMs": 15.977500000000873,
+      "status": 200
+    }
+  ]
+}

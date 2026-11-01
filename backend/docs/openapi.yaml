@@ -1,0 +1,5549 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ToolSathi simulated platform",
+    "version": "0.1.0",
+    "description": "13 implemented operations including 4 persisted SAP simulations; 5 teammate stubs. No real SAP connection. Provisional ground truth."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4004/api"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "demoIdentity": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-demo-user",
+        "description": "Local demo only; disabled in production"
+      },
+      "demoRole": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-demo-role"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Verified using bound XSUAA SDK"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message",
+              "details"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "details": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "db",
+                    "mode",
+                    "seedVersion",
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "db": {
+                      "type": "string"
+                    },
+                    "mode": {
+                      "type": "string"
+                    },
+                    "seedVersion": {
+                      "type": "string"
+                    },
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "status": "ok",
+                  "db": "connected",
+                  "mode": "SIMULATED",
+                  "seedVersion": "synthetic-v1",
+                  "_label": "SIMULATED",
+                  "_stub": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/incidents": {
+      "post": {
+        "operationId": "incident-create",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "201": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incident",
+                    "warnings",
+                    "auditId"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incident": {
+                      "type": "object",
+                      "required": [
+                        "incidentId",
+                        "toolId",
+                        "reporterId",
+                        "language",
+                        "rawText",
+                        "translatedText",
+                        "category",
+                        "suggestedNcCode",
+                        "confidence",
+                        "missingFields",
+                        "state",
+                        "createdAt",
+                        "reportedAt",
+                        "reportedAtSource",
+                        "confirmedAt",
+                        "confirmedBy",
+                        "modelVersion"
+                      ],
+                      "properties": {
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "reporterId": {
+                          "type": "string"
+                        },
+                        "language": {
+                          "type": "string"
+                        },
+                        "rawText": {
+                          "type": "string"
+                        },
+                        "translatedText": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "category": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "suggestedNcCode": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "nullable": true
+                        },
+                        "missingFields": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAtSource": {
+                          "type": "string"
+                        },
+                        "confirmedAt": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "confirmedBy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "modelVersion": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "warnings": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "auditId": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Reported",
+                    "createdAt": "2026-10-31T10:34:37.397Z",
+                    "reportedAt": "2026-11-04T05:12:00.000Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "confirmedAt": null,
+                    "confirmedBy": null,
+                    "modelVersion": "demo-structured-v1"
+                  },
+                  "warnings": [],
+                  "auditId": "AUD-ff62a9a9-04d3-43dc-a381-0d963093a7c5"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "toolId",
+                  "reporterId",
+                  "language",
+                  "rawText"
+                ],
+                "properties": {
+                  "toolId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "reporterId": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "rawText": {
+                    "type": "string"
+                  },
+                  "translatedText": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "category": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "reportedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "modelVersion": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "toolId": "TOOL-B",
+                "reporterId": "WRK-014",
+                "language": "kn",
+                "rawText": "?????? ??????????",
+                "translatedText": "Tool B is leaving bolts loose",
+                "category": "TORQUE",
+                "reportedAt": "2026-11-04T05:12:00Z",
+                "modelVersion": "stub-0"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/confirm": {
+      "post": {
+        "operationId": "incident-confirm",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incident",
+                    "warnings",
+                    "auditId"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incident": {
+                      "type": "object",
+                      "required": [
+                        "incidentId",
+                        "toolId",
+                        "reporterId",
+                        "language",
+                        "rawText",
+                        "translatedText",
+                        "category",
+                        "suggestedNcCode",
+                        "confidence",
+                        "missingFields",
+                        "state",
+                        "createdAt",
+                        "reportedAt",
+                        "reportedAtSource",
+                        "confirmedAt",
+                        "confirmedBy",
+                        "modelVersion"
+                      ],
+                      "properties": {
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "reporterId": {
+                          "type": "string"
+                        },
+                        "language": {
+                          "type": "string"
+                        },
+                        "rawText": {
+                          "type": "string"
+                        },
+                        "translatedText": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "category": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "suggestedNcCode": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "nullable": true
+                        },
+                        "missingFields": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAtSource": {
+                          "type": "string"
+                        },
+                        "confirmedAt": {
+                          "type": "string",
+                          "nullable": true,
+                          "format": "date-time"
+                        },
+                        "confirmedBy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "modelVersion": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "warnings": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "auditId": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Confirmed",
+                    "createdAt": "2026-10-31T10:34:37.397Z",
+                    "reportedAt": "2026-11-04T05:12:00.000Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "confirmedAt": "2026-10-31T10:34:37.428Z",
+                    "confirmedBy": "WRK-014",
+                    "modelVersion": "demo-structured-v1"
+                  },
+                  "warnings": [],
+                  "auditId": "AUD-94952be3-9ee4-4bfe-9a44-fb3f1aa78290"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "confirmedBy"
+                ],
+                "properties": {
+                  "confirmedBy": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "corrections": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": true
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "confirmedBy": "WRK-014",
+                "corrections": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}": {
+      "get": {
+        "operationId": "incident-get",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incident",
+                    "evidence",
+                    "auditSummary",
+                    "traceResults"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incident": {
+                      "type": "object",
+                      "required": [
+                        "incidentId",
+                        "toolId",
+                        "reporterId",
+                        "language",
+                        "rawText",
+                        "translatedText",
+                        "category",
+                        "suggestedNcCode",
+                        "confidence",
+                        "missingFields",
+                        "state",
+                        "createdAt",
+                        "reportedAt",
+                        "reportedAtSource",
+                        "confirmedAt",
+                        "confirmedBy",
+                        "modelVersion"
+                      ],
+                      "properties": {
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "reporterId": {
+                          "type": "string"
+                        },
+                        "language": {
+                          "type": "string"
+                        },
+                        "rawText": {
+                          "type": "string"
+                        },
+                        "translatedText": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "category": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "suggestedNcCode": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "nullable": true
+                        },
+                        "missingFields": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAtSource": {
+                          "type": "string"
+                        },
+                        "confirmedAt": {
+                          "type": "string",
+                          "nullable": true,
+                          "format": "date-time"
+                        },
+                        "confirmedBy": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "modelVersion": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "auditSummary": {
+                      "type": "object",
+                      "required": [
+                        "count",
+                        "last"
+                      ],
+                      "properties": {
+                        "count": {
+                          "type": "number"
+                        },
+                        "last": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "auditId",
+                              "incidentId",
+                              "toolId",
+                              "actor",
+                              "actorRole",
+                              "action",
+                              "details",
+                              "reason",
+                              "modelVersion",
+                              "timestamp"
+                            ],
+                            "properties": {
+                              "auditId": {
+                                "type": "string"
+                              },
+                              "incidentId": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "toolId": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "actor": {
+                                "type": "string"
+                              },
+                              "actorRole": {
+                                "type": "string"
+                              },
+                              "action": {
+                                "type": "string"
+                              },
+                              "details": {
+                                "type": "object",
+                                "additionalProperties": true
+                              },
+                              "reason": {
+                                "type": "string"
+                              },
+                              "modelVersion": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "timestamp": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "additionalProperties": true
+                          }
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "traceResults": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "windowHours",
+                          "version",
+                          "totalUnits",
+                          "byTier",
+                          "dataQualityScore",
+                          "snapshotTime"
+                        ],
+                        "properties": {
+                          "windowHours": {
+                            "type": "number"
+                          },
+                          "version": {
+                            "type": "number"
+                          },
+                          "totalUnits": {
+                            "type": "number"
+                          },
+                          "byTier": {
+                            "type": "object",
+                            "required": [
+                              "CONFIRMED",
+                              "PROBABLE",
+                              "UNKNOWN"
+                            ],
+                            "properties": {
+                              "CONFIRMED": {
+                                "type": "number"
+                              },
+                              "PROBABLE": {
+                                "type": "number"
+                              },
+                              "UNKNOWN": {
+                                "type": "number"
+                              }
+                            },
+                            "additionalProperties": true
+                          },
+                          "dataQualityScore": {
+                            "type": "number"
+                          },
+                          "snapshotTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Confirmed",
+                    "createdAt": "2026-10-31T10:34:37.397Z",
+                    "reportedAt": "2026-11-04T05:12:00.000Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "confirmedAt": "2026-10-31T10:34:37.428Z",
+                    "confirmedBy": "WRK-014",
+                    "modelVersion": "demo-structured-v1"
+                  },
+                  "evidence": [],
+                  "auditSummary": {
+                    "count": 5,
+                    "last": [
+                      {
+                        "auditId": "AUD-b5d997eb-63b2-4176-a05b-ede43cb11064",
+                        "incidentId": "TS-0002",
+                        "toolId": "TOOL-B",
+                        "actor": "DEMO-MANAGER",
+                        "actorRole": "Manager",
+                        "action": "TRACE_GENERATED",
+                        "details": {
+                          "windowHours": 168,
+                          "version": 1,
+                          "totalUnits": 160
+                        },
+                        "reason": "Human requested deterministic exposure review",
+                        "modelVersion": null,
+                        "timestamp": "2026-10-31T10:34:37.518Z"
+                      },
+                      {
+                        "auditId": "AUD-94e25716-a79b-44c0-aa91-59118e809cdb",
+                        "incidentId": "TS-0002",
+                        "toolId": "TOOL-B",
+                        "actor": "DEMO-MANAGER",
+                        "actorRole": "Manager",
+                        "action": "TRACE_GENERATED",
+                        "details": {
+                          "windowHours": 72,
+                          "version": 1,
+                          "totalUnits": 100
+                        },
+                        "reason": "Human requested deterministic exposure review",
+                        "modelVersion": null,
+                        "timestamp": "2026-10-31T10:34:37.494Z"
+                      },
+                      {
+                        "auditId": "AUD-fc335b4f-892d-45a9-b0ce-3d09a4b4762a",
+                        "incidentId": "TS-0002",
+                        "toolId": "TOOL-B",
+                        "actor": "DEMO-MANAGER",
+                        "actorRole": "Manager",
+                        "action": "TRACE_GENERATED",
+                        "details": {
+                          "windowHours": 24,
+                          "version": 1,
+                          "totalUnits": 35
+                        },
+                        "reason": "Human requested deterministic exposure review",
+                        "modelVersion": null,
+                        "timestamp": "2026-10-31T10:34:37.468Z"
+                      },
+                      {
+                        "auditId": "AUD-94952be3-9ee4-4bfe-9a44-fb3f1aa78290",
+                        "incidentId": "TS-0002",
+                        "toolId": "TOOL-B",
+                        "actor": "WRK-014",
+                        "actorRole": "Worker",
+                        "action": "INCIDENT_CONFIRMED",
+                        "details": {
+                          "before": {
+                            "incidentId": "TS-0002",
+                            "toolId": "TOOL-B",
+                            "reporterId": "WRK-014",
+                            "language": "kn",
+                            "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                            "translatedText": "Tool B is leaving bolts loose",
+                            "category": "TORQUE",
+                            "suggestedNcCode": "NC-TORQUE-LOOSE",
+                            "confidence": 0.82,
+                            "missingFields": [],
+                            "state": "Reported",
+                            "createdAt": "2026-10-31T10:34:37.397Z",
+                            "reportedAt": "2026-11-04T05:12:00.000Z",
+                            "reportedAtSource": "CLIENT_REPORTED",
+                            "confirmedAt": null,
+                            "confirmedBy": null,
+                            "modelVersion": "demo-structured-v1"
+                          },
+                          "after": {
+                            "incidentId": "TS-0002",
+                            "toolId": "TOOL-B",
+                            "reporterId": "WRK-014",
+                            "language": "kn",
+                            "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                            "translatedText": "Tool B is leaving bolts loose",
+                            "category": "TORQUE",
+                            "suggestedNcCode": "NC-TORQUE-LOOSE",
+                            "confidence": 0.82,
+                            "missingFields": [],
+                            "state": "Confirmed",
+                            "createdAt": "2026-10-31T10:34:37.397Z",
+                            "reportedAt": "2026-11-04T05:12:00.000Z",
+                            "reportedAtSource": "CLIENT_REPORTED",
+                            "confirmedAt": "2026-10-31T10:34:37.428Z",
+                            "confirmedBy": "WRK-014",
+                            "modelVersion": "demo-structured-v1"
+                          }
+                        },
+                        "reason": "Worker confirmed report",
+                        "modelVersion": "demo-structured-v1",
+                        "timestamp": "2026-10-31T10:34:37.429Z"
+                      },
+                      {
+                        "auditId": "AUD-ff62a9a9-04d3-43dc-a381-0d963093a7c5",
+                        "incidentId": "TS-0002",
+                        "toolId": "TOOL-B",
+                        "actor": "WRK-014",
+                        "actorRole": "Worker",
+                        "action": "INCIDENT_CREATED",
+                        "details": {
+                          "state": "Reported",
+                          "reporterId": "WRK-014",
+                          "reportedAtSource": "CLIENT_REPORTED"
+                        },
+                        "reason": "Worker report received",
+                        "modelVersion": "demo-structured-v1",
+                        "timestamp": "2026-10-31T10:34:37.410Z"
+                      }
+                    ]
+                  },
+                  "traceResults": [
+                    {
+                      "windowHours": 24,
+                      "version": 1,
+                      "totalUnits": 35,
+                      "byTier": {
+                        "CONFIRMED": 35,
+                        "PROBABLE": 0,
+                        "UNKNOWN": 0
+                      },
+                      "dataQualityScore": 100,
+                      "snapshotTime": "2026-11-04T05:02:00.000Z"
+                    },
+                    {
+                      "windowHours": 72,
+                      "version": 1,
+                      "totalUnits": 100,
+                      "byTier": {
+                        "CONFIRMED": 90,
+                        "PROBABLE": 4,
+                        "UNKNOWN": 6
+                      },
+                      "dataQualityScore": 82,
+                      "snapshotTime": "2026-11-04T05:02:00.000Z"
+                    },
+                    {
+                      "windowHours": 168,
+                      "version": 1,
+                      "totalUnits": 160,
+                      "byTier": {
+                        "CONFIRMED": 146,
+                        "PROBABLE": 8,
+                        "UNKNOWN": 6
+                      },
+                      "dataQualityScore": 83,
+                      "snapshotTime": "2026-11-04T05:02:00.000Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tools": {
+      "get": {
+        "operationId": "tools",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "tools"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "tools": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "toolId",
+                          "type",
+                          "line",
+                          "workCenter",
+                          "state",
+                          "calibrationDue",
+                          "usageCount",
+                          "lastVerifiedGood"
+                        ],
+                        "properties": {
+                          "toolId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "line": {
+                            "type": "string"
+                          },
+                          "workCenter": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "calibrationDue": {
+                            "type": "string"
+                          },
+                          "usageCount": {
+                            "type": "number"
+                          },
+                          "lastVerifiedGood": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "tools": [
+                    {
+                      "toolId": "TOOL-A",
+                      "type": "TORQUE",
+                      "line": "LINE-BRAKE-1",
+                      "workCenter": "WC-A",
+                      "state": "Active",
+                      "calibrationDue": "2026-12-01",
+                      "usageCount": 50,
+                      "lastVerifiedGood": "2026-10-25T05:12:00.000Z"
+                    },
+                    {
+                      "toolId": "TOOL-B",
+                      "type": "TORQUE",
+                      "line": "LINE-BRAKE-1",
+                      "workCenter": "WC-B",
+                      "state": "Active",
+                      "calibrationDue": "2026-12-01",
+                      "usageCount": 200,
+                      "lastVerifiedGood": "2026-10-25T05:12:00.000Z"
+                    },
+                    {
+                      "toolId": "TOOL-C",
+                      "type": "TORQUE",
+                      "line": "LINE-BRAKE-1",
+                      "workCenter": "WC-C",
+                      "state": "Active",
+                      "calibrationDue": "2026-11-09",
+                      "usageCount": 50,
+                      "lastVerifiedGood": "2026-10-25T05:12:00.000Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/tools/{id}/history": {
+      "get": {
+        "operationId": "tool-history",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "toolId",
+                    "events",
+                    "counts"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "eventId",
+                          "toolId",
+                          "type",
+                          "at",
+                          "summary",
+                          "refId",
+                          "details"
+                        ],
+                        "properties": {
+                          "eventId": {
+                            "type": "string"
+                          },
+                          "toolId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "at": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "summary": {
+                            "type": "string"
+                          },
+                          "refId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "details": {
+                            "type": "object",
+                            "additionalProperties": true
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "counts": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "toolId": "TOOL-B",
+                  "events": [
+                    {
+                      "eventId": "HIST-59d5f12d-dbbc-46f0-ae3f-1db4b42d9dde",
+                      "toolId": "TOOL-B",
+                      "type": "TRACE",
+                      "at": "2026-10-31T10:34:37.519Z",
+                      "summary": "168h trace generated",
+                      "refId": "TS-0002",
+                      "details": {
+                        "version": 1,
+                        "totalUnits": 160
+                      }
+                    },
+                    {
+                      "eventId": "HIST-79bcf59d-a8b1-4c60-a5b7-4f0d0fcde657",
+                      "toolId": "TOOL-B",
+                      "type": "TRACE",
+                      "at": "2026-10-31T10:34:37.495Z",
+                      "summary": "72h trace generated",
+                      "refId": "TS-0002",
+                      "details": {
+                        "version": 1,
+                        "totalUnits": 100
+                      }
+                    },
+                    {
+                      "eventId": "HIST-d8851620-a947-4427-9f1f-ea4fdc5255e1",
+                      "toolId": "TOOL-B",
+                      "type": "TRACE",
+                      "at": "2026-10-31T10:34:37.470Z",
+                      "summary": "24h trace generated",
+                      "refId": "TS-0002",
+                      "details": {
+                        "version": 1,
+                        "totalUnits": 35
+                      }
+                    },
+                    {
+                      "eventId": "HIST-5b4568c1-e2bd-453b-83c7-535ef5b77c9d",
+                      "toolId": "TOOL-B",
+                      "type": "INCIDENT",
+                      "at": "2026-10-31T10:34:37.430Z",
+                      "summary": "Incident confirmed",
+                      "refId": "TS-0002",
+                      "details": {
+                        "fromTool": "TOOL-B",
+                        "toTool": "TOOL-B",
+                        "state": "Confirmed"
+                      }
+                    },
+                    {
+                      "eventId": "HIST-3b253125-8652-4deb-8c6c-037b74532ae5",
+                      "toolId": "TOOL-B",
+                      "type": "INCIDENT",
+                      "at": "2026-10-31T10:34:37.412Z",
+                      "summary": "Incident reported",
+                      "refId": "TS-0002",
+                      "details": {
+                        "state": "Reported"
+                      }
+                    },
+                    {
+                      "eventId": "HIST-SEED-2",
+                      "toolId": "TOOL-B",
+                      "type": "REPAIR",
+                      "at": "2026-10-23T23:12:00.000Z",
+                      "summary": "Synthetic previous repair",
+                      "refId": "REP-0001",
+                      "details": {}
+                    },
+                    {
+                      "eventId": "HIST-SEED-1",
+                      "toolId": "TOOL-B",
+                      "type": "INCIDENT",
+                      "at": "2026-10-23T05:12:00.000Z",
+                      "summary": "Synthetic previous incident",
+                      "refId": "TS-0001",
+                      "details": {}
+                    },
+                    {
+                      "eventId": "HIST-SEED-3",
+                      "toolId": "TOOL-B",
+                      "type": "CALIBRATION",
+                      "at": "2026-09-25T05:12:00.000Z",
+                      "summary": "Synthetic previous calibration",
+                      "refId": "CAL-0001",
+                      "details": {}
+                    }
+                  ],
+                  "counts": {
+                    "TRACE": 3,
+                    "INCIDENT": 3,
+                    "REPAIR": 1,
+                    "CALIBRATION": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/trace": {
+      "get": {
+        "operationId": "trace",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "Deterministic association with run-bounded missing-end assumption, explicit uncertainty and all-window exposure range.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incidentId",
+                    "toolId",
+                    "windowHours",
+                    "windowStart",
+                    "windowEnd",
+                    "snapshotTime",
+                    "summary",
+                    "dataQuality",
+                    "valueAtRisk",
+                    "gaps",
+                    "units",
+                    "exposureRange",
+                    "disclaimer",
+                    "generatedAt",
+                    "version"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "windowHours": {
+                      "type": "number"
+                    },
+                    "windowStart": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "windowEnd": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "snapshotTime": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "summary": {
+                      "type": "object",
+                      "required": [
+                        "totalUnits",
+                        "byTier",
+                        "byLocation",
+                        "staleLocationUnits",
+                        "shippedByDealer"
+                      ],
+                      "properties": {
+                        "totalUnits": {
+                          "type": "number"
+                        },
+                        "byTier": {
+                          "type": "object",
+                          "required": [
+                            "CONFIRMED",
+                            "PROBABLE",
+                            "UNKNOWN"
+                          ],
+                          "properties": {
+                            "CONFIRMED": {
+                              "type": "number"
+                            },
+                            "PROBABLE": {
+                              "type": "number"
+                            },
+                            "UNKNOWN": {
+                              "type": "number"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "byLocation": {
+                          "type": "object",
+                          "required": [
+                            "IN_STOCK",
+                            "SHIPPED",
+                            "UNKNOWN_LOCATION"
+                          ],
+                          "properties": {
+                            "IN_STOCK": {
+                              "type": "number"
+                            },
+                            "SHIPPED": {
+                              "type": "number"
+                            },
+                            "UNKNOWN_LOCATION": {
+                              "type": "number"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "staleLocationUnits": {
+                          "type": "number"
+                        },
+                        "shippedByDealer": {
+                          "type": "object",
+                          "required": [
+                            "DLR-X",
+                            "DLR-Y"
+                          ],
+                          "properties": {
+                            "DLR-X": {
+                              "type": "number"
+                            },
+                            "DLR-Y": {
+                              "type": "number"
+                            }
+                          },
+                          "additionalProperties": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "dataQuality": {
+                      "type": "object",
+                      "required": [
+                        "score",
+                        "deductions"
+                      ],
+                      "properties": {
+                        "score": {
+                          "type": "number"
+                        },
+                        "deductions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "code",
+                              "amount"
+                            ],
+                            "properties": {
+                              "code": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "type": "number"
+                              }
+                            },
+                            "additionalProperties": true
+                          }
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "valueAtRisk": {
+                      "type": "object",
+                      "required": [
+                        "amountINR",
+                        "label"
+                      ],
+                      "properties": {
+                        "amountINR": {
+                          "type": "number"
+                        },
+                        "label": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "gaps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "code",
+                          "severity",
+                          "message",
+                          "runId",
+                          "affectedUnits",
+                          "evidenceIds"
+                        ],
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "severity": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "runId": {
+                            "type": "string"
+                          },
+                          "affectedUnits": {
+                            "type": "number"
+                          },
+                          "evidenceIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "units": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "serial",
+                          "batchId",
+                          "runId",
+                          "tier",
+                          "tierLabel",
+                          "tierReason",
+                          "reasonCodes",
+                          "locationStatus",
+                          "location",
+                          "dealerId",
+                          "flags",
+                          "evidenceIds"
+                        ],
+                        "properties": {
+                          "serial": {
+                            "type": "string"
+                          },
+                          "batchId": {
+                            "type": "string"
+                          },
+                          "runId": {
+                            "type": "string"
+                          },
+                          "tier": {
+                            "type": "string"
+                          },
+                          "tierLabel": {
+                            "type": "string"
+                          },
+                          "tierReason": {
+                            "type": "string"
+                          },
+                          "reasonCodes": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "locationStatus": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "dealerId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "flags": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "evidenceIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "exposureRange": {
+                      "type": "object",
+                      "required": [
+                        "low",
+                        "high",
+                        "unknownSeparate",
+                        "definition"
+                      ],
+                      "properties": {
+                        "low": {
+                          "type": "number"
+                        },
+                        "high": {
+                          "type": "number"
+                        },
+                        "unknownSeparate": {
+                          "type": "number"
+                        },
+                        "definition": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "disclaimer": {
+                      "type": "string"
+                    },
+                    "generatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "version": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incidentId": "TS-0002",
+                  "toolId": "TOOL-B",
+                  "windowHours": 24,
+                  "windowStart": "2026-11-03T05:12:00.000Z",
+                  "windowEnd": "2026-11-04T05:12:00.000Z",
+                  "snapshotTime": "2026-11-04T05:02:00.000Z",
+                  "summary": {
+                    "totalUnits": 35,
+                    "byTier": {
+                      "CONFIRMED": 35,
+                      "PROBABLE": 0,
+                      "UNKNOWN": 0
+                    },
+                    "byLocation": {
+                      "IN_STOCK": 35,
+                      "SHIPPED": 0,
+                      "UNKNOWN_LOCATION": 0
+                    },
+                    "staleLocationUnits": 0,
+                    "shippedByDealer": {
+                      "DLR-X": 0,
+                      "DLR-Y": 0
+                    }
+                  },
+                  "dataQuality": {
+                    "score": 100,
+                    "deductions": [
+                      {
+                        "code": "UNKNOWN_UNITS",
+                        "amount": 0
+                      },
+                      {
+                        "code": "PROBABLE_UNITS",
+                        "amount": 0
+                      },
+                      {
+                        "code": "STALE_SHIPMENT_RECORDS",
+                        "amount": 0
+                      },
+                      {
+                        "code": "CONFLICT_RUNS",
+                        "amount": 0
+                      }
+                    ]
+                  },
+                  "valueAtRisk": {
+                    "amountINR": 112000,
+                    "label": "ESTIMATE_SYNTHETIC"
+                  },
+                  "gaps": [
+                    {
+                      "code": "DUPLICATE_TOOL_USE_LINK",
+                      "severity": "INFO",
+                      "message": "Several tool-use links refer to this run; each serial is counted once.",
+                      "runId": "RUN-B-DUP",
+                      "affectedUnits": 10,
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP"
+                      ]
+                    }
+                  ],
+                  "units": [
+                    {
+                      "serial": "SN-000001",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000001",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000002",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000002",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000003",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000003",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000004",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000004",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000005",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000005",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000006",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000006",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000007",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000007",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000008",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000008",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000009",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000009",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000010",
+                      "batchId": "BATCH-B-DUP",
+                      "runId": "RUN-B-DUP",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-0001",
+                        "TUE-B-0001-DUP",
+                        "RUN-B-DUP",
+                        "BATCH-B-DUP",
+                        "SN-000010",
+                        "STOCK-BATCH-B-DUP"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000011",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000011",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000012",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000012",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000013",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000013",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000014",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000014",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000015",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000015",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000016",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000016",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000017",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000017",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000018",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000018",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000019",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000019",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000020",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000020",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000021",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000021",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000022",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000022",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000023",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000023",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000024",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000024",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000025",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000025",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000026",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000026",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000027",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000027",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000028",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000028",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000029",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000029",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000030",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000030",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000031",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000031",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000032",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000032",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000033",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000033",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000034",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000034",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    },
+                    {
+                      "serial": "SN-000035",
+                      "batchId": "BATCH-B-RECENT",
+                      "runId": "RUN-B-RECENT",
+                      "tier": "CONFIRMED",
+                      "tierLabel": "Record-linked association",
+                      "tierReason": "Valid tool-use interval links tool and run.",
+                      "reasonCodes": [],
+                      "locationStatus": "IN_STOCK",
+                      "location": "STORE-01",
+                      "dealerId": null,
+                      "flags": [],
+                      "evidenceIds": [
+                        "TUE-B-RECENT",
+                        "RUN-B-RECENT",
+                        "BATCH-B-RECENT",
+                        "SN-000035",
+                        "STOCK-BATCH-B-RECENT"
+                      ]
+                    }
+                  ],
+                  "exposureRange": {
+                    "low": 35,
+                    "high": 154,
+                    "unknownSeparate": 6,
+                    "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+                  },
+                  "disclaimer": "Potentially exposed units only. No fault or quality determination is made by this system.",
+                  "generatedAt": "2026-10-31T10:39:28.672Z",
+                  "version": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "window",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "24",
+              "enum": [
+                "24",
+                "72",
+                "168",
+                "24h",
+                "72h",
+                "168h"
+              ]
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/audit": {
+      "get": {
+        "operationId": "audit",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "real",
+        "description": "CAP persistence with application audit history.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incidentId",
+                    "entries"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "auditId",
+                          "incidentId",
+                          "toolId",
+                          "actor",
+                          "actorRole",
+                          "action",
+                          "details",
+                          "reason",
+                          "modelVersion",
+                          "timestamp"
+                        ],
+                        "properties": {
+                          "auditId": {
+                            "type": "string"
+                          },
+                          "incidentId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "toolId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "actor": {
+                            "type": "string"
+                          },
+                          "actorRole": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string"
+                          },
+                          "details": {
+                            "type": "object",
+                            "additionalProperties": true
+                          },
+                          "reason": {
+                            "type": "string"
+                          },
+                          "modelVersion": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incidentId": "TS-0002",
+                  "entries": [
+                    {
+                      "auditId": "AUD-ff62a9a9-04d3-43dc-a381-0d963093a7c5",
+                      "incidentId": "TS-0002",
+                      "toolId": "TOOL-B",
+                      "actor": "WRK-014",
+                      "actorRole": "Worker",
+                      "action": "INCIDENT_CREATED",
+                      "details": {
+                        "state": "Reported",
+                        "reporterId": "WRK-014",
+                        "reportedAtSource": "CLIENT_REPORTED"
+                      },
+                      "reason": "Worker report received",
+                      "modelVersion": "demo-structured-v1",
+                      "timestamp": "2026-10-31T10:34:37.410Z"
+                    },
+                    {
+                      "auditId": "AUD-94952be3-9ee4-4bfe-9a44-fb3f1aa78290",
+                      "incidentId": "TS-0002",
+                      "toolId": "TOOL-B",
+                      "actor": "WRK-014",
+                      "actorRole": "Worker",
+                      "action": "INCIDENT_CONFIRMED",
+                      "details": {
+                        "before": {
+                          "incidentId": "TS-0002",
+                          "toolId": "TOOL-B",
+                          "reporterId": "WRK-014",
+                          "language": "kn",
+                          "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                          "translatedText": "Tool B is leaving bolts loose",
+                          "category": "TORQUE",
+                          "suggestedNcCode": "NC-TORQUE-LOOSE",
+                          "confidence": 0.82,
+                          "missingFields": [],
+                          "state": "Reported",
+                          "createdAt": "2026-10-31T10:34:37.397Z",
+                          "reportedAt": "2026-11-04T05:12:00.000Z",
+                          "reportedAtSource": "CLIENT_REPORTED",
+                          "confirmedAt": null,
+                          "confirmedBy": null,
+                          "modelVersion": "demo-structured-v1"
+                        },
+                        "after": {
+                          "incidentId": "TS-0002",
+                          "toolId": "TOOL-B",
+                          "reporterId": "WRK-014",
+                          "language": "kn",
+                          "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                          "translatedText": "Tool B is leaving bolts loose",
+                          "category": "TORQUE",
+                          "suggestedNcCode": "NC-TORQUE-LOOSE",
+                          "confidence": 0.82,
+                          "missingFields": [],
+                          "state": "Confirmed",
+                          "createdAt": "2026-10-31T10:34:37.397Z",
+                          "reportedAt": "2026-11-04T05:12:00.000Z",
+                          "reportedAtSource": "CLIENT_REPORTED",
+                          "confirmedAt": "2026-10-31T10:34:37.428Z",
+                          "confirmedBy": "WRK-014",
+                          "modelVersion": "demo-structured-v1"
+                        }
+                      },
+                      "reason": "Worker confirmed report",
+                      "modelVersion": "demo-structured-v1",
+                      "timestamp": "2026-10-31T10:34:37.429Z"
+                    },
+                    {
+                      "auditId": "AUD-fc335b4f-892d-45a9-b0ce-3d09a4b4762a",
+                      "incidentId": "TS-0002",
+                      "toolId": "TOOL-B",
+                      "actor": "DEMO-MANAGER",
+                      "actorRole": "Manager",
+                      "action": "TRACE_GENERATED",
+                      "details": {
+                        "windowHours": 24,
+                        "version": 1,
+                        "totalUnits": 35
+                      },
+                      "reason": "Human requested deterministic exposure review",
+                      "modelVersion": null,
+                      "timestamp": "2026-10-31T10:34:37.468Z"
+                    },
+                    {
+                      "auditId": "AUD-94e25716-a79b-44c0-aa91-59118e809cdb",
+                      "incidentId": "TS-0002",
+                      "toolId": "TOOL-B",
+                      "actor": "DEMO-MANAGER",
+                      "actorRole": "Manager",
+                      "action": "TRACE_GENERATED",
+                      "details": {
+                        "windowHours": 72,
+                        "version": 1,
+                        "totalUnits": 100
+                      },
+                      "reason": "Human requested deterministic exposure review",
+                      "modelVersion": null,
+                      "timestamp": "2026-10-31T10:34:37.494Z"
+                    },
+                    {
+                      "auditId": "AUD-b5d997eb-63b2-4176-a05b-ede43cb11064",
+                      "incidentId": "TS-0002",
+                      "toolId": "TOOL-B",
+                      "actor": "DEMO-MANAGER",
+                      "actorRole": "Manager",
+                      "action": "TRACE_GENERATED",
+                      "details": {
+                        "windowHours": 168,
+                        "version": 1,
+                        "totalUnits": 160
+                      },
+                      "reason": "Human requested deterministic exposure review",
+                      "modelVersion": null,
+                      "timestamp": "2026-10-31T10:34:37.518Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "incident",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/mock/s4/maintenance-notifications": {
+      "post": {
+        "operationId": "maintenance",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "simulated",
+        "description": "Persisted local SIMULATED behavior. Matching approval role, incident, action and scope required for POST.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "_shapedLike",
+                    "MaintenanceNotification",
+                    "NotificationType",
+                    "NotificationText",
+                    "TechnicalObject",
+                    "Plant",
+                    "MaintPriority",
+                    "NotificationStatus"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "_shapedLike": {
+                      "type": "string"
+                    },
+                    "MaintenanceNotification": {
+                      "type": "string"
+                    },
+                    "NotificationType": {
+                      "type": "string"
+                    },
+                    "NotificationText": {
+                      "type": "string"
+                    },
+                    "TechnicalObject": {
+                      "type": "string"
+                    },
+                    "Plant": {
+                      "type": "string"
+                    },
+                    "MaintPriority": {
+                      "type": "string"
+                    },
+                    "NotificationStatus": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "_shapedLike": "S/4HANA Maintenance Notification",
+                  "MaintenanceNotification": "0000000001",
+                  "NotificationType": "M1",
+                  "NotificationText": "Inspect torque",
+                  "TechnicalObject": "TOOL-B",
+                  "Plant": "PLANT-01",
+                  "MaintPriority": "2",
+                  "NotificationStatus": "OSNO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "incidentId",
+                  "toolId",
+                  "shortText",
+                  "priority",
+                  "requestedBy",
+                  "approvalId"
+                ],
+                "properties": {
+                  "incidentId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "toolId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "shortText": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string"
+                  },
+                  "requestedBy": {
+                    "type": "string"
+                  },
+                  "approvalId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "incidentId": "TS-0002",
+                "toolId": "TOOL-B",
+                "shortText": "Inspect Tool B",
+                "priority": "2",
+                "requestedBy": "MGR-01",
+                "approvalId": "APR-0001"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/s4/quality-notifications": {
+      "post": {
+        "operationId": "quality",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "simulated",
+        "description": "Persisted local SIMULATED behavior. Matching approval role, incident, action and scope required for POST.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "_shapedLike",
+                    "QualityNotification",
+                    "NotificationType",
+                    "NotificationText",
+                    "TechnicalObject",
+                    "batchIds"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "_shapedLike": {
+                      "type": "string"
+                    },
+                    "QualityNotification": {
+                      "type": "string"
+                    },
+                    "NotificationType": {
+                      "type": "string"
+                    },
+                    "NotificationText": {
+                      "type": "string"
+                    },
+                    "TechnicalObject": {
+                      "type": "string"
+                    },
+                    "batchIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "_shapedLike": "S/4HANA Quality Notification",
+                  "QualityNotification": "0000000002",
+                  "NotificationType": "Q3",
+                  "NotificationText": "Review potential exposure",
+                  "TechnicalObject": "TOOL-B",
+                  "batchIds": [
+                    "BATCH-B-DUP"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "incidentId",
+                  "toolId",
+                  "shortText",
+                  "batchIds",
+                  "requestedBy",
+                  "approvalId"
+                ],
+                "properties": {
+                  "incidentId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "toolId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "shortText": {
+                    "type": "string"
+                  },
+                  "batchIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "requestedBy": {
+                    "type": "string"
+                  },
+                  "approvalId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "incidentId": "TS-0002",
+                "toolId": "TOOL-B",
+                "shortText": "Review potential exposure",
+                "batchIds": [
+                  "BATCH-B-DUP"
+                ],
+                "requestedBy": "QA-01",
+                "approvalId": "APR-0002"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/s4/stock-blocks": {
+      "post": {
+        "operationId": "stock-block",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "simulated",
+        "description": "Persisted local SIMULATED behavior. Matching approval role, incident, action and scope required for POST.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "_shapedLike",
+                    "MaterialDocument",
+                    "GoodsMovementType",
+                    "items",
+                    "skipped",
+                    "alreadyBlocked"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "_shapedLike": {
+                      "type": "string"
+                    },
+                    "MaterialDocument": {
+                      "type": "string"
+                    },
+                    "GoodsMovementType": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "batchId",
+                          "stockId",
+                          "quantity",
+                          "fromStatus",
+                          "toStatus"
+                        ],
+                        "properties": {
+                          "batchId": {
+                            "type": "string"
+                          },
+                          "stockId": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "number"
+                          },
+                          "fromStatus": {
+                            "type": "string"
+                          },
+                          "toStatus": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "skipped": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "batchId",
+                          "reason"
+                        ],
+                        "properties": {
+                          "batchId": {
+                            "type": "string"
+                          },
+                          "reason": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "alreadyBlocked": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "_shapedLike": "S/4HANA Material Document",
+                  "MaterialDocument": "0000000003",
+                  "GoodsMovementType": "344",
+                  "items": [
+                    {
+                      "batchId": "BATCH-B-DUP",
+                      "stockId": "STOCK-BATCH-B-DUP",
+                      "quantity": 10,
+                      "fromStatus": "UNRESTRICTED",
+                      "toStatus": "BLOCKED"
+                    }
+                  ],
+                  "skipped": [
+                    {
+                      "batchId": "BATCH-B-X72",
+                      "reason": "SHIPPED"
+                    }
+                  ],
+                  "alreadyBlocked": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "incidentId",
+                  "batchIds",
+                  "plant",
+                  "storageLocation",
+                  "reason",
+                  "approvalId"
+                ],
+                "properties": {
+                  "incidentId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "batchIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "plant": {
+                    "type": "string"
+                  },
+                  "storageLocation": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "approvalId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "incidentId": "TS-0002",
+                "batchIds": [
+                  "BATCH-B-DUP"
+                ],
+                "plant": "PLANT-01",
+                "storageLocation": "STORE-01",
+                "reason": "Potential exposure review",
+                "approvalId": "APR-0002"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/dm/tool-restrictions": {
+      "post": {
+        "operationId": "restriction",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "simulated",
+        "description": "Persisted local SIMULATED behavior. Matching approval role, incident, action and scope required for POST.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "_shapedLike",
+                    "ResourceId",
+                    "Status"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "_shapedLike": {
+                      "type": "string"
+                    },
+                    "ResourceId": {
+                      "type": "string"
+                    },
+                    "Status": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "_shapedLike": "Digital Manufacturing Resource",
+                  "ResourceId": "TOOL-B",
+                  "Status": "RESTRICTED"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "toolId",
+                  "incidentId",
+                  "action",
+                  "reason",
+                  "approvalId"
+                ],
+                "properties": {
+                  "toolId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "incidentId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "action": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "approvalId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "toolId": "TOOL-B",
+                "incidentId": "TS-0002",
+                "action": "RESTRICT",
+                "reason": "Review torque report",
+                "approvalId": "APR-0001"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mock/documents": {
+      "get": {
+        "operationId": "documents",
+        "tags": [
+          "platform"
+        ],
+        "x-owner": "platform",
+        "x-implementation": "simulated",
+        "description": "Persisted local SIMULATED behavior. Matching approval role, incident, action and scope required for POST.",
+        "responses": {
+          "200": {
+            "description": "Implemented response on synthetic data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incidentId",
+                    "documents",
+                    "limit",
+                    "offset"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "documents": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "limit": {
+                      "type": "number"
+                    },
+                    "offset": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": false,
+                  "incidentId": "TS-0002",
+                  "documents": [],
+                  "limit": 50,
+                  "offset": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "incident",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000,
+              "default": 0
+            }
+          }
+        ],
+        "security": [
+          {
+            "demoIdentity": [],
+            "demoRole": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/ai/structure-report": {
+      "post": {
+        "operationId": "ai-structure",
+        "tags": [
+          "Shashank"
+        ],
+        "x-owner": "Shashank",
+        "x-implementation": "stub",
+        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "responses": {
+          "200": {
+            "description": "Fixed fixture",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "toolId",
+                    "language",
+                    "rawText",
+                    "translatedText",
+                    "category",
+                    "suggestedNcCode",
+                    "confidence",
+                    "missingFields",
+                    "modelVersion"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "toolId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "language": {
+                      "type": "string"
+                    },
+                    "rawText": {
+                      "type": "string"
+                    },
+                    "translatedText": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "suggestedNcCode": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "missingFields": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "modelVersion": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "toolId": "TOOL-B",
+                  "language": "kn",
+                  "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ",
+                  "translatedText": "Tool B is leaving bolts loose",
+                  "category": "TORQUE",
+                  "suggestedNcCode": "NC-TORQUE-LOOSE",
+                  "confidence": 0.82,
+                  "missingFields": [],
+                  "modelVersion": "stub-0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "toolId",
+                  "language",
+                  "rawText"
+                ],
+                "properties": {
+                  "toolId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "rawText": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "toolId": "TOOL-B",
+                "language": "kn",
+                "rawText": "ಟೂಲ್ B ಬೋಲ್ಟ್ ಸಡಿಲವಾಗಿದೆ"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/duplicates": {
+      "get": {
+        "operationId": "duplicates",
+        "tags": [
+          "Jamuna"
+        ],
+        "x-owner": "Jamuna",
+        "x-implementation": "stub",
+        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "responses": {
+          "200": {
+            "description": "Fixed fixture",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incidentId",
+                    "candidates"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "incidentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "candidates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "incidentId",
+                          "reason"
+                        ],
+                        "properties": {
+                          "incidentId": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "reason": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incidentId": "TS-0002",
+                  "candidates": [
+                    {
+                      "incidentId": "TS-0001",
+                      "reason": "Same tool and category; human review required."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/incidents/{id}/proposals": {
+      "post": {
+        "operationId": "proposals",
+        "tags": [
+          "Jamuna"
+        ],
+        "x-owner": "Jamuna",
+        "x-implementation": "stub",
+        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "responses": {
+          "200": {
+            "description": "Fixed fixture",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "proposal",
+                    "approval"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "proposal": {
+                      "type": "object",
+                      "required": [
+                        "proposalId",
+                        "incidentId",
+                        "type",
+                        "payload",
+                        "reason",
+                        "state",
+                        "createdAt"
+                      ],
+                      "properties": {
+                        "proposalId": {
+                          "type": "string"
+                        },
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "payload": {
+                          "type": "object",
+                          "additionalProperties": true
+                        },
+                        "reason": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "approval": {
+                      "type": "object",
+                      "required": [
+                        "approvalId",
+                        "proposalId",
+                        "approverRole",
+                        "decision"
+                      ],
+                      "properties": {
+                        "approvalId": {
+                          "type": "string"
+                        },
+                        "proposalId": {
+                          "type": "string"
+                        },
+                        "approverRole": {
+                          "type": "string"
+                        },
+                        "decision": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "proposal": {
+                    "proposalId": "PROP-0001",
+                    "incidentId": "TS-0002",
+                    "type": "TOOL_RESTRICTION",
+                    "payload": {
+                      "toolId": "TOOL-B",
+                      "action": "RESTRICT"
+                    },
+                    "reason": "Review torque report",
+                    "state": "Pending",
+                    "createdAt": "2026-11-04T05:14:00Z"
+                  },
+                  "approval": {
+                    "approvalId": "APR-0001",
+                    "proposalId": "PROP-0001",
+                    "approverRole": "Manager",
+                    "decision": "PENDING"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "reason"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "type": "TOOL_RESTRICTION",
+                "reason": "Review torque report"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/approvals/{id}/decision": {
+      "post": {
+        "operationId": "approval-decision",
+        "tags": [
+          "Jamuna"
+        ],
+        "x-owner": "Jamuna",
+        "x-implementation": "stub",
+        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "responses": {
+          "200": {
+            "description": "Fixed fixture",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "approval"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "approval": {
+                      "type": "object",
+                      "required": [
+                        "approvalId",
+                        "proposalId",
+                        "approverRole",
+                        "decision",
+                        "reason",
+                        "decidedAt",
+                        "decidedBy"
+                      ],
+                      "properties": {
+                        "approvalId": {
+                          "type": "string"
+                        },
+                        "proposalId": {
+                          "type": "string"
+                        },
+                        "approverRole": {
+                          "type": "string"
+                        },
+                        "decision": {
+                          "type": "string"
+                        },
+                        "reason": {
+                          "type": "string"
+                        },
+                        "decidedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "decidedBy": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "approval": {
+                    "approvalId": "APR-0001",
+                    "proposalId": "PROP-0001",
+                    "approverRole": "Manager",
+                    "decision": "APPROVED",
+                    "reason": "Containment approved",
+                    "decidedAt": "2026-11-04T05:15:00Z",
+                    "decidedBy": "MGR-01"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "decision",
+                  "reason",
+                  "decidedBy"
+                ],
+                "properties": {
+                  "decision": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "decidedBy": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "decision": "APPROVED",
+                "reason": "Containment approved",
+                "decidedBy": "MGR-01"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/verify-return": {
+      "post": {
+        "operationId": "verify-return",
+        "tags": [
+          "Jamuna"
+        ],
+        "x-owner": "Jamuna",
+        "x-implementation": "stub",
+        "description": "Fixed _stub:true fixture; does not persist or execute workflow. Shape awaits owner review.",
+        "responses": {
+          "200": {
+            "description": "Fixed fixture",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub",
+                    "incident",
+                    "tool",
+                    "verification"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "incident": {
+                      "type": "object",
+                      "required": [
+                        "incidentId",
+                        "toolId",
+                        "reporterId",
+                        "language",
+                        "rawText",
+                        "translatedText",
+                        "category",
+                        "suggestedNcCode",
+                        "confidence",
+                        "missingFields",
+                        "state",
+                        "reportedAt",
+                        "reportedAtSource",
+                        "createdAt",
+                        "modelVersion"
+                      ],
+                      "properties": {
+                        "incidentId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "reporterId": {
+                          "type": "string"
+                        },
+                        "language": {
+                          "type": "string"
+                        },
+                        "rawText": {
+                          "type": "string"
+                        },
+                        "translatedText": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "category": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "suggestedNcCode": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "nullable": true
+                        },
+                        "missingFields": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "reportedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "reportedAtSource": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "modelVersion": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "tool": {
+                      "type": "object",
+                      "required": [
+                        "toolId",
+                        "type",
+                        "line",
+                        "workCenter",
+                        "state",
+                        "calibrationDue",
+                        "usageCount",
+                        "lastVerifiedGood"
+                      ],
+                      "properties": {
+                        "toolId": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "line": {
+                          "type": "string"
+                        },
+                        "workCenter": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "calibrationDue": {
+                          "type": "string"
+                        },
+                        "usageCount": {
+                          "type": "number"
+                        },
+                        "lastVerifiedGood": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "verification": {
+                      "type": "object",
+                      "required": [
+                        "verifiedBy",
+                        "passed"
+                      ],
+                      "properties": {
+                        "verifiedBy": {
+                          "type": "string"
+                        },
+                        "passed": {
+                          "type": "boolean"
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                "example": {
+                  "_label": "SIMULATED",
+                  "_stub": true,
+                  "incident": {
+                    "incidentId": "TS-0002",
+                    "toolId": "TOOL-B",
+                    "reporterId": "WRK-014",
+                    "language": "kn",
+                    "rawText": "?????? ??????????",
+                    "translatedText": "Tool B is leaving bolts loose",
+                    "category": "TORQUE",
+                    "suggestedNcCode": "NC-TORQUE-LOOSE",
+                    "confidence": 0.82,
+                    "missingFields": [],
+                    "state": "Closed",
+                    "reportedAt": "2026-11-04T05:12:00Z",
+                    "reportedAtSource": "CLIENT_REPORTED",
+                    "createdAt": "2026-11-04T05:12:00Z",
+                    "modelVersion": "stub-0"
+                  },
+                  "tool": {
+                    "toolId": "TOOL-B",
+                    "type": "TORQUE",
+                    "line": "LINE-BRAKE-1",
+                    "workCenter": "WC-B",
+                    "state": "Active",
+                    "calibrationDue": "2026-11-09",
+                    "usageCount": 200,
+                    "lastVerifiedGood": "2026-10-23T05:12:00Z"
+                  },
+                  "verification": {
+                    "verifiedBy": "VER-01",
+                    "passed": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity missing or unverified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Invalid state or approval required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error; details withheld",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable configuration or database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "verifiedBy",
+                  "repairId",
+                  "passed"
+                ],
+                "properties": {
+                  "verifiedBy": {
+                    "type": "string"
+                  },
+                  "repairId": {
+                    "type": "string"
+                  },
+                  "passed": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "example": {
+                "verifiedBy": "VER-01",
+                "repairId": "REP-0001",
+                "passed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

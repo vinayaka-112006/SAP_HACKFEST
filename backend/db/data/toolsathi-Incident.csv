@@ -1,0 +1,2 @@
+incidentId;toolId;reporterId;language;rawText;translatedText;category;suggestedNcCode;confidence;missingFields;state;createdAt;reportedAt;reportedAtSource;confirmedAt;confirmedBy;modelVersion
+"TS-0001";"TOOL-B";"WRK-009";"hi";"Previous torque report (synthetic)";"Previous torque report";"TORQUE";"NC-TORQUE-LOOSE";"0.9";"[]";"Closed";"2026-10-23T05:12:00.000Z";"2026-10-23T05:12:00.000Z";"CLIENT_REPORTED";"2026-10-23T06:12:00.000Z";"WRK-009";"seed-v1"

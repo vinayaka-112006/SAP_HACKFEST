@@ -1,0 +1,11 @@
+{
+  "label": "synthetic data, simulated services",
+  "status": "PASSED",
+  "checks": [
+    "compiled CSN loads",
+    "packaged stub fixtures resolve",
+    "health and five teammate stubs verified",
+    "seeded CAP queries work"
+  ],
+  "cloudDeployment": "NOT_EXECUTED"
+}

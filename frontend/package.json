@@ -8,7 +8,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "seed": "node scripts/generate-seed.js",
-    "test:seed": "node src/tests/seed.test.js"
+    "test:seed": "node src/tests/seed.test.js",
+    "test": "node --test src/tests/client.test.js",
+    "test:e2e": "node --test --test-concurrency=1 scripts/browser.integration.test.js",
+    "verify:hana-ui": "node --test --test-concurrency=1 scripts/browser.hana.test.js"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.0.20",
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
+    "playwright": "^1.64.1",
     "vite": "^5.4.2"
   }
 }

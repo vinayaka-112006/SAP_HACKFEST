@@ -1,0 +1,36 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "tools": [
+    {
+      "toolId": "TOOL-A",
+      "type": "TORQUE",
+      "line": "LINE-BRAKE-1",
+      "workCenter": "WC-A",
+      "state": "Active",
+      "calibrationDue": "2026-12-01",
+      "usageCount": 50,
+      "lastVerifiedGood": "2026-10-25T05:12:00.000Z"
+    },
+    {
+      "toolId": "TOOL-B",
+      "type": "TORQUE",
+      "line": "LINE-BRAKE-1",
+      "workCenter": "WC-B",
+      "state": "Active",
+      "calibrationDue": "2026-12-01",
+      "usageCount": 200,
+      "lastVerifiedGood": "2026-10-25T05:12:00.000Z"
+    },
+    {
+      "toolId": "TOOL-C",
+      "type": "TORQUE",
+      "line": "LINE-BRAKE-1",
+      "workCenter": "WC-C",
+      "state": "Active",
+      "calibrationDue": "2026-11-09",
+      "usageCount": 50,
+      "lastVerifiedGood": "2026-10-25T05:12:00.000Z"
+    }
+  ]
+}

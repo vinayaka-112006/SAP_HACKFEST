@@ -36,7 +36,7 @@ export default function Launcher() {
         </svg>
       ),
       highlight: 'Multilingual Voice & Optical Tool Identification',
-      description: 'Rugged intake terminal built for shop-floor operators. Optical QR tool detection, high-accuracy Kannada, Hindi, and English voice intake via acoustic Mic Orb, and operator-confirmed structured drafting.',
+      description: 'Rugged intake terminal built for shop-floor operators. Manual tool register and QR contents, browser-dependent Kannada, Hindi, and English speech input via acoustic Mic Orb, and operator-confirmed structured drafting.',
       cta: 'Open Operator Terminal →'
     },
     {
@@ -50,7 +50,7 @@ export default function Launcher() {
         </svg>
       ),
       highlight: 'Repeat Failure Detection & Duplicate Case Correlation',
-      description: 'Chronological asset registry tracking tool repairs, calibration drift, and recurring torque clutch slippage. Features multilingual case correlation and side-by-side duplicate resolution.',
+      description: 'Chronological asset registry tracking tool repairs, calibration drift, and recurring torque clutch slippage. Duplicate review awaits the workflow adapter.',
       cta: 'Inspect Asset Lifecycle →'
     },
     {
@@ -70,9 +70,9 @@ export default function Launcher() {
   ];
 
   return (
-    <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '40px 32px 140px 32px' }}>
+    <div className="launcher-container" style={{ maxWidth: '1360px', margin: '0 auto', padding: '40px 32px 140px 32px' }}>
       {/* Hero Welcome Showcase */}
-      <div 
+      <div
         className="animate-fade-in-up"
         style={{
           textAlign: 'center',
@@ -85,7 +85,7 @@ export default function Launcher() {
         }}
       >
         {/* Emblem Showcase with Official Floating Logo */}
-        <div 
+        <div
           className="animate-float"
           style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}
         >
@@ -94,7 +94,7 @@ export default function Launcher() {
 
         {/* Enterprise Eyebrow */}
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-          <span 
+          <span
             className="animate-badge-ping"
             style={{
               display: 'inline-block',
@@ -103,7 +103,7 @@ export default function Launcher() {
               borderRadius: '50%',
               backgroundColor: 'var(--brand-cyan)',
               boxShadow: '0 0 12px var(--brand-cyan)'
-            }} 
+            }}
           />
           <span style={{
             fontSize: '13px',
@@ -113,7 +113,7 @@ export default function Launcher() {
             color: 'var(--brand-cyan-ink)',
             fontFamily: 'var(--font-mono)'
           }}>
-            AUTONOMOUS MANUFACTURING CLOUD • BENGALURU INDUSTRIAL COMPLEX
+            SYNTHETIC MANUFACTURING DEMONSTRATION
           </span>
           <StatusBadge status="Verified" size="small" />
         </div>
@@ -143,11 +143,11 @@ export default function Launcher() {
           lineHeight: 1.6,
           fontWeight: 500
         }}>
-          Next-generation shop-floor incident intelligence. Transforming real-time operator voice reports into explainable supply chain exposure boundaries and human-approved SAP S/4HANA recovery.
+          Next-generation shop-floor incident intelligence. Transforming real-time operator voice reports into explainable supply chain exposure boundaries and human-reviewed simulated SAP containment.
         </p>
 
         {/* High-Impact Enterprise Metrics Pill Strip */}
-        <div style={{
+        <div className="launcher-metrics" style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '28px',
@@ -168,17 +168,17 @@ export default function Launcher() {
           </div>
           <span style={{ opacity: 0.3 }}>|</span>
           <div>
-            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--ruby-ink)', textShadow: '0 0 10px rgba(220, 38, 38, 0.25)' }}>Zero</strong> Silent Escapes
+            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--ruby-ink)', textShadow: '0 0 10px rgba(220, 38, 38, 0.25)' }}>Explicit</strong> Record Gaps
           </div>
           <span style={{ opacity: 0.3 }}>|</span>
           <div>
-            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--cobalt-ink)', textShadow: '0 0 10px rgba(2, 132, 199, 0.25)' }}>4-Level</strong> Governance Ladder
+            <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', color: 'var(--cobalt-ink)', textShadow: '0 0 10px rgba(2, 132, 199, 0.25)' }}>Human</strong> Approval Required
           </div>
         </div>
       </div>
 
       {/* Role Switcher Toolbar */}
-      <div 
+      <div
         className="animate-fade-in-up delay-1"
         style={{
           display: 'flex',
@@ -195,7 +195,7 @@ export default function Launcher() {
       </div>
 
       {/* 4 Feature Portals Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '28px' }}>
+      <div className="launcher-portals" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '28px' }}>
         {portals.map((portal, idx) => (
           <GlassPanel
             key={portal.to}

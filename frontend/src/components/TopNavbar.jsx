@@ -10,28 +10,28 @@ import { useStore } from '../state/store';
  * active module indicator, and live role switcher.
  */
 export default function TopNavbar() {
-  const { currentRole, setCurrentRole } = useStore();
+  const { currentRole, setCurrentRole, demoUserId, setDemoUserId, apiConfig } = useStore();
   const location = useLocation();
 
   const getPageInfo = () => {
     switch (location.pathname) {
       case '/console':
-        return { title: 'Evidence Control Console', code: 'MOD-01', status: 'Live Line Supervised' };
+        return { title: 'Evidence Control Console', code: 'MOD-01', status: 'Backend Evidence Records' };
       case '/worker':
-        return { title: 'Shop-Floor Intake Terminal', code: 'MOD-02', status: 'Acoustic & QR Active' };
+        return { title: 'Shop-Floor Intake Terminal', code: 'MOD-02', status: 'Typed & Manual Tool Intake' };
       case '/history':
-        return { title: 'Asset Lifecycle & Telemetry', code: 'MOD-03', status: 'Repeat Pattern Monitor' };
+        return { title: 'Asset Lifecycle & Telemetry', code: 'MOD-03', status: 'Stored Tool History' };
       case '/kitchen':
         return { title: 'Clarity Glass Design System', code: 'MOD-04', status: 'Design Token Audit' };
       default:
-        return { title: 'Enterprise System Overview', code: 'PORTAL', status: 'Plant 1010 Synchronized' };
+        return { title: 'Enterprise System Overview', code: 'PORTAL', status: 'Synthetic Manufacturing Demo' };
     }
   };
 
   const pageInfo = getPageInfo();
 
   return (
-    <header
+    <header className="top-navbar"
       style={{
         position: 'sticky',
         top: 0,
@@ -63,7 +63,17 @@ export default function TopNavbar() {
             textDecoration: 'none'
           }}
         >
-          <Logo variant="lockup" theme="light" size={40} />
+          <div>
+            <Logo variant="lockup" theme="light" size={40} />
+            <div style={{
+              fontSize: '12px',
+              color: 'var(--ink-muted)',
+              fontWeight: 500,
+              letterSpacing: '-0.01em'
+            }}>
+              Human-reviewed incidents &amp; deterministic traceability
+            </div>
+          </div>
         </Link>
 
         {/* Current Active Page Pill */}
@@ -92,7 +102,7 @@ export default function TopNavbar() {
           <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--ink)' }}>
             {pageInfo.title}
           </span>
-          <span 
+          <span
             className="animate-badge-ping"
             style={{
               display: 'inline-block',
@@ -101,13 +111,14 @@ export default function TopNavbar() {
               borderRadius: '50%',
               backgroundColor: 'var(--jade)',
               boxShadow: '0 0 8px var(--jade)'
-            }} 
+            }}
           />
         </div>
 
         {/* Persona Role Switcher */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="persona-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole} />
+          {apiConfig.demoMode&&<label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120} /></label>}
         </div>
       </div>
     </header>
