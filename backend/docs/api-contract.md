@@ -1,5 +1,7 @@
 # ToolSathi API contract
 
+Phase 4 communication: `POST /api/ai/readback` (Worker/Manager, explicit review, Sarvam WAV); `GET /api/incidents/:id/status-text?language=kn|hi|en` (authenticated roles); `GET /api/incidents/:id/trace-explanation?window=24|72|168&language=kn|hi|en` (Manager/Quality/Verifier, stored snapshot); `POST /api/incidents/:id/dealer-draft` (Quality, approved notification and shipped batch scope, returns 201). Drafts are stored and audited, never sent. See [AI adapter documentation](../srv/ai-adapter/README.md) and OpenAPI for fields, provenance and limits.
+
 Paths and npm commands in this document are relative to the `backend/` CAP project unless stated otherwise. Repository-wide backups live in `../backup/`.
 
 Base URL `http://localhost:4004/api`. Synthetic data, simulated SAP services; no tenant connected. JSON UTC timestamps end in Z. Tools use `{ tools: [...] }`. Real responses carry `_label:SIMULATED`, `_stub:false`; fixed teammate fixtures carry `_stub:true`. Examples are recorded synthetic responses.
@@ -19,7 +21,10 @@ Base URL `http://localhost:4004/api`. Synthetic data, simulated SAP services; no
 | POST | /api/mock/s4/stock-blocks | platform | Real local simulation | [JSON](examples/stock-block.json) |
 | POST | /api/mock/dm/tool-restrictions | platform | Real local simulation | [JSON](examples/restriction.json) |
 | GET | /api/mock/documents | platform | Real local simulation | [JSON](examples/documents.json) |
-| POST | /api/ai/structure-report | Shashank | Stub | [JSON](examples/ai-structure.json) |
+| POST | /api/ai/structure-report | Shashank | Live Sarvam, schema validated | [Current contract](../srv/ai-adapter/README.md) |
+| POST | /api/ai/transcribe?language=kn\|hi\|en | Shashank | Live Sarvam transcription, raw audio ≤2 MiB | [Current contract](../srv/ai-adapter/README.md) |
+| POST | /api/ai/search | Shashank | Read-only local hybrid evidence retrieval | [Current contract](../srv/ai-adapter/README.md) |
+| GET | /api/incidents/:id/similar | Shashank | Past-record retrieval, excludes current incident | [Current contract](../srv/ai-adapter/README.md) |
 | GET | /api/incidents/:id/duplicates | Jamuna | Stub | [JSON](examples/duplicates.json) |
 | POST | /api/incidents/:id/proposals | Jamuna | Stub | [JSON](examples/proposals.json) |
 | POST | /api/approvals/:id/decision | Jamuna | Stub | [JSON](examples/approval-decision.json) |

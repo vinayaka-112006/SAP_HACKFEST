@@ -15,7 +15,7 @@ test("remaining teammate stubs and live health match documented fixtures", async
         ? `http://localhost:${cds.app.server.address().port}`
         : cds.test.url,
     ),
-  ).toBe(6);
+  ).toBe(5);
 });
 test("unknown route returns contract error", async () => {
   const response = await request(cds.app).get("/api/no-such-route");

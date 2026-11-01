@@ -167,7 +167,7 @@ async function smoke(
     });
   }
   const contract = require("../srv/routes/_stubs/contract.json");
-  for (const e of contract.filter((e) => e.owner !== "platform")) {
+  for (const e of contract.filter((e) => e.owner === "Jamuna")) {
     // Read-only duplicate lookup and AI/proposal stub probes are enough to identify current seams.
     // Avoid deciding a real approval or verified return without a persisted workflow/repair setup.
     if (["approval-decision", "verify-return"].includes(e.name)) continue;

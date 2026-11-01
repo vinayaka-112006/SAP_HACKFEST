@@ -18,9 +18,10 @@ export function createApiClient({
   timeoutMs = 15000,
 } = {}) {
   const base = baseUrl.replace(/\/$/, "");
-  async function request(path, { method = "GET", body, signal } = {}) {
+  async function request(path, { method = "GET", body, signal, requestTimeoutMs = timeoutMs } = {}) {
     const headers = { Accept: "application/json" };
-    if (body !== undefined) headers["Content-Type"] = "application/json";
+    const binary = typeof Blob !== "undefined" && body instanceof Blob;
+    if (body !== undefined) headers["Content-Type"] = binary ? body.type : "application/json";
     if (demoMode) {
       const { userId, role } = getSession();
       if (!userId?.trim() || !role)
@@ -34,12 +35,12 @@ export function createApiClient({
     const abort = () => controller.abort();
     if (signal?.aborted) controller.abort();
     signal?.addEventListener("abort", abort, { once: true });
-    const timer = setTimeout(abort, timeoutMs);
+    const timer = setTimeout(abort, requestTimeoutMs);
     try {
       const response = await fetchImpl(base + path, {
         method,
         headers,
-        ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
+        ...(body !== undefined ? { body: binary ? body : JSON.stringify(body) } : {}),
         signal: controller.signal,
       });
       let value;
@@ -112,8 +113,18 @@ export function createApiClient({
       request(`/audit?incident=${id(incidentId)}`, options),
     getDocuments: (incidentId, options) =>
       request(`/mock/documents?incident=${id(incidentId)}`, options),
-    structureReport: (body) =>
-      request("/ai/structure-report", { method: "POST", body }),
+    structureReport: (body, options = {}) =>
+      request("/ai/structure-report", { ...options, method: "POST", body, requestTimeoutMs: 45000 }),
+    transcribe: (body, language, options = {}) =>
+      request(`/ai/transcribe?language=${id(language)}`, { ...options, method: "POST", body, requestTimeoutMs: 25000 }),
+    readback: (body, options = {}) => request('/ai/readback', { ...options, method: 'POST', body, requestTimeoutMs: 25000 }),
+    getStatusText: (incidentId, language, options) => request(`/incidents/${id(incidentId)}/status-text?language=${id(language)}`, options),
+    getTraceExplanation: (incidentId, windowHours, language, options) => request(`/incidents/${id(incidentId)}/trace-explanation?window=${id(windowHours)}&language=${id(language)}`, options),
+    createDealerDraft: (incidentId, body, options = {}) => request(`/incidents/${id(incidentId)}/dealer-draft`, { ...options, method: 'POST', body }),
+    searchEvidence: (body, options = {}) =>
+      request('/ai/search', { ...options, method: 'POST', body, requestTimeoutMs: 60000 }),
+    getSimilar: (incidentId, { scope = 'same-tool', ...options } = {}) =>
+      request(`/incidents/${id(incidentId)}/similar?scope=${id(scope)}`, { ...options, requestTimeoutMs: 60000 }),
     getDuplicates: (incidentId, options) =>
       request(`/incidents/${id(incidentId)}/duplicates`, options),
     createProposal: (incidentId, body) =>

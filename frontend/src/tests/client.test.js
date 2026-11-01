@@ -206,3 +206,34 @@ test("unknown location is explicit and does not become stock or a dealer", () =>
   assert.equal(view.units[0].location, "Unknown location");
   assert.equal(view.tankCounts.factoryStock, 0);
 });
+test("speech uploads audio bytes with identity headers rather than JSON encoding", async () => {
+  const { api, calls } = setup({ transcript: 'Tool B leaves bolts loose.' }, {
+    demoMode: true, getSession: () => ({ userId: 'VOICE-TEST', role: 'Worker' }),
+  });
+  const audio = new Blob(['audio'], { type: 'audio/webm;codecs=opus' });
+  await api.transcribe(audio, 'kn');
+  assert.equal(calls[0].url, 'http://test/api/ai/transcribe?language=kn');
+  assert.equal(calls[0].body, audio);
+  assert.equal(calls[0].headers['Content-Type'], audio.type);
+  assert.equal(calls[0].headers['x-demo-role'], 'Worker');
+});
+test('evidence search uses explicit filters and saved incident scope', async () => {
+  const { api, calls } = setup({ matches: [] });
+  const body = { query: 'loose bolts', toolId: 'TOOL-B', category: 'TORQUE' };
+  await api.searchEvidence(body);
+  await api.getSimilar('TS-0042', { scope: 'all-tools' });
+  assert.equal(calls[0].url, 'http://test/api/ai/search');
+  assert.deepEqual(JSON.parse(calls[0].body), body);
+  assert.equal(calls[1].url, 'http://test/api/incidents/TS-0042/similar?scope=all-tools');
+});
+test('communication binds language, trace window, review and approval to explicit requests', async () => {
+  const { api, calls } = setup({ text: 'Stored status' });
+  await api.getStatusText('TS-1', 'kn');
+  await api.getTraceExplanation('TS-1', 72, 'hi');
+  await api.readback({ reviewed: true, language: 'en', incidentId: 'TS-1' });
+  await api.createDealerDraft('TS-1', { approvalId: 'A1', dealerId: 'D1', language: 'kn' });
+  assert.equal(calls[0].url, 'http://test/api/incidents/TS-1/status-text?language=kn');
+  assert.equal(calls[1].url, 'http://test/api/incidents/TS-1/trace-explanation?window=72&language=hi');
+  assert.equal(JSON.parse(calls[2].body).reviewed, true);
+  assert.deepEqual(JSON.parse(calls[3].body), { approvalId: 'A1', dealerId: 'D1', language: 'kn' });
+});
