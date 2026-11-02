@@ -73,3 +73,11 @@ Open **http://localhost:5173**. The existing design is preserved; /api is proxie
 - [Restructuring inventory and validation](backend/docs/repository-restructure.md)
 
 AI intake and the recovery-planning read-tool loop are implemented; recovery actions remain approval-bound simulations. See the recovery guide for current behavior and verification. Candidate ground truth awaits domain review. No push, merge or real-cloud deployment is implied.
+# ToolSathi V2 local extension
+
+The reviewed V2 integration inventory, current roles/API routes and implementation
+limits are in [docs/v2-architecture.md](docs/v2-architecture.md). Start a separate
+SQLite demo with synthetic qualifications and parts using `npm run dev:v2`, then
+open `/workspace`. This does not migrate or reset the existing HANA/SQLite data.
+See [Windows startup and demonstration](docs/v2-demo-script.md) and
+[verification results](docs/v2-test-results.md).
