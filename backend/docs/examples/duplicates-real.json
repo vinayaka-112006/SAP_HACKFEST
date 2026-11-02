@@ -1,0 +1,19 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "incidentId": "TS-0002",
+  "descriptionSource": "translatedText",
+  "evaluation": {
+    "valid": true,
+    "reason": null
+  },
+  "candidates": [
+    {
+      "incidentId": "TS-0001",
+      "reportedAt": "2026-10-30T05:12:00.000Z",
+      "state": "Reported",
+      "similarity": 0.9,
+      "reason": "Same tool, category, and sufficiently similar description; human review required."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "label": "synthetic data, simulated services",
+  "executedAt": "2026-11-01T13:19:00.383Z",
+  "status": "PASSED",
+  "runtimeDatabase": "isolated SQLite",
+  "checks": [
+    "compiled CSN loads",
+    "packaged stub fixtures resolve",
+    "contract health/stub routes verified (1)",
+    "seeded CAP queries work"
+  ],
+  "cloudDeployment": "NOT_EXECUTED"
+}

@@ -6,7 +6,7 @@ import React from 'react';
  */
 export default function SyntheticRibbon() {
   return (
-    <aside
+    <aside className="synthetic-ribbon"
       aria-label="Enterprise system telemetry status"
       style={{
         width: '100%',
@@ -35,18 +35,18 @@ export default function SyntheticRibbon() {
           boxShadow: '0 0 8px var(--jade)'
         }} />
         <span style={{ color: '#FFFFFF', fontWeight: 700 }}>
-          TOOLSATHI ENTERPRISE MANUFACTURING CLOUD
+          TOOLSATHI | SYNTHETIC MANUFACTURING DATA
         </span>
         <span style={{ opacity: 0.4 }}>|</span>
         <span style={{ color: '#94A3B8' }}>
-          SAP S/4HANA QM &amp; DIGITAL MANUFACTURING LINK ACTIVE
+          SAP S/4HANA &amp; DM: SIMULATED | NO TENANT CONNECTED
         </span>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: '#94A3B8' }}>
-        <span>PLANT 1010 • LINE 03 (BRAKE SAFETY)</span>
+        <span>LINE-BRAKE-1</span>
         <span style={{ opacity: 0.4 }}>•</span>
-        <span style={{ color: '#38BDF8', fontWeight: 700 }}>300 ACTIVE ASY TRACE NODES</span>
+        <span style={{ color: '#38BDF8', fontWeight: 700 }}>DETERMINISTIC RECORD TRACE</span>
       </div>
     </aside>
   );

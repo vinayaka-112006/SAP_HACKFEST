@@ -1,0 +1,23 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "_shapedLike": "S/4HANA Material Document",
+  "MaterialDocument": "0000000003",
+  "GoodsMovementType": "344",
+  "items": [
+    {
+      "batchId": "BATCH-B-DUP",
+      "stockId": "STOCK-BATCH-B-DUP",
+      "quantity": 10,
+      "fromStatus": "UNRESTRICTED",
+      "toStatus": "BLOCKED"
+    }
+  ],
+  "skipped": [
+    {
+      "batchId": "BATCH-B-X72",
+      "reason": "SHIPPED"
+    }
+  ],
+  "alreadyBlocked": []
+}

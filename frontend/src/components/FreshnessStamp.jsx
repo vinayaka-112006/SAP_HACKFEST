@@ -17,7 +17,7 @@ export default function FreshnessStamp({
   return (
     <span
       className={`freshness-stamp ${className}`}
-      title={isStale ? 'Warning: Stale telemetry snapshot requires sync' : 'Live synchronized snapshot'}
+      title={isStale ? 'Warning: Stale telemetry snapshot requires sync' : 'Stored data snapshot timestamp'}
       style={{
         display: 'inline-flex',
         alignItems: 'center',

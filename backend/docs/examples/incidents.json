@@ -1,0 +1,26 @@
+{
+  "incidents": [
+    {
+      "incidentId": "TS-0001",
+      "toolId": "TOOL-B",
+      "reporterId": "WRK-009",
+      "language": "hi",
+      "rawText": "Previous torque report (synthetic)",
+      "translatedText": "Previous torque report",
+      "category": "TORQUE",
+      "suggestedNcCode": "NC-TORQUE-LOOSE",
+      "confidence": 0.9,
+      "missingFields": [],
+      "state": "Closed",
+      "createdAt": "2026-10-19T05:12:00.000Z",
+      "reportedAt": "2026-10-19T05:12:00.000Z",
+      "reportedAtSource": "CLIENT_REPORTED",
+      "confirmedAt": "2026-10-19T06:12:00.000Z",
+      "confirmedBy": "WRK-009",
+      "modelVersion": "seed-v1"
+    }
+  ],
+  "count": 1,
+  "_label": "SIMULATED",
+  "_stub": false
+}

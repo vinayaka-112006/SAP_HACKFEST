@@ -1,0 +1,63 @@
+{
+  "requires": {
+    "db": {
+      "kind": "sqlite"
+    },
+    "queue": false,
+    "[hana-local]": {
+      "db": {
+        "kind": "hana",
+        "impl": "@cap-js/hana"
+      }
+    },
+    "[test]": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": ":memory:"
+        }
+      }
+    },
+    "[production]": {
+      "db": {
+        "kind": "hana"
+      },
+      "auth": {
+        "kind": "xsuaa"
+      }
+    },
+    "[development]": {
+      "db": {
+        "credentials": {
+          "url": "db.sqlite"
+        }
+      }
+    }
+  },
+  "server": "./srv/server.js",
+  "build": {
+    "tasks": [
+      {
+        "for": "hana",
+        "src": "db",
+        "options": {
+          "contentHdbtabledata": false,
+          "model": [
+            "db",
+            "srv"
+          ]
+        }
+      },
+      {
+        "for": "nodejs",
+        "src": "srv",
+        "options": {
+          "model": [
+            "db",
+            "srv"
+          ]
+        }
+      }
+    ]
+  }
+}

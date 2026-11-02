@@ -1,0 +1,11 @@
+{
+  "_label": "SIMULATED",
+  "_stub": true,
+  "incidentId": "TS-0002",
+  "candidates": [
+    {
+      "incidentId": "TS-0001",
+      "reason": "Same tool and category; human review required."
+    }
+  ]
+}

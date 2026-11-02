@@ -3,29 +3,19 @@ import GlassPanel from '../../components/GlassPanel';
 import StatusBadge from '../../components/StatusBadge';
 import FreshnessStamp from '../../components/FreshnessStamp';
 
-/**
- * CertaintyCapsule: signature transparency strip.
- * Large, high-visibility projector-grade scale.
- * Never shows a solitary terrifying number. Breaks down:
- * - "100 potentially exposed" (NEVER "defective")
- * - 90 record-linked (Ruby)
- * - 4 probable (Saffron)
- * - 6 cannot be determined (Frosted fog, never green)
- * - Window range: 35 to 160
- * - Data Quality Score: 91%
- */
+/** Backend-calculated scope and uncertainty in the existing Clarity Glass strip. */
 export default function CertaintyCapsule({
-  totalExposed = 100,
-  confirmedCount = 90,
-  probableCount = 4,
-  unknownCount = 6,
+  totalExposed = 0,
+  confirmedCount = 0,
+  probableCount = 0,
+  unknownCount = 0,
   windowHours = 72,
-  qualityScore = 91,
-  onOpenGaps
+  qualityScore = 0,
+  exposureRange, snapshotTime, onOpenGaps
 }) {
-  const confirmedPct = (confirmedCount / totalExposed) * 100;
-  const probablePct = (probableCount / totalExposed) * 100;
-  const unknownPct = (unknownCount / totalExposed) * 100;
+  const confirmedPct = totalExposed ? (confirmedCount / totalExposed) * 100 : 0;
+  const probablePct = totalExposed ? (probableCount / totalExposed) * 100 : 0;
+  const unknownPct = totalExposed ? (unknownCount / totalExposed) * 100 : 0;
 
   return (
     <GlassPanel variant="strong" style={{ padding: '24px 28px', width: '100%' }}>
@@ -38,8 +28,8 @@ export default function CertaintyCapsule({
         marginBottom: '18px'
       }}>
         {/* Main Headline */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ minWidth: 0, maxWidth: '100%' }}>
+          <div className="certainty-heading" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px' }}>
             <span style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -56,19 +46,19 @@ export default function CertaintyCapsule({
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </span>
-            <h2 style={{ fontSize: '30px', fontWeight: 900, letterSpacing: '-0.025em', color: 'var(--ink)' }}>
+            <h2 style={{ minWidth: 0, flex: '1 1 200px', fontSize: '30px', fontWeight: 900, letterSpacing: '-0.025em', color: 'var(--ink)' }}>
               {totalExposed} Assemblies Potentially Exposed
             </h2>
             <StatusBadge status="Verified" size="medium" />
           </div>
           <div style={{ fontSize: '16px', color: 'var(--ink-secondary)', marginTop: '6px', fontWeight: 500 }}>
-            Investigation Boundary: <strong style={{ color: 'var(--ink)', fontSize: '17px' }}>{windowHours} Hours</strong> • Exposure Range Across Horizons: <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '17px' }}>35 to 160 units</strong>
+            Investigation Boundary: <strong style={{ color: 'var(--ink)', fontSize: '17px' }}>{windowHours} Hours</strong> • Exposure Range Across Horizons: <strong style={{ fontFamily: 'var(--font-mono)', fontSize: '17px' }}>{exposureRange ? `${exposureRange.low} to ${exposureRange.high} units; ${exposureRange.unknownSeparate} Unknown separately` : 'Not available'}</strong>
           </div>
         </div>
 
         {/* Quality Score & Freshness */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <FreshnessStamp timestamp="10:42 AM" />
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '14px', maxWidth: '100%' }}>
+          <FreshnessStamp timestamp={snapshotTime ? new Date(snapshotTime).toLocaleString() : 'Not available'} />
           
           <div
             style={{
@@ -201,7 +191,7 @@ export default function CertaintyCapsule({
         </div>
 
         <div style={{ fontSize: '14px', color: 'var(--ink-muted)', fontStyle: 'italic' }}>
-          *Software identifies exposure paths; human inspector verifies defect.
+          Potentially exposed units only. Record-linked association is not a product-quality finding.
         </div>
       </div>
     </GlassPanel>

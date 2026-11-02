@@ -105,7 +105,7 @@ export default function EvidenceYard({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.01em', color: 'var(--ink)' }}>
-                Evidence Yard (300 Assemblies)
+                Evidence Yard ({allUnits.length} Returned Records)
               </h3>
               <StatusBadge status="Built" size="small" />
             </div>
@@ -179,6 +179,7 @@ export default function EvidenceYard({
       {/* VIEW MODE 1: 3D ISOMETRIC EVIDENCE YARD */}
       {viewMode === 'yard' ? (
         <div
+          className="evidence-yard-canvas"
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
@@ -205,6 +206,8 @@ export default function EvidenceYard({
           {/* Subtle Tilt Wrapper */}
           <div
             style={{
+              width: '100%',
+              maxWidth: '1000px',
               transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
               transition: 'transform 0.15s ease-out',
               transformStyle: 'preserve-3d'
@@ -214,7 +217,7 @@ export default function EvidenceYard({
               width="1000"
               height="440"
               viewBox="0 0 1000 440"
-              style={{ overflow: 'visible' }}
+              style={{ overflow: 'visible', width: '100%', height: 'auto', display: 'block' }}
             >
               <defs>
                 {/* SVG Cross-Hatch Pattern for Unknown Fog */}
@@ -289,7 +292,8 @@ export default function EvidenceYard({
 
                 return (
                   <g
-                    key={unit.unitId}
+                    key={unit.unitId} role="button" tabIndex={0} aria-label={`Inspect ${unit.serial}`}
+                    onKeyDown={event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();onUnitClick?.(unit);}}}
                     style={{ cursor: 'pointer', transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
                     onMouseEnter={() => setHoveredUnit(unit)}
                     onClick={() => onUnitClick && onUnitClick(unit)}
@@ -446,7 +450,7 @@ export default function EvidenceYard({
               }}
             />
 
-            {['ALL', 'IN_WINDOW', 'CONFIRMED', 'PROBABLE', 'UNKNOWN', 'OUTSIDE'].map(t => (
+            {['ALL', 'IN_WINDOW', 'CONFIRMED', 'PROBABLE', 'UNKNOWN'].map(t => (
               <button
                 key={t}
                 onClick={() => setTierFilter(t)}

@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-31T17:13:49.237Z",
+  "status": "PASSED",
+  "connected": true,
+  "mode": "hana",
+  "sqlQuerySucceeded": true,
+  "query": "SELECT CURRENT_USER, CURRENT_SCHEMA FROM DUMMY",
+  "configuredSchemaMatches": true,
+  "configuredUserMatches": true,
+  "tlsEnabled": true,
+  "certificateValidationEnabled": true,
+  "credentialsLogged": false
+}

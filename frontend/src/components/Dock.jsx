@@ -65,7 +65,7 @@ export default function Dock() {
   ];
 
   return (
-    <nav
+    <nav className="navigation-dock"
       aria-label="Enterprise system navigation dock"
       style={{
         position: 'fixed',
@@ -127,8 +127,8 @@ export default function Dock() {
               fontSize: '12px',
               fontWeight: isActive ? 800 : 600,
               color: isActive ? '#FFFFFF' : 'var(--ink)',
-              background: isActive 
-                ? 'linear-gradient(135deg, #071120 0%, #15243B 100%)' 
+              background: isActive
+                ? 'linear-gradient(135deg, #071120 0%, #15243B 100%)'
                 : 'transparent',
               textDecoration: 'none',
               boxShadow: isActive ? '0 4px 16px rgba(7, 17, 32, 0.28), 0 0 16px rgba(0, 229, 255, 0.22)' : 'none',

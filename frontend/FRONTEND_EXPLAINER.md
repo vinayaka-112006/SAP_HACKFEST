@@ -1,3 +1,5 @@
+> Historical design/fixture walkthrough. Current implemented capabilities, startup and executed browser results are in ../docs/frontend-backend-integration.md. The live app uses CAP data and does not execute the fixture-based AI/approval behaviors described below.
+
 # ToolSathi AI: Frontend Architecture, Design Philosophy & Integration Guide
 
 > **Target Audience**: Team Members, Judges, Evaluators, and Frontend/Backend Collaborators.  

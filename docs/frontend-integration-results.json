@@ -1,0 +1,594 @@
+{
+  "browser": {
+    "label": "synthetic data, simulated services",
+    "automatedBrowser": true,
+    "mainDatabaseReset": false,
+    "checks": [
+      {
+        "name": "real register, manual QR fallback and explicit synthetic input",
+        "status": "PASSED"
+      },
+      {
+        "name": "typed creation prevents double submission and confirmation requires a second worker action",
+        "status": "PASSED"
+      },
+      {
+        "name": "actual 72h trace, gaps, evidence and browser CORS work without fabricated results",
+        "status": "PASSED"
+      },
+      {
+        "name": "trace window switching clears stale values and returns 35/100/160 with scores 100/82/83",
+        "status": "PASSED"
+      },
+      {
+        "name": "audit, documents, history and implemented workflow evaluation are shown honestly",
+        "status": "PASSED"
+      },
+      {
+        "name": "console completes proposal approval, simulated restriction, repair and independent verification through the UI",
+        "status": "PASSED"
+      },
+      {
+        "name": "network error recovery, role access and mobile layout do not crash",
+        "status": "PASSED"
+      },
+      {
+        "name": "existing backend smoke and health/stub verification pass on isolated data",
+        "status": "PASSED"
+      },
+      {
+        "name": "review freezes late speech input and the next report clears old structured fields",
+        "status": "PASSED"
+      }
+    ],
+    "pageErrors": [],
+    "frontendUrl": "http://localhost:5174",
+    "backendUrl": "http://localhost:53069/api",
+    "backendSmoke": "PASSED",
+    "backendStubVerification": "PASSED",
+    "speechLifecycleMocked": true,
+    "microphoneHardwareVerified": false,
+    "trace": [
+      {
+        "traceId": "TRACE-a8301c52-fd16-4c42-ae36-4cfb65797a43",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 100,
+          "byTier": {
+            "CONFIRMED": 90,
+            "PROBABLE": 4,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 40,
+            "SHIPPED": 60,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 35,
+            "DLR-Y": 25
+          }
+        },
+        "dataQuality": {
+          "score": 82,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 2.4
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0.8
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-c8a99874-38fe-4768-9214-f28faa0b0b94",
+        "windowHours": 24,
+        "summary": {
+          "totalUnits": 35,
+          "byTier": {
+            "CONFIRMED": 35,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 35,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-f24037a6-d1b4-41ba-91e7-bc6fa778d1c1",
+        "windowHours": 168,
+        "summary": {
+          "totalUnits": 160,
+          "byTier": {
+            "CONFIRMED": 146,
+            "PROBABLE": 8,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 50,
+            "SHIPPED": 110,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 55,
+            "DLR-Y": 55
+          }
+        },
+        "dataQuality": {
+          "score": 83,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 1.5
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 1
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-14cb4bb0-29d1-499c-b4b4-45c3f01e8210",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 100,
+          "byTier": {
+            "CONFIRMED": 90,
+            "PROBABLE": 4,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 40,
+            "SHIPPED": 60,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 35,
+            "DLR-Y": 25
+          }
+        },
+        "dataQuality": {
+          "score": 82,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 2.4
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0.8
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-a64450b6-86dc-4c25-9322-af739d501407",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-c6c2b2e4-ffc4-4e83-85e0-86ae89b2143d",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-ebd74810-736f-4876-a1bc-c2c40f8d9e67",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-d291d1bb-ff2a-4a58-aa00-44eaefad1d24",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-ad9a7137-9f17-4166-8b0a-05de5cd3820c",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-103fdd07-8912-4fef-8ffa-56e6ad538b9a",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-ce2da404-2770-4cb5-9129-3f3441ed5f2c",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      }
+    ],
+    "executedAt": "2026-11-01T09:26:38.994Z"
+  }
+}

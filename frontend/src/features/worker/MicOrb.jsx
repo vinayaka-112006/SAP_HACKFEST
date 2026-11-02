@@ -4,7 +4,7 @@ import React from 'react';
  * MicOrb: Glossy glass sphere with pulsating audio ring waveform.
  * Used on the shop floor worker intake screen.
  */
-export default function MicOrb({ isRecording = false, onToggleRecord, language = 'kn' }) {
+export default function MicOrb({ isRecording = false, onToggleRecord, language = 'kn', disabled = false }) {
   const getPromptText = () => {
     if (language === 'kn') return isRecording ? 'ಆಲಿಸಲಾಗುತ್ತಿದೆ... ನಿಲ್ಲಿಸಲು ಒತ್ತಿ' : 'ಮಾತನಾಡಲು ಒತ್ತಿ (ಕನ್ನಡ)';
     if (language === 'hi') return isRecording ? 'सुन रहे हैं... रोकने के लिए टैप करें' : 'बोलने के लिए टैप करें (हिन्दी)';
@@ -14,7 +14,7 @@ export default function MicOrb({ isRecording = false, onToggleRecord, language =
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
       <button
-        onClick={onToggleRecord}
+        disabled={disabled} onClick={onToggleRecord}
         aria-label={isRecording ? "Stop recording voice report" : "Start recording voice report"}
         className={isRecording ? 'animate-orb-pulse' : ''}
         style={{

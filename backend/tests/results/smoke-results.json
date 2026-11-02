@@ -1,0 +1,79 @@
+{
+  "label": "synthetic data, simulated services",
+  "executedAt": "2026-11-01T14:13:52.032Z",
+  "realBackend": [
+    "tools",
+    "incident-create",
+    "incident-confirm",
+    "tool-history",
+    "trace",
+    "trace",
+    "trace",
+    "audit",
+    "tool-history",
+    "incident-get",
+    "documents",
+    "health"
+  ],
+  "simulatedSAP": [
+    {
+      "action": "maintenance",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    },
+    {
+      "action": "quality",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    },
+    {
+      "action": "stock-block",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    },
+    {
+      "action": "restriction",
+      "status": "VERIFIED_APPROVAL_REJECTION"
+    }
+  ],
+  "remainingStubs": [],
+  "blocked": [],
+  "trace": [
+    {
+      "windowHours": 24,
+      "totalUnits": 35,
+      "byTier": {
+        "CONFIRMED": 35,
+        "PROBABLE": 0,
+        "UNKNOWN": 0
+      },
+      "score": 100,
+      "durationMs": 10.927700000000186
+    },
+    {
+      "windowHours": 72,
+      "totalUnits": 100,
+      "byTier": {
+        "CONFIRMED": 90,
+        "PROBABLE": 4,
+        "UNKNOWN": 6
+      },
+      "score": 82,
+      "durationMs": 10.211500000001251
+    },
+    {
+      "windowHours": 168,
+      "totalUnits": 160,
+      "byTier": {
+        "CONFIRMED": 146,
+        "PROBABLE": 8,
+        "UNKNOWN": 6
+      },
+      "score": 83,
+      "durationMs": 10.73320000000058
+    }
+  ],
+  "incidentId": "TS-0002",
+  "proposalAttempt": {
+    "status": 409,
+    "code": "INSUFFICIENT_EVIDENCE",
+    "actionExecuted": false
+  }
+}

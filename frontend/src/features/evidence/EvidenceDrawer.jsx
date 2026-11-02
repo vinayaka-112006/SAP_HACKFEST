@@ -15,7 +15,7 @@ export default function EvidenceDrawer({ unit, onClose }) {
   const isConfirmed = unit.tier === 'Confirmed';
 
   return (
-    <div
+    <div role="dialog" aria-label="Unit evidence"
       style={{
         position: 'fixed',
         top: 0,
@@ -102,12 +102,11 @@ export default function EvidenceDrawer({ unit, onClose }) {
             }}>
               Tier: {unit.tier} Association
             </span>
-            <FreshnessStamp timestamp="10:42 AM" isStale={unit.warnings?.some(w => w.includes('Stale'))} />
+            <FreshnessStamp timestamp={unit.snapshotTime ? new Date(unit.snapshotTime).toLocaleString() : 'Not supplied'} isStale={unit.flags?.includes('STALE')} />
           </div>
           <div style={{ fontSize: '13px', color: 'var(--ink)' }}>
-            {isConfirmed && 'Strict cryptographic link: tool-use record, production run, and batch records confirmed.'}
-            {isProbable && 'Probable association: inferred via station work center timestamp overlap.'}
-            {isUnknown && 'Data gap identified: required tool-use event missing. Unit classified as potentially exposed.'}
+            {unit.tierLabel}: {unit.tierReason}
+
           </div>
         </div>
 
@@ -122,7 +121,7 @@ export default function EvidenceDrawer({ unit, onClose }) {
           }}>
             <div style={{ fontWeight: 700, fontSize: '13px', color: 'var(--saffron-ink)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span>⚠️</span>
-              <span>Integrity Flag</span>
+              <span>Record warning (status may be uncertain)</span>
             </div>
             {unit.warnings.map((w, idx) => (
               <div key={idx} style={{ fontSize: '12px', color: 'var(--ink)', lineHeight: 1.4 }}>
@@ -144,8 +143,8 @@ export default function EvidenceDrawer({ unit, onClose }) {
           gap: '12px'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
-            <span style={{ color: 'var(--ink-soft)' }}>Tool Involved:</span>
-            <strong style={{ fontFamily: 'var(--font-mono)' }}>{unit.toolId} (Brake Torque)</strong>
+            <span style={{ color: 'var(--ink-soft)' }}>Investigated tool:</span>
+            <strong style={{ fontFamily: 'var(--font-mono)' }}>{unit.toolId}</strong>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
             <span style={{ color: 'var(--ink-soft)' }}>Current Location:</span>
@@ -169,16 +168,8 @@ export default function EvidenceDrawer({ unit, onClose }) {
               {unit.toolUseEventId || 'NULL (Missing Record)'}
             </span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
-            <span style={{ color: 'var(--ink-soft)' }}>Production Time:</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
-              {new Date(unit.productionTime).toLocaleString()}
-            </span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
-            <span style={{ color: 'var(--ink-soft)' }}>Operator ID:</span>
-            <span style={{ fontFamily: 'var(--font-mono)' }}>{unit.operatorId}</span>
-          </div>
+
+
         </div>
 
         {/* Evidence Chain IDs */}

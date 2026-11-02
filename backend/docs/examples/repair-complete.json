@@ -1,0 +1,25 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "incidentId": "TS-SAMPLE",
+  "toolId": "TOOL-B",
+  "repairStatus": "Awaiting verification",
+  "completed": true,
+  "repair": {
+    "repairId": "REP-SAMPLE",
+    "toolId": "TOOL-B",
+    "incidentId": "TS-SAMPLE",
+    "description": "Replaced the worn synthetic fixture and recorded the adjustment",
+    "loggedBy": "TECH-01",
+    "loggedAt": "2026-10-31T10:00:00.000Z",
+    "testReadings": [
+      { "name": "Fixture torque check", "passed": true },
+      { "name": "Alignment check", "passed": true }
+    ],
+    "passed": true,
+    "verifiedBy": null,
+    "verifiedAt": null
+  },
+  "toolState": { "from": "Under repair", "to": "Awaiting verification" },
+  "auditId": "AUD-SAMPLE"
+}

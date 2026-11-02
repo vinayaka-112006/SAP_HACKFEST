@@ -1,0 +1,9 @@
+{
+  "incidentId": "TS-0002",
+  "fromState": "Awaiting verification",
+  "toState": "Closed",
+  "closedAt": "2026-11-01T10:00:00.000Z",
+  "auditId": "AUD-0099",
+  "_label": "SIMULATED",
+  "_stub": false
+}

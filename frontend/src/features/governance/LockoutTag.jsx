@@ -7,7 +7,7 @@ import React from 'react';
  */
 export default function LockoutTag({
   isRestricted = true,
-  tagId = 'LOTO-2026-B-09',
+  tagId = 'Tool state',
   onVerifyClick
 }) {
   const isLocked = isRestricted;
@@ -51,7 +51,7 @@ export default function LockoutTag({
           position: 'relative'
         }}
         onClick={isLocked ? onVerifyClick : undefined}
-        title={isLocked ? 'Click to inspect return-to-service verification' : 'Tool verified in-service'}
+        title={isLocked ? 'Click to inspect return-to-service verification' : 'Tool recorded as active'}
       >
         {/* Grommet eyelet */}
         <div style={{
@@ -72,11 +72,11 @@ export default function LockoutTag({
           paddingBottom: '4px',
           marginBottom: '6px'
         }}>
-          {isLocked ? 'DANGER' : 'VERIFIED'}
+          {isLocked ? 'DANGER' : 'ACTIVE'}
         </div>
 
         <div style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', lineHeight: 1.2 }}>
-          {isLocked ? 'DO NOT OPERATE' : 'RETURN TO SERVICE'}
+          {isLocked ? 'DO NOT OPERATE' : 'PER RECORDS'}
         </div>
 
         <div style={{

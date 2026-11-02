@@ -1,0 +1,137 @@
+{
+  "checkedAt": "2026-10-31T17:13:49.237Z",
+  "status": "PASSED",
+  "mode": "hana",
+  "allImportedRecordsRetained": true,
+  "importedRecords": 394,
+  "unchangedImportedRows": 393,
+  "countersAdvancedByNormalIncidentCreation": 1,
+  "tables": [
+    {
+      "entity": "toolsathi.Approval",
+      "importedRowsRetained": 0,
+      "currentRows": 0,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.AuditLog",
+      "importedRowsRetained": 1,
+      "currentRows": 50,
+      "addedVerificationRows": 49
+    },
+    {
+      "entity": "toolsathi.Batch",
+      "importedRowsRetained": 18,
+      "currentRows": 18,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.CalibrationRecord",
+      "importedRowsRetained": 1,
+      "currentRows": 1,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.Counter",
+      "importedRowsRetained": 2,
+      "currentRows": 2,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.Dealer",
+      "importedRowsRetained": 2,
+      "currentRows": 2,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.Incident",
+      "importedRowsRetained": 1,
+      "currentRows": 7,
+      "addedVerificationRows": 6
+    },
+    {
+      "entity": "toolsathi.IncidentEvidence",
+      "importedRowsRetained": 0,
+      "currentRows": 0,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.InventoryStock",
+      "importedRowsRetained": 9,
+      "currentRows": 9,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.MockDocument",
+      "importedRowsRetained": 0,
+      "currentRows": 0,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.NcCode",
+      "importedRowsRetained": 5,
+      "currentRows": 5,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.ProductionRun",
+      "importedRowsRetained": 18,
+      "currentRows": 18,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.Proposal",
+      "importedRowsRetained": 0,
+      "currentRows": 0,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.RepairLog",
+      "importedRowsRetained": 1,
+      "currentRows": 1,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.Shipment",
+      "importedRowsRetained": 9,
+      "currentRows": 9,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.SopDoc",
+      "importedRowsRetained": 3,
+      "currentRows": 3,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.Tool",
+      "importedRowsRetained": 3,
+      "currentRows": 3,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.ToolHistoryEvent",
+      "importedRowsRetained": 3,
+      "currentRows": 36,
+      "addedVerificationRows": 33
+    },
+    {
+      "entity": "toolsathi.ToolUseEvent",
+      "importedRowsRetained": 18,
+      "currentRows": 18,
+      "addedVerificationRows": 0
+    },
+    {
+      "entity": "toolsathi.TraceResult",
+      "importedRowsRetained": 0,
+      "currentRows": 22,
+      "addedVerificationRows": 22
+    },
+    {
+      "entity": "toolsathi.Unit",
+      "importedRowsRetained": 300,
+      "currentRows": 300,
+      "addedVerificationRows": 0
+    }
+  ]
+}

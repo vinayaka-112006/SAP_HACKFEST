@@ -12,14 +12,21 @@ import ToolHistory from './screens/ToolHistory';
 import Kitchen from './screens/Kitchen';
 
 export default function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    return window.location.pathname === '/' && !sessionStorage.getItem('toolsathi_intro_seen');
+  });
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem('toolsathi_intro_seen', 'true');
+    setShowIntro(false);
+  };
 
   return (
     <StoreProvider>
       <div className="app-shell" style={{ minHeight: '100vh', position: 'relative' }}>
         {/* 5.5s Animated Cinematic Intro Sequence */}
         {showIntro && (
-          <IntroSequence onComplete={() => setShowIntro(false)} />
+          <IntroSequence onComplete={handleIntroComplete} />
         )}
 
         {/* Background Refractive Glows (Cyan-Teal Metallic with Fluid Drift) */}
@@ -52,7 +59,7 @@ export default function App() {
         {!showIntro && (
           <button
             onClick={() => setShowIntro(true)}
-            title="Replay ToolSathi AI Cinematic Intro"
+            className="intro-replay" title="Replay ToolSathi AI Cinematic Intro"
             style={{
               position: 'fixed',
               bottom: '26px',

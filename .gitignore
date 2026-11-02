@@ -1,0 +1,24 @@
+# Dependencies and generated CAP/build output (all project directories)
+node_modules/
+gen/
+coverage/
+_out/
+mta_archives/
+*.mtar
+
+# Local runtime database, journaling/locks, and repository backup store
+*.sqlite
+*.sqlite-*
+*.sqlite.lock
+/backup/
+
+# Environment files, service keys and private CAP bindings
+.env
+.env.*
+!.env.example
+default-env.json
+.cdsrc-private.json
+*service-key*
+*service_key*
+
+/frontend/.vite/

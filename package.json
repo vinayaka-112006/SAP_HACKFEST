@@ -1,0 +1,15 @@
+{
+  "name": "toolsathi-repository",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "dev:local": "node scripts/dev.js --sqlite",
+    "dev:fresh": "node scripts/dev.js --fresh",
+    "dev:backend": "npm --prefix backend run start:local",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "test:backend": "npm --prefix backend test",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "mode": "hana",
+  "executedAt": "2026-11-01T10:09:13.217Z",
+  "status": "FAILED",
+  "verificationScope": "new uniquely identified synthetic incident in the confirmed application schema",
+  "checks": [
+    {
+      "name": "HANA database identity and schema",
+      "status": "PASSED"
+    },
+    {
+      "name": "real tools and health APIs",
+      "status": "PASSED"
+    },
+    {
+      "name": "incident creation actually writes to HANA",
+      "status": "PASSED"
+    },
+    {
+      "name": "explicit confirmation persists in HANA",
+      "status": "PASSED"
+    },
+    {
+      "name": "incident survives backend process restart",
+      "status": "PASSED"
+    }
+  ],
+  "_label": "SIMULATED",
+  "failedAt": "24h HANA trace matches SQLite serials, tiers, locations and evidence",
+  "error": {
+    "code": "HANA_VERIFICATION_ASSERTION",
+    "message": "Expected values to be strictly equal:\n\n20 !== 35\n"
+  }
+}

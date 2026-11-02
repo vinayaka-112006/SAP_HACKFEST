@@ -7,40 +7,40 @@ import GlassPanel from '../../components/GlassPanel';
  * Scaled-up high-visibility typography.
  */
 export default function GlassTanks({
-  counts = { factoryStock: 40, dealerX: 35, dealerY: 25 },
-  tiers = { confirmed: 90, probable: 4, unknown: 6 },
-  totalUnits = 100,
+  counts = { factoryStock: 0, dealerX: 0, dealerY: 0 },
+  tiers = { confirmed: 0, probable: 0, unknown: 0 },
+  totalUnits = 0, staleLocationUnits = 0,
   onTankClick
 }) {
   const tanks = [
     {
       id: 'factoryStock',
       title: 'Factory Stock',
-      locationTag: 'Plant 1010 • Loc 0001 (Warehouse)',
+      locationTag: 'Factory stock records',
       count: counts.factoryStock,
       max: 60,
-      status: 'Action: Ready for QA Block',
-      actionBadge: 'Hold Proposed',
+      status: 'Human approval required for stock block',
+      actionBadge: 'Recorded stock',
       accentColor: 'var(--ruby)'
     },
     {
       id: 'dealerX',
-      title: 'Dealer X (Bengaluru North)',
+      title: 'Dealer X',
       locationTag: 'Outbound Transit / Consignment',
       count: counts.dealerX,
       max: 60,
-      status: 'Action: Trace Notice Dispatched',
-      actionBadge: 'Escalated',
+      status: 'Shipment records; no notice sent',
+      actionBadge: 'Recorded shipment',
       accentColor: 'var(--brand-cyan)'
     },
     {
       id: 'dealerY',
-      title: 'Dealer Y (Hubballi Central)',
-      locationTag: 'Outbound Transit (1 Stale Scan)',
+      title: 'Dealer Y',
+      locationTag: 'Shipment location records',
       count: counts.dealerY,
       max: 60,
-      status: 'Action: Awaiting Transit Ping',
-      actionBadge: '1 Warning',
+      status: 'Review record freshness separately',
+      actionBadge: 'Recorded shipment',
       accentColor: 'var(--saffron)'
     }
   ];
@@ -66,7 +66,7 @@ export default function GlassTanks({
           Destination Inventory Vessels (Glass Tanks)
         </h3>
         <span style={{ fontSize: '15px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--ink-secondary)' }}>
-          {totalUnits} Units Flowed Downstream
+          {totalUnits} Potentially Exposed Units in Scope
         </span>
       </div>
 
@@ -132,7 +132,7 @@ export default function GlassTanks({
                   zIndex: 2,
                   opacity: 0.6
                 }}>
-                  <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>60 max</span>
+                  <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>60 chart scale</span>
                   <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>40</span>
                   <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>20</span>
                   <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>0</span>
@@ -186,7 +186,7 @@ export default function GlassTanks({
                     gap: '6px'
                   }}>
                     <span style={{ fontSize: '32px', fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--ink)' }}>
-                      {tank.count}
+                      <span data-testid={`location-${tank.id}`}>{tank.count}</span>
                     </span>
                     <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--ink-soft)' }}>
                       units
@@ -204,7 +204,7 @@ export default function GlassTanks({
                 color: 'var(--ink-secondary)'
               }}>
                 <span style={{ fontWeight: 600 }}>{tank.status}</span>
-                <span style={{ fontWeight: 800, color: 'var(--ink)' }}>{fillPct}% Capacity</span>
+                <span style={{ fontWeight: 800, color: 'var(--ink)' }}>{fillPct}% of chart scale</span>
               </div>
             </GlassPanel>
           );

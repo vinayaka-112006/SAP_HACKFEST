@@ -5,34 +5,17 @@ import GlassPanel from '../../components/GlassPanel';
  * GapsPanel: Lists evidence gaps and integrity anomalies weakening the trace.
  * Clean enterprise engineering interface with zero emojis.
  */
-export default function GapsPanel({ onSelectUnit, onClose }) {
-  const gaps = [
-    {
-      id: 'gap-1',
-      title: 'Missing Tool-Use Telemetry (6 Units)',
-      severity: 'high',
-      badge: 'Unknown Tier • 6 Units',
-      description: 'Run #402 produced 6 units without automated torque-logger handshake. Classified as Unknown (cannot be determined). Never styled as safe.',
-      unitIds: ['TS-BRK-0095', 'TS-BRK-0096', 'TS-BRK-0097', 'TS-BRK-0098', 'TS-BRK-0099', 'TS-BRK-0100']
-    },
-    {
-      id: 'gap-2',
-      title: 'Stale Shipment Snapshot (Dealer Y Consignment)',
-      severity: 'medium',
-      badge: 'Stale Snapshot • 1 Unit',
-      description: 'Shipment dispatched to Dealer Y (Hubballi) lacks automated GPS/dock receipt for 48 hours. Inventory snapshot timestamp is stale.',
-      unitIds: ['TS-BRK-0085']
-    },
-    {
-      id: 'gap-3',
-      title: 'Conflicting Run Timestamps (Run #398)',
-      severity: 'medium',
-      badge: 'Data Integrity Flag',
-      description: 'Recorded run end time (08:30) precedes start time (09:00). Flagged for MES system clock drift investigation.',
-      unitIds: ['TS-BRK-0023']
-    }
-  ];
-
+export default function GapsPanel({ gaps: sourceGaps = [], deductions = [], units = [], onSelectUnit, onClose }) {
+  const gaps = sourceGaps.map((gap, index) => ({
+    ...gap,
+    id: `${gap.code}-${gap.runId}-${index}`,
+    title: gap.code,
+    badge: `${gap.severity} | ${gap.affectedUnits} units`,
+    description: gap.message,
+    unitIds: units
+      .filter(unit => unit.runId === gap.runId && unit.evidenceIds.some(id => gap.evidenceIds.includes(id)))
+      .map(unit => unit.serial),
+  }));
   return (
     <GlassPanel variant="strong" style={{ padding: '24px', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
@@ -64,7 +47,7 @@ export default function GapsPanel({ onSelectUnit, onClose }) {
             color: 'var(--saffron-ink)',
             fontWeight: 700
           }}>
-            3 Findings
+            {gaps.length} Findings
           </span>
         </div>
 
@@ -80,6 +63,7 @@ export default function GapsPanel({ onSelectUnit, onClose }) {
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        {!gaps.length&&<p>No record gaps returned for this scope.</p>}
         {gaps.map(gap => (
           <div
             key={gap.id}
@@ -139,6 +123,7 @@ export default function GapsPanel({ onSelectUnit, onClose }) {
           </div>
         ))}
       </div>
+      <h4>Illustrative data-quality deductions</h4>{deductions.map(item=><p key={item.code}>{item.code}: {item.amount.toFixed(2)} points</p>)}
     </GlassPanel>
   );
 }

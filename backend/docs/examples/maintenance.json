@@ -1,0 +1,12 @@
+{
+  "_label": "SIMULATED",
+  "_stub": false,
+  "_shapedLike": "S/4HANA Maintenance Notification",
+  "MaintenanceNotification": "0000000001",
+  "NotificationType": "M1",
+  "NotificationText": "Inspect torque",
+  "TechnicalObject": "TOOL-B",
+  "Plant": "PLANT-01",
+  "MaintPriority": "2",
+  "NotificationStatus": "OSNO"
+}

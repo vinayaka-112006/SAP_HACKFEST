@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["detectedLanguage", "translatedText", "symptom", "category", "suggestedNcCode", "mentionedToolId", "confidence", "missingFields"],
+  "properties": {
+    "detectedLanguage": { "type": ["string", "null"], "enum": ["kn", "hi", "en", null] },
+    "translatedText": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "symptom": { "type": ["string", "null"], "minLength": 1, "maxLength": 1000 },
+    "category": { "type": ["string", "null"], "enum": ["TORQUE", "WEAR", "CALIBRATION", "ELECTRICAL", "OTHER", null] },
+    "suggestedNcCode": { "type": ["string", "null"], "minLength": 1, "maxLength": 120 },
+    "mentionedToolId": { "type": ["string", "null"], "minLength": 1, "maxLength": 120 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "missingFields": { "type": "array", "uniqueItems": true, "maxItems": 7, "items": { "type": "string", "enum": ["language", "symptom", "category", "suggestedNcCode", "toolId", "reporterId", "reportedAt"] } }
+  }
+}

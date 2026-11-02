@@ -17,7 +17,11 @@ const STATES = [
  */
 export default function StateRail({ currentState = 'Under review' }) {
   const currentIndex = STATES.findIndex(s => s.toLowerCase() === (currentState || '').toLowerCase());
-  const activeIdx = currentIndex >= 0 ? currentIndex : 2;
+  if (currentState === 'Closed with insufficient evidence')
+    return <p role="status" aria-label="Incident closure status" style={{ color: 'var(--danger-ink, #9f2635)', fontWeight: 700 }}>Closed with insufficient evidence — this is not a verified successful closure.</p>;
+  if (currentIndex < 0)
+    return <p role="status">Incident state is not mapped to the displayed progression: {currentState || 'Unknown'}.</p>;
+  const activeIdx = currentIndex;
 
   return (
     <nav
