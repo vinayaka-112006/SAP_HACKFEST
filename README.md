@@ -19,14 +19,17 @@ Use Node 24.11+ (major 24). From the repository root:
 ```powershell
 npm --prefix backend ci
 npm --prefix frontend ci
-npm run dev
+npm run dev:hana:v21
 ```
 
-Open **http://localhost:5173**; API: **http://localhost:4004/api**. The combined launcher follows `backend/.env`, currently configured for HANA, and stops its two children on Ctrl+C. It reports occupied ports without stopping existing applications. Root dependency installation is unnecessary.
+Open **http://localhost:5173/workspace**; API: **http://localhost:4004/api**. The combined launcher uses the privately configured HANA destination with V2 workflows enabled and stops its two children on Ctrl+C. It reports occupied ports without stopping existing applications. Root dependency installation is unnecessary.
 
 `npm run dev:local` explicitly uses the preserved `backend/db.sqlite` offline. `npm run dev:fresh` creates a separate seeded SQLite file under ignored `backup/` each time. Neither resets the existing database. Stop the running application before switching modes.
 
-See [current demo readiness, verified results and limitations](docs/local-demo-readiness.md). Existing data migration completed: **394 records across 21 tables**, with content verification and a zero-insert repeat before application testing.
+See [current V2.1 verification and limitations](docs/v2.1-handover.md). HANA currently
+contains **692 records across 35 tables** after the approved additive update;
+all **585 pre-update records** are preserved. The [earlier demo report](docs/local-demo-readiness.md)
+records the historical 394-record initial migration.
 
 ## Start the backend independently with SQLite
 
@@ -81,3 +84,10 @@ SQLite demo with synthetic qualifications and parts using `npm run dev:v2`, then
 open `/workspace`. This does not migrate or reset the existing HANA/SQLite data.
 See [Windows startup and demonstration](docs/v2-demo-script.md) and
 [verification results](docs/v2-test-results.md).
+
+For the V2.1 HANA application, use `npm run dev:hana:v21` and read the
+[current handover](docs/v2.1-handover.md). It includes real Groq/Sarvam checks,
+the new workforce workflow, static localization and responsive assistant.
+The approved HANA update added 14 tables and 106 synthetic records while preserving
+all 585 original records. Startup does not seed HANA. `npm run dev:v21` starts a
+separate SQLite demonstration.

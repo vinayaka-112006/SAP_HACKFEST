@@ -4,6 +4,11 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 
 | Method and path | Authority | Required body fields | Optional body fields |
 |---|---|---|---|
+| GET /v2/system | Manager Administrator | — | — |
+| POST /v2/system/check | Administrator | — | — |
+| GET /v2/incidents/{id}/workforce | Manager | — | — |
+| POST /v2/incidents/{id}/workforce/assign | Manager | workerId stationId minutes reason | — |
+| POST /v2/workforce/{id}/return | Manager | reason | — |
 | POST /v2/register | Any authenticated role | displayName language workCenter team | invitationId |
 | GET /v2/me | Any authenticated role | — | — |
 | POST /v2/invitations | Administrator | userId role | — |
@@ -27,7 +32,7 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 | GET /v2/conversations/{id} | Session owner Worker Manager | — | — |
 | GET /v2/conversations/{id}/duplicates | Session owner Worker Manager | — | — |
 | POST /v2/conversations/{id}/readback | Session owner Worker Manager | reviewed | — |
-| POST /v2/conversations/{id}/messages | Session owner Worker Manager | version text | facts extract |
+| POST /v2/conversations/{id}/messages | Session owner Worker Manager | version text | facts extract reason |
 | POST /v2/conversations/{id}/submit | Session owner Worker Manager | version confirmed description | category translatedText reportedAt |
 | POST /v2/chat | Any authenticated role; object and tool permissions enforced | message language | incidentId generate tool |
 

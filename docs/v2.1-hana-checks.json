@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-11-02T10:06:47.314Z",
+  "remoteWrites": false,
+  "hana": {
+    "connected": true,
+    "tables": 21,
+    "counts": {
+      "toolsathi.Approval": 1,
+      "toolsathi.AuditLog": 81,
+      "toolsathi.Batch": 18,
+      "toolsathi.CalibrationRecord": 1,
+      "toolsathi.Counter": 2,
+      "toolsathi.Dealer": 2,
+      "toolsathi.Incident": 14,
+      "toolsathi.IncidentEvidence": 0,
+      "toolsathi.InventoryStock": 9,
+      "toolsathi.MockDocument": 1,
+      "toolsathi.NcCode": 5,
+      "toolsathi.ProductionRun": 18,
+      "toolsathi.Proposal": 1,
+      "toolsathi.RepairLog": 1,
+      "toolsathi.Shipment": 9,
+      "toolsathi.SopDoc": 3,
+      "toolsathi.Tool": 3,
+      "toolsathi.ToolHistoryEvent": 63,
+      "toolsathi.ToolUseEvent": 18,
+      "toolsathi.TraceResult": 35,
+      "toolsathi.Unit": 300
+    },
+    "exclusiveSchema": true,
+    "backupVerified": false,
+    "incidentTS00078Exists": false
+  }
+}

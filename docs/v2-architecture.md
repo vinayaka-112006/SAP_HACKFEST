@@ -1,5 +1,10 @@
 # ToolSathi V2 architecture and implementation inventory
 
+This is the V2 baseline inventory. [V2.1 architecture](v2.1-architecture.md) and
+[current handover](v2.1-handover.md) supersede its HANA deployment, provider,
+localization and workforce status. The earlier limitations below remain historical
+unless the current handover explicitly retains them.
+
 See [integration audit](v2-integration-inventory.md), [all actual endpoints](v2-current-endpoints.md)
 and [V2 API contract](v2-api-contract.md). Work remains on `feature/toolsathi-v2-core`.
 Main and Shashank were already incorporated at the start; no competing AI/rules

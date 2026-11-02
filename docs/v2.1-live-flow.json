@@ -1,0 +1,49 @@
+{
+  "at": "2026-11-02T10:45:13.220Z",
+  "database": "isolated SQLite memory",
+  "remoteDatabaseWrites": false,
+  "microphoneTested": false,
+  "firstTurn": {
+    "version": 1,
+    "provider": "groq/openai/gpt-oss-120b",
+    "questionPresent": true,
+    "missingFields": [
+      "onset",
+      "equipmentStopped",
+      "productionStopped",
+      "safety",
+      "actionTaken",
+      "errorCode"
+    ]
+  },
+  "tts": {
+    "verified": true,
+    "provider": "sarvam"
+  },
+  "stt": {
+    "status": 200,
+    "verified": true,
+    "mimeType": "audio/wav"
+  },
+  "secondTurn": {
+    "version": 2,
+    "provider": "groq/openai/gpt-oss-120b",
+    "missingFields": [],
+    "contextPreserved": true
+  },
+  "legacyStructuring": {
+    "provider": "groq",
+    "model": "groq/openai/gpt-oss-120b|intake-2|card-1",
+    "schemaValidated": true
+  },
+  "confirmed": {
+    "state": "Confirmed",
+    "originalRetained": true
+  },
+  "groundedChat": {
+    "provider": "groq/openai/gpt-oss-120b",
+    "sourceCount": 2,
+    "retrievalMethod": "KEYWORD",
+    "answerNonempty": true
+  }
+}

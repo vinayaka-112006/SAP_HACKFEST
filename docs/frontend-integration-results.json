@@ -51,11 +51,23 @@
       {
         "name": "V2 browser manager assigns a qualified technician and technician sees and accepts persisted work",
         "status": "PASSED"
+      },
+      {
+        "name": "V2.1 voice interface supports typed fallback, review cancellation and explicit confirmation",
+        "status": "PASSED"
+      },
+      {
+        "name": "V2.1 manager approves qualified workforce reassignment using stored demand",
+        "status": "PASSED"
+      },
+      {
+        "name": "V2.1 assistant stays within the viewport and uses actual authorized sources",
+        "status": "PASSED"
       }
     ],
     "pageErrors": [],
     "frontendUrl": "http://localhost:5174",
-    "backendUrl": "http://localhost:54599/api",
+    "backendUrl": "http://localhost:59987/api",
     "backendSmoke": "PASSED",
     "backendStubVerification": "PASSED",
     "manualFallbackWithAiDisabled": true,
@@ -63,9 +75,24 @@
     "v2TypedConversation": true,
     "v2Assignment": true,
     "v2CrossUserChatDenied": true,
+    "v21VoiceTextFallback": true,
+    "physicalMicrophoneTested": false,
+    "v21WorkforceBrowser": true,
+    "v21ChatBrowser": true,
+    "v21ResponsiveLocales": {
+      "routes": 5,
+      "languages": 3,
+      "widths": [
+        375,
+        768,
+        1280,
+        1440
+      ],
+      "checks": 60
+    },
     "trace": [
       {
-        "traceId": "TRACE-45796a00-6b02-4daf-aa31-4e1bce4865cf",
+        "traceId": "TRACE-565941d8-97f0-4427-80ac-4a483d188573",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -114,7 +141,7 @@
         }
       },
       {
-        "traceId": "TRACE-7549d611-fce3-47a4-822f-e7af8108bff1",
+        "traceId": "TRACE-f02501a1-ca77-4112-99d7-6787ba18e301",
         "windowHours": 24,
         "summary": {
           "totalUnits": 35,
@@ -163,7 +190,7 @@
         }
       },
       {
-        "traceId": "TRACE-1759ce33-2331-4d0c-8652-526522dc9a90",
+        "traceId": "TRACE-24d94d2c-d23e-409f-89b2-d83c114f1be0",
         "windowHours": 168,
         "summary": {
           "totalUnits": 160,
@@ -212,7 +239,7 @@
         }
       },
       {
-        "traceId": "TRACE-47cd23b7-3d80-4587-b749-97834da47e18",
+        "traceId": "TRACE-fa974d74-90c7-44e5-b38f-372a70382862",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -261,7 +288,7 @@
         }
       },
       {
-        "traceId": "TRACE-40c0444d-2ee1-4be2-ac6f-95b027ac46fe",
+        "traceId": "TRACE-5fe40f63-00b7-4ebe-96ea-6db01a66d2d4",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -310,7 +337,7 @@
         }
       },
       {
-        "traceId": "TRACE-b50296d7-8036-46e4-87f3-724f541a6fad",
+        "traceId": "TRACE-d2164036-6686-4d09-a649-18ff3414dac6",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -359,7 +386,7 @@
         }
       },
       {
-        "traceId": "TRACE-36138768-b0bb-46d8-aa49-e08e7a6af6fb",
+        "traceId": "TRACE-515d33a7-eb31-4166-960e-6d4040cf0a26",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -408,7 +435,7 @@
         }
       },
       {
-        "traceId": "TRACE-ee137a2e-5406-4a1f-8a9a-9b84498b4f7a",
+        "traceId": "TRACE-a7cdb373-7047-45fc-9189-c9f472102262",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -457,7 +484,7 @@
         }
       },
       {
-        "traceId": "TRACE-121bad77-a410-47d2-a591-787cec8b69a1",
+        "traceId": "TRACE-00625b2f-b55c-413b-9391-ef551d32e039",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -506,7 +533,7 @@
         }
       },
       {
-        "traceId": "TRACE-b703d75a-9ced-4a12-927e-b8755e7644aa",
+        "traceId": "TRACE-ed79c481-1303-428a-8e47-c5d8da502d23",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -555,7 +582,7 @@
         }
       },
       {
-        "traceId": "TRACE-de78c6db-4e13-4df0-a3b6-9ec9b7d50e6c",
+        "traceId": "TRACE-8db8c72b-3d54-4188-a4f5-13d21f20de7a",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -604,7 +631,7 @@
         }
       },
       {
-        "traceId": "TRACE-42772cf6-d103-473d-9b8d-cb9a17f4c22f",
+        "traceId": "TRACE-531a2f15-f8eb-4396-98d1-1f54a6cd82aa",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -653,7 +680,7 @@
         }
       },
       {
-        "traceId": "TRACE-6dfd8a3f-f28c-49e0-a52a-c2b4f6b51cd1",
+        "traceId": "TRACE-a54c9e1f-8842-4b77-a0f5-7996b14de923",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -702,7 +729,7 @@
         }
       },
       {
-        "traceId": "TRACE-a36f6ff1-1c3c-4cd1-9399-8502f2eddbd1",
+        "traceId": "TRACE-bfbf9b9a-9f7d-4d9d-aa3b-00994b73cfb6",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -751,7 +778,7 @@
         }
       },
       {
-        "traceId": "TRACE-0487347a-8b59-41c0-b944-7c27a2a5e525",
+        "traceId": "TRACE-6ebeeea9-8fa1-480c-a406-0c159378e821",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -800,7 +827,7 @@
         }
       },
       {
-        "traceId": "TRACE-cb383394-54d0-4351-af54-2cf205c8fb56",
+        "traceId": "TRACE-37443666-36f2-40e4-a293-a8af9c290071",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -849,7 +876,56 @@
         }
       },
       {
-        "traceId": "TRACE-85202cec-e723-4a67-9510-b4e00a1168d9",
+        "traceId": "TRACE-b9f42f68-051e-4015-976c-65cc07cefcd5",
+        "windowHours": 72,
+        "summary": {
+          "totalUnits": 0,
+          "byTier": {
+            "CONFIRMED": 0,
+            "PROBABLE": 0,
+            "UNKNOWN": 0
+          },
+          "byLocation": {
+            "IN_STOCK": 0,
+            "SHIPPED": 0,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 0,
+          "shippedByDealer": {
+            "DLR-X": 0,
+            "DLR-Y": 0
+          }
+        },
+        "dataQuality": {
+          "score": 100,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 0
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 0
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 0
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 0,
+          "high": 0,
+          "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-924fa09f-6063-44e7-8a09-2d7b58de1c45",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -898,6 +974,6 @@
         }
       }
     ],
-    "executedAt": "2026-11-02T09:35:18.353Z"
+    "executedAt": "2026-11-02T15:25:11.563Z"
   }
 }

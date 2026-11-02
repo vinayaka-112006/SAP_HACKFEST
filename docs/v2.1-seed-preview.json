@@ -1,0 +1,20 @@
+{
+  "records": 106,
+  "tables": {
+    "Tool": 5,
+    "EquipmentRequirement": 5,
+    "WorkStation": 5,
+    "ProductionDemand": 5,
+    "SopDoc": 5,
+    "SparePart": 20,
+    "UserProfile": 26,
+    "WorkforceProfile": 14,
+    "TechnicianQualification": 8,
+    "Incident": 10,
+    "RepairLog": 2,
+    "RepairWorkOrder": 1
+  },
+  "identifierNamespace": "V21-",
+  "baselineTraceChanged": false,
+  "remoteApplied": false
+}

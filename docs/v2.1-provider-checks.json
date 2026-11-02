@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-02T10:40:49.893Z",
+  "remoteWrites": false,
+  "groq": {
+    "connected": true,
+    "model": "openai/gpt-oss-120b",
+    "schemaValid": true
+  },
+  "sarvam": {
+    "languages": [
+      {
+        "language": "en",
+        "tts": true,
+        "stt": true,
+        "audioBytes": 124230,
+        "transcriptNonempty": true
+      },
+      {
+        "language": "kn",
+        "tts": true,
+        "stt": true,
+        "audioBytes": 112940,
+        "transcriptNonempty": true
+      },
+      {
+        "language": "hi",
+        "tts": true,
+        "stt": true,
+        "audioBytes": 97888,
+        "transcriptNonempty": true
+      }
+    ],
+    "microphoneTested": false
+  }
+}
