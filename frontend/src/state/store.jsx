@@ -11,7 +11,7 @@ import { traceView } from "../api/mappings";
 import { useResource } from "./useResource";
 const StoreContext = createContext(null);
 export function StoreProvider({ children }) {
-  const [currentRole, setCurrentRole] = useState("Manager");
+  const [currentRole, setCurrentRole] = useState(apiConfig.demoMode ? "Manager" : "Worker");
   const [demoUserId, setDemoUserId] = useState("DEMO-MANAGER");
   const [incidentId, setIncidentId] = useState(
     () => sessionStorage.getItem("toolsathi.incidentId") || "",
@@ -32,6 +32,16 @@ export function StoreProvider({ children }) {
     [currentRole, demoUserId],
   );
   const identityKey = currentRole + ":" + demoUserId;
+  useEffect(() => {
+    if (apiConfig.demoMode) return;
+    const controller = new AbortController();
+    client.request('/v2/me', { signal: controller.signal }).then(result => {
+      if (controller.signal.aborted) return;
+      const role = result.identity.roles.includes(result.profile?.role) ? result.profile.role : result.identity.roles[0];
+      setCurrentRole(role);
+    }).catch(() => { /* API resources display authentication failures; never invent a role grant. */ });
+    return () => controller.abort();
+  }, [client]);
   const toolsState = useResource("tools:" + identityKey, (signal) =>
     client.getTools({ signal }),
   );

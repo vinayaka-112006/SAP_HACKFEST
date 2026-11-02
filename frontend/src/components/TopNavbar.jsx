@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import RoleSwitch from './RoleSwitch';
 import Logo from './Logo';
+import { LanguageSelector, useLocale } from '../features/v2/locale';
 import { useStore } from '../state/store';
 
 /**
@@ -10,6 +11,7 @@ import { useStore } from '../state/store';
  * active module indicator, and live role switcher.
  */
 export default function TopNavbar() {
+  const { t } = useLocale();
   const { currentRole, setCurrentRole, demoUserId, setDemoUserId, apiConfig } = useStore();
   const location = useLocation();
 
@@ -117,6 +119,8 @@ export default function TopNavbar() {
 
         {/* Persona Role Switcher */}
         <div className="persona-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <Link to="/workspace">{t('workspace')}</Link>
+          <LanguageSelector />
           <RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole} />
           {apiConfig.demoMode&&<label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120} /></label>}
         </div>

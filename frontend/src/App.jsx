@@ -10,6 +10,9 @@ import Console from './screens/Console';
 import Worker from './screens/Worker';
 import ToolHistory from './screens/ToolHistory';
 import Kitchen from './screens/Kitchen';
+import Workspace from './screens/Workspace';
+import { LocaleProvider } from './features/v2/locale';
+import WebsiteAssistant from './features/v2/WebsiteAssistant';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
@@ -22,7 +25,7 @@ export default function App() {
   };
 
   return (
-    <StoreProvider>
+    <LocaleProvider><StoreProvider>
       <div className="app-shell" style={{ minHeight: '100vh', position: 'relative' }}>
         {/* 5.5s Animated Cinematic Intro Sequence */}
         {showIntro && (
@@ -51,6 +54,7 @@ export default function App() {
             <Route path="/worker" element={<Worker />} />
             <Route path="/history" element={<ToolHistory />} />
             <Route path="/kitchen" element={<Kitchen />} />
+            <Route path="/workspace" element={<Workspace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
@@ -90,7 +94,8 @@ export default function App() {
 
         {/* Floating Navigation Dock */}
         <Dock />
+        <WebsiteAssistant />
       </div>
-    </StoreProvider>
+    </StoreProvider></LocaleProvider>
   );
 }
