@@ -28,6 +28,7 @@ cds.on("served", async () => {
   if (process.env.V2_SYNTHETIC_FIXTURES === 'true') {
     if (cds.db.kind !== 'sqlite' || process.env.NODE_ENV === 'production') throw new Error('V2 synthetic fixtures require development SQLite');
     await require('../db/seed/v2-demo')(cds.db);
+    await cds.db.tx(tx=>require('../db/seed/v21').apply(tx));
   }
 });
 cds.on("bootstrap", (app) => {

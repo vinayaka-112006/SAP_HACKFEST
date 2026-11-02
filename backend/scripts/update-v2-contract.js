@@ -4,6 +4,11 @@ const schemas={
   language:{type:'string',enum:['en','kn','hi']},boolean:{type:'boolean'},version:{type:'integer',minimum:0},
 };
 const contracts=[
+  ['get','/v2/system','Manager Administrator','',''],
+  ['post','/v2/system/check','Administrator','',''],
+  ['get','/v2/incidents/{id}/workforce','Manager','',''],
+  ['post','/v2/incidents/{id}/workforce/assign','Manager','workerId stationId minutes reason',''],
+  ['post','/v2/workforce/{id}/return','Manager','reason',''],
   ['post','/v2/register','Any authenticated role','displayName language workCenter team','invitationId'],
   ['get','/v2/me','Any authenticated role','',''],
   ['post','/v2/invitations','Administrator','userId role',''],
@@ -27,12 +32,12 @@ const contracts=[
   ['get','/v2/conversations/{id}','Session owner Worker Manager','',''],
   ['get','/v2/conversations/{id}/duplicates','Session owner Worker Manager','',''],
   ['post','/v2/conversations/{id}/readback','Session owner Worker Manager','reviewed',''],
-  ['post','/v2/conversations/{id}/messages','Session owner Worker Manager','version text','facts extract'],
+  ['post','/v2/conversations/{id}/messages','Session owner Worker Manager','version text','facts extract reason'],
   ['post','/v2/conversations/{id}/submit','Session owner Worker Manager','version confirmed description','category translatedText reportedAt'],
   ['post','/v2/chat','Any authenticated role; object and tool permissions enforced','message language','incidentId generate tool'],
 ];
 function property(key){
-  if(['extract','generate','confirmed','reviewed'].includes(key))return schemas.boolean;
+  if(['extract','generate','confirmed','reviewed','reason'].includes(key))return key==='reason'?schemas.long:schemas.boolean;
   if(key==='language')return schemas.language;
   if(key==='version')return schemas.version;
   if(['maxAssignments','quantity','reorderThreshold'].includes(key))return {type:'integer',minimum:0};
@@ -42,14 +47,15 @@ function property(key){
 }
 function update(){
   const file='docs/openapi.yaml',api=JSON.parse(fs.readFileSync(file,'utf8'));
+  api.paths['/tools'].get.responses['200'].content['application/json'].schema.properties.demoScenario={type:'object',nullable:true,description:'Verified original synthetic-v1 fixture clock from stored import audit and matching runs. Null when the fixture cannot be identified.',properties:{toolId:{type:'string'},reportedAt:{type:'string',format:'date-time'},synthetic:{type:'boolean'},source:{type:'string'},auditId:{type:'string'}}};
   for(const [method,path,roles,req,opt] of contracts){
     const fields=(req+' '+opt).trim().split(/\s+/).filter(Boolean);
     const parameters=[...path.matchAll(/\{([^}]+)\}/g)].map(([,name])=>({name,in:'path',required:true,schema:schemas.string}));
-    if(path.endsWith('/duplicates'))parameters.push({name:'semantic',in:'query',schema:{type:'boolean'},description:'Request optional Sarvam meaning comparison; failure retains deterministic results'});
+    if(path.endsWith('/duplicates'))parameters.push({name:'semantic',in:'query',schema:{type:'boolean'},description:'Request optional configured reasoning-provider comparison; failure retains deterministic results'});
     const responses={200:{description:'Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.',content:{'application/json':{schema:{type:'object',required:['_label','_stub'],properties:{_label:{type:'string',enum:['SIMULATED']},_stub:{type:'boolean',enum:[false]}},additionalProperties:true}}}}};
     for(const code of [400,401,403,404,409,429,500])responses[code]={description:{400:'Invalid input',401:'Authentication required',403:'Role, scope, invitation or object ownership denied',404:'Record not found',409:'State, idempotency conflict or reviewed V2 schema deployment required',429:'AI rate limited',500:'Database/internal error; no success claimed'}[code],content:{'application/json':{schema:{$ref:'#/components/schemas/Error'}}}};
     const operation={summary:path.split('/').slice(2).join(' ')+' ('+method+')',description:'Roles: '+roles+'. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.',tags:['V2'],parameters,responses};
-    if(method!=='get')operation.requestBody={required:true,content:{'application/json':{schema:{type:'object',additionalProperties:false,...(req?{required:req.split(' ')}:{}),properties:Object.fromEntries(fields.map(key=>[key,property(key)]))}}}};
+    if(method!=='get')operation.requestBody={required:true,content:{'application/json':{schema:{type:'object',additionalProperties:false,...(req?{required:req.split(' ')}:{}),properties:Object.fromEntries(fields.map(key=>[key,key==='reason'&&path.endsWith('/messages')?schemas.boolean:property(key)]))}}}};
     api.paths[path]||={};api.paths[path][method]=operation;
   }
   fs.writeFileSync(file,JSON.stringify(api,null,2)+'\n');

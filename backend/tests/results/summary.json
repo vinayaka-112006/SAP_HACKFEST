@@ -1,17 +1,11 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-11-02T09:35:10.735Z",
-  "passed": 277,
+  "executedAt": "2026-11-02T11:34:27.640Z",
+  "passed": 282,
   "failed": 0,
   "skipped": 0,
   "suitesFailed": 0,
   "testFiles": [
-    {
-      "file": "tests/deployment.test.js",
-      "passed": 3,
-      "failed": 0,
-      "skipped": 0
-    },
     {
       "file": "tests/local-launcher.test.js",
       "passed": 4,
@@ -31,8 +25,8 @@
       "skipped": 0
     },
     {
-      "file": "tests/v2-xsuaa.test.js",
-      "passed": 2,
+      "file": "tests/platform.test.js",
+      "passed": 6,
       "failed": 0,
       "skipped": 0
     },
@@ -43,20 +37,14 @@
       "skipped": 0
     },
     {
-      "file": "tests/mocks.test.js",
-      "passed": 14,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
       "file": "tests/proposals.test.js",
       "passed": 11,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/roles.test.js",
-      "passed": 9,
+      "file": "tests/mocks.test.js",
+      "passed": 14,
       "failed": 0,
       "skipped": 0
     },
@@ -67,13 +55,25 @@
       "skipped": 0
     },
     {
-      "file": "tests/contract.test.js",
+      "file": "tests/seed.test.js",
       "passed": 3,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/seed.test.js",
+      "file": "tests/roles.test.js",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/deployment.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/contract.test.js",
       "passed": 3,
       "failed": 0,
       "skipped": 0
@@ -85,8 +85,8 @@
       "skipped": 0
     },
     {
-      "file": "tests/trace.test.js",
-      "passed": 8,
+      "file": "tests/v21.test.js",
+      "passed": 5,
       "failed": 0,
       "skipped": 0
     },
@@ -97,8 +97,8 @@
       "skipped": 0
     },
     {
-      "file": "tests/repeat-failure.test.js",
-      "passed": 10,
+      "file": "tests/trace.test.js",
+      "passed": 8,
       "failed": 0,
       "skipped": 0
     },
@@ -109,20 +109,20 @@
       "skipped": 0
     },
     {
-      "file": "tests/platform.test.js",
-      "passed": 6,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
       "file": "tests/return-to-service.test.js",
       "passed": 14,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/smoke.test.js",
-      "passed": 1,
+      "file": "tests/repeat-failure.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/duplicates.test.js",
+      "passed": 10,
       "failed": 0,
       "skipped": 0
     },
@@ -133,8 +133,14 @@
       "skipped": 0
     },
     {
-      "file": "tests/duplicates.test.js",
-      "passed": 10,
+      "file": "tests/smoke.test.js",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/v2-xsuaa.test.js",
+      "passed": 2,
       "failed": 0,
       "skipped": 0
     },
@@ -151,14 +157,14 @@
       "skipped": 0
     },
     {
-      "file": "srv/ai-adapter/tests/communication.test.js",
-      "passed": 10,
+      "file": "srv/ai-adapter/tests/endpoints.test.js",
+      "passed": 8,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "srv/ai-adapter/tests/endpoints.test.js",
-      "passed": 8,
+      "file": "srv/ai-adapter/tests/communication.test.js",
+      "passed": 10,
       "failed": 0,
       "skipped": 0
     },
@@ -169,14 +175,14 @@
       "skipped": 0
     },
     {
-      "file": "tests/xsuaa-unit.test.js",
-      "passed": 2,
+      "file": "srv/ai-adapter/tests/dealer-draft.test.js",
+      "passed": 12,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "srv/ai-adapter/tests/dealer-draft.test.js",
-      "passed": 12,
+      "file": "tests/xsuaa-unit.test.js",
+      "passed": 2,
       "failed": 0,
       "skipped": 0
     },
@@ -245,7 +251,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 44.106800000001385,
+      "durationMs": 44.40020000000004,
       "status": 200
     },
     {
@@ -286,7 +292,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 32.699899999999616,
+      "durationMs": 27.679299999999785,
       "status": 200
     },
     {
@@ -327,7 +333,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 38.545500000000175,
+      "durationMs": 23.30909999999858,
       "status": 200
     }
   ]

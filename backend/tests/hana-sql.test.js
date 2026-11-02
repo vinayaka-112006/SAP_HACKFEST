@@ -8,7 +8,7 @@ beforeAll(async () => {
 });
 test("the same CDS model compiles all tables with HANA LOB, timestamp and decimal types", () => {
   const sql = cds.compile.to.sql(model, { dialect: "hana" });
-  expect(sql).toHaveLength(31);
+  expect(sql).toHaveLength(35);
   expect(sql.join("\n")).toContain("rawText NCLOB");
   expect(sql.join("\n")).toContain("value DECIMAL(15, 2)");
   expect(sql.join("\n")).toContain('"TIMESTAMP" TIMESTAMP');

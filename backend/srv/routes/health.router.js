@@ -6,6 +6,8 @@ router.get("/health", async (_req, res, next) => {
     res.json({
       status: "ok",
       db: "connected",
+      databaseMode: cds.db.kind,
+      databaseInstance: require('node:crypto').createHash('sha256').update(JSON.stringify([cds.db.kind,cds.env.requires.db.credentials?.url||'',cds.env.requires.db.credentials?.schema||''])).digest('hex').slice(0,16),
       mode: "SIMULATED",
       seedVersion: "synthetic-v1",
       _label: "SIMULATED",

@@ -111,8 +111,8 @@ async function candidates(tx, current, options = {}) {
       if(!Array.isArray(value.matches)||value.matches.length>10||value.matches.some(m=>!pool.some(r=>r.incidentId===m.incidentId)||typeof m.reason!=='string'||m.reason.length>1000))throw new Error('Invalid semantic result');
       for(const match of value.matches){
         const row=pool.find(r=>r.incidentId===match.incidentId),existing=candidates.find(c=>c.incidentId===match.incidentId);
-        if(existing){existing.semanticSuggestion=match.reason;existing.comparisonMethod+=' + sarvam-semantic';}
-        else candidates.push({incidentId:row.incidentId,candidateType:closed(row.state)?'REPEAT_FAILURE':'POSSIBLE_DUPLICATE',sameEquipment:true,reviewRequired:true,reasons:['Exact equipment and bounded event-time window',match.reason],comparisonMethod:'sarvam-semantic',modelVersion:response.model});
+        if(existing){existing.semanticSuggestion=match.reason;existing.comparisonMethod+=' + model-semantic';existing.modelVersion=response.model;}
+        else candidates.push({incidentId:row.incidentId,candidateType:closed(row.state)?'REPEAT_FAILURE':'POSSIBLE_DUPLICATE',sameEquipment:true,reviewRequired:true,reasons:['Exact equipment and bounded event-time window',match.reason],comparisonMethod:'model-semantic',modelVersion:response.model});
       }
       semanticStatus=response.model;
     }catch(cause){semanticStatus=/^AI_/.test(cause.code||'')?cause.code:'AI_UNAVAILABLE';}

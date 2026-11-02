@@ -137,7 +137,7 @@ test('semantic suggestions stay within exact equipment and retain human review',
   try{
     const result=await call('get',`/v2/incidents/${second}/duplicates?semantic=true`,'Manager','V2-M');
     expect(result.body.semanticStatus).toBe('synthetic-provider-test');
-    expect(result.body.candidates.find(c=>c.incidentId===first)).toMatchObject({sameEquipment:true,reviewRequired:true,comparisonMethod:'sarvam-semantic'});
+    expect(result.body.candidates.find(c=>c.incidentId===first)).toMatchObject({sameEquipment:true,reviewRequired:true,comparisonMethod:'model-semantic'});
     spy.mockImplementation(async(_user,fn)=>fn({complete:async()=>({content:JSON.stringify({matches:[{incidentId:'HALLUCINATED',reason:'invented'}]}),model:'test'})}));
     expect((await call('get',`/v2/incidents/${second}/duplicates?semantic=true`,'Manager','V2-M')).body.semanticStatus).toBe('AI_UNAVAILABLE');
   }finally{spy.mockRestore();}

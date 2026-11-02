@@ -9,6 +9,7 @@ router.get(
   wrap(async (req, res) =>
     res.json(
       label({
+        demoScenario: await require('../lib/synthetic-scenario').read(cds.db),
         tools: await cds.db.run(
           cds.ql.SELECT.from(entity("Tool")).orderBy("toolId"),
         ),

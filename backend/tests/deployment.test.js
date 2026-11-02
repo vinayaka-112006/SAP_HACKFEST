@@ -48,5 +48,5 @@ test("OpenAPI is a valid document with all declared operations including AI comm
     ],
     { encoding: "utf8" },
   );
-  expect(Number(out)).toBe(56);
+  expect(Number(out)).toBe(61);
 });

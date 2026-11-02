@@ -316,3 +316,47 @@ entity PartReservation {
   createdAt : Timestamp;
   status : String(30);
 }
+
+entity WorkforceProfile {
+  key workerId : String(120);
+  homeToolId : String(120);
+  skills : LargeString;
+  certifications : LargeString;
+  safetyAuthorizations : LargeString;
+  certificationExpiresAt : Timestamp;
+  shiftEndsAt : Timestamp;
+  available : Boolean;
+}
+entity WorkStation {
+  key stationId : String(120);
+  workCenter : String(120);
+  toolId : String(120);
+  requiredSkill : String(120);
+  requiredCertification : String(120);
+  safetyAuthorization : String(120);
+  materialsAvailable : Boolean;
+  slots : Integer;
+  unitsPerHour : Double;
+  setupMinutes : Integer;
+}
+entity ProductionDemand {
+  key orderId : String(120);
+  stationId : String(120);
+  requiredQuantity : Integer;
+  completedQuantity : Integer;
+  dueAt : Timestamp;
+}
+entity TemporaryAssignment {
+  key assignmentId : String(120);
+  workerId : String(120);
+  incidentId : String(120);
+  sourceToolId : String(120);
+  stationId : String(120);
+  startsAt : Timestamp;
+  endsAt : Timestamp;
+  status : String(30);
+  estimatedOutput : Integer;
+  assumptions : LargeString;
+  approvedBy : String(120);
+  approvedAt : Timestamp;
+}
