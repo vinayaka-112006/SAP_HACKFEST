@@ -25,6 +25,10 @@ cds.on("served", async () => {
     await cds.db.run(cds.ql.SELECT.from("toolsathi.Tool").limit(1));
   }
   await require("./lib/db-protection").install(cds.db);
+  if (process.env.V2_SYNTHETIC_FIXTURES === 'true') {
+    if (cds.db.kind !== 'sqlite' || process.env.NODE_ENV === 'production') throw new Error('V2 synthetic fixtures require development SQLite');
+    await require('../db/seed/v2-demo')(cds.db);
+  }
 });
 cds.on("bootstrap", (app) => {
   app.disable("x-powered-by");

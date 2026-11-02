@@ -49,6 +49,7 @@ router.post(
       );
       if (!incidentRow) fail(404, "INCIDENT_NOT_FOUND", "Incident not found");
       const incident = decode(incidentRow);
+      await require('../lib/v2').guardRepair(tx, req.user, incident.incidentId);
       if (incident.state !== "Confirmed")
         fail(409, "INVALID_STATE", "Repair logging requires a Confirmed incident", {
           incidentId: incident.incidentId,
@@ -164,6 +165,7 @@ router.post(
       );
       if (!incidentRow) fail(404, "INCIDENT_NOT_FOUND", "Incident not found");
       const incident = decode(incidentRow);
+      await require('../lib/v2').guardRepair(tx, req.user, incident.incidentId);
       const tool = await tx.run(
         cds.ql.SELECT.one.from(entity("Tool"))
           .where({ toolId: repairRef.toolId })

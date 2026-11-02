@@ -7,7 +7,8 @@ const backend = path.join(root, "backend");
 const frontend = path.join(root, "frontend");
 const backendPort = Number(process.env.TOOLSATHI_BACKEND_PORT || 4004);
 const frontendPort = Number(process.env.TOOLSATHI_FRONTEND_PORT || 5173);
-const fresh = process.argv.includes("--fresh");
+const v2 = process.argv.includes("--v2");
+const fresh = v2 || process.argv.includes("--fresh");
 const sqlite = fresh || process.argv.includes("--sqlite");
 const children = [];
 let stopping = false;
@@ -48,6 +49,7 @@ async function main() {
   if (stopping) return;
   const backendEnv = { ...process.env, NODE_ENV: "development", CDS_ENV: "development", AUTH_MODE: "header", ENFORCE_APPROVALS: "true", ALLOW_UNAPPROVED_MOCKS: "false", PORT: String(backendPort) };
   if (sqlite) backendEnv.DATABASE_MODE = "sqlite";
+  if (v2) Object.assign(backendEnv, { V2_WORKFLOW_ENABLED: 'true', V2_SYNTHETIC_FIXTURES: 'true' });
   if (fresh) {
     const backup = path.join(root, "backup");
     fs.mkdirSync(backup, { recursive: true });

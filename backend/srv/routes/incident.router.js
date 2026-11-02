@@ -449,6 +449,7 @@ router.post(
     const result = await transaction(async (tx) => {
       const verifierId = req.user.id.trim();
       const incident = await incidents.find(tx, req.params.id);
+      const assignedWork = await require('../lib/v2').guardRepair(tx, req.user, incident.incidentId, true);
       const currentTool = await tx.run(
         cds.ql.SELECT.one
           .from(entity("Tool"))
@@ -501,6 +502,7 @@ router.post(
       }
 
       const verifiedAt = new Date().toISOString();
+      if (assignedWork) await tx.run(cds.ql.UPDATE(entity('RepairWorkOrder')).set({ status: 'Closed' }).where({ incidentId: incident.incidentId }));
       const updated = await tx.run(
         cds.ql
           .UPDATE(entity("RepairLog"))
@@ -601,6 +603,14 @@ router.get(
     const result = await transaction(async (tx) => {
       let query = cds.ql.SELECT.from(entity("Incident")).orderBy("reportedAt desc", "incidentId desc").limit(limit);
       const where = {};
+      if (process.env.AUTH_MODE === 'xsuaa' || (process.env.NODE_ENV === 'production' && !process.env.AUTH_MODE)) {
+        if (req.user.role === 'Worker') where.reporterId = req.user.id;
+        if (req.user.role === 'Technician') {
+          const assigned = await tx.run(cds.ql.SELECT.from(entity('RepairWorkOrder')).where({ technicianId: req.user.id }));
+          if (!assigned.length) return { incidents: [], count: 0 };
+          where.incidentId = { in: assigned.map(w => w.incidentId) };
+        }
+      }
       if (typeof req.query.toolId === "string" && req.query.toolId.trim()) {
         where.toolId = req.query.toolId.trim();
       }

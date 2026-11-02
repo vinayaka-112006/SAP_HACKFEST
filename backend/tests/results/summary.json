@@ -1,26 +1,26 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-11-01T11:04:18.211Z",
-  "passed": 164,
-  "failed": 1,
+  "executedAt": "2026-11-02T09:35:10.735Z",
+  "passed": 277,
+  "failed": 0,
   "skipped": 0,
-  "suitesFailed": 1,
+  "suitesFailed": 0,
   "testFiles": [
     {
-      "file": "tests/reliability.test.js",
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/local-launcher.test.js",
+      "file": "tests/deployment.test.js",
       "passed": 3,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/incidents.test.js",
-      "passed": 15,
+      "file": "tests/local-launcher.test.js",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/reliability.test.js",
+      "passed": 1,
       "failed": 0,
       "skipped": 0
     },
@@ -31,20 +31,14 @@
       "skipped": 0
     },
     {
-      "file": "tests/seed.test.js",
-      "passed": 3,
+      "file": "tests/v2-xsuaa.test.js",
+      "passed": 2,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/hana-config.test.js",
-      "passed": 25,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/deployment.test.js",
-      "passed": 3,
+      "file": "tests/v2.test.js",
+      "passed": 10,
       "failed": 0,
       "skipped": 0
     },
@@ -62,19 +56,31 @@
     },
     {
       "file": "tests/roles.test.js",
-      "passed": 8,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/hana-config.test.js",
+      "passed": 25,
       "failed": 0,
       "skipped": 0
     },
     {
       "file": "tests/contract.test.js",
-      "passed": 2,
-      "failed": 1,
+      "passed": 3,
+      "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/repeat-failure.test.js",
-      "passed": 10,
+      "file": "tests/seed.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/recovery.test.js",
+      "passed": 9,
       "failed": 0,
       "skipped": 0
     },
@@ -85,26 +91,20 @@
       "skipped": 0
     },
     {
+      "file": "tests/incidents.test.js",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/repeat-failure.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
       "file": "tests/repairs.test.js",
       "passed": 4,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/duplicates.test.js",
-      "passed": 10,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/approval-workflow.test.js",
-      "passed": 10,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/return-to-service.test.js",
-      "passed": 14,
       "failed": 0,
       "skipped": 0
     },
@@ -115,8 +115,26 @@
       "skipped": 0
     },
     {
+      "file": "tests/return-to-service.test.js",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
       "file": "tests/smoke.test.js",
       "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/approval-workflow.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/duplicates.test.js",
+      "passed": 10,
       "failed": 0,
       "skipped": 0
     },
@@ -127,8 +145,50 @@
       "skipped": 0
     },
     {
+      "file": "srv/ai-adapter/tests/dealer-sqlite.test.js",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/communication.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/endpoints.test.js",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/similarity.test.js",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
       "file": "tests/xsuaa-unit.test.js",
       "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/dealer-draft.test.js",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/intake.test.js",
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/evaluation.test.js",
+      "passed": 3,
       "failed": 0,
       "skipped": 0
     },
@@ -185,7 +245,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 20.547300000000178,
+      "durationMs": 44.106800000001385,
       "status": 200
     },
     {
@@ -226,7 +286,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 15.90480000000025,
+      "durationMs": 32.699899999999616,
       "status": 200
     },
     {
@@ -267,7 +327,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 13.922299999998359,
+      "durationMs": 38.545500000000175,
       "status": 200
     }
   ]

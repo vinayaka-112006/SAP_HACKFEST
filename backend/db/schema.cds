@@ -221,3 +221,98 @@ entity Counter {
   key ![name] : String(120);
   ![value] : Integer64;
 }
+
+// V2 additions: deploy only to a reviewed isolated destination. No automatic migration.
+entity UserProfile {
+  key userId : String(120);
+  displayName : String(120);
+  role : String(120);
+  language : String(2);
+  workCenter : String(120);
+  team : String(120);
+  status : String(30);
+  createdAt : Timestamp;
+}
+entity UserInvitation {
+  key invitationId : String(120);
+  userId : String(120);
+  role : String(120);
+  expiresAt : Timestamp;
+  createdBy : String(120);
+  consumedAt : Timestamp;
+}
+entity TechnicianQualification {
+  key userId : String(120);
+  key toolType : String(120);
+  workCenter : String(120);
+  skill : String(120);
+  certification : String(120);
+  expiresAt : Timestamp;
+  safetyAuthorization : String(120);
+  availableUntil : Timestamp;
+  maxAssignments : Integer;
+  approvedBy : String(120);
+}
+entity EquipmentRequirement {
+  key toolType : String(120);
+  skill : String(120);
+  certification : String(120);
+  safetyAuthorization : String(120);
+  approvedBy : String(120);
+}
+entity RepairWorkOrder {
+  key incidentId : String(120);
+  workOrderId : String(120);
+  technicianId : String(120);
+  assignedBy : String(120);
+  assignedAt : Timestamp;
+  status : String(30);
+  findings : LargeString;
+  repairId : String(120);
+  reviewedBy : String(120);
+  reviewedAt : Timestamp;
+}
+entity IncidentRelationship {
+  key incidentId : String(120);
+  canonicalId : String(120);
+  decision : String(30);
+  reason : LargeString;
+  decidedBy : String(120);
+  decidedAt : Timestamp;
+}
+entity ConversationSession {
+  key sessionId : String(120);
+  userId : String(120);
+  toolId : String(120);
+  language : String(2);
+  messages : LargeString;
+  facts : LargeString;
+  draft : LargeString;
+  incidentId : String(120);
+  version : Integer;
+  createdAt : Timestamp;
+}
+entity UserNotification {
+  key notificationId : String(120);
+  userId : String(120);
+  incidentId : String(120);
+  message : LargeString;
+  createdAt : Timestamp;
+}
+entity SparePart {
+  key partId : String(120);
+  name : String(120);
+  toolType : String(120);
+  location : String(120);
+  quantity : Integer;
+  reserved : Integer;
+  reorderThreshold : Integer;
+}
+entity PartReservation {
+  key incidentId : String(120);
+  key partId : String(120);
+  quantity : Integer;
+  requestedBy : String(120);
+  createdAt : Timestamp;
+  status : String(30);
+}

@@ -40,7 +40,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 20.71259999999893,
+      "durationMs": 44.106800000001385,
       "status": 200
     },
     {
@@ -81,7 +81,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 14.272600000000239,
+      "durationMs": 32.699899999999616,
       "status": 200
     },
     {
@@ -122,7 +122,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 12.979100000000471,
+      "durationMs": 38.545500000000175,
       "status": 200
     }
   ]

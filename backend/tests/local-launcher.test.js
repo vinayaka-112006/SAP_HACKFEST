@@ -76,3 +76,13 @@ test("combined launcher reports a port conflict without stopping the existing li
     await expect(fetch(`http://localhost:${backendPort}/api/health`)).rejects.toThrow();
   } finally { await new Promise(resolve => listener.close(resolve)); }
 });
+test('V2 launcher creates an isolated synthetic qualification and inventory demo',async()=>{
+  const [backendPort,frontendPort]=await ports();
+  const process=child(path.join(repositoryRoot,'scripts/dev.js'),['--v2'],{env:{...offline(),TOOLSATHI_BACKEND_PORT:String(backendPort),TOOLSATHI_FRONTEND_PORT:String(frontendPort)}});
+  await ready(process,/ToolSathi database: sqlite/);
+  const base=`http://localhost:${backendPort}/api`;
+  const me=await (await fetch(base+'/v2/me',{headers:{'x-demo-user':'DEMO-TECH-TOOL-B','x-demo-role':'Technician'}})).json();
+  expect(me.profile).toMatchObject({role:'Technician',userId:'DEMO-TECH-TOOL-B'});
+  expect(me.profile.displayName).toContain('Synthetic');
+  await stop(process);
+});

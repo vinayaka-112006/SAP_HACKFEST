@@ -68,7 +68,7 @@ test("real endpoint status codes and response structures conform to OpenAPI", as
 });
 test("every declared endpoint is claimed by a real router or explicitly marked stub", () => {
   const registry = cds.app.locals.routeRegistry;
-  expect(registry.size).toBe(37);
+  expect(registry.size).toBe(63);
   for (const [method, path] of [
     ['GET', '/incidents/:param/recovery'], ['POST', '/incidents/:param/recovery/evidence'],
     ['POST', '/incidents/:param/recovery/plans'], ['POST', '/incidents/:param/recovery/proposals'],

@@ -18,9 +18,9 @@ test("MTA bindings and XSUAA role collections are structurally consistent", () =
     ENFORCE_APPROVALS: "true",
     ALLOW_UNAPPROVED_MOCKS: "false",
   });
-  expect(security.scopes).toHaveLength(5);
-  expect(security["role-templates"]).toHaveLength(5);
-  expect(security["role-collections"]).toHaveLength(5);
+  expect(security.scopes).toHaveLength(6);
+  expect(security["role-templates"]).toHaveLength(6);
+  expect(security["role-collections"]).toHaveLength(6);
 });
 test("production profile selects HANA/XSUAA without local SQLite credentials", () => {
   const env = { ...process.env, NODE_ENV: "production", CDS_ENV: "production" };
@@ -48,5 +48,5 @@ test("OpenAPI is a valid document with all declared operations including AI comm
     ],
     { encoding: "utf8" },
   );
-  expect(Number(out)).toBe(30);
+  expect(Number(out)).toBe(56);
 });

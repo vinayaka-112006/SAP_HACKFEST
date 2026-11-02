@@ -6,6 +6,7 @@
     "dev": "node scripts/dev.js",
     "dev:local": "node scripts/dev.js --sqlite",
     "dev:fresh": "node scripts/dev.js --fresh",
+    "dev:v2": "node scripts/dev.js --v2",
     "dev:backend": "npm --prefix backend run start:local",
     "dev:frontend": "npm --prefix frontend run dev",
     "test:backend": "npm --prefix backend test",
