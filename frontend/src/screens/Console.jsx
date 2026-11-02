@@ -15,6 +15,7 @@ import EvidenceDrawer from "../features/evidence/EvidenceDrawer";
 import SimilarEvidence from "../features/memory/SimilarEvidence";
 import Communication from "../features/worker/Communication";
 import WorkflowPanel from "../features/workflow/WorkflowPanel";
+import TraceTimeline from '../features/evidence/TraceTimeline';
 
 function displayLocalTime(value) {
   const time = new Date(value);
@@ -396,6 +397,7 @@ export default function Console() {
       {canReview && (
         <>
           <section style={{ marginBottom: "20px" }}>
+            <TraceTimeline />
             <WindowLens
               activeWindow={selectedWindow}
               totalUnits={trace?.summary.totalUnits}

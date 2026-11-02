@@ -8,6 +8,7 @@ const frontend = path.join(root, "frontend");
 const backendPort = Number(process.env.TOOLSATHI_BACKEND_PORT || 4004);
 const frontendPort = Number(process.env.TOOLSATHI_FRONTEND_PORT || 5173);
 const v2 = process.argv.includes("--v2");
+const hanaV21 = process.argv.includes("--hana-v21");
 const fresh = v2 || process.argv.includes("--fresh");
 const sqlite = fresh || process.argv.includes("--sqlite");
 const children = [];
@@ -42,6 +43,7 @@ function launch(role, file, args, cwd, env) {
   });
 }
 async function main() {
+  if (hanaV21 && sqlite) throw Error("HANA V2.1 and SQLite demo options cannot be combined.");
   for (const file of [path.join(backend, "node_modules/@sap/cds/package.json"), path.join(frontend, "node_modules/vite/bin/vite.js")])
     if (!fs.existsSync(file)) throw Error("Install dependencies first: npm --prefix backend ci and npm --prefix frontend ci.");
   if (backendPort === frontendPort) throw Error("Backend and frontend require different ports.");
@@ -49,6 +51,7 @@ async function main() {
   if (stopping) return;
   const backendEnv = { ...process.env, NODE_ENV: "development", CDS_ENV: "development", AUTH_MODE: "header", ENFORCE_APPROVALS: "true", ALLOW_UNAPPROVED_MOCKS: "false", PORT: String(backendPort) };
   if (sqlite) backendEnv.DATABASE_MODE = "sqlite";
+  if (hanaV21) Object.assign(backendEnv, { DATABASE_MODE: 'hana', V2_WORKFLOW_ENABLED: 'true', V2_SYNTHETIC_FIXTURES: 'false' });
   if (v2) Object.assign(backendEnv, { V2_WORKFLOW_ENABLED: 'true', V2_SYNTHETIC_FIXTURES: 'true' });
   if (fresh) {
     const backup = path.join(root, "backup");

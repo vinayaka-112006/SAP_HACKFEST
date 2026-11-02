@@ -25,7 +25,7 @@ export default function App() {
   };
 
   return (
-    <LocaleProvider><StoreProvider>
+    <StoreProvider>
       <div className="app-shell" style={{ minHeight: '100vh', position: 'relative' }}>
         {/* 5.5s Animated Cinematic Intro Sequence */}
         {showIntro && (
@@ -96,6 +96,6 @@ export default function App() {
         <Dock />
         <WebsiteAssistant />
       </div>
-    </StoreProvider></LocaleProvider>
+    </StoreProvider>
   );
 }

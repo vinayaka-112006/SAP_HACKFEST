@@ -67,6 +67,8 @@ async function until(fn, message) {
   throw new Error(message);
 }
 async function skipIntro(target) {
+  const demo=target.locator('.demo-panel');
+  if(await demo.count() && !await demo.evaluate(element=>element.open))await demo.locator('summary').first().click();
   const skip = target.getByRole("button", { name: /skip/i });
   if (await skip.count()) await skip.first().click();
   await until(
@@ -102,6 +104,8 @@ before(
         DATABASE_MODE: "sqlite",
         AUTH_MODE: "header",
         SARVAM_API_KEY: "",
+        GROQ_API_KEY: "",
+        V21_BROWSER_FIXTURES: "true",
         ENFORCE_APPROVALS: "true",
         ALLOW_UNAPPROVED_MOCKS: "false",
         CDS_REQUIRES_DB_CREDENTIALS_URL: database,
@@ -325,6 +329,7 @@ check(
   "actual 72h trace, gaps, evidence and browser CORS work without fabricated results",
   async () => {
     await page.getByRole("button", { name: "Open Incident Details" }).click();
+    await page.getByText(/Trace and audit require/).waitFor();
     assert.match(
       await page.locator("body").textContent(),
       /Trace and audit require/,
@@ -786,6 +791,7 @@ check("manual fallback with AI disabled works and the next report clears old str
 let v2Incident;
 check('V2 Kannada typed interview, correction, confirmation and language persistence work in the browser',async()=>{
   await page.goto(frontendUrl+'/workspace');
+  await skipIntro(page);
   await page.getByRole('button',{name:'Worker local demo role',exact:true}).first().click();
   await page.getByLabel('Local demo user ID',{exact:true}).fill('V2-BROWSER-W');
   await page.getByLabel('Language',{exact:true}).selectOption('kn');
@@ -817,6 +823,7 @@ check('V2 Kannada typed interview, correction, confirmation and language persist
   report.v2TypedConversation=true;
 });
 check('V2 browser manager assigns a qualified technician and technician sees and accepts persisted work',async()=>{
+  await skipIntro(page);
   async function api(method,path,role,user,body){
     const response=await fetch(apiUrl+'/api'+path,{method,headers:{'content-type':'application/json','x-demo-role':role,'x-demo-user':user},...(body?{body:JSON.stringify(body)}:{})});
     const value=await response.json();assert.equal(response.status,200,JSON.stringify(value));return value;
@@ -848,4 +855,65 @@ check('V2 browser manager assigns a qualified technician and technician sees and
   assert.equal(denied.status,403);
   assert.equal(pageErrors.length,0,JSON.stringify(pageErrors));
   report.v2Assignment=true;report.v2CrossUserChatDenied=true;
+});
+
+check('V2.1 voice interface supports typed fallback, review cancellation and explicit confirmation',async()=>{
+  await page.goto(frontendUrl+'/workspace');await skipIntro(page);
+  await page.getByRole('button',{name:'Worker local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V21-BROWSER-VOICE');
+  await page.getByLabel('Equipment',{exact:true}).selectOption('TOOL-C');
+  await page.getByRole('button',{name:'Push to talk',exact:true}).first().click();
+  const agent=page.locator('.voice-agent');
+  await agent.getByRole('button',{name:'Start report',exact:true}).click();
+  await agent.getByRole('textbox').fill('Synthetic typed fallback: the bolts are loose.');
+  const sent=page.waitForResponse(r=>r.url().includes('/messages')&&r.request().method()==='POST');
+  await agent.getByRole('button',{name:'Send answer',exact:true}).click();
+  assert.equal((await sent).status(),200);
+  await agent.getByRole('button',{name:'Review report',exact:true}).click();
+  await agent.getByLabel('Reviewed description',{exact:true}).fill('Worker-reviewed synthetic fallback report');
+  const submitted=page.waitForResponse(r=>r.url().includes('/submit')&&r.request().method()==='POST');
+  await agent.getByRole('button',{name:'Confirm and Submit',exact:true}).click();
+  const response=await submitted,result=await response.json();
+  assert.equal(response.status(),200);
+  assert.equal(result.incident.rawText,'Synthetic typed fallback: the bolts are loose.');
+  assert.equal(result.incident.state,'Confirmed');
+  report.v21VoiceTextFallback=true;report.physicalMicrophoneTested=false;
+});
+
+check('V2.1 manager approves qualified workforce reassignment using stored demand',async()=>{
+  const seed=await fetch(apiUrl+'/api/test/v21-seed',{method:'POST'});assert.equal(seed.status,200);
+  await page.goto(frontendUrl+'/workspace');await skipIntro(page);
+  await page.getByRole('button',{name:'Manager local demo role',exact:true}).first().click();
+  await page.getByLabel('Incident ID',{exact:true}).first().fill('V21-INC-01');
+  await page.getByRole('button',{name:'Find available capacity',exact:true}).click();
+  await page.locator('.capacity-card').first().waitFor();
+  assert.ok((await page.locator('.capacity-card').count())>0);
+  await page.getByLabel('Manager decision reason',{exact:true}).fill('Synthetic workforce benefit reviewed');
+  const assigned=page.waitForResponse(r=>r.url().endsWith('/workforce/assign'));
+  await page.getByRole('button',{name:'Approve reassignment',exact:true}).first().click();
+  assert.equal((await assigned).status(),200);report.v21WorkforceBrowser=true;
+});
+check('V2.1 assistant stays within the viewport and uses actual authorized sources',async()=>{
+  await page.getByRole('button',{name:'Website assistant',exact:true}).click();
+  const dialog=page.getByRole('dialog',{name:'Website assistant'});await dialog.waitFor();
+  await dialog.getByLabel('Your question',{exact:true}).fill('What is the status of my report?');
+  await dialog.getByRole('button',{name:/Ask/}).click();
+  await dialog.locator('.chat-message.assistant').waitFor();
+  const bound=await dialog.boundingBox();assert.ok(bound.x>=0&&bound.y>=0);
+  assert.ok(bound.x+bound.width<=1440&&bound.y+bound.height<=1050);
+  await dialog.getByRole('button',{name:'Close assistant'}).click();report.v21ChatBrowser=true;
+});
+test('V2.1 language and responsive checks across all main routes',{timeout:120000},async()=>{
+  const target=await context.newPage();target.on('pageerror',e=>pageErrors.push(e.message));
+  try{
+    for(const width of [375,768,1280,1440])for(const language of ['en','kn','hi'])for(const route of ['/','/worker','/workspace','/console','/history']){
+      await target.setViewportSize({width,height:1000});
+      await target.addInitScript(({language})=>{localStorage.setItem('toolsathi.language',language);sessionStorage.setItem('toolsathi_intro_seen','true');},{language});
+      await target.goto(frontendUrl+route);await target.locator('.top-navbar').waitFor();
+      await target.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+      const measured=await target.evaluate(()=>({width:document.documentElement.scrollWidth,viewport:innerWidth,lang:document.documentElement.lang}));
+      assert.equal(measured.lang,language);assert.ok(measured.width<=measured.viewport+1,JSON.stringify({route,language,...measured}));
+    }
+    assert.equal(pageErrors.length,0,JSON.stringify(pageErrors));report.v21ResponsiveLocales={routes:5,languages:3,widths:[375,768,1280,1440],checks:60};
+  }finally{await target.close();}
 });

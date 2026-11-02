@@ -121,8 +121,7 @@ export default function TopNavbar() {
         <div className="persona-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link to="/workspace">{t('workspace')}</Link>
           <LanguageSelector />
-          <RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole} />
-          {apiConfig.demoMode&&<label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120} /></label>}
+          {apiConfig.demoMode?<details className="demo-panel"><summary>Demo mode · {currentRole}</summary><RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole}/><label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120}/></label></details>:<span>{currentRole}</span>}
         </div>
       </div>
     </header>

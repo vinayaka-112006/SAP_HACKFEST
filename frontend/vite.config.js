@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import uiLocalization from './scripts/ui-localization.cjs';
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({babel:{plugins:[uiLocalization]}})],
   cacheDir: process.env.TOOLSATHI_VITE_CACHE_DIR || "node_modules/.vite",
   server: {
     port: 5173,

@@ -4,6 +4,9 @@ import { useStore } from '../state/store';
 import { useLocale } from '../features/v2/locale';
 import useSarvamRecorder from '../features/worker/useSarvamRecorder';
 import { resolveToolCode } from '../api/mappings';
+import VoiceAgent from '../features/v2/VoiceAgent';
+import WorkforcePanel from '../features/v2/WorkforcePanel';
+import SystemPanel from '../features/v2/SystemPanel';
 const box={padding:20,background:'rgba(255,255,255,.88)',border:'1px solid var(--brand-cyan-soft)',borderRadius:16,marginBottom:20};
 const row={display:'flex',gap:12,flexWrap:'wrap',alignItems:'center',margin:'12px 0'};
 function Field({label,value,onChange,type='text'}){return <label style={{display:'grid',gap:5,flex:1,minWidth:170}}>{label}<input aria-label={label} type={type} value={value} onChange={e=>onChange(e.target.value)} style={{padding:10,border:'1px solid #a3bac6',borderRadius:6}}/></label>;}
@@ -24,6 +27,7 @@ export default function Workspace(){
   const [reviewContext,setReviewContext]=useState(null),[information,setInformation]=useState(''),[previewDuplicates,setPreviewDuplicates]=useState(null);
   const [guidance,setGuidance]=useState(null);
   const [speech,setSpeech]=useState(null);
+  const [voiceMode,setVoiceMode]=useState(false);
   const perform=async fn=>{setBusy(true);setError('');setNotice('');try{await fn();setNotice(t('saved'));refresh();}catch(e){setError(e.message);}finally{setBusy(false);}};
   const identity = useRef(client);
   identity.current = client;
@@ -38,16 +42,18 @@ export default function Workspace(){
   const start=()=>perform(async()=>{const result=await request('/conversations',{toolId:selected,language});setSession(result);setReview(false);setAnswer('');});
   const send=(value=answer)=>perform(async()=>{
     const facts={};if(session.field)facts[session.field]=['equipmentStopped','productionStopped','safety'].includes(session.field)&&['yes','no'].includes(value)?value==='yes':value;
-    const result=await request(`/conversations/${session.sessionId}/messages`,{version:session.version,text:value,facts});setSession(result);setAnswer('');
+    const result=await request(`/conversations/${session.sessionId}/messages`,{version:session.version,text:value,facts,reason:apiConfig.aiEnabled});setSession(result);setCategory(result.draft?.category||'');setTranslation(result.draft?.translatedText||'');setAnswer('');
   });
   const doWork=action=>perform(async()=>{await request(`/incidents/${encodeURIComponent(scope)}/work`,{action,...(currentRole==='Technician'?{findings}:{}),...(action==='submit'?{repairId}:{})});setOrders((await request('/work-orders',undefined,'GET')).workOrders);});
   return <div className="workspace" style={{maxWidth:1100,margin:'30px auto 160px',padding:20}}>
     <h1>{t('workspace')}</h1><nav style={row}><Link to="/worker">{t('worker')}</Link><Link to="/console">{t('console')}</Link><Link to="/history">{t('history')}</Link></nav>
+    {currentRole==='Manager'&&<WorkforcePanel incidentId={scope}/>}
+    {['Manager','Administrator'].includes(currentRole)&&<SystemPanel/>}
     {error&&<p role="alert" style={{color:'#9c2136'}}>{t('error')}: {error}</p>}{notice&&<p role="status">{notice}</p>}{busy&&<p aria-live="polite">{t('busy')}</p>}
     {['Worker','Manager'].includes(currentRole)&&<section style={box}><h2>{t('start')}</h2>
       {!session?<><div style={row}><label>{t('equipment')} <select aria-label={t('equipment')} value={selected} onChange={e=>setSelected(e.target.value)}><option value="">—</option>{tools.map(x=><option key={x.toolId} value={x.toolId}>{x.toolId} · {x.type} · {x.workCenter}</option>)}</select></label></div>
         <div style={row}><Field label={t('qr')} value={qr} onChange={setQr}/><button onClick={()=>{const tool=resolveToolCode(qr,tools);if(tool){setSelected(tool.toolId);setError('');}else setError(t('invalidQr'));}}>{t('resolve')}</button></div>
-        {tool&&<p>{tool.toolId} · {tool.type} · {tool.workCenter} · {tool.line} · {tool.state}</p>}<button disabled={!tool||busy} onClick={start}>{t('start')}</button></>:<>
+        {tool&&<p>{tool.toolId} · {tool.type} · {tool.workCenter} · {tool.line} · {tool.state}</p>}<button disabled={!tool||busy} onClick={start}>{t('start')}</button><button disabled={!tool} onClick={()=>setVoiceMode(!voiceMode)}>{t('voice')}</button>{voiceMode&&<VoiceAgent key={selected+language} toolId={selected} onConfirmed={id=>{openIncident(id);setScope(id);}}/>}</>:<>
         <p>{t('equipment')}: {session.toolId} · {session.language}</p><p>{t('provider')}</p>
         {session.safetyEscalation&&<p role="alert" style={{background:'#ffe4de',padding:15}}>{session.safetyEscalation}</p>}
         {!review?<><p aria-live="polite">{session.question||t('review')}</p><button disabled={busy||!session.question||!apiConfig.aiEnabled} onClick={()=>perform(async()=>{const result=await request(`/conversations/${session.sessionId}/readback`,{reviewed:true});setSpeech(result.audio?`data:${result.mimeType};base64,${result.audio}`:null);setNotice(`${t('model')}: ${result.providerStatus}`);})}>{t('listen')}</button>{speech&&<audio controls src={speech}/>}
@@ -56,9 +62,9 @@ export default function Workspace(){
           {['equipmentStopped','productionStopped','safety'].includes(session.field)&&<><button disabled={busy} onClick={()=>send('yes')}>{t('yes')}</button><button disabled={busy} onClick={()=>send('no')}>{t('no')}</button></>}
           <button disabled={busy||!session.messages.length} onClick={()=>send('unknown')}>{t('unknown')}</button>
           <button disabled={!recorder.supported||busy||!apiConfig.aiEnabled} onClick={recorder.toggle}>{recorder.recording?t('stop'):t('voice')}</button>{recorder.recording&&<span role="status">● {t('recording')}</span>}</div>
-          <p>{t('speechReview')}</p><div style={row}><button disabled={busy||!session.messages.length} onClick={()=>{setReview(true);setDescription(session.messages.map(m=>m.text).join('\n'));}}>{session.ready?t('review'):t('continue')}</button>
-          <button disabled={busy||!session.messages.length} onClick={()=>perform(async()=>{const result=await request(`/conversations/${session.sessionId}/messages`,{version:session.version,text:session.messages.at(-1).text,extract:true});setSession(result);setCategory(result.draft?.category||'');setTranslation(result.draft?.translatedText||'');setNotice(`${t('model')}: ${result.providerStatus}`);})}>{t('extract')}</button></div>
-          <details><summary>{t('original')}</summary>{session.messages.map((m,i)=><p key={i}>{m.text}</p>)}</details></>:<>
+          <p>{t('speechReview')}</p><div style={row}><button disabled={busy||!session.messages.length} onClick={()=>{setReview(true);setDescription(session.messages.filter(m=>m.role==='worker').map(m=>m.text).join('\n'));}}>{session.ready?t('review'):t('continue')}</button>
+          <button disabled={busy||!session.messages.length} onClick={()=>perform(async()=>{const result=await request(`/conversations/${session.sessionId}/messages`,{version:session.version,text:session.messages.filter(m=>m.role==='worker').at(-1).text,extract:true});setSession(result);setCategory(result.draft?.category||'');setTranslation(result.draft?.translatedText||'');setNotice(`${t('model')}: ${result.providerStatus}`);})}>{t('extract')}</button></div>
+          <details><summary>{t('original')}</summary>{session.messages.filter(m=>m.role==='worker').map((m,i)=><p key={i}>{m.text}</p>)}</details></>:<>
           <h3>{t('draft')}</h3><label>{t('description')}<textarea aria-label={t('description')} value={description} onChange={e=>setDescription(e.target.value)} rows={4} style={{width:'100%'}}/></label>
           <div style={row}><Field label={t('category')} value={category} onChange={setCategory}/><Field label={t('translate')} value={translation} onChange={setTranslation}/></div>
           <p>{t('missing')}: {session.missingFields.join(', ')||'—'}</p><Records value={session.facts}/>

@@ -11,6 +11,8 @@
     "dev:frontend": "npm --prefix frontend run dev",
     "test:backend": "npm --prefix backend test",
     "build:backend": "npm --prefix backend run build",
-    "build:frontend": "npm --prefix frontend run build"
+    "build:frontend": "npm --prefix frontend run build",
+    "dev:v21": "node scripts/dev.js --v2",
+    "dev:hana:v21": "node scripts/dev.js --hana-v21"
   }
 }

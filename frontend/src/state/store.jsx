@@ -33,6 +33,15 @@ export function StoreProvider({ children }) {
   );
   const identityKey = currentRole + ":" + demoUserId;
   useEffect(() => {
+    const controller=new AbortController();
+    client.request('/health',{signal:controller.signal}).then(health=>{
+      const previous=sessionStorage.getItem('toolsathi.databaseInstance');
+      if(previous&&previous!==health.databaseInstance){setIncidentId('');sessionStorage.removeItem('toolsathi.incidentId');}
+      if(health.databaseInstance)sessionStorage.setItem('toolsathi.databaseInstance',health.databaseInstance);
+    }).catch(()=>{});
+    return()=>controller.abort();
+  },[client]);
+  useEffect(() => {
     if (apiConfig.demoMode) return;
     const controller = new AbortController();
     client.request('/v2/me', { signal: controller.signal }).then(result => {
