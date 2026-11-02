@@ -196,6 +196,7 @@ router.post(
           },
           tx,
         );
+      await require('../lib/operations').notifyReviewers(tx,after,'New confirmed worker report awaits manager review');
       return { incident: after, warnings: [], auditId };
     });
     res.json(label(result));
@@ -450,6 +451,10 @@ router.post(
       const verifierId = req.user.id.trim();
       const incident = await incidents.find(tx, req.params.id);
       const assignedWork = await require('../lib/v2').guardRepair(tx, req.user, incident.incidentId, true);
+      if(await require('../lib/v2').workflowAvailable(tx)){
+        if(!(await require('../lib/operations').permissions(tx,req.user)).canVerify)fail(403,'VERIFICATION_NOT_AUTHORIZED','Independent verification capability is required');
+        if(assignedWork&&[assignedWork.assignedBy,assignedWork.reviewedBy].includes(req.user.id))fail(403,'INDEPENDENCE_REQUIRED','Verifier must be independent of assignment and completion approval');
+      }
       const currentTool = await tx.run(
         cds.ql.SELECT.one
           .from(entity("Tool"))
@@ -576,6 +581,14 @@ router.post(
         },
         tx,
       );
+      if(assignedWork){
+        const v=require('../lib/v2');
+        await v.notify(tx,assignedWork.technicianId,incident.incidentId,'Independent verification passed; equipment restored');
+        await v.notify(tx,incident.reporterId,incident.incidentId,'Equipment restored after independent verification');
+        await require('../lib/operations').notifyReviewers(tx,incident,'Equipment restored; review workforce returns and close the incident');
+        const assignments=await tx.run(cds.ql.SELECT.from(entity('TemporaryAssignment')).where({sourceToolId:incident.toolId,status:'Active'}));
+        for(const a of assignments)await v.notify(tx,a.workerId,incident.incidentId,'Original equipment restored. Await manager return decision; keep current station commitment');
+      }
       return {
         incidentId: incident.incidentId,
         toolId: incident.toolId,
@@ -603,6 +616,14 @@ router.get(
     const result = await transaction(async (tx) => {
       let query = cds.ql.SELECT.from(entity("Incident")).orderBy("reportedAt desc", "incidentId desc").limit(limit);
       const where = {};
+      if(await require('../lib/v2').workflowAvailable(tx)){
+        const profile=await require('../lib/v2').one(tx,'UserProfile',{userId:req.user.id});
+        if(profile||['Manager','Verifier'].includes(req.user.role)){
+          const allowed=await require('../lib/operations').allowedIds(tx,req.user);
+          if(!allowed.size)return {incidents:[],count:0};
+          where.incidentId={in:[...allowed]};
+        }
+      }
       if (process.env.AUTH_MODE === 'xsuaa' || (process.env.NODE_ENV === 'production' && !process.env.AUTH_MODE)) {
         if (req.user.role === 'Worker') where.reporterId = req.user.id;
         if (req.user.role === 'Technician') {
@@ -688,6 +709,7 @@ router.post(
         },
         tx,
       );
+      if(await require('../lib/v2').workflowAvailable(tx))await require('../lib/v2').notify(tx,incident.reporterId,incident.incidentId,'Incident closed after recorded review');
       return {
         incidentId: incident.incidentId,
         fromState: incident.state,

@@ -64,6 +64,10 @@ function requireRole(...allowed) {
         : user.role;
       if (!role) fail(403, "FORBIDDEN", "Role is not permitted");
       req.user = { ...user, role };
+      if (['Manager','Verifier'].includes(role) && await require('./v2').workflowAvailable(cds.db)) {
+        const incidentId=/\/incidents\/([^/?]+)/.exec(req.originalUrl)?.[1] || req.body?.incidentId || req.query.incident || req.query.incidentId;
+        if(incidentId)await require('./v2').access(cds.db,req.user,decodeURIComponent(incidentId));
+      }
       if (mode() === 'xsuaa' && ['Worker','Technician'].includes(role)) {
         const incidentId = /\/incidents\/([^/?]+)/.exec(req.originalUrl)?.[1] || req.body?.incidentId || req.query.incident || req.query.incidentId;
         if (incidentId) await require('./v2').access(cds.db, req.user, decodeURIComponent(incidentId));

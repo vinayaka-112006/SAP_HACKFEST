@@ -116,6 +116,7 @@ router.post('/v2/conversations/:id/submit',requireRole('Worker','Manager'),run(a
   await tx.run(cds.ql.UPDATE(entity('ConversationSession')).set({incidentId:incident.incidentId}).where({sessionId:row.sessionId}));
   await v.event(tx,req.user,'INCIDENT_CONFIRMED','Worker explicitly confirmed conversational report',{sessionId:row.sessionId,state:'Confirmed'},incident);
   await history.append({toolId:row.toolId,type:'INCIDENT',summary:'Worker confirmed conversational report',refId:incident.incidentId,details:{state:'Confirmed'}},tx);
+  await require('../lib/operations').notifyReviewers(tx,incident,'New confirmed worker report awaits manager review');
   return {incident:{...incident,missingFields:JSON.parse(incident.missingFields)},candidates:await v.candidates(tx,incident)};
 }));
 router.post('/v2/chat',requireRole(),run(async(req,tx)=>{
@@ -134,7 +135,8 @@ router.post('/v2/chat',requireRole(),run(async(req,tx)=>{
       const rows=await tx.run(cds.ql.SELECT.from(entity('RepairWorkOrder')).where({technicianId:req.user.id}).limit(20));
       for(const row of rows)sources.push({id:row.workOrderId,type:'RepairWorkOrder',data:{incidentId:row.incidentId,status:row.status,findings:row.findings}});
     }else if(['Manager','Quality','Verifier'].includes(req.user.role)){
-      const rows=await tx.run(cds.ql.SELECT.from(entity('Incident')).where({state:'Confirmed'}).orderBy('createdAt desc').limit(10));
+      const allowed=await require('../lib/operations').allowedIds(tx,req.user);
+      const rows=(await tx.run(cds.ql.SELECT.from(entity('Incident')).where({state:'Confirmed'}).orderBy('createdAt desc'))).filter(i=>allowed.has(i.incidentId)).slice(0,10);
       for(const row of rows)sources.push({id:row.incidentId,type:'Incident',data:{state:row.state,toolId:row.toolId,category:row.category}});
     }
   }

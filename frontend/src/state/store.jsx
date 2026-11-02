@@ -11,8 +11,9 @@ import { traceView } from "../api/mappings";
 import { useResource } from "./useResource";
 const StoreContext = createContext(null);
 export function StoreProvider({ children }) {
-  const [currentRole, setCurrentRole] = useState(apiConfig.demoMode ? "Manager" : "Worker");
-  const [demoUserId, setDemoUserId] = useState("DEMO-MANAGER");
+  const [currentRole, setCurrentRole] = useState(()=>apiConfig.demoMode ? (sessionStorage.getItem('toolsathi.demoRole')||"Manager") : "Worker");
+  const [demoUserId, setDemoUserId] = useState(()=>sessionStorage.getItem('toolsathi.demoUser')||"DEMO-MANAGER");
+  useEffect(()=>{if(apiConfig.demoMode){sessionStorage.setItem('toolsathi.demoRole',currentRole);sessionStorage.setItem('toolsathi.demoUser',demoUserId);}},[currentRole,demoUserId]);
   const [incidentId, setIncidentId] = useState(
     () => sessionStorage.getItem("toolsathi.incidentId") || "",
   );

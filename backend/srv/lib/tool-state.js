@@ -13,6 +13,7 @@ async function setState(
     reason,
     verified = false,
     approvalId,
+    correctionRepairId,
   },
   tx,
 ) {
@@ -28,6 +29,7 @@ async function setState(
           reason,
           verified,
           approvalId,
+          correctionRepairId,
         },
         t,
       ),
@@ -41,10 +43,20 @@ async function setState(
     if (incident.toolId !== toolId)
       fail(400, "INVALID_INPUT", "Tool does not match incident");
   }
+  if(correctionRepairId){
+    const v=require('./v2');
+    await v.access(tx,{id:actor,role:actorRole,roles:[actorRole]},incidentId);
+    const work=await v.one(tx,'RepairWorkOrder',{incidentId},true),repair=await v.one(tx,'RepairLog',{repairId:correctionRepairId,incidentId},true);
+    if(tool.state!=='Awaiting verification'||state!=='Under repair'||!['Manager','Verifier'].includes(actorRole)||!work||!['Submitted','Reviewed','NeedsEvidence'].includes(work.status)||!repair?.passed||repair.verifiedBy||work.repairId!==repair.repairId)
+      fail(409,'INVALID_CORRECTION','Only submitted unverified repair work may return for correction');
+    if(actorRole==='Verifier'&&(!(await require('./operations').permissions(tx,{id:actor,role:actorRole,roles:[actorRole]})).canVerify||[work.technicianId,work.reviewedBy,work.assignedBy].includes(actor)))
+      fail(403,'INDEPENDENCE_REQUIRED','Independent verification capability is required');
+  }
   if (
     !(await rules.canToolTransition(tool.state, state, {
       verified,
       role: actorRole,
+      correction:!!correctionRepairId,
       incidentId,
       toolId,
       tx,

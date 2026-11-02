@@ -140,3 +140,20 @@ Paths and npm commands in this document are relative to the `backend/` CAP proje
 - Localize legacy static JSX at compile time through checked-in resources and the existing context, excluding raw report/style/code data. Resources were generated with Groq; native-speaker review and complete dynamic-content localization remain unverified.
 - HANA's preserved synthetic scenario clock is 4 November, while the local seed clock is 31 October. Resolve it from the immutable v1 seed audit and corroborating production runs, return it via `/tools`, and use it only for explicit synthetic demo input. Never rewrite original production times or alter trace arithmetic to match a local fixture date.
 - Root `dev:hana:v21` explicitly enables reviewed V2 HANA workflows without modifying the private environment or seeding remotely on startup. The SQLite demo remains independent.
+# V2.2 operational integration decisions
+
+Operational scope uses the existing trusted role and profile work center, with
+administrator-approved UserAuthorization records for multiple centers and
+independent assignment/verification capabilities. Unregistered header identities
+retain the explicitly local legacy demo behavior; production onboarding requires
+an active profile. New extension tables avoid altering the original HANA tables.
+V22 features are enabled only after reviewed deployment, never automatically.
+
+Repair correction is an additive rule-adapter seam from Awaiting verification
+to Under repair. tool-state validates persisted submitted work, passing unverified
+repair evidence and the authorized independent actor. The teammate-owned state
+machine and approval modules remain untouched. A correction appends the previous
+readings as evidence before resetting the current submission for another check.
+An additional-evidence request blocks manager acceptance until the assigned
+technician submits a reference. Product containment release remains separate.
+

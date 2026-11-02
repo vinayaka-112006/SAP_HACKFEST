@@ -4,6 +4,21 @@ const schemas={
   language:{type:'string',enum:['en','kn','hi']},boolean:{type:'boolean'},version:{type:'integer',minimum:0},
 };
 const contracts=[
+  ['get','/incidents/{id}/repair-records','Scoped Manager Quality Verifier or assigned Technician','',''],
+  ['get','/incidents/{id}/recovery','Scoped Manager Quality Verifier','',''],
+  ['post','/incidents/{id}/recovery/evidence','Scoped Manager','alternativeToolId sourceReference validUntil','operationCompatible available'],
+  ['post','/incidents/{id}/recovery/plans','Scoped Manager','',''],
+  ['post','/incidents/{id}/recovery/proposals','Scoped Manager','planId reason',''],
+  ['post','/incidents/{id}/recovery/execute','Scoped Manager with matching approved record','approvalId',''],
+  ['get','/incidents/{id}/executive-report','Scoped Manager Quality Verifier','',''],
+  ['get','/v2/dashboard','Authenticated role; approved work-center/ownership scope','',''],
+  ['get','/v2/issues','Authenticated role; approved work-center/ownership scope','',''],
+  ['get','/v2/issues/{id}','Authenticated role; approved work-center/ownership scope','',''],
+  ['get','/v2/notifications','Authenticated notification owner','',''],
+  ['post','/v2/notifications/{id}/read','Authenticated notification owner','',''],
+  ['put','/v2/authorizations/{userId}','Independent Administrator','workCenters canAssign canVerify expiresAt reason',''],
+  ['put','/v2/profile','Profile owner','displayName language',''],
+  ['post','/v2/incidents/{id}/triage','Scoped Manager','severity urgency shift reason version escalate',''],
   ['get','/v2/system','Manager Administrator','',''],
   ['post','/v2/system/check','Administrator','',''],
   ['get','/v2/incidents/{id}/workforce','Manager','',''],
@@ -18,10 +33,10 @@ const contracts=[
   ['get','/v2/incidents/{id}/review','Manager Quality Verifier; assigned Technician','',''],
   ['post','/v2/incidents/{id}/information-request','Manager','message',''],
   ['post','/v2/incidents/{id}/information','Owning Worker','message',''],
-  ['get','/v2/incidents/{id}/technicians','Manager','',''],
-  ['post','/v2/incidents/{id}/assign','Manager','technicianId',''],
+  ['get','/v2/incidents/{id}/technicians','Scoped Manager or explicitly authorized Verifier/Assigner','',''],
+  ['post','/v2/incidents/{id}/assign','Scoped Manager or explicitly authorized Verifier/Assigner','technicianId','reason replaceWorkOrderId'],
   ['get','/v2/work-orders','Manager Quality Verifier; Technician sees own','',''],
-  ['post','/v2/incidents/{id}/work','Assigned Technician / Manager review','action','findings repairId'],
+  ['post','/v2/incidents/{id}/work','Assigned Technician / scoped Manager / independent Verifier','action','findings repairId reason evidenceRef'],
   ['get','/v2/incidents/{id}/duplicates','Manager Quality','',''],
   ['post','/v2/incidents/{id}/relationship','Manager','canonicalId decision reason',''],
   ['get','/v2/incidents/{id}/repair-context','Manager or assigned Technician','',''],
@@ -37,6 +52,8 @@ const contracts=[
   ['post','/v2/chat','Any authenticated role; object and tool permissions enforced','message language','incidentId generate tool'],
 ];
 function property(key){
+  if(key==='workCenters')return {type:'array',minItems:1,maxItems:20,items:schemas.string};
+  if(['canAssign','canVerify','escalate','operationCompatible','available'].includes(key))return schemas.boolean;
   if(['extract','generate','confirmed','reviewed','reason'].includes(key))return key==='reason'?schemas.long:schemas.boolean;
   if(key==='language')return schemas.language;
   if(key==='version')return schemas.version;

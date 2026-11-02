@@ -10,7 +10,8 @@ async function retrieve(tx,user,query,toolId){
     if(!work.length)return {matches:[],method:'AUTHORIZED_EMPTY',warnings:[]};
     selection=selection.where({incidentId:{in:work.map(w=>w.incidentId)}});
   }else if(!['Manager','Quality','Verifier'].includes(user.role))return {matches:[],method:'AUTHORIZED_EMPTY',warnings:[]};
-  const incidents=await tx.run(selection),ids=incidents.map(i=>i.incidentId);
+  const allowed=await require('./operations').allowedIds(tx,user);
+  const incidents=(await tx.run(selection)).filter(i=>allowed.has(i.incidentId)),ids=incidents.map(i=>i.incidentId);
   const repairs=user.role==='Worker'||!ids.length?[]:await tx.run(cds.ql.SELECT.from(entity('RepairLog')).where({incidentId:{in:ids}}).limit(100));
   const sops=user.role==='Worker'?[]:await tx.run(cds.ql.SELECT.from(entity('SopDoc')).limit(50));
   const search=createSearch({embedder,loadSources:async()=>({incidents,repairs,sops})});

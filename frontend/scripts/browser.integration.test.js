@@ -903,6 +903,36 @@ check('V2.1 assistant stays within the viewport and uses actual authorized sourc
   assert.ok(bound.x+bound.width<=1440&&bound.y+bound.height<=1050);
   await dialog.getByRole('button',{name:'Close assistant'}).click();report.v21ChatBrowser=true;
 });
+check('V2.2 role dashboards open scoped issue details, survive refresh, and persist notification reads',async()=>{
+  await page.goto(frontendUrl+'/technician');await skipIntro(page);
+  await page.getByRole('button',{name:'Technician local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V2-BROWSER-T');
+  await page.locator('.operations-table').getByRole('link',{name:v2Incident,exact:true}).click();
+  await page.getByRole('heading',{name:v2Incident,exact:true}).waitFor();
+  await page.getByRole('button',{name:'Repair',exact:true}).click();
+  await page.getByLabel('Findings / progress',{exact:true}).waitFor().catch(async error=>{error.message+='\nSynthetic issue page: '+await page.locator('.operations-page').innerText();throw error;});
+  await page.reload();await page.getByLabel('Findings / progress',{exact:true}).waitFor();
+  assert.equal(await page.getByLabel('Local demo user ID',{exact:true}).inputValue(),'V2-BROWSER-T');
+  await page.locator('.operations-nav').getByRole('link',{name:'Notifications',exact:true}).click();
+  await page.getByRole('button',{name:'Mark as read',exact:true}).first().waitFor();
+  const marked=page.waitForResponse(r=>r.url().endsWith('/read')&&r.request().method()==='POST');
+  await page.getByRole('button',{name:'Mark as read',exact:true}).first().click();assert.equal((await marked).status(),200);
+  await page.goto(frontendUrl+'/manager');await skipIntro(page);
+  await page.getByRole('button',{name:'Manager local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V2-BROWSER-M');
+  await page.locator('.operations-metrics').waitFor();
+  await page.goto(frontendUrl+'/verifier');await skipIntro(page);
+  await page.getByRole('button',{name:'Verifier local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V2-BROWSER-V');
+  await page.locator('.operations-metrics').waitFor();
+  await page.goto(frontendUrl+'/worker');await skipIntro(page);
+  await page.getByRole('button',{name:'Worker local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V2-BROWSER-W');
+  await page.getByRole('heading',{name:'Talk to ToolSathi',exact:true}).waitFor();
+  await page.getByLabel('Equipment',{exact:true}).selectOption('TOOL-C');
+  assert.equal(await page.locator('.voice-agent').getByRole('button',{name:'Start report',exact:true}).isEnabled(),true);
+  report.v22Dashboards={roles:4,issueRefresh:true,notificationRead:true,visibleWorkerVoice:true};
+});
 test('V2.1 language and responsive checks across all main routes',{timeout:120000},async()=>{
   const target=await context.newPage();target.on('pageerror',e=>pageErrors.push(e.message));
   try{

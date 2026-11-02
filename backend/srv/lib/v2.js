@@ -25,6 +25,10 @@ async function access(tx, user, incidentId) {
     const work = await one(tx, 'RepairWorkOrder', { incidentId });
     if (work?.technicianId !== user.id) fail(403, 'FORBIDDEN', 'Only assigned work is accessible');
   }
+  if (['Manager','Verifier'].includes(user.role) && await workflowAvailable(tx)) {
+    const tool=await one(tx,'Tool',{toolId:incident.toolId});
+    await require('./operations').scope(tx,user,tool);
+  }
   return incident;
 }
 async function event(tx, user, action, reason, details = {}, incident = {}) {

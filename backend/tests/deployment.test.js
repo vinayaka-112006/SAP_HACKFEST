@@ -48,5 +48,5 @@ test("OpenAPI is a valid document with all declared operations including AI comm
     ],
     { encoding: "utf8" },
   );
-  expect(Number(out)).toBe(61);
+  expect(Number(out)).toBe(require('../srv/lib/router-loader').loadRouters(require('express')()).size);
 });

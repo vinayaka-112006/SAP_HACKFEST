@@ -360,3 +360,37 @@ entity TemporaryAssignment {
   approvedBy : String(120);
   approvedAt : Timestamp;
 }
+
+// V2.2 extensions: existing table definitions and historical rows stay intact.
+entity UserAuthorization {
+  key userId : String(120);
+  workCenters : LargeString;
+  canAssign : Boolean;
+  canVerify : Boolean;
+  expiresAt : Timestamp;
+  approvedBy : String(120);
+  updatedAt : Timestamp;
+}
+entity UserProfileDetail {
+  key userId : String(120);
+  shift : String(120);
+  shiftStartsAt : Timestamp;
+  shiftEndsAt : Timestamp;
+  updatedAt : Timestamp;
+}
+entity IssueOperation {
+  key incidentId : String(120);
+  severity : String(30);
+  urgency : String(30);
+  shift : String(120);
+  reviewedBy : String(120);
+  reviewedAt : Timestamp;
+  assignmentEscalated : Boolean;
+  version : Integer;
+  updatedAt : Timestamp;
+}
+entity NotificationRead {
+  key notificationId : String(120);
+  userId : String(120);
+  readAt : Timestamp;
+}

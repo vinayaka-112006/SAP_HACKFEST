@@ -4,6 +4,21 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 
 | Method and path | Authority | Required body fields | Optional body fields |
 |---|---|---|---|
+| GET /incidents/{id}/repair-records | Scoped Manager Quality Verifier or assigned Technician | — | — |
+| GET /incidents/{id}/recovery | Scoped Manager Quality Verifier | — | — |
+| POST /incidents/{id}/recovery/evidence | Scoped Manager | alternativeToolId sourceReference validUntil | operationCompatible available |
+| POST /incidents/{id}/recovery/plans | Scoped Manager | — | — |
+| POST /incidents/{id}/recovery/proposals | Scoped Manager | planId reason | — |
+| POST /incidents/{id}/recovery/execute | Scoped Manager with matching approved record | approvalId | — |
+| GET /incidents/{id}/executive-report | Scoped Manager Quality Verifier | — | — |
+| GET /v2/dashboard | Authenticated role; approved work-center/ownership scope | — | — |
+| GET /v2/issues | Authenticated role; approved work-center/ownership scope | — | — |
+| GET /v2/issues/{id} | Authenticated role; approved work-center/ownership scope | — | — |
+| GET /v2/notifications | Authenticated notification owner | — | — |
+| POST /v2/notifications/{id}/read | Authenticated notification owner | — | — |
+| PUT /v2/authorizations/{userId} | Independent Administrator | workCenters canAssign canVerify expiresAt reason | — |
+| PUT /v2/profile | Profile owner | displayName language | — |
+| POST /v2/incidents/{id}/triage | Scoped Manager | severity urgency shift reason version escalate | — |
 | GET /v2/system | Manager Administrator | — | — |
 | POST /v2/system/check | Administrator | — | — |
 | GET /v2/incidents/{id}/workforce | Manager | — | — |
@@ -18,10 +33,10 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 | GET /v2/incidents/{id}/review | Manager Quality Verifier; assigned Technician | — | — |
 | POST /v2/incidents/{id}/information-request | Manager | message | — |
 | POST /v2/incidents/{id}/information | Owning Worker | message | — |
-| GET /v2/incidents/{id}/technicians | Manager | — | — |
-| POST /v2/incidents/{id}/assign | Manager | technicianId | — |
+| GET /v2/incidents/{id}/technicians | Scoped Manager or explicitly authorized Verifier/Assigner | — | — |
+| POST /v2/incidents/{id}/assign | Scoped Manager or explicitly authorized Verifier/Assigner | technicianId | reason replaceWorkOrderId |
 | GET /v2/work-orders | Manager Quality Verifier; Technician sees own | — | — |
-| POST /v2/incidents/{id}/work | Assigned Technician / Manager review | action | findings repairId |
+| POST /v2/incidents/{id}/work | Assigned Technician / scoped Manager / independent Verifier | action | findings repairId reason evidenceRef |
 | GET /v2/incidents/{id}/duplicates | Manager Quality | — | — |
 | POST /v2/incidents/{id}/relationship | Manager | canonicalId decision reason | — |
 | GET /v2/incidents/{id}/repair-context | Manager or assigned Technician | — | — |

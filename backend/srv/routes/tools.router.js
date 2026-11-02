@@ -22,7 +22,8 @@ router.get(
   requireRole(),
   wrap(async (req, res) => {
     const result = await transaction(async (tx) => {
-      await tool(tx, req.params.id);
+      const selected=await tool(tx, req.params.id);
+      if(await require('../lib/v2').workflowAvailable(tx))await require('../lib/operations').scope(tx,req.user,selected);
       const events = (
         await tx.run(
           cds.ql.SELECT.from(entity("ToolHistoryEvent"))

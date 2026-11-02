@@ -33,6 +33,7 @@ router.post('/v2/incidents/:id/information',requireRole('Worker'),run(async(req,
   const incident=await v.access(tx,req.user,req.params.id),message=v.text(req.body.message,'message',2000);
   await tx.run(cds.ql.INSERT.into(entity('IncidentEvidence')).entries({evidenceId:ids.uuid('EVID'),incidentId:incident.incidentId,type:'WORKER_INFORMATION',reference:JSON.stringify({message,actor:req.user.id}),sourceTime:now()}));
   await v.event(tx,req.user,'INFORMATION_SUPPLIED','Worker supplied additional facts without overwriting original report',{message},incident);
+  await require('../lib/operations').notifyReviewers(tx,incident,'Worker supplied requested information');
   return {recorded:true};
 }));
 
@@ -61,6 +62,7 @@ router.post('/v2/register', requireRole(), run(async (req, tx) => {
   const profile = { userId: req.user.id, displayName: v.text(req.body.displayName, 'displayName'), role,
     language: req.body.language, workCenter: v.text(req.body.workCenter, 'workCenter'), team: v.text(req.body.team, 'team'), status: 'Active', createdAt: now() };
   await tx.run(cds.ql.INSERT.into(entity('UserProfile')).entries(profile));
+  if(await require('../lib/operations').available(tx))await tx.run(cds.ql.INSERT.into(entity('UserProfileDetail')).entries({userId:profile.userId,updatedAt:now()}));
   await v.event(tx, req.user, 'PROFILE_REGISTERED', 'Authenticated identity completed onboarding', { userId: profile.userId, role });
   return { profile, authentication: 'Existing identity provider; application profile does not grant scopes' };
 }));
@@ -104,63 +106,17 @@ router.put('/v2/parts/:id',requireRole('Administrator'),run(async(req,tx)=>{
   await v.event(tx,req.user,'PART_INVENTORY_UPDATED','Administrator recorded verified stock quantities',{before:existing,after:part});
   return {part};
 }));
-router.get('/v2/incidents/:id/technicians', requireRole('Manager'), run(async (req,tx) => {
-  const incident = await incidents.find(tx,req.params.id);
-  return { technicians: await v.eligible(tx,await incidents.tool(tx,incident.toolId)) };
+router.get('/v2/incidents/:id/technicians', requireRole('Manager','Verifier'), run(async (req,tx) => {
+  const incident=await require('../lib/work-orders').assignmentAccess(tx,req.user,req.params.id);
+  return {technicians:await v.eligible(tx,await incidents.tool(tx,incident.toolId),{excludeIncidentId:incident.incidentId})};
 }));
-router.post('/v2/incidents/:id/assign', requireRole('Manager'), run(async (req,tx) => {
-  v.keys(req.body,['technicianId']);
-  const technicianId = v.text(req.body.technicianId,'technicianId');
-  const incident = await v.one(tx,'Incident',{incidentId:req.params.id},true);
-  if (!incident || incident.state !== 'Confirmed') fail(409,'INVALID_STATE','A Confirmed incident is required');
-  const tool = await v.one(tx,'Tool',{toolId:incident.toolId},true);
-  const relation = await v.one(tx,'IncidentRelationship',{incidentId:incident.incidentId});
-  if (relation?.decision === 'LINK') fail(409,'LINKED_REPORT','Assign the canonical investigation instead');
-  const existing = await v.one(tx,'RepairWorkOrder',{incidentId:incident.incidentId},true);
-  if (existing) {
-    if (existing.technicianId !== technicianId) fail(409,'ASSIGNMENT_CONFLICT','Primary work order already assigned');
-    return { workOrder:existing, reused:true };
-  }
-  // Serialize across the technician's equipment qualifications and workload.
-  const profile = await v.one(tx,'UserProfile',{userId:technicianId},true);
-  if (!profile || !(await v.eligible(tx,tool)).find(t => t.userId === technicianId && t.eligible)) fail(409,'INELIGIBLE_TECHNICIAN','Current qualifications, shift or workload requirements are not met');
-  const workOrder = { incidentId:incident.incidentId, workOrderId:ids.uuid('WO'), technicianId, assignedBy:req.user.id, assignedAt:now(), status:'Assigned', findings:'', repairId:null, reviewedBy:null, reviewedAt:null };
-  await tx.run(cds.ql.INSERT.into(entity('RepairWorkOrder')).entries(workOrder));
-  await v.notify(tx,technicianId,incident.incidentId,'Manager assigned repair investigation');
-  await v.event(tx,req.user,'WORK_ASSIGNED','Manager authorized investigation; containment approval remains separate',workOrder,incident);
-  return { workOrder };
-}));
+router.post('/v2/incidents/:id/assign', requireRole('Manager','Verifier'), run((req,tx)=>require('../lib/work-orders').assign(tx,req.user,req.params.id,req.body)));
 router.get('/v2/work-orders', requireRole('Manager','Technician','Quality','Verifier'), run(async (req,tx) => {
-  let query = cds.ql.SELECT.from(entity('RepairWorkOrder')).orderBy('assignedAt desc');
-  if (req.user.role === 'Technician') query = query.where({technicianId:req.user.id});
-  return { workOrders: await tx.run(query.limit(100)) };
+  const allowed=await require('../lib/operations').allowedIds(tx,req.user);
+  const workOrders=await tx.run(cds.ql.SELECT.from(entity('RepairWorkOrder')).orderBy('assignedAt desc'));
+  return {workOrders:workOrders.filter(w=>allowed.has(w.incidentId)).slice(0,100)};
 }));
-router.post('/v2/incidents/:id/work', requireRole('Technician','Manager'), run(async (req,tx) => {
-  v.keys(req.body,['action','findings','repairId']);
-  const incident = await v.access(tx,req.user,req.params.id);
-  const work = await v.one(tx,'RepairWorkOrder',{incidentId:incident.incidentId},true);
-  if (!work) fail(404,'WORK_ORDER_NOT_FOUND','Work order not found');
-  const action = req.body.action;
-  const transitions = { accept:['Assigned','Accepted','Technician'], progress:['Accepted','Accepted','Technician'], submit:['Accepted','Submitted','Technician'], review:['Submitted','Reviewed','Manager'] };
-  const step = transitions[action];
-  if (!step || work.status !== step[0] || req.user.role !== step[2]) fail(409,'INVALID_STATE','Work transition is not allowed');
-  const update = { status:step[1] };
-  if (action === 'accept') {
-    const tool=await incidents.tool(tx,incident.toolId);
-    if (!(await v.eligible(tx,tool,{excludeIncidentId:incident.incidentId})).some(t=>t.userId===req.user.id&&t.eligible)) fail(409,'INELIGIBLE_TECHNICIAN','Qualifications or shift authorization are no longer current');
-  }
-  if (req.user.role === 'Technician') update.findings = v.text(req.body.findings,'findings',4000);
-  if (action === 'submit') {
-    const repair = await v.one(tx,'RepairLog',{repairId:v.text(req.body.repairId,'repairId'),incidentId:incident.incidentId});
-    if (!repair || repair.loggedBy !== req.user.id || !repair.passed) fail(409,'REPAIR_EVIDENCE_REQUIRED','Submit passing evidence through the existing repair API first');
-    update.repairId = repair.repairId;
-  }
-  if (action === 'review') { update.reviewedBy = req.user.id; update.reviewedAt = now(); }
-  await tx.run(cds.ql.UPDATE(entity('RepairWorkOrder')).set(update).where({incidentId:incident.incidentId}));
-  await v.notify(tx, action === 'submit' ? work.assignedBy : work.technicianId,incident.incidentId,`Work order ${step[1]}`);
-  await v.event(tx,req.user,'WORK_'+action.toUpperCase(),'Explicit repair workflow decision',{before:work,after:update},incident);
-  return {workOrder:{...work,...update}};
-}));
+router.post('/v2/incidents/:id/work', requireRole('Technician','Manager','Verifier'), run((req,tx)=>require('../lib/work-orders').transition(tx,req.user,req.params.id,req.body)));
 router.get('/v2/incidents/:id/duplicates', requireRole('Manager','Quality'), run(async (req,tx) => v.candidates(tx,await incidents.find(tx,req.params.id),{semantic:req.query.semantic==='true',withStatus:true,userId:req.user.id})));
 router.post('/v2/incidents/:id/relationship', requireRole('Manager'), run(async (req,tx) => {
   v.keys(req.body,['canonicalId','decision','reason']);

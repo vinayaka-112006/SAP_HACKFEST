@@ -13,6 +13,8 @@ import Kitchen from './screens/Kitchen';
 import Workspace from './screens/Workspace';
 import { LocaleProvider } from './features/v2/locale';
 import WebsiteAssistant from './features/v2/WebsiteAssistant';
+import {DashboardRedirect,RoleDashboard,Issues,IssueDetail,Notifications,Profile,Login} from './screens/Operations';
+import {OperationsNav} from './features/operations/common';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
@@ -45,13 +47,24 @@ export default function App() {
 
         {/* Persistent Branding Navigation Bar (Every Page with Official Logo) */}
         <TopNavbar />
+        <OperationsNav />
 
         {/* Main Application Screen Routes */}
         <main style={{ position: 'relative', zIndex: 1 }}>
           <Routes>
             <Route path="/" element={<Launcher />} />
             <Route path="/console" element={<Console />} />
-            <Route path="/worker" element={<Worker />} />
+            <Route path="/dashboard" element={<DashboardRedirect />} />
+            <Route path="/worker" element={<RoleDashboard role="Worker" />} />
+            <Route path="/manager" element={<RoleDashboard role="Manager" />} />
+            <Route path="/technician" element={<RoleDashboard role="Technician" />} />
+            <Route path="/verifier" element={<RoleDashboard role="Verifier" />} />
+            <Route path="/issues" element={<Issues />} />
+            <Route path="/issues/:incidentId" element={<IssueDetail />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/history" element={<ToolHistory />} />
             <Route path="/kitchen" element={<Kitchen />} />
             <Route path="/workspace" element={<Workspace />} />

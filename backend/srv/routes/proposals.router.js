@@ -403,6 +403,7 @@ router.post(
         fail(409, "INVALID_STATE", "Proposal already has a decision record");
 
       const incident = await incidents.find(tx, proposal.incidentId);
+      if(await require('../lib/v2').workflowAvailable(tx))await require('../lib/v2').access(tx,req.user,incident.incidentId);
       if (proposal.payload.toolId && proposal.payload.toolId !== incident.toolId)
         fail(409, "INVALID_PROPOSAL", "Proposal tool does not match its incident");
       if (Array.isArray(proposal.payload.batchIds)) {

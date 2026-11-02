@@ -1,0 +1,85 @@
+const cds=require('@sap/cds'),request=require('supertest');
+const {entity}=require('../srv/lib/db');
+cds.test(__dirname+'/..');jest.setTimeout(30000);
+const call=(method,path,body,role='Manager',id='OPS-M')=>{
+  const req=request(cds.app)[method]('/api'+path).set('x-demo-user',id).set('x-demo-role',role);return body?req.send(body):req;
+};
+let incidentId,workCenter;
+test('operational queues are derived from persisted reports and scoped by role and work center',async()=>{
+  workCenter=(await cds.db.run(cds.ql.SELECT.one.from(entity('Tool')).where({toolId:'TOOL-B'}))).workCenter;
+  for(const [userId,role,center]of [['OPS-M','Manager',workCenter],['OPS-OTHER','Manager','UNASSIGNED'],['OPS-V','Verifier',workCenter],['OPS-W','Worker',workCenter]])await cds.db.run(cds.ql.INSERT.into(entity('UserProfile')).entries({userId,displayName:userId,role,workCenter:center,status:'Active',language:'en',team:'Test',createdAt:new Date().toISOString()}));
+  const created=await call('post','/incidents',{toolId:'TOOL-B',reporterId:'OPS-W',language:'en',rawText:'Synthetic operation report'},'Worker','OPS-W');
+  expect(created.status).toBe(201);incidentId=created.body.incident.incidentId;
+  expect((await call('post',`/incidents/${incidentId}/confirm`,{confirmedBy:'OPS-W'},'Worker','OPS-W')).status).toBe(200);
+  const list=await call('get','/v2/issues');expect(list.status).toBe(200);expect(list.body.issues.map(i=>i.incidentId)).toContain(incidentId);
+  expect((await call('get','/v2/issues',null,'Manager','OPS-OTHER')).body.issues).toHaveLength(0);
+  expect((await call('get',`/v2/issues/${incidentId}`,null,'Manager','OPS-OTHER')).status).toBe(403);
+  expect((await call('get',`/incidents/${incidentId}`,null,'Manager','OPS-OTHER')).status).toBe(403);
+  expect((await call('get',`/v2/issues/${incidentId}`,null,'Worker','OTHER-W')).status).toBe(403);
+  expect((await call('get',`/v2/issues/${incidentId}`,null,'Technician','OTHER-T')).status).toBe(403);
+  const dash=await call('get','/v2/dashboard');expect(dash.status).toBe(200);expect(dash.body.counts.new).toBeGreaterThan(0);expect(dash.body.permissions.canAssign).toBe(true);
+});
+test('triage rejects stale decisions, notifies reporter, and notification reads are private and idempotent',async()=>{
+  const body={severity:'High',urgency:'Urgent',shift:'Day',reason:'Checked worker account',version:0,escalate:true};
+  expect((await call('post',`/v2/incidents/${incidentId}/triage`,body,'Worker','OPS-W')).status).toBe(403);
+  expect((await call('post',`/v2/incidents/${incidentId}/triage`,body)).status).toBe(200);
+  expect((await call('post',`/v2/incidents/${incidentId}/triage`,body)).status).toBe(409);
+  const list=await call('get','/v2/issues?status=Awaiting%20authorized%20assigner');expect(list.body.issues[0].incidentId).toBe(incidentId);
+  const notices=await call('get','/v2/notifications',null,'Worker','OPS-W');expect(notices.body.unread).toBeGreaterThan(0);
+  const n=notices.body.notifications[0];expect(n.href).toBe(`/issues/${incidentId}`);
+  expect((await call('post',`/v2/notifications/${n.notificationId}/read`,{},'Worker','OTHER-W')).status).toBe(404);
+  expect((await call('post',`/v2/notifications/${n.notificationId}/read`,{},'Worker','OPS-W')).body.read).toBe(true);
+  expect((await call('post',`/v2/notifications/${n.notificationId}/read`,{},'Worker','OPS-W')).body.reused).toBe(true);
+});
+test('assignment and independent verification are separately approved capabilities',async()=>{
+  const before=await call('get','/v2/dashboard',null,'Verifier','OPS-V');expect(before.body.permissions.canAssign).toBe(false);expect(before.body.permissions.canVerify).toBe(true);
+  const grant={workCenters:[workCenter],canAssign:true,canVerify:false,expiresAt:new Date(Date.now()+86400000).toISOString(),reason:'Independent administrator delegates assignment only'};
+  expect((await call('put','/v2/authorizations/OPS-V',grant,'Verifier','OPS-V')).status).toBe(403);
+  expect((await call('put','/v2/authorizations/OPS-V',grant,'Administrator','OPS-ADMIN')).status).toBe(200);
+  const after=await call('get','/v2/dashboard',null,'Verifier','OPS-V');expect(after.body.permissions.canAssign).toBe(true);expect(after.body.permissions.canVerify).toBe(false);
+  expect((await call('put','/v2/profile',{displayName:'Actor',language:'en',role:'Manager'},'Worker','OPS-W')).status).toBe(400);
+});
+
+test('delegated assignment, parts blocker, correction, failed verification and independent closure use the shared lifecycle',async()=>{
+  const future=new Date(Date.now()+86400000).toISOString();
+  // Isolated fixture begins in an already restricted maintenance condition.
+  await cds.db.run(cds.ql.INSERT.into(entity('Tool')).entries({toolId:'OPS-TOOL',type:'OPS-FIXTURE',workCenter,state:'Restricted'}));
+  for(const [userId,role]of [['OPS-T','Technician'],['OPS-T2','Technician'],['OPS-INDEP','Verifier']])await cds.db.run(cds.ql.INSERT.into(entity('UserProfile')).entries({userId,role,displayName:userId,workCenter,status:'Active',language:'en',createdAt:new Date().toISOString()}));
+  await call('put','/v2/equipment-requirements/OPS-FIXTURE',{skill:'OPS',certification:'OPS-CERT',safetyAuthorization:'OPS-SAFE'},'Administrator','OPS-ADMIN');
+  for(const user of ['OPS-T','OPS-T2'])expect((await call('put','/v2/qualifications/'+user,{toolType:'OPS-FIXTURE',workCenter,skill:'OPS',certification:'OPS-CERT',safetyAuthorization:'OPS-SAFE',expiresAt:future,availableUntil:future,maxAssignments:2},'Administrator','OPS-ADMIN')).status).toBe(200);
+  const created=await call('post','/incidents',{toolId:'OPS-TOOL',reporterId:'OPS-W',language:'en',rawText:'Synthetic restricted tool needs inspection'},'Worker','OPS-W');
+  const id=created.body.incident.incidentId,base='/v2/incidents/'+id;
+  expect((await call('post',`/incidents/${id}/confirm`,{confirmedBy:'OPS-W'},'Worker','OPS-W')).status).toBe(200);
+  expect((await call('post',base+'/assign',{technicianId:'OPS-T'},'Verifier','OPS-INDEP')).status).toBe(403);
+  const assigned=await call('post',base+'/assign',{technicianId:'OPS-T'},'Verifier','OPS-V');expect(assigned.status).toBe(200);
+  expect((await call('post',base+'/assign',{technicianId:'OPS-T2'})).status).toBe(409);
+  const replaced=await call('post',base+'/assign',{technicianId:'OPS-T2',replaceWorkOrderId:assigned.body.workOrder.workOrderId,reason:'Corrected staffing before work began'});expect(replaced.status).toBe(200);
+  expect((await call('post',base+'/work',{action:'accept',findings:'Reviewed scope'},'Technician','OPS-T')).status).toBe(403);
+  expect((await call('post',base+'/work',{action:'accept',findings:'Accepted isolation scope'},'Technician','OPS-T2')).status).toBe(200);
+  expect((await call('post',base+'/work',{action:'blockParts',findings:'Required fixture part missing',reason:'Store confirmed lack of stock'},'Technician','OPS-T2')).status).toBe(200);
+  expect((await call('get','/v2/issues/'+id)).body.issue.status).toBe('Blocked by spare parts');
+  expect((await call('post',base+'/work',{action:'resume',findings:'Compatible part received'},'Technician','OPS-T2')).status).toBe(200);
+  const started=await call('post',`/incidents/${id}/repairs`,{description:'Synthetic fixture replacement and checks'},'Technician','OPS-T2');expect(started.status).toBe(201);
+  const repairId=started.body.repair.repairId;
+  const complete=()=>call('post',`/repairs/${repairId}/complete`,{testReadings:[{name:'Synthetic fixture reading',value:'12',unit:'fixture units',expected:'Illustrative only',evidenceRef:'SYNTHETIC-OPS-READING',passed:true}]},'Technician','OPS-T2');
+  const submit=()=>call('post',base+'/work',{action:'submit',findings:'Documented synthetic result',repairId},'Technician','OPS-T2');
+  expect((await complete()).status).toBe(200);expect((await submit()).status).toBe(200);
+  expect((await call('post',base+'/work',{action:'requestEvidence',reason:'Attach independent measurement reference'})).status).toBe(200);
+  expect((await call('post',base+'/work',{action:'review',reason:'Too early'})).status).toBe(409);
+  expect((await call('post',base+'/work',{action:'supplement',findings:'Additional reference supplied',evidenceRef:'SYNTHETIC-EXTRA-EVIDENCE'},'Technician','OPS-T2')).status).toBe(200);
+  expect((await call('post',base+'/work',{action:'correct',reason:'Repeat measurement with reviewed fixture'})).status).toBe(200);
+  expect((await cds.db.run(cds.ql.SELECT.one.from(entity('Tool')).where({toolId:'OPS-TOOL'}))).state).toBe('Under repair');
+  expect((await complete()).status).toBe(200);expect((await submit()).status).toBe(200);
+  expect((await call('post',base+'/work',{action:'review',reason:'Completion evidence reviewed'})).status).toBe(200);
+  expect((await call('post',`/incidents/${id}/verify-return`,{repairId},'Verifier','OPS-V')).status).toBe(403);
+  expect((await call('post',base+'/work',{action:'verificationFailed',reason:'Independent inspection requires another measurement'},'Verifier','OPS-INDEP')).status).toBe(200);
+  expect((await call('post',`/incidents/${id}/close`,{reason:'Cannot close before passing verification'})).status).toBe(409);
+  expect((await complete()).status).toBe(200);expect((await submit()).status).toBe(200);
+  expect((await call('post',base+'/work',{action:'review',reason:'Corrected evidence accepted'})).status).toBe(200);
+  const verified=await call('post',`/incidents/${id}/verify-return`,{repairId},'Verifier','OPS-INDEP');expect(verified.status).toBe(200);
+  expect((await call('post',`/incidents/${id}/close`,{reason:'Independent verification complete'})).status).toBe(200);
+  const detail=await call('get','/v2/issues/'+id);expect(detail.body.issue.status).toBe('Closed');
+  expect(detail.body.evidence.filter(e=>['REPAIR_CORRECTION','VERIFICATION_FAILED'].includes(e.type))).toHaveLength(2);
+  expect(detail.body.timeline.some(e=>e.action==='WORK_REASSIGNED')).toBe(true);
+  expect(detail.body.timeline.some(e=>e.action==='WORK_VERIFICATIONFAILED')).toBe(true);
+});

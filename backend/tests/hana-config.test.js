@@ -65,7 +65,7 @@ test("diagnostics omit raw driver messages and secrets", () => {
 test("HANA compiler plan contains only CREATE tables and append-only triggers", async () => {
   const cds = require("@sap/cds"), model = await cds.load("db/schema.cds");
   const plan = deploymentPlan(cds, model);
-  expect(plan.tables).toHaveLength(35);
+  expect(plan.tables).toHaveLength(require('../srv/lib/data-transfer').entities(model).length);
   expect(plan.statements.every(statement => statement.startsWith("CREATE TABLE"))).toBe(true);
   expect(plan.audit.map(item => item.sql).join("\n")).not.toMatch(/DROP|REPLACE|TRUNCATE/);
   expect(() => assertExclusive({ schemaVisible: true, objects: [{ OBJECT_NAME: "OTHER_APP", OBJECT_TYPE: "TABLE" }] }, model)).toThrow("outside the ToolSathi model");
