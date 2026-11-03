@@ -3,6 +3,7 @@ node_modules/
 gen/
 coverage/
 _out/
+**/.npm-cache/
 mta_archives/
 *.mtar
 

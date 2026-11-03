@@ -17,7 +17,7 @@ function createReasoningClient({env=process.env,fetchImpl=globalThis.fetch}={}){
   return {provider,
     async model(){
       models ||= (await groq('models')).data?.map(m=>m.id)||[];
-      const candidate=env.GROQ_MODEL||['llama-3.3-70b-versatile','openai/gpt-oss-120b','openai/gpt-oss-20b'].find(id=>models.includes(id));
+      const candidate=env.GROQ_MODEL||['openai/gpt-oss-20b','llama-3.3-70b-versatile','qwen/qwen3.8-27b','openai/gpt-oss-120b'].find(id=>models.includes(id));
       if(!candidate||!models.includes(candidate))throw error('AI_MODEL_UNAVAILABLE','Configured Groq model is not active for this account.');
       return activeModel=candidate;
     },

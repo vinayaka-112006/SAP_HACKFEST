@@ -3,17 +3,26 @@ import { useStore } from "../state/store";
 import { useLocale, LanguageSelector } from "../features/v2/locale";
 import { Icon } from "./ui";
 
-const SUGGESTIONS = [
-  "Which incidents need review?",
-  "Which technicians are qualified for this equipment?",
-  "What spare parts are available?",
-  "Which workers can be reassigned?",
-];
+const SUGGESTIONS = {
+  Worker: [
+    "What is the status of my reported incidents?",
+    "Which equipment is registered in my work center?",
+    "How do I confirm a machine fault report?",
+    "What safety isolation procedures apply here?",
+  ],
+  default: [
+    "Which incidents need review?",
+    "Which technicians are qualified for this equipment?",
+    "What spare parts are available?",
+    "Which workers can be reassigned?",
+  ]
+};
 
 export default function ChatDock() {
   const { client, incidentId, currentRole } = useStore();
   const { t, language } = useLocale();
   const [open, setOpen] = useState(false);
+  const activeSuggestions = SUGGESTIONS[currentRole] || SUGGESTIONS.default;
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const [busy, setBusy] = useState(false);
@@ -78,7 +87,7 @@ export default function ChatDock() {
                 <p className="v23-muted" style={{ margin: 0, fontSize: 13.5 }}>
                   {t("readOnly")}
                 </p>
-                {SUGGESTIONS.map((suggestion) => (
+                {activeSuggestions.map((suggestion) => (
                   <button key={suggestion} type="button" className="v23-dock-suggestion" onClick={() => send(suggestion)}>{suggestion}</button>
                 ))}
               </div>

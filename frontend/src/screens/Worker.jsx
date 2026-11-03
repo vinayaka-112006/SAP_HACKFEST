@@ -1204,7 +1204,7 @@ export default function Worker() {
           </p>
           <button
             className="primary-action"
-            onClick={() => navigate("/console")}
+            onClick={() => navigate(`/issues/${encodeURIComponent(saved?.incident?.incidentId || "")}`)}
           >
             Open Incident Details
           </button>

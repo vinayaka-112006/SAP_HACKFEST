@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useStore } from "../state/store";
+import { LanguageSelector } from "../features/v2/locale";
 
 export default function RoleDock() {
   const navigate = useNavigate();
@@ -233,6 +234,7 @@ export default function RoleDock() {
           pointerEvents: "auto",
         }}
       >
+        <LanguageSelector />
         <span
           style={{
             fontSize: "12.5px",
