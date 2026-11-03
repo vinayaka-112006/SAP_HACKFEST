@@ -128,7 +128,7 @@ export default function IssueDetailPage() {
                 </Card>
                 <Card>
                   <CardHead title="Reviewed summary" subtitle="English description confirmed by the worker before submission." />
-                  <p style={{ margin: 0, color: "#eaf6ff" }}>{issue.translatedText || "No translated description recorded."}</p>
+                  <p style={{ margin: 0, color: "var(--v23-ink)", fontWeight: 500, fontSize: "16px", lineHeight: "1.6" }}>{issue.translatedText || "No translated description recorded."}</p>
                 </Card>
                 {currentRole === "Manager" && issue.state === "Confirmed" && (
                   <Card><Triage key={revision} issue={issue} done={done} /></Card>

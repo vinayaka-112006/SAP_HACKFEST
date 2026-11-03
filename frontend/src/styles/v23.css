@@ -89,9 +89,46 @@
 .v23-topbar-spacer { flex: 1; }
 .v23-main { padding: 28px 28px 72px; min-width: 0; }
 .v23-page { max-width: 1380px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-.v23-page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-.v23-page-head h1 { margin: 0; font-size: clamp(32px, 3.5vw, 44px); letter-spacing: -0.03em; color: #ffffff; font-weight: 900; }
-.v23-page-head p { margin: 6px 0 0; color: rgba(190, 220, 255, 0.9); max-width: 68ch; font-size: 17px; font-weight: 500; line-height: 1.6; }
+.v23-page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  border: 2px solid rgba(2, 132, 199, 0.4);
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 32px rgba(2, 100, 180, 0.08), 0 2px 6px rgba(11, 27, 51, 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.v23-page-head:hover {
+  border-color: #0284C7;
+  box-shadow: 0 12px 36px rgba(2, 100, 180, 0.14);
+}
+.v23-page-head h1 {
+  margin: 0;
+  font-size: clamp(26px, 3.2vw, 38px);
+  letter-spacing: -0.03em;
+  color: #0B1B33 !important;
+  font-weight: 900;
+  line-height: 1.25;
+}
+.v23-page-head p {
+  margin: 6px 0 0;
+  color: #1E3A5F !important;
+  max-width: 68ch;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.v23-page-head .v23-mono {
+  color: #0284C7 !important;
+  font-weight: 800;
+  font-size: 14.5px;
+  letter-spacing: 0.02em;
+}
 .v23-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .v23-icon-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 40px; height: 40px;
@@ -105,32 +142,72 @@
 /* ---------- Surfaces and type (Light High-Contrast Standard) ---------- */
 .v23-card {
   background: #FFFFFF;
-  border: 2px solid rgba(2, 132, 199, 0.28);
+  border: 2px solid rgba(2, 132, 199, 0.4);
   border-radius: var(--v23-radius);
-  box-shadow: 0 4px 20px rgba(2, 100, 180, 0.08), 0 1px 4px rgba(11, 27, 51, 0.06);
-  padding: 24px;
+  box-shadow: 0 8px 26px rgba(2, 100, 180, 0.08), 0 2px 6px rgba(11, 27, 51, 0.04);
+  padding: 26px;
   min-width: 0;
   color: #0B1B33;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 .v23-card:hover {
-  border-color: rgba(2, 132, 199, 0.55);
-  box-shadow: 0 6px 28px rgba(2, 100, 180, 0.14), 0 0 0 1px rgba(2, 132, 199, 0.15);
+  border-color: #0284C7;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(2, 100, 180, 0.15), 0 0 0 1px rgba(2, 132, 199, 0.2);
 }
 .v23-card.light {
   background: #FFFFFF;
   color: #0B1B33;
-  border-color: rgba(2, 132, 199, 0.28);
-  box-shadow: 0 4px 20px rgba(2, 100, 180, 0.08);
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 8px 26px rgba(2, 100, 180, 0.08);
 }
 .v23-card.light h2, .v23-card.light h3, .v23-card h2, .v23-card h3 {
   color: #0B1B33 !important;
-  font-weight: 800 !important;
-  font-size: 18px !important;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.01em;
 }
 .v23-card.light p, .v23-card.light small, .v23-card p, .v23-card small {
   color: #1E3A5F;
-  font-weight: 500;
+  font-weight: 600;
+}
+.v23-card button:not(.v23-btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin: 4px 6px 4px 0;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1.5px solid rgba(2, 132, 199, 0.45);
+  background: #FFFFFF;
+  color: #0056B3;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(2, 100, 180, 0.06);
+}
+.v23-card button:not(.v23-btn):hover {
+  background: #EFF8FF;
+  border-color: #0284C7;
+  color: #0048A8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(2, 100, 180, 0.14);
+}
+.v23-card button:not(.v23-btn):disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.v23-card-head strong, .v23-card-head h2 {
+  color: #0B1B33 !important;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+}
+.v23-card-head .v23-faint, .v23-card-head p {
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 14.5px !important;
 }
 .v23-card-head {
   display: flex;
