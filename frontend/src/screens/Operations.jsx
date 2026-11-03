@@ -8,7 +8,7 @@ import WorkflowPanel from '../features/workflow/WorkflowPanel';
 import WorkforcePanel from '../features/v2/WorkforcePanel';
 import {useOperation,LoadState,IssueTable} from '../features/operations/common';
 import {rolePath,useOperationsText} from '../features/operations/text';
-import {AssignmentActions,ConversationActions,DuplicateActions,RepairActions} from '../features/operations/CaseActions';
+import {AssignmentActions,ConversationActions,DuplicateActions,RepairActions,WorkerAssignments} from '../features/operations/CaseActions';
 import '../styles/operations.css';
 
 export function DashboardRedirect(){const {currentRole}=useStore();return <Navigate to={rolePath(currentRole)} replace/>;}
@@ -24,7 +24,7 @@ export function RoleDashboard({role}){
  return <div className="operations-page"><header className="operations-heading"><div><p>{L('dashboard')}</p><h1>{L(role)}</h1>{data?.permissions.profile&&<p>{data.permissions.profile.displayName} · {data.permissions.profile.workCenter} · {data.profileDetail?.shift||L('unknown')}</p>}</div><button onClick={()=>setRevision(n=>n+1)}>{L('refresh')}</button></header>
  <LoadState state={state} retry={()=>setRevision(n=>n+1)}/>
  {worker&&<section className="operations-panel"><h2>{L('voice')}</h2><p>{L('voiceHelp')}</p><label>{L('equipment')}<select aria-label={L('equipment')} value={toolId} onChange={e=>setToolId(e.target.value)}><option value="">{L('equipment')}</option>{tools.map(t=><option key={t.toolId} value={t.toolId}>{t.toolId} · {t.workCenter} · {t.state}</option>)}</select></label><VoiceAgent toolId={toolId} onConfirmed={id=>{openIncident(id);refresh();navigate('/issues/'+encodeURIComponent(id));}}/></section>}
- {data&&<><div className="operations-metrics">{keys.map(key=><Link key={key} to={'/issues'+(metricStatus[key]?'?status='+encodeURIComponent(metricStatus[key]):key==='critical'?'?severity=Critical':'')}><span>{L(key)}</span><strong>{data.counts[key]}</strong></Link>)}</div><section className="operations-panel"><h2>{worker?L('myReports'):L('issues')}</h2><IssueTable issues={data.issues}/></section>{worker&&<section className="operations-panel"><h2>{L('myAssignments')}</h2>{data.assignments.length?data.assignments.map(a=><p key={a.assignmentId}>{a.sourceToolId} → {a.stationId} · {L(a.status)} · {new Date(a.endsAt).toLocaleString()}</p>):<p>{L('empty')}</p>}</section>}</>}
+ {data&&<><div className="operations-metrics">{keys.map(key=><Link key={key} to={'/issues'+(metricStatus[key]?'?status='+encodeURIComponent(metricStatus[key]):key==='critical'?'?severity=Critical':'')}><span>{L(key)}</span><strong>{data.counts[key]}</strong></Link>)}</div><section className="operations-panel"><h2>{worker?L('myReports'):L('issues')}</h2><IssueTable issues={data.issues}/></section>{worker&&<WorkerAssignments assignments={data.assignments} done={()=>setRevision(n=>n+1)}/>}</>}
  {worker&&<section className="operations-panel"><h2>{L('manual')}</h2><Worker/></section>}
  </div>;
 }

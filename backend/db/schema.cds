@@ -394,3 +394,49 @@ entity NotificationRead {
   userId : String(120);
   readAt : Timestamp;
 }
+entity WorkStationOperation {
+  key stationId : String(120);
+  travelMinutes : Integer;
+  bottleneckUnitsPerHour : Double;
+  approvedBy : String(120);
+  updatedAt : Timestamp;
+}
+entity AllocationPolicy {
+  key policyId : String(120);
+  sourceToolIds : LargeString;
+  destinationStationIds : LargeString;
+  maxWorkers : Integer;
+  maxMinutes : Integer;
+  maxEstimatedUnits : Integer;
+  enabled : Boolean;
+  expiresAt : Timestamp;
+  approvedBy : String(120);
+  approvedRole : String(120);
+  approvedAt : Timestamp;
+  reason : LargeString;
+}
+entity AllocationPlan {
+  key planId : String(120);
+  incidentId : String(120);
+  createdBy : String(120);
+  createdAt : Timestamp;
+  expiresAt : Timestamp;
+  minutes : Integer;
+  status : String(30);
+  snapshot : LargeString;
+  fingerprint : String(64);
+  policyId : String(120);
+  executedBy : String(120);
+  executedAt : Timestamp;
+}
+entity AssignmentDetail {
+  key assignmentId : String(120);
+  mode : String(30);
+  planId : String(120);
+  policyId : String(120);
+  acknowledgedAt : Timestamp;
+  acknowledgedBy : String(120);
+  decision : String(30);
+  decidedAt : Timestamp;
+  decidedBy : String(120);
+}

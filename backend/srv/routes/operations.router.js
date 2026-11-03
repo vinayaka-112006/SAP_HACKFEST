@@ -9,6 +9,7 @@ router.get('/v2/dashboard',requireRole(),run(async(req,tx)=>{
   const permissions=await ops.permissions(tx,req.user),issues=await ops.issues(tx,req.user);
   const allTools=await ops.rows(tx,'Tool'),tools=allTools.filter(t=>permissions.unrestricted||permissions.workCenters.includes(t.workCenter));
   const assignments=(await ops.rows(tx,'TemporaryAssignment')).filter(a=>req.user.role==='Worker'?a.workerId===req.user.id:issues.some(i=>i.incidentId===a.incidentId));
+  const assignmentDetails=await ops.rows(tx,'AssignmentDetail');
   const counts={open:issues.filter(i=>i.status!=='Closed').length,new:issues.filter(i=>i.status==='Awaiting manager review').length,
     critical:issues.filter(i=>i.severity==='Critical'&&i.status!=='Closed').length,repairs:issues.filter(i=>i.status==='Repair in progress').length,
     review:issues.filter(i=>i.status==='Awaiting manager completion review').length,verification:issues.filter(i=>i.status==='Awaiting verification').length,
@@ -23,7 +24,7 @@ router.get('/v2/dashboard',requireRole(),run(async(req,tx)=>{
   const demand=(await ops.rows(tx,'ProductionDemand')).filter(d=>stations.some(s=>s.stationId===d.stationId));
   counts.pendingDemand=demand.reduce((n,d)=>n+Math.max(0,d.requiredQuantity-d.completedQuantity),0);
   const profileDetail=await v.one(tx,'UserProfileDetail',{userId:req.user.id});
-  return {role:req.user.role,permissions,profileDetail,counts,issues:issues.slice(0,100),tools,assignments,
+  return {role:req.user.role,permissions,profileDetail,counts,issues:issues.slice(0,100),tools,assignments:assignments.map(a=>({...a,detail:assignmentDetails.find(d=>d.assignmentId===a.assignmentId)||null})),
     estimation:{basis:'Stored temporary assignments; estimates, not measured production',units:assignments.filter(a=>a.status==='Active').reduce((n,a)=>n+a.estimatedOutput,0)},demand};
 }));
 router.get('/v2/issues',requireRole(),run(async(req,tx)=>{
@@ -36,7 +37,8 @@ router.get('/v2/issues/:id',requireRole(),run((req,tx)=>ops.detail(tx,req.user,r
 router.get('/v2/notifications',requireRole(),run(async(req,tx)=>{
   const reads=new Set((await ops.rows(tx,'NotificationRead',{userId:req.user.id})).map(n=>n.notificationId));
   const all=(await ops.rows(tx,'UserNotification',{userId:req.user.id})).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
-  return {unread:all.filter(n=>!reads.has(n.notificationId)).length,notifications:all.slice(0,100).map(n=>({...n,read:reads.has(n.notificationId),href:n.incidentId?`/issues/${encodeURIComponent(n.incidentId)}`:'/dashboard'}))};
+  const allowed=await ops.allowedIds(tx,req.user);
+  return {unread:all.filter(n=>!reads.has(n.notificationId)).length,notifications:all.slice(0,100).map(n=>({...n,read:reads.has(n.notificationId),href:n.incidentId&&allowed.has(n.incidentId)?`/issues/${encodeURIComponent(n.incidentId)}`:req.user.role==='Worker'?'/worker#assignments':'/dashboard'}))};
 }));
 router.post('/v2/notifications/:id/read',requireRole(),run(async(req,tx)=>{
   v.keys(req.body,[]);

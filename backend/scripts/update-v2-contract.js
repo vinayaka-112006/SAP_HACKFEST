@@ -22,8 +22,14 @@ const contracts=[
   ['get','/v2/system','Manager Administrator','',''],
   ['post','/v2/system/check','Administrator','',''],
   ['get','/v2/incidents/{id}/workforce','Manager','',''],
+  ['post','/v2/incidents/{id}/workforce/plan','Scoped Manager; existing bounded policy for automatic execution','','minutes policyId automatic'],
+  ['post','/v2/workforce/plans/{id}/execute','Preview owner Manager; explicit confirmation or existing bounded policy','reason','confirmed automatic'],
+  ['post','/v2/workforce/plans/{id}/explanation','Scoped Manager; read-only AI explanation','',''],
+  ['get','/v2/workforce/policies','Scoped Manager or Administrator','',''],
+  ['put','/v2/workforce/policies/{id}','Scoped Manager or Administrator','sourceToolIds destinationStationIds maxWorkers maxMinutes maxEstimatedUnits enabled expiresAt reason',''],
+  ['post','/v2/workforce/{id}/acknowledge','Assigned Worker','',''],
   ['post','/v2/incidents/{id}/workforce/assign','Manager','workerId stationId minutes reason',''],
-  ['post','/v2/workforce/{id}/return','Manager','reason',''],
+  ['post','/v2/workforce/{id}/return','Scoped Manager','reason','continue'],
   ['post','/v2/register','Any authenticated role','displayName language workCenter team','invitationId'],
   ['get','/v2/me','Any authenticated role','',''],
   ['post','/v2/invitations','Administrator','userId role',''],
@@ -52,6 +58,11 @@ const contracts=[
   ['post','/v2/chat','Any authenticated role; object and tool permissions enforced','message language','incidentId generate tool'],
 ];
 function property(key){
+  if(['sourceToolIds','destinationStationIds'].includes(key))return {type:'array',minItems:1,maxItems:30,items:schemas.string};
+  if(['minutes','maxMinutes'].includes(key))return {type:'integer',minimum:15,maximum:480};
+  if(key==='maxWorkers')return {type:'integer',minimum:1,maximum:50};
+  if(key==='maxEstimatedUnits')return {type:'integer',minimum:1,maximum:100000};
+  if(['automatic','continue','enabled'].includes(key))return schemas.boolean;
   if(key==='workCenters')return {type:'array',minItems:1,maxItems:20,items:schemas.string};
   if(['canAssign','canVerify','escalate','operationCompatible','available'].includes(key))return schemas.boolean;
   if(['extract','generate','confirmed','reviewed','reason'].includes(key))return key==='reason'?schemas.long:schemas.boolean;

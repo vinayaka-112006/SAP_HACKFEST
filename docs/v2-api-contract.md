@@ -22,8 +22,14 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 | GET /v2/system | Manager Administrator | — | — |
 | POST /v2/system/check | Administrator | — | — |
 | GET /v2/incidents/{id}/workforce | Manager | — | — |
+| POST /v2/incidents/{id}/workforce/plan | Scoped Manager; existing bounded policy for automatic execution | — | minutes policyId automatic |
+| POST /v2/workforce/plans/{id}/execute | Preview owner Manager; explicit confirmation or existing bounded policy | reason | confirmed automatic |
+| POST /v2/workforce/plans/{id}/explanation | Scoped Manager; read-only AI explanation | — | — |
+| GET /v2/workforce/policies | Scoped Manager or Administrator | — | — |
+| PUT /v2/workforce/policies/{id} | Scoped Manager or Administrator | sourceToolIds destinationStationIds maxWorkers maxMinutes maxEstimatedUnits enabled expiresAt reason | — |
+| POST /v2/workforce/{id}/acknowledge | Assigned Worker | — | — |
 | POST /v2/incidents/{id}/workforce/assign | Manager | workerId stationId minutes reason | — |
-| POST /v2/workforce/{id}/return | Manager | reason | — |
+| POST /v2/workforce/{id}/return | Scoped Manager | reason | continue |
 | POST /v2/register | Any authenticated role | displayName language workCenter team | invitationId |
 | GET /v2/me | Any authenticated role | — | — |
 | POST /v2/invitations | Administrator | userId role | — |

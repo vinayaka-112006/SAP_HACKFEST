@@ -893,6 +893,29 @@ check('V2.1 manager approves qualified workforce reassignment using stored deman
   await page.getByRole('button',{name:'Approve reassignment',exact:true}).first().click();
   assert.equal((await assigned).status(),200);report.v21WorkforceBrowser=true;
 });
+check('V2.2 automatic allocation requires confirmation and the assigned worker acknowledges it',async()=>{
+  await page.goto(frontendUrl+'/issues/V21-INC-01?tab=workforce');await skipIntro(page);
+  await page.getByRole('button',{name:'Manager local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V22-ALLOC-M');
+  const panel=page.locator('.workforce-module');await panel.waitFor();
+  await panel.getByRole('button',{name:'Automatic',exact:true}).click();
+  await panel.getByRole('button',{name:'Auto Allocate Workers',exact:true}).click();
+  await panel.getByRole('heading',{name:'Proposed allocation',exact:true}).waitFor();
+  await panel.getByLabel('Manager decision reason',{exact:true}).fill('Reviewed exact joint allocation and remaining destination commitments');
+  const applied=page.waitForResponse(r=>r.url().includes('/workforce/plans/')&&r.url().endsWith('/execute'));
+  await panel.getByRole('button',{name:'Confirm and apply this allocation',exact:true}).click();
+  const response=await applied,result=await response.json();assert.equal(response.status(),200,JSON.stringify(result));assert.ok(result.assignments.length>0);
+  const assignment=result.assignments[0];
+  await page.getByRole('button',{name:'Worker local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill(assignment.workerId);
+  await page.goto(frontendUrl+'/worker');await skipIntro(page);
+  const acknowledged=page.waitForResponse(r=>r.url().endsWith('/acknowledge')&&r.request().method()==='POST');
+  await page.getByRole('button',{name:'Acknowledge assignment',exact:true}).first().click();
+  assert.equal((await acknowledged).status(),200);report.v22AutomaticAllocation={managerConfirmed:true,workerAcknowledged:true};
+  await page.goto(frontendUrl+'/workspace');await skipIntro(page);
+  await page.getByRole('button',{name:'Manager local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('V22-ALLOC-M');
+});
 check('V2.1 assistant stays within the viewport and uses actual authorized sources',async()=>{
   await page.getByRole('button',{name:'Website assistant',exact:true}).click();
   const dialog=page.getByRole('dialog',{name:'Website assistant'});await dialog.waitFor();

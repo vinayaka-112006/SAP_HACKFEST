@@ -13172,9 +13172,9 @@
                     "maxLength": 120
                   },
                   "minutes": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 120
+                    "type": "integer",
+                    "minimum": 15,
+                    "maximum": 480
                   },
                   "reason": {
                     "type": "string",
@@ -13191,7 +13191,7 @@
     "/v2/workforce/{id}/return": {
       "post": {
         "summary": "workforce {id} return (post)",
-        "description": "Roles: Manager. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "description": "Roles: Scoped Manager. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
         "tags": [
           "V2"
         ],
@@ -13323,6 +13323,9 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 4000
+                  },
+                  "continue": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -15346,6 +15349,875 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/incidents/{id}/workforce/plan": {
+      "post": {
+        "summary": "incidents {id} workforce plan (post)",
+        "description": "Roles: Scoped Manager; existing bounded policy for automatic execution. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "minutes": {
+                    "type": "integer",
+                    "minimum": 15,
+                    "maximum": 480
+                  },
+                  "policyId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "automatic": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/workforce/plans/{id}/execute": {
+      "post": {
+        "summary": "workforce plans {id} execute (post)",
+        "description": "Roles: Preview owner Manager; explicit confirmation or existing bounded policy. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "reason"
+                ],
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  },
+                  "confirmed": {
+                    "type": "boolean"
+                  },
+                  "automatic": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/workforce/plans/{id}/explanation": {
+      "post": {
+        "summary": "workforce plans {id} explanation (post)",
+        "description": "Roles: Scoped Manager; read-only AI explanation. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/workforce/policies": {
+      "get": {
+        "summary": "workforce policies (get)",
+        "description": "Roles: Scoped Manager or Administrator. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/workforce/policies/{id}": {
+      "put": {
+        "summary": "workforce policies {id} (put)",
+        "description": "Roles: Scoped Manager or Administrator. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "sourceToolIds",
+                  "destinationStationIds",
+                  "maxWorkers",
+                  "maxMinutes",
+                  "maxEstimatedUnits",
+                  "enabled",
+                  "expiresAt",
+                  "reason"
+                ],
+                "properties": {
+                  "sourceToolIds": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 30,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120
+                    }
+                  },
+                  "destinationStationIds": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 30,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120
+                    }
+                  },
+                  "maxWorkers": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 50
+                  },
+                  "maxMinutes": {
+                    "type": "integer",
+                    "minimum": 15,
+                    "maximum": 480
+                  },
+                  "maxEstimatedUnits": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100000
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/workforce/{id}/acknowledge": {
+      "post": {
+        "summary": "workforce {id} acknowledge (post)",
+        "description": "Roles: Assigned Worker. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {}
               }
             }
           }
