@@ -119,3 +119,41 @@ Paths and npm commands in this document are relative to the `backend/` CAP proje
 - Keep the trace deterministic. Use the existing Sarvam client from a new platform library with a bounded JSON read-tool protocol; validate source IDs and selected eligibility on the server. Do not modify teammate-owned AI adapter or rules modules. To change provider/tool protocol, replace the planner client seam and keep the approval and evidence validation tests.
 - The schema has no operation capability or capacity catalogue. Require a referenced, expiring Manager attestation plus current tool type/state/calibration checks; otherwise show Unknown. Add a domain-reviewed capability catalogue later instead of treating demo tool labels as specifications. No downtime estimate is invented.
 - Replace the console's fabricated success fallbacks, role overrides and hardcoded executive-report claims with persisted results and explicit selected identities. Keep the existing GlassPanel styling and broader console trace/evidence screens. Missing repair/verification/closure evidence stays missing.
+
+## V2 integration and workflow (2026-11-02)
+
+- The V2 feature branch already contained main `10a6ff0` and Shashank `6162563`; the reviewed merge was a no-op. Preserve the ported Member 4 rules and optional adapter fallback; no teammate-owned AI/rules file was modified.
+- Reuse XSUAA rather than add local passwords. Application onboarding cannot grant provider scopes. Add identity-bound expiring invitations, Administrator scope, qualifications and an approved equipment requirement policy. Default new profiles are Workers.
+- Add ten CDS entities without altering the original 21. No populated SQLite/HANA migration is automatic. V2 routes report a schema requirement on old SQLite; HANA V2 requires explicit enablement after reviewed deployment. A create-only HANA SQL review artifact is in root docs, never executed here.
+- Model assignment and review as work-order states while retaining existing incident/tool states, approval checks, RepairLog and independent verification. Legacy unassigned demo repairs remain only outside V2 assignment enforcement. The fresh `dev:v2` launcher uses isolated SQLite and explicit synthetic profiles/certifications/parts, never HANA.
+- Reuse Sarvam through a bounded platform library. Conversation facts need explicit worker values or supporting source quotes, and saved V2 confidence is null. All original messages and edited report evidence remain traceable. AI failures keep manual typed reporting and authorized record retrieval usable.
+- Duplicate semantic suggestions operate only on bounded same-equipment candidates and require human resolution. Links preserve reports and block child primary repair work. Inventory reservation/use/release is persisted and audited, never inferred from model text.
+- The new workspace and floating assistant preserve the existing frontend routes/design. Complete legacy-page localization, domain-approved inspection tolerances/SOP approval metadata, production sign-in provisioning and real speech verification remain explicit limitations in `docs/v2-architecture.md`.
+
+## V2.1 (2026-11-02)
+
+- Reuse the Sarvam interface for speech and introduce a platform Groq complete(messages,schema) adapter, with account model discovery and local JSON validation. Do not modify teammate-owned AI modules. The legacy AI route receives the adapter through its existing clientFactory seam.
+- Conversation reasoning and quote-supported fact extraction remain separate from deterministic rules. Source scopes are applied before existing chunk/embedding/keyword retrieval. No AI enters trace, certification, capacity arithmetic or approval decisions.
+- Add four workforce tables and a namespaced 106-record fixture graph. After explicit backup/update approval, verify a complete recoverable backup, create the 14 missing HANA tables and insert the 106 fixtures plus a seed audit. No original schema entity or any of the 585 baseline records changed.
+- Automatic approval review rejected the combined full HANA export/provider probe. Narrow synthetic provider calls and read-only HANA metadata checks succeeded. Do not bypass the export gate; retain an explicit recoverable-backup requirement before additive remote deployment/seeding.
+- Automatic review separately rejected switching the legacy recovery planner's broader context payload to Groq. Preserve its current provider rather than indirectly perform that rejected change.
+- Localize legacy static JSX at compile time through checked-in resources and the existing context, excluding raw report/style/code data. Resources were generated with Groq; native-speaker review and complete dynamic-content localization remain unverified.
+- HANA's preserved synthetic scenario clock is 4 November, while the local seed clock is 31 October. Resolve it from the immutable v1 seed audit and corroborating production runs, return it via `/tools`, and use it only for explicit synthetic demo input. Never rewrite original production times or alter trace arithmetic to match a local fixture date.
+- Root `dev:hana:v21` explicitly enables reviewed V2 HANA workflows without modifying the private environment or seeding remotely on startup. The SQLite demo remains independent.
+# V2.2 operational integration decisions
+
+Operational scope uses the existing trusted role and profile work center, with
+administrator-approved UserAuthorization records for multiple centers and
+independent assignment/verification capabilities. Unregistered header identities
+retain the explicitly local legacy demo behavior; production onboarding requires
+an active profile. New extension tables avoid altering the original HANA tables.
+V22 features are enabled only after reviewed deployment, never automatically.
+
+Repair correction is an additive rule-adapter seam from Awaiting verification
+to Under repair. tool-state validates persisted submitted work, passing unverified
+repair evidence and the authorized independent actor. The teammate-owned state
+machine and approval modules remain untouched. A correction appends the previous
+readings as evidence before resetting the current submission for another check.
+An additional-evidence request blocks manager acceptance until the assigned
+technician submits a reference. Product containment release remains separate.
+

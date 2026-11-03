@@ -32,22 +32,27 @@
     "db:checkpoint": "node scripts/checkpoint-db.js",
     "verify:package": "node scripts/verify-package.js",
     "docs:contract": "node scripts/update-contract.js",
-    "db:unlock": "node -e \"const fs=require('fs');const f='db.sqlite.lock';if(fs.existsSync(f)){fs.unlinkSync(f);console.log('Lock removed')}else{console.log('No lock file')}\""
+    "db:unlock": "node -e \"const fs=require('fs');const f='db.sqlite.lock';if(fs.existsSync(f)){fs.unlinkSync(f);console.log('Lock removed')}else{console.log('No lock file')}\"",
+    "ai:verify": "node scripts/v21-check.js --providers-only",
+    "hana:verify:readonly": "node scripts/v21-check.js --hana-readonly",
+    "demo:v22:generate": "node scripts/v22-generate.js",
+    "demo:v22:preview": "node scripts/v22-seed.js --preview",
+    "demo:v22:seed": "node scripts/v22-seed.js --apply"
   },
   "dependencies": {
-    "@cap-js/hana": "^3.1.2",
     "@cap-js/sqlite": "3.1.2",
     "@sap/cds": "10.2.2",
     "@sap/xssec": "^4.16.0",
+    "ajv": "^8.20.0",
     "cors": "^2.8.5",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "pdfkit": "0.20.2"
   },
   "devDependencies": {
     "@apidevtools/swagger-parser": "^13.1.0",
     "@cap-js/cds-test": "^1.0.2",
+    "@cap-js/hana": "^3.1.2",
     "@sap/cds-dk": "^10.2.0",
-    "@sap/hdi-deploy": "^5.7.0",
-    "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "jest": "^30.2.0",
     "supertest": "^7.1.4",

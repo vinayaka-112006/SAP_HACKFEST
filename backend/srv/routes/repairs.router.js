@@ -18,14 +18,19 @@ function validateReadings(value) {
       !reading ||
       typeof reading !== "object" ||
       Array.isArray(reading) ||
-      Object.keys(reading).some((key) => !["name", "passed"].includes(key)) ||
+      Object.keys(reading).some((key) => !["name", "passed", "value", "unit", "expected", "evidenceRef"].includes(key)) ||
       typeof reading.name !== "string" ||
       !reading.name.trim() ||
       reading.name.trim().length > 120 ||
       typeof reading.passed !== "boolean"
     )
       fail(400, "INVALID_REPAIR_EVIDENCE", "Each reading must contain only a non-empty name and an explicit boolean passed result");
-    return { name: reading.name.trim(), passed: reading.passed };
+    const result={name:reading.name.trim(),passed:reading.passed};
+    for(const key of ['value','unit','expected','evidenceRef'])if(reading[key]!==undefined){
+      if(typeof reading[key]!=='string'||!reading[key].trim()||reading[key].length>1000)fail(400,'INVALID_REPAIR_EVIDENCE','Recorded reading details must be nonempty text of at most 1000 characters');
+      result[key]=reading[key].trim();
+    }
+    return result;
   });
 }
 
@@ -49,6 +54,7 @@ router.post(
       );
       if (!incidentRow) fail(404, "INCIDENT_NOT_FOUND", "Incident not found");
       const incident = decode(incidentRow);
+      await require('../lib/v2').guardRepair(tx, req.user, incident.incidentId);
       if (incident.state !== "Confirmed")
         fail(409, "INVALID_STATE", "Repair logging requires a Confirmed incident", {
           incidentId: incident.incidentId,
@@ -164,6 +170,7 @@ router.post(
       );
       if (!incidentRow) fail(404, "INCIDENT_NOT_FOUND", "Incident not found");
       const incident = decode(incidentRow);
+      await require('../lib/v2').guardRepair(tx, req.user, incident.incidentId);
       const tool = await tx.run(
         cds.ql.SELECT.one.from(entity("Tool"))
           .where({ toolId: repairRef.toolId })

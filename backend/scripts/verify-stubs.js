@@ -31,6 +31,11 @@ async function verify(base = process.env.BASE_URL || "http://localhost:4004") {
     assert.equal(response.status, 200, endpoint.name);
     assert.match(response.headers.get("content-type"), /application\/json/);
     const actual = await response.json();
+    if(endpoint.name==='health'){
+      assert.ok(['hana','sqlite'].includes(actual.databaseMode));
+      assert.match(actual.databaseInstance,/^[a-f0-9]{16}$/);
+      delete actual.databaseMode;delete actual.databaseInstance;
+    }
     assert.deepEqual(
       JSON.parse(JSON.stringify(actual)),
       require("../docs/examples/" + endpoint.example),

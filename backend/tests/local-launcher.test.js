@@ -76,3 +76,34 @@ test("combined launcher reports a port conflict without stopping the existing li
     await expect(fetch(`http://localhost:${backendPort}/api/health`)).rejects.toThrow();
   } finally { await new Promise(resolve => listener.close(resolve)); }
 });
+test('V2 launcher creates an isolated synthetic qualification and inventory demo',async()=>{
+  const [backendPort,frontendPort]=await ports();
+  const process=child(path.join(repositoryRoot,'scripts/dev.js'),['--v2'],{env:{...offline(),TOOLSATHI_BACKEND_PORT:String(backendPort),TOOLSATHI_FRONTEND_PORT:String(frontendPort)}});
+  await ready(process,/ToolSathi database: sqlite/);
+  const base=`http://localhost:${backendPort}/api`;
+  const me=await (await fetch(base+'/v2/me',{headers:{'x-demo-user':'DEMO-TECH-TOOL-B','x-demo-role':'Technician'}})).json();
+  expect(me.profile).toMatchObject({role:'Technician',userId:'DEMO-TECH-TOOL-B'});
+  expect(me.profile.displayName).toContain('Synthetic');
+  await stop(process);
+});
+
+test('V22 SQLite launcher preserves reported work across restart without replaying the seed',async()=>{
+  const database=path.join(backupRoot,'v22-persistence-'+require('node:crypto').randomUUID()+'.sqlite');
+  let incidentId;
+  for(let boot=0;boot<2;boot++){
+    const [backendPort,frontendPort]=await ports();
+    const process=child(path.join(repositoryRoot,'scripts/dev.js'),['--v22'],{env:{...offline(),SQLITE_FILE:database,TOOLSATHI_BACKEND_PORT:String(backendPort),TOOLSATHI_FRONTEND_PORT:String(frontendPort)}});
+    await ready(process,/ToolSathi database: sqlite/);
+    const base=`http://localhost:${backendPort}/api`,actor={'content-type':'application/json','x-demo-user':'V22-20261103-WORKER-01','x-demo-role':'Worker'};
+    const identities=await (await fetch(base+'/v2/demo-identities',{headers:actor})).json();
+    expect(identities.identities).toHaveLength(52);
+    if(!boot){
+      const response=await fetch(base+'/incidents',{method:'POST',headers:actor,body:JSON.stringify({toolId:'V22-20261103-TOOL-1',reporterId:actor['x-demo-user'],language:'en',rawText:'SYNTHETIC persistence check'})});
+      expect(response.status).toBe(201);incidentId=(await response.json()).incident.incidentId;
+    }else{
+      const response=await fetch(base+'/incidents/'+incidentId,{headers:actor});expect(response.status).toBe(200);expect((await response.json()).incident.rawText).toBe('SYNTHETIC persistence check');
+    }
+    expect((await (await fetch(base+'/health')).json()).databaseMode).toBe('sqlite');
+    await stop(process);
+  }
+});

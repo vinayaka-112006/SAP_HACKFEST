@@ -10,6 +10,7 @@ export default function ResourceState({ state, empty, children }) {
     return (
       <div className="resource-message error" role="alert">
         <p>{state.error.message}</p>
+        {state.error.status===404&&<p>This incident is absent from the current database. Select another saved report or clear the incident ID; no replacement has been created.</p>}
         <button onClick={state.refresh}>Try again</button>
       </div>
     );

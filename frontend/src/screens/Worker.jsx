@@ -18,7 +18,6 @@ const DEMO_INPUT = {
   translatedText: "Tool B is leaving bolts loose",
   category: "TORQUE",
   suggestedNcCode: "NC-TORQUE-LOOSE",
-  reportedAt: "2026-10-31T05:12:00.000Z",
 };
 const emptyFields = (tool) => ({
   tool, symptom: "", category: "", time: "", suggestedNc: "",
@@ -92,7 +91,11 @@ export default function Worker() {
     chooseTool(tool.toolId);
     setActionError("");
   };
-  const loadDemo = () => {
+  const loadDemo = async () => {
+    setBusy(true);setActionError('');
+    try {
+    const {demoScenario}=await client.request('/tools');
+    if(!demoScenario?.synthetic||demoScenario.toolId!==DEMO_INPUT.toolId)throw new Error('Synthetic scenario time is unavailable for this database. Enter the observed report time.');
     stopRecording();
     setSpeechSource(null); setAiWarnings([]); setToolConflict(false); setConflictReviewed(false);
     chooseTool(DEMO_INPUT.toolId);
@@ -104,13 +107,14 @@ export default function Worker() {
       tool: DEMO_INPUT.toolId,
       symptom: DEMO_INPUT.translatedText,
       category: DEMO_INPUT.category,
-      time: DEMO_INPUT.reportedAt,
+      time: demoScenario.reportedAt,
       suggestedNc: DEMO_INPUT.suggestedNcCode,
       confidence: null,
       missingFields: [],
       modelVersion: null,
     });
     setActionError("");
+    } catch(error) { setActionError(error.message); } finally { setBusy(false); }
   };
   const handleMicToggle = () => {
     setActionError("");
@@ -740,8 +744,7 @@ export default function Worker() {
               Load synthetic demo report
             </button>
             <p className="muted">
-              The demo input explicitly uses the 4 November scenario time. It is
-              not an AI extraction.
+              The demo uses the scenario time verified from this database's synthetic records.
             </p>
           </div>
           {/* Typed Fallback Input */}

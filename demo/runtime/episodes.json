@@ -1,0 +1,38 @@
+[
+  {
+    "id": "06-voice-agent",
+    "number": "06",
+    "title": "Multilingual AI conversation",
+    "identity": {
+      "role": "Worker",
+      "user": "V22-20261103-WORKER-01",
+      "language": "kn"
+    },
+    "narration": [
+      "Back on the dashboard, the worker starts a guided conversation for the selected machine. The interviewer asks one question at a time and keeps the worker in control of every answer.",
+      "The worker answers in Kannada. Speech synthesis reads the question back through Sarvam, and the transcript can always be corrected before it is sent.",
+      "The assistant only structures what the worker actually said. When a fact is genuinely unknown, the worker can say so, and the field stays missing instead of being invented."
+    ],
+    "checks": [
+      {
+        "name": "interview question returned by the backend",
+        "status": "PASSED",
+        "detail": ""
+      },
+      {
+        "name": "conversation reached the worker review stage",
+        "status": "PASSED",
+        "detail": ""
+      }
+    ],
+    "failure": "",
+    "consoleErrors": [],
+    "rawVideo": "C:\\Users\\yoges\\Desktop\\hackfest\\SAP_HACKFEST\\demo\\runtime\\raw\\06-voice-agent.webm",
+    "screenshot": "C:\\Users\\yoges\\Desktop\\hackfest\\SAP_HACKFEST\\demo\\screenshots\\06-voice-agent.png",
+    "recordedSeconds": 24.6,
+    "state": {
+      "applicationUser": "DEMO-APPLICANT-01",
+      "incidentId": "TS-0002"
+    }
+  }
+]

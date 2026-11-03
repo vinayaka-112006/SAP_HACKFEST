@@ -1,0 +1,312 @@
+{
+  "checkedAt": "2026-11-03T02:32:24.406Z",
+  "targetSchema": "HACKFEST0343",
+  "exclusiveSchema": true,
+  "remoteWrites": false,
+  "existingTables": 35,
+  "existingRecords": 692,
+  "counts": {
+    "toolsathi.Approval": 1,
+    "toolsathi.AuditLog": 82,
+    "toolsathi.Batch": 18,
+    "toolsathi.CalibrationRecord": 1,
+    "toolsathi.ConversationSession": 0,
+    "toolsathi.Counter": 2,
+    "toolsathi.Dealer": 2,
+    "toolsathi.EquipmentRequirement": 5,
+    "toolsathi.Incident": 24,
+    "toolsathi.IncidentEvidence": 0,
+    "toolsathi.IncidentRelationship": 0,
+    "toolsathi.InventoryStock": 9,
+    "toolsathi.MockDocument": 1,
+    "toolsathi.NcCode": 5,
+    "toolsathi.PartReservation": 0,
+    "toolsathi.ProductionDemand": 5,
+    "toolsathi.ProductionRun": 18,
+    "toolsathi.Proposal": 1,
+    "toolsathi.RepairLog": 3,
+    "toolsathi.RepairWorkOrder": 1,
+    "toolsathi.Shipment": 9,
+    "toolsathi.SopDoc": 8,
+    "toolsathi.SparePart": 20,
+    "toolsathi.TechnicianQualification": 8,
+    "toolsathi.TemporaryAssignment": 0,
+    "toolsathi.Tool": 8,
+    "toolsathi.ToolHistoryEvent": 63,
+    "toolsathi.ToolUseEvent": 18,
+    "toolsathi.TraceResult": 35,
+    "toolsathi.Unit": 300,
+    "toolsathi.UserInvitation": 0,
+    "toolsathi.UserNotification": 0,
+    "toolsathi.UserProfile": 26,
+    "toolsathi.WorkforceProfile": 14,
+    "toolsathi.WorkStation": 5
+  },
+  "createTables": 9,
+  "createAuditTriggers": 0,
+  "version": "20261103",
+  "synthetic": true,
+  "preview": true,
+  "inserted": 0,
+  "planned": 738,
+  "plan": [
+    {
+      "table": "toolsathi.Approval",
+      "records": 9,
+      "insert": 9,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.AuditLog",
+      "records": 193,
+      "insert": 193,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.EquipmentRequirement",
+      "records": 5,
+      "insert": 5,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.Incident",
+      "records": 10,
+      "insert": 10,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.IssueOperation",
+      "records": 9,
+      "insert": 9,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.MockDocument",
+      "records": 9,
+      "insert": 9,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.PartReservation",
+      "records": 7,
+      "insert": 7,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.ProductionDemand",
+      "records": 5,
+      "insert": 5,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.Proposal",
+      "records": 9,
+      "insert": 9,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.RepairLog",
+      "records": 7,
+      "insert": 7,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.RepairWorkOrder",
+      "records": 8,
+      "insert": 8,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.SopDoc",
+      "records": 5,
+      "insert": 5,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.SparePart",
+      "records": 15,
+      "insert": 15,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.TechnicianQualification",
+      "records": 15,
+      "insert": 15,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.Tool",
+      "records": 10,
+      "insert": 10,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.ToolHistoryEvent",
+      "records": 79,
+      "insert": 79,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.UserAuthorization",
+      "records": 15,
+      "insert": 15,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.UserNotification",
+      "records": 194,
+      "insert": 194,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.UserProfile",
+      "records": 52,
+      "insert": 52,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.UserProfileDetail",
+      "records": 52,
+      "insert": 52,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.WorkforceProfile",
+      "records": 20,
+      "insert": 20,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.WorkStation",
+      "records": 5,
+      "insert": 5,
+      "identical": 0
+    },
+    {
+      "table": "toolsathi.WorkStationOperation",
+      "records": 5,
+      "insert": 5,
+      "identical": 0
+    }
+  ],
+  "shiftStartsAt": "2026-11-03T06:00:00.000Z",
+  "shiftEndsAt": "2026-11-04T18:00:00.000Z",
+  "traceImpact": "No Counter, baseline equipment, production, serial, shipment or trace record changes",
+  "scenarioManifest": [
+    {
+      "entity": "toolsathi.Approval",
+      "rows": 9,
+      "sha256": "bc55c4233fc27dfd33d9e32d5c0c010a654936360291ece078d8099ad233c6c2"
+    },
+    {
+      "entity": "toolsathi.AuditLog",
+      "rows": 193,
+      "sha256": "3bfba059bcd28ed74f623700a99dd214d9aad810e1a3ed54accb50211ce8b032"
+    },
+    {
+      "entity": "toolsathi.EquipmentRequirement",
+      "rows": 5,
+      "sha256": "5b3665399dd4a95fb2444c06543e1334363ad962af010d98bb98a7f8ad477d6e"
+    },
+    {
+      "entity": "toolsathi.Incident",
+      "rows": 10,
+      "sha256": "29d6d93656b83e9158574a95d1bcbccce8cf82a327086bce96f5a5a7c0cd6da6"
+    },
+    {
+      "entity": "toolsathi.IssueOperation",
+      "rows": 9,
+      "sha256": "50f82e9dc540784dfa90286e487f6ee344edb5b15565a82034d37d69d37d13e1"
+    },
+    {
+      "entity": "toolsathi.MockDocument",
+      "rows": 9,
+      "sha256": "16d4e369c39093a9b5b7a97d6bcb81bad80e2c37ee191f2bbf118907d5a220f7"
+    },
+    {
+      "entity": "toolsathi.PartReservation",
+      "rows": 7,
+      "sha256": "b3da7a52c4f6f4661162c526b4fef33ac85436dcdb1720f3a9de6cc61b0dc9cd"
+    },
+    {
+      "entity": "toolsathi.ProductionDemand",
+      "rows": 5,
+      "sha256": "2e98286b31fad543c78434b9522964dec8c90e39904935d7a73193f2b0bf947a"
+    },
+    {
+      "entity": "toolsathi.Proposal",
+      "rows": 9,
+      "sha256": "bd220cd244cdac7322157eb2b3ce0a6df3f575f140b52217a3047c676a550607"
+    },
+    {
+      "entity": "toolsathi.RepairLog",
+      "rows": 7,
+      "sha256": "68488f1ae8cc143bb917fd52dc960df611cb5ee8291c47445b51f498b8b196b9"
+    },
+    {
+      "entity": "toolsathi.RepairWorkOrder",
+      "rows": 8,
+      "sha256": "1063ef0a781d03655eb50298c69e5baa1e2c05f2d271055ed22239df10a45d63"
+    },
+    {
+      "entity": "toolsathi.SopDoc",
+      "rows": 5,
+      "sha256": "333192e020ca0159e8ff411ad48f2a28fdc937cc0d2a68a836c247a737aa520c"
+    },
+    {
+      "entity": "toolsathi.SparePart",
+      "rows": 15,
+      "sha256": "96d8d5e383cd0952fbdf3df89b62717593d6d4f1c837fa67630f0e1203a95115"
+    },
+    {
+      "entity": "toolsathi.TechnicianQualification",
+      "rows": 15,
+      "sha256": "17623f7760ce0a0efe92dbef90443a4e8631a816aa5aac5318b05ac05e4e55f4"
+    },
+    {
+      "entity": "toolsathi.Tool",
+      "rows": 10,
+      "sha256": "4f7a0a2c4b386343b475cacba065c0a60d803a8badc2441fc4e67ba90490d01f"
+    },
+    {
+      "entity": "toolsathi.ToolHistoryEvent",
+      "rows": 79,
+      "sha256": "f439845f762eaed5264b4fd1e745571cdb31a82fa21e8e14272c1d5ea7d7443c"
+    },
+    {
+      "entity": "toolsathi.UserAuthorization",
+      "rows": 15,
+      "sha256": "b7755d49ae4828e1e312afe0f8bb672a27d55394e43bea9d031bec94b4073df7"
+    },
+    {
+      "entity": "toolsathi.UserNotification",
+      "rows": 194,
+      "sha256": "1f9fa8c925a1f9abbda0518325852879adf2aae87ee98d953e5b619c4164b782"
+    },
+    {
+      "entity": "toolsathi.UserProfile",
+      "rows": 52,
+      "sha256": "1abbee0afc8deece0cdab2a52d12a1f9de50533734d98875b719911df4f8b97b"
+    },
+    {
+      "entity": "toolsathi.UserProfileDetail",
+      "rows": 52,
+      "sha256": "81248ade5afb5bea3b27833b037c0aab16c5b0fb64fcf3b183b25510f2e7fb05"
+    },
+    {
+      "entity": "toolsathi.WorkforceProfile",
+      "rows": 20,
+      "sha256": "993a29a6f18f2eda1f61f860686304502431a48cacc3837a92f67b47cb626f4b"
+    },
+    {
+      "entity": "toolsathi.WorkStation",
+      "rows": 5,
+      "sha256": "86732491db84f81e28a388f85f07bed63ea0a9d85bb9e692af84967b08482c54"
+    },
+    {
+      "entity": "toolsathi.WorkStationOperation",
+      "rows": 5,
+      "sha256": "68c722343ed0b16bc4f12c4cc91ec9298f145551ed0ebc726ed64cd75f78329b"
+    }
+  ]
+}

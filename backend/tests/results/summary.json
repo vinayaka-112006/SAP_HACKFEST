@@ -1,11 +1,17 @@
 {
   "label": "synthetic data, simulated services",
-  "executedAt": "2026-11-01T11:04:18.211Z",
-  "passed": 164,
-  "failed": 1,
+  "executedAt": "2026-11-03T04:24:40.282Z",
+  "passed": 306,
+  "failed": 0,
   "skipped": 0,
-  "suitesFailed": 1,
+  "suitesFailed": 0,
   "testFiles": [
+    {
+      "file": "tests/local-launcher.test.js",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
     {
       "file": "tests/reliability.test.js",
       "passed": 1,
@@ -13,14 +19,14 @@
       "skipped": 0
     },
     {
-      "file": "tests/local-launcher.test.js",
-      "passed": 3,
+      "file": "tests/v22-seed.test.js",
+      "passed": 2,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/incidents.test.js",
-      "passed": 15,
+      "file": "tests/contract.test.js",
+      "passed": 3,
       "failed": 0,
       "skipped": 0
     },
@@ -31,7 +37,43 @@
       "skipped": 0
     },
     {
-      "file": "tests/seed.test.js",
+      "file": "tests/exposure-report.test.js",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/v2.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/operations.test.js",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/mocks.test.js",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/allocation.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/roles.test.js",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/deployment.test.js",
       "passed": 3,
       "failed": 0,
       "skipped": 0
@@ -43,38 +85,14 @@
       "skipped": 0
     },
     {
-      "file": "tests/deployment.test.js",
-      "passed": 3,
+      "file": "tests/recovery.test.js",
+      "passed": 9,
       "failed": 0,
       "skipped": 0
     },
     {
-      "file": "tests/mocks.test.js",
-      "passed": 14,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/proposals.test.js",
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/roles.test.js",
-      "passed": 8,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/contract.test.js",
-      "passed": 2,
-      "failed": 1,
-      "skipped": 0
-    },
-    {
-      "file": "tests/repeat-failure.test.js",
-      "passed": 10,
+      "file": "tests/platform.test.js",
+      "passed": 6,
       "failed": 0,
       "skipped": 0
     },
@@ -85,8 +103,44 @@
       "skipped": 0
     },
     {
+      "file": "tests/proposals.test.js",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/v21.test.js",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/incidents.test.js",
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/seed.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/repeat-failure.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
       "file": "tests/repairs.test.js",
       "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/return-to-service.test.js",
+      "passed": 14,
       "failed": 0,
       "skipped": 0
     },
@@ -103,14 +157,8 @@
       "skipped": 0
     },
     {
-      "file": "tests/return-to-service.test.js",
-      "passed": 14,
-      "failed": 0,
-      "skipped": 0
-    },
-    {
-      "file": "tests/platform.test.js",
-      "passed": 6,
+      "file": "tests/onboarding.test.js",
+      "passed": 4,
       "failed": 0,
       "skipped": 0
     },
@@ -121,8 +169,44 @@
       "skipped": 0
     },
     {
+      "file": "tests/v2-xsuaa.test.js",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
       "file": "tests/hana-sql.test.js",
       "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/schema-migration.test.js",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/dealer-sqlite.test.js",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/endpoints.test.js",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/communication.test.js",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/similarity.test.js",
+      "passed": 14,
       "failed": 0,
       "skipped": 0
     },
@@ -133,7 +217,31 @@
       "skipped": 0
     },
     {
+      "file": "srv/ai-adapter/tests/intake.test.js",
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/dealer-draft.test.js",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "srv/ai-adapter/tests/evaluation.test.js",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
       "file": "tests/rules-adapter.test.js",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/sqlite-config.test.js",
       "passed": 2,
       "failed": 0,
       "skipped": 0
@@ -185,7 +293,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 20.547300000000178,
+      "durationMs": 26.22370000000228,
       "status": 200
     },
     {
@@ -226,7 +334,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 15.90480000000025,
+      "durationMs": 21.960100000003877,
       "status": 200
     },
     {
@@ -267,7 +375,7 @@
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       },
-      "durationMs": 13.922299999998359,
+      "durationMs": 21.305099999997765,
       "status": 200
     }
   ]

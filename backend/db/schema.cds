@@ -221,3 +221,291 @@ entity Counter {
   key ![name] : String(120);
   ![value] : Integer64;
 }
+
+// V2 additions: deploy only to a reviewed isolated destination. No automatic migration.
+entity UserProfile {
+  key userId : String(120);
+  displayName : String(120);
+  role : String(120);
+  language : String(2);
+  workCenter : String(120);
+  team : String(120);
+  status : String(30);
+  createdAt : Timestamp;
+}
+entity UserInvitation {
+  key invitationId : String(120);
+  userId : String(120);
+  role : String(120);
+  expiresAt : Timestamp;
+  createdBy : String(120);
+  consumedAt : Timestamp;
+}
+entity TechnicianQualification {
+  key userId : String(120);
+  key toolType : String(120);
+  workCenter : String(120);
+  skill : String(120);
+  certification : String(120);
+  expiresAt : Timestamp;
+  safetyAuthorization : String(120);
+  availableUntil : Timestamp;
+  maxAssignments : Integer;
+  approvedBy : String(120);
+}
+entity EquipmentRequirement {
+  key toolType : String(120);
+  skill : String(120);
+  certification : String(120);
+  safetyAuthorization : String(120);
+  approvedBy : String(120);
+}
+entity RepairWorkOrder {
+  key incidentId : String(120);
+  workOrderId : String(120);
+  technicianId : String(120);
+  assignedBy : String(120);
+  assignedAt : Timestamp;
+  status : String(30);
+  findings : LargeString;
+  repairId : String(120);
+  reviewedBy : String(120);
+  reviewedAt : Timestamp;
+}
+entity IncidentRelationship {
+  key incidentId : String(120);
+  canonicalId : String(120);
+  decision : String(30);
+  reason : LargeString;
+  decidedBy : String(120);
+  decidedAt : Timestamp;
+}
+entity ConversationSession {
+  key sessionId : String(120);
+  userId : String(120);
+  toolId : String(120);
+  language : String(2);
+  messages : LargeString;
+  facts : LargeString;
+  draft : LargeString;
+  incidentId : String(120);
+  version : Integer;
+  createdAt : Timestamp;
+}
+entity UserNotification {
+  key notificationId : String(120);
+  userId : String(120);
+  incidentId : String(120);
+  message : LargeString;
+  createdAt : Timestamp;
+}
+entity SparePart {
+  key partId : String(120);
+  name : String(120);
+  toolType : String(120);
+  location : String(120);
+  quantity : Integer;
+  reserved : Integer;
+  reorderThreshold : Integer;
+}
+entity PartReservation {
+  key incidentId : String(120);
+  key partId : String(120);
+  quantity : Integer;
+  requestedBy : String(120);
+  createdAt : Timestamp;
+  status : String(30);
+}
+
+entity WorkforceProfile {
+  key workerId : String(120);
+  homeToolId : String(120);
+  skills : LargeString;
+  certifications : LargeString;
+  safetyAuthorizations : LargeString;
+  certificationExpiresAt : Timestamp;
+  shiftEndsAt : Timestamp;
+  available : Boolean;
+}
+entity WorkStation {
+  key stationId : String(120);
+  workCenter : String(120);
+  toolId : String(120);
+  requiredSkill : String(120);
+  requiredCertification : String(120);
+  safetyAuthorization : String(120);
+  materialsAvailable : Boolean;
+  slots : Integer;
+  unitsPerHour : Double;
+  setupMinutes : Integer;
+}
+entity ProductionDemand {
+  key orderId : String(120);
+  stationId : String(120);
+  requiredQuantity : Integer;
+  completedQuantity : Integer;
+  dueAt : Timestamp;
+}
+entity TemporaryAssignment {
+  key assignmentId : String(120);
+  workerId : String(120);
+  incidentId : String(120);
+  sourceToolId : String(120);
+  stationId : String(120);
+  startsAt : Timestamp;
+  endsAt : Timestamp;
+  status : String(30);
+  estimatedOutput : Integer;
+  assumptions : LargeString;
+  approvedBy : String(120);
+  approvedAt : Timestamp;
+}
+
+// V2.2 extensions: existing table definitions and historical rows stay intact.
+entity UserAuthorization {
+  key userId : String(120);
+  workCenters : LargeString;
+  canAssign : Boolean;
+  canVerify : Boolean;
+  expiresAt : Timestamp;
+  approvedBy : String(120);
+  updatedAt : Timestamp;
+}
+entity UserProfileDetail {
+  key userId : String(120);
+  shift : String(120);
+  shiftStartsAt : Timestamp;
+  shiftEndsAt : Timestamp;
+  updatedAt : Timestamp;
+}
+entity IssueOperation {
+  key incidentId : String(120);
+  severity : String(30);
+  urgency : String(30);
+  shift : String(120);
+  reviewedBy : String(120);
+  reviewedAt : Timestamp;
+  assignmentEscalated : Boolean;
+  version : Integer;
+  updatedAt : Timestamp;
+}
+entity NotificationRead {
+  key notificationId : String(120);
+  userId : String(120);
+  readAt : Timestamp;
+}
+entity WorkStationOperation {
+  key stationId : String(120);
+  travelMinutes : Integer;
+  bottleneckUnitsPerHour : Double;
+  approvedBy : String(120);
+  updatedAt : Timestamp;
+}
+entity AllocationPolicy {
+  key policyId : String(120);
+  sourceToolIds : LargeString;
+  destinationStationIds : LargeString;
+  maxWorkers : Integer;
+  maxMinutes : Integer;
+  maxEstimatedUnits : Integer;
+  enabled : Boolean;
+  expiresAt : Timestamp;
+  approvedBy : String(120);
+  approvedRole : String(120);
+  approvedAt : Timestamp;
+  reason : LargeString;
+}
+entity AllocationPlan {
+  key planId : String(120);
+  incidentId : String(120);
+  createdBy : String(120);
+  createdAt : Timestamp;
+  expiresAt : Timestamp;
+  minutes : Integer;
+  status : String(30);
+  snapshot : LargeString;
+  fingerprint : String(64);
+  policyId : String(120);
+  executedBy : String(120);
+  executedAt : Timestamp;
+}
+entity AssignmentDetail {
+  key assignmentId : String(120);
+  mode : String(30);
+  planId : String(120);
+  policyId : String(120);
+  acknowledgedAt : Timestamp;
+  acknowledgedBy : String(120);
+  decision : String(30);
+  decidedAt : Timestamp;
+  decidedBy : String(120);
+}
+entity ExposureReport {
+  key reportId : String(120);
+  incidentId : String(120);
+  createdBy : String(120);
+  createdAt : Timestamp;
+  windowHours : Integer;
+  version : Integer;
+  digest : String(64);
+  snapshot : LargeString;
+}
+
+// V2.3 onboarding: role applications, declared skills and protected documents.
+// A requested role is never a grant; only an Administrator review may create a profile.
+entity OnboardingApplication {
+  key applicationId : String(120);
+  userId : String(120);
+  status : String(30);
+  requestedRole : String(120);
+  fullName : String(120);
+  email : String(200);
+  phone : String(40);
+  language : String(2);
+  department : String(120);
+  workCenter : String(120);
+  shift : String(120);
+  employeeId : String(120);
+  team : String(120);
+  notes : LargeString;
+  reviewNotes : LargeString;
+  reviewedBy : String(120);
+  reviewedAt : Timestamp;
+  createdAt : Timestamp;
+  updatedAt : Timestamp;
+}
+entity ApplicantSkill {
+  key skillId : String(120);
+  applicationId : String(120);
+  userId : String(120);
+  category : String(120);
+  name : String(120);
+  level : String(30);
+  years : Integer;
+  specialization : String(120);
+  workCenter : String(120);
+  certification : String(120);
+  issuer : String(120);
+  validUntil : Date;
+  notes : LargeString;
+  source : String(30);
+  verified : Boolean;
+  verifiedBy : String(120);
+  verifiedAt : Timestamp;
+}
+entity UploadedDocument {
+  key documentId : String(120);
+  userId : String(120);
+  applicationId : String(120);
+  incidentId : String(120);
+  docType : String(40);
+  fileName : String(240);
+  mimeType : String(120);
+  size : Integer;
+  storageName : String(240);
+  checksum : String(64);
+  description : String(500);
+  status : String(30);
+  reviewNote : LargeString;
+  createdAt : Timestamp;
+}

@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-02T10:53:05.888Z",
+  "backupFile": "hana-source-a1ea2a9f-cffb-4714-af3a-c788272c0b5e.json",
+  "tables": 21,
+  "records": 585,
+  "manifestVerified": true,
+  "sqliteRestoreVerified": true,
+  "remoteWrites": false
+}

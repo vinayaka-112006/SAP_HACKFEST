@@ -14,17 +14,26 @@ const cors = require("cors");
 const { loadRouters } = require("./lib/router-loader");
 const errors = require("./lib/errors");
 cds.on("served", async () => {
-  if (cds.db.kind === "sqlite") {
-    const existing = await cds.db.run(
-      "SELECT name FROM sqlite_master WHERE type='table' AND name='toolsathi_Tool'",
-    );
-    if (!existing.length) await cds.deploy(cds.model).to(cds.db);
-  } else {
-    // Fail on a real query before listening; never auto-deploy or seed remote HANA.
-    await cds.db.run("SELECT CURRENT_USER, CURRENT_SCHEMA FROM DUMMY");
-    await cds.db.run(cds.ql.SELECT.from("toolsathi.Tool").limit(1));
-  }
+  if (cds.db.kind !== "sqlite") throw new Error("ToolSathi requires SQLite");
+  // Additive, backed-up deployment: creates missing tables without touching existing rows.
+  const sqliteFile = cds.env.requires.db.credentials?.url || "db.sqlite";
+  await require("./lib/schema-migration").ensure(cds.db, {
+    file: sqliteFile,
+    model: cds.model,
+    deploy: () => cds.deploy(cds.model).to(cds.db),
+  });
   await require("./lib/db-protection").install(cds.db);
+  if (process.env.V2_SYNTHETIC_FIXTURES === 'true') {
+    if (cds.db.kind !== 'sqlite' || process.env.NODE_ENV === 'production') throw new Error('V2 synthetic fixtures require development SQLite');
+    await require('../db/seed/v2-demo')(cds.db);
+    await cds.db.tx(tx=>require('../db/seed/v21').apply(tx));
+  }
+  if (process.env.V22_SYNTHETIC_FIXTURES === 'true') {
+    if (cds.db.kind !== 'sqlite' || process.env.NODE_ENV === 'production') throw new Error('V22 synthetic fixtures require development SQLite');
+    const seed = require('../db/seed/v22');
+    const marker = await cds.db.run(cds.ql.SELECT.one.from('toolsathi.AuditLog').where({action:'V22_SYNTHETIC_BASE_CREATED',actor:seed.graph.prefix+'ADMIN'}));
+    if (!marker) await cds.db.tx(tx=>seed.apply(tx));
+  }
 });
 cds.on("bootstrap", (app) => {
   app.disable("x-powered-by");

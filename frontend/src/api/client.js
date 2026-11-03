@@ -18,7 +18,7 @@ export function createApiClient({
   timeoutMs = 15000,
 } = {}) {
   const base = baseUrl.replace(/\/$/, "");
-  async function request(path, { method = "GET", body, headers: customHeaders, signal, requestTimeoutMs = timeoutMs } = {}) {
+  async function request(path, { method = "GET", body, headers: customHeaders, signal, requestTimeoutMs = timeoutMs, responseType = 'json' } = {}) {
     const headers = { Accept: "application/json", ...customHeaders };
     const binary = typeof Blob !== "undefined" && body instanceof Blob;
     if (body !== undefined) headers["Content-Type"] = binary ? body.type : "application/json";
@@ -43,6 +43,7 @@ export function createApiClient({
         ...(body !== undefined ? { body: binary ? body : JSON.stringify(body) } : {}),
         signal: controller.signal,
       });
+      if(response.ok&&responseType==='blob')return response.blob();
       let value;
       try {
         value = await response.json();
@@ -89,6 +90,7 @@ export function createApiClient({
   const id = (value) => encodeURIComponent(value);
   return {
     request,
+    download:(path,options={})=>request(path,{...options,responseType:'blob',headers:{Accept:'application/pdf,text/csv',...options.headers}}),
     getTools: async (options) => {
       const value = await request("/tools", options);
       if (!Array.isArray(value.tools))
