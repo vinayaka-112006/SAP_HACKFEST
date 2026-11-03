@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { StoreProvider } from './state/store';
 import SyntheticRibbon from './components/SyntheticRibbon';
 import TopNavbar from './components/TopNavbar';
-import Dock from './components/Dock';
 import IntroSequence from './components/IntroSequence';
 import Launcher from './screens/Launcher';
 import Console from './screens/Console';
@@ -51,7 +50,7 @@ export default function App() {
         <OperationsNav />
 
         {/* Main Application Screen Routes */}
-        <main style={{ position: 'relative', zIndex: 1 }}>
+        <main style={{ position: 'relative', zIndex: 1, paddingBottom: '32px' }}>
           <Routes>
             <Route path="/" element={<Launcher />} />
             <Route path="/console" element={<Console />} />
@@ -107,8 +106,6 @@ export default function App() {
           </button>
         )}
 
-        {/* Floating Navigation Dock */}
-        <Dock />
         <WebsiteAssistant />
       </div>
     </StoreProvider>

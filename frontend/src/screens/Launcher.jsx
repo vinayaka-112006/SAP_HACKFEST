@@ -5,9 +5,12 @@ import StatusBadge from '../components/StatusBadge';
 import RoleSwitch from '../components/RoleSwitch';
 import Logo from '../components/Logo';
 import { useStore } from '../state/store';
+import { rolePath } from '../features/operations/text';
+import { useOperationsText } from '../features/operations/text';
 
 export default function Launcher() {
   const { currentRole, setCurrentRole } = useStore();
+  const L = useOperationsText();
 
   const portals = [
     {
@@ -193,6 +196,33 @@ export default function Launcher() {
         </div>
         <RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole} />
       </div>
+
+      {/* Primary V2.2 role dashboard entry points */}
+      <section aria-label={L('dashboard')} style={{ marginBottom: '44px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '16px' }}>
+          {['Worker', 'Manager', 'Technician', 'Verifier'].map(role => (
+            <Link
+              key={role}
+              to={rolePath(role)}
+              style={{
+                display: 'flex', flexDirection: 'column', gap: '6px', padding: '22px 24px',
+                borderRadius: '18px', textDecoration: 'none', color: 'var(--ink)',
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(238,248,252,0.92) 100%)',
+                border: role === currentRole ? '2px solid var(--brand-cyan)' : '1px solid rgba(7, 17, 32, 0.12)',
+                boxShadow: '0 10px 28px rgba(7, 17, 32, 0.07)'
+              }}
+            >
+              <strong style={{ fontSize: '19px' }}>{L(role)}</strong>
+              <span style={{ fontSize: '14px', color: 'var(--ink-soft)', fontWeight: 600 }}>{L('dashboard')} →</span>
+            </Link>
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '16px' }}>
+          {[['/issues', L('issues')], ['/notifications', L('notifications')], ['/profile', L('profile')], ['/login', L('login')]].map(([to, label]) => (
+            <Link key={to} to={to} style={{ padding: '8px 16px', borderRadius: 'var(--radius-pill)', background: 'rgba(255,255,255,0.9)', border: '1px solid rgba(7,17,32,0.12)', color: 'var(--ink)', fontWeight: 650, textDecoration: 'none' }}>{label}</Link>
+          ))}
+        </div>
+      </section>
 
       {/* 4 Feature Portals Grid */}
       <div className="launcher-portals" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '28px' }}>

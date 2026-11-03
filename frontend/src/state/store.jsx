@@ -11,9 +11,36 @@ import { traceView } from "../api/mappings";
 import { useResource } from "./useResource";
 const StoreContext = createContext(null);
 export function StoreProvider({ children }) {
-  const [currentRole, setCurrentRole] = useState(()=>apiConfig.demoMode ? (sessionStorage.getItem('toolsathi.demoRole')||"Manager") : "Worker");
-  const [demoUserId, setDemoUserId] = useState(()=>sessionStorage.getItem('toolsathi.demoUser')||"DEMO-MANAGER");
+  const [currentRole, setCurrentRoleState] = useState(()=>apiConfig.demoMode ? (sessionStorage.getItem('toolsathi.demoRole')||"Manager") : "Worker");
+  const [demoUserId, setDemoUserIdState] = useState(()=>sessionStorage.getItem('toolsathi.demoUser')||"DEMO-MANAGER");
+  const [demoIdentities, setDemoIdentities] = useState([]);
   useEffect(()=>{if(apiConfig.demoMode){sessionStorage.setItem('toolsathi.demoRole',currentRole);sessionStorage.setItem('toolsathi.demoUser',demoUserId);}},[currentRole,demoUserId]);
+  // Local demo identity list: the role and the account ID must always describe the same person.
+  useEffect(()=>{
+    if(!apiConfig.demoMode) return;
+    const controller=new AbortController();
+    createApiClient({...apiConfig,getSession:()=>({userId:'IDENTITY-LOOKUP',role:'Worker'})})
+      .request('/v2/demo-identities',{signal:controller.signal})
+      .then(result=>{if(!controller.signal.aborted)setDemoIdentities(result.identities||[]);})
+      .catch(()=>{/* The login page reports API errors; never invent identities. */});
+    return ()=>controller.abort();
+  },[]);
+  useEffect(()=>{
+    if(!demoIdentities.length) return;
+    const paired=demoIdentities.find(identity=>identity.userId===demoUserId);
+    // A restored or typed ID whose verified application role differs must not keep a stale role.
+    if(paired&&paired.role!==currentRole)setCurrentRoleState(paired.role);
+  },[demoIdentities,demoUserId,currentRole]);
+  const setCurrentRole = role => {
+    setCurrentRoleState(role);
+    const paired=demoIdentities.find(identity=>identity.role===role);
+    if(apiConfig.demoMode&&paired)setDemoUserIdState(paired.userId);
+  };
+  const setDemoUserId = id => {
+    setDemoUserIdState(id);
+    const paired=demoIdentities.find(identity=>identity.userId===id);
+    if(apiConfig.demoMode&&paired)setCurrentRoleState(paired.role);
+  };
   const [incidentId, setIncidentId] = useState(
     () => sessionStorage.getItem("toolsathi.incidentId") || "",
   );
@@ -122,6 +149,7 @@ export function StoreProvider({ children }) {
         setCurrentRole,
         demoUserId,
         setDemoUserId,
+        demoIdentities,
         incidentId,
         openIncident,
         incident,

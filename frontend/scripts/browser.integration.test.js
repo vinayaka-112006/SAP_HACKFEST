@@ -127,6 +127,9 @@ before(
         silent: true,
         env: {
           ...process.env,
+          // Deterministic machine-readable startup line: no ANSI colour around the URL.
+          NO_COLOR: "1",
+          FORCE_COLOR: "0",
           VITE_API_BASE_URL: "/api",
           VITE_DEMO_AUTH: "true",
           VITE_AI_ENABLED: "false",

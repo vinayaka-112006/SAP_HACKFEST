@@ -121,7 +121,7 @@ export default function TopNavbar() {
         <div className="persona-controls" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link to="/workspace">{t('workspace')}</Link>
           <LanguageSelector />
-          {apiConfig.demoMode?<details className="demo-panel"><summary>Demo mode · {currentRole}</summary><RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole}/><label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120}/></label></details>:<span>{currentRole}</span>}
+          {apiConfig.demoMode?<details className="demo-panel"><summary title="Development-only simulated identity. Not verified production authentication.">DEV · {currentRole} · {demoUserId}</summary><RoleSwitch activeRole={currentRole} onRoleChange={setCurrentRole}/><label className="demo-identity">Local demo user ID <input aria-label="Local demo user ID" value={demoUserId} onChange={event=>setDemoUserId(event.target.value)} maxLength={120}/></label><p className="demo-note">Simulated development identity only. Selecting a role pairs it with that role&apos;s seeded account.</p></details>:<span>{currentRole}</span>}
         </div>
       </div>
     </header>
