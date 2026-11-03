@@ -379,15 +379,14 @@ export default function IntroSequence({ onComplete }) {
           pointerEvents:'none',
         }}/>
 
-        {/* ══ TOP BRAND HEADER — CENTERED & HIGHLIGHTED BRAND ══ */}
+        {/* ══ TOP BAR ══ */}
         <div style={{
           position:'absolute', top:0, left:0, right:0,
-          padding:'22px 36px', zIndex:30,
-          display:'flex', alignItems:'center', justifyContent:'center',
+          padding:'20px 36px', zIndex:30,
+          display:'flex', alignItems:'center', justifyContent:'space-between',
         }}>
-          {/* Shop-Floor Status Pill on far left */}
+          {/* Shop-Floor Status Pill */}
           <div style={{
-            position:'absolute', left:'36px',
             display:'flex', alignItems:'center', gap:'8px',
             padding:'7px 16px', borderRadius:'100px',
             background:'rgba(0, 229, 255, 0.08)',
@@ -397,60 +396,18 @@ export default function IntroSequence({ onComplete }) {
             boxShadow:'0 0 16px rgba(0, 229, 255, 0.15)',
           }}>
             <span style={{ width:'8px', height:'8px', borderRadius:'50%', background:'#00E5FF', boxShadow:'0 0 10px #00E5FF', animation:'is-pulse 1.2s infinite' }} />
-            <span>AI SHOP-FLOOR ENGINE</span>
+            <span>AI SHOP-FLOOR ENGINE ACTIVE</span>
           </div>
 
-          {/* GRAND CENTERED BRAND — BIG HIGHLIGHTED LETTERS & UNIFIED LOGO */}
           <div style={{
-            display:'flex', alignItems:'center', gap:'18px',
-            animation:'is-brandCenter 0.75s cubic-bezier(.16,1,.3,1) both',
+            fontSize:'12px', fontWeight:800, letterSpacing:'2px',
+            color:'rgba(255,255,255,0.4)', fontFamily:'monospace',
           }}>
-            {/* EXACT IDENTICAL LOGO TO LANDING PAGE (Unified Cyber-Teal Metallic Tool Emblem) */}
-            <div style={{
-              width:'58px', height:'58px', borderRadius:'16px',
-              background:'linear-gradient(135deg, #00E5FF 0%, #0070F3 50%, #7C3AED 100%)',
-              display:'flex', alignItems:'center', justifyContent:'center',
-              boxShadow:'0 8px 32px rgba(0, 229, 255, 0.7), 0 0 50px rgba(0, 112, 243, 0.45)',
-              border:'2px solid rgba(255, 255, 255, 0.45)',
-              flexShrink:0,
-            }}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" stroke="rgba(255,255,255,0.85)" strokeWidth="1.6" />
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-              </svg>
-            </div>
-
-            <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-start' }}>
-              <div style={{
-                fontSize:'clamp(34px, 3.8vw, 44px)',
-                fontWeight:900,
-                letterSpacing:'-0.03em',
-                lineHeight:1,
-                background:'linear-gradient(135deg, #FFFFFF 15%, #38BDF8 60%, #00E5FF 100%)',
-                WebkitBackgroundClip:'text',
-                WebkitTextFillColor:'transparent',
-                backgroundClip:'text',
-                filter:'drop-shadow(0 0 28px rgba(0, 229, 255, 0.75)) drop-shadow(0 4px 12px rgba(0,0,0,0.85))',
-              }}>
-                ToolSathi
-              </div>
-              <div style={{
-                fontSize:'12px',
-                letterSpacing:'1.8px',
-                fontFamily:'monospace',
-                color:'#38BDF8',
-                fontWeight:800,
-                marginTop:'4px',
-                textShadow:'0 0 14px rgba(0,229,255,0.65)',
-              }}>
-                EVIDENCE LINE • INTELLIGENT MANUFACTURING CONTROL
-              </div>
-            </div>
+            SAP HACKFEST 2026 • AUTONOMOUS MANUFACTURING SCENARIO
           </div>
 
-          {/* Skip button on far right */}
+          {/* Skip button */}
           <button onClick={handleSkip} style={{
-            position:'absolute', right:'36px',
             padding:'10px 24px', borderRadius:'100px',
             background:'rgba(255,255,255,0.08)', backdropFilter:'blur(16px)',
             border:'1.5px solid rgba(0, 229, 255, 0.45)',
@@ -466,85 +423,121 @@ export default function IntroSequence({ onComplete }) {
           </button>
         </div>
 
-        {/* ══ CENTER STAGE ══ */}
+        {/* ══ CENTER STAGE: PRESENTING ToolSathi IN BOLD HIGHLIGHTED LETTERS ══ */}
         <div style={{
           position:'relative', zIndex:20,
           display:'flex', flexDirection:'column', alignItems:'center',
-          gap:'20px', textAlign:'center',
-          maxWidth:'800px', width:'100%', padding:'0 32px',
+          gap:'16px', textAlign:'center',
+          maxWidth:'920px', width:'100%', padding:'0 32px',
         }}>
-          {/* Icon card */}
-          <div key={`ic-${phase}`} className="is-pop" style={{
-            padding:'26px',
-            borderRadius:'24px',
-            background:`linear-gradient(145deg, rgba(20,15,8,0.8) 0%, ${cur.bg} 100%)`,
-            border:`1.5px solid ${cur.border}`,
-            boxShadow:`
-              0 0 0 1px rgba(255,255,255,0.04),
-              0 0 55px ${cur.glow},
-              inset 0 1px 0 rgba(255,255,255,0.07),
-              inset 0 -1px 0 rgba(0,0,0,0.3)
-            `,
-            backdropFilter:'blur(28px)',
-            transition:'border-color 0.5s, box-shadow 0.5s',
+          {/* EXACT SAME UNIFIED LOGO AS LANDING PAGE */}
+          <div className="is-pop" style={{
+            width:'80px', height:'80px', borderRadius:'22px',
+            background:'linear-gradient(135deg, #00E5FF 0%, #0070F3 50%, #7C3AED 100%)',
+            display:'flex', alignItems:'center', justifyContent:'center',
+            boxShadow:'0 12px 45px rgba(0, 229, 255, 0.8), 0 0 80px rgba(0, 112, 243, 0.55)',
+            border:'2.5px solid rgba(255, 255, 255, 0.5)',
+            flexShrink:0,
           }}>
-            {cur.icon}
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" stroke="rgba(255,255,255,0.9)" strokeWidth="1.6" />
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
           </div>
 
-          {/* Phase badge */}
-          <div key={`ba-${phase}`} className="is-fu" style={{
-            display:'inline-flex', alignItems:'center', gap:'9px',
-            padding:'7px 20px', borderRadius:'100px',
-            background:cur.bg,
-            border:`1px solid ${cur.accent}`,
-            boxShadow:`0 0 22px ${cur.glow}`,
-            transition:'background 0.5s, border-color 0.5s, box-shadow 0.5s',
+          {/* Glowing Presentation Eyebrow: PRESENTING */}
+          <div className="is-fu" style={{
+            display:'inline-flex', alignItems:'center', gap:'12px',
+            padding:'6px 24px', borderRadius:'100px',
+            background:'rgba(0, 229, 255, 0.12)',
+            border:'1.5px solid rgba(0, 229, 255, 0.5)',
+            boxShadow:'0 0 24px rgba(0, 229, 255, 0.35)',
           }}>
+            <span style={{ width:'8px', height:'8px', borderRadius:'50%', background:'#00E5FF', boxShadow:'0 0 10px #00E5FF', animation:'is-pulse 1.2s infinite' }} />
             <span style={{
-              width:'8px', height:'8px', borderRadius:'50%', flexShrink:0,
-              background:cur.accent, boxShadow:`0 0 10px ${cur.accent}`,
-              animation:'is-pulse 1.1s ease-in-out infinite',
-            }}/>
-            <span style={{
-              fontSize:'11.5px', fontWeight:800, fontFamily:'monospace',
-              letterSpacing:'0.09em', color:cur.accent,
-            }}>{cur.badge}</span>
+              fontSize:'14.5px', fontWeight:900, fontFamily:'monospace',
+              letterSpacing:'0.28em', color:'#00E5FF',
+              textShadow:'0 0 14px rgba(0, 229, 255, 0.85)',
+            }}>
+              PRESENTING
+            </span>
+            <span style={{ width:'8px', height:'8px', borderRadius:'50%', background:'#00E5FF', boxShadow:'0 0 10px #00E5FF', animation:'is-pulse 1.2s infinite' }} />
           </div>
 
-          {/* Title */}
-          <h1 key={`ti-${phase}`} className="is-fu2" style={{
-            fontSize:'clamp(28px,4.2vw,50px)', fontWeight:900,
-            letterSpacing:'-0.035em', lineHeight:1.12, margin:0,
-            color:'#FFFFFF', WebkitTextFillColor:'#FFFFFF',
-            textShadow:`0 0 55px ${cur.glow}, 0 2px 28px rgba(0,0,0,0.98)`,
+          {/* BIG BOLD HIGHLIGHTED ToolSathi */}
+          <h1 className="is-fu2" style={{
+            fontSize:'clamp(54px, 7.5vw, 84px)',
+            fontWeight:900,
+            letterSpacing:'-0.035em',
+            lineHeight:1,
+            margin:0,
+            background:'linear-gradient(135deg, #FFFFFF 15%, #38BDF8 55%, #00E5FF 100%)',
+            WebkitBackgroundClip:'text',
+            WebkitTextFillColor:'transparent',
+            backgroundClip:'text',
+            filter:'drop-shadow(0 0 38px rgba(0, 229, 255, 0.85)) drop-shadow(0 6px 20px rgba(0,0,0,0.95))',
           }}>
-            {phase === 1
-              ? <>Exposure Boundary:{' '}
-                  <span style={{ color:cur.accent, fontFamily:'monospace',
-                    textShadow:`0 0 30px ${cur.accent}, 0 0 60px ${cur.accent}` }}>
-                    {counter}
-                  </span>{' '}Assemblies
-                </>
-              : cur.title}
+            ToolSathi
           </h1>
 
-          {/* Subtitle */}
-          <p key={`su-${phase}`} className="is-fu3" style={{
-            fontSize:'clamp(14px,1.8vw,18px)', lineHeight:1.7, margin:0,
-            maxWidth:'650px', color:'rgba(220,210,190,0.85)',
-            WebkitTextFillColor:'rgba(220,210,190,0.85)',
+          {/* Subtitle / Brand Slogan */}
+          <div className="is-fu3" style={{
+            fontSize:'clamp(15px, 2vw, 19px)',
+            fontWeight:800,
+            color:'rgba(255, 255, 255, 0.95)',
+            letterSpacing:'0.03em',
+            maxWidth:'750px',
+            textShadow:'0 2px 12px rgba(0,0,0,0.85)',
           }}>
-            {cur.sub}
-          </p>
+            Intelligent Shop-Floor Incident Control &amp; Autonomous S/4HANA Governance
+          </div>
 
-          {/* Accent underline */}
-          <div style={{
-            width:'80px', height:'2.5px',
-            background:`linear-gradient(90deg, transparent, ${cur.accent}, transparent)`,
-            boxShadow:`0 0 14px ${cur.accent}`,
-            borderRadius:'2px',
-            transition:'background 0.5s, box-shadow 0.5s',
-          }}/>
+          {/* DYNAMIC INNOVATION PHASE CARD */}
+          <div key={`phase-pill-${phase}`} className="is-fu" style={{
+            marginTop:'8px',
+            display:'flex', alignItems:'center', gap:'16px',
+            padding:'14px 28px', borderRadius:'18px',
+            background:`linear-gradient(135deg, rgba(15,23,42,0.92) 0%, ${cur.bg} 100%)`,
+            border:`1.8px solid ${cur.accent}`,
+            boxShadow:`0 0 35px ${cur.glow}, inset 0 1px 0 rgba(255,255,255,0.18)`,
+            backdropFilter:'blur(24px)',
+            transition:'all 0.5s ease',
+            maxWidth:'680px',
+            width:'100%',
+            boxSizing:'border-box',
+          }}>
+            <div style={{
+              width:'44px', height:'44px', borderRadius:'12px',
+              background:cur.bg, border:`1.5px solid ${cur.accent}`,
+              display:'flex', alignItems:'center', justifyContent:'center',
+              flexShrink:0,
+              overflow:'hidden',
+            }}>
+              <div style={{ transform:'scale(0.58)', transformOrigin:'center center' }}>
+                {cur.icon}
+              </div>
+            </div>
+            <div style={{ textAlign:'left', flex:1 }}>
+              <div style={{
+                fontSize:'12px', fontWeight:900, fontFamily:'monospace',
+                color:cur.accent, letterSpacing:'0.09em',
+              }}>
+                {cur.badge}
+              </div>
+              <div style={{
+                fontSize:'16px', fontWeight:800, color:'#FFFFFF', marginTop:'3px',
+                letterSpacing:'-0.01em',
+              }}>
+                {phase === 1 ? `Forward Trace Boundary: ${counter} Assemblies Traced` : cur.title}
+              </div>
+              <div style={{
+                fontSize:'13px', fontWeight:600, color:'rgba(220,210,190,0.88)', marginTop:'2px',
+                lineHeight:1.4,
+              }}>
+                {cur.sub}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* ══ BOTTOM TIMELINE ══ */}
