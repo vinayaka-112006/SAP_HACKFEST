@@ -7,8 +7,10 @@ const backend = path.join(root, "backend");
 const frontend = path.join(root, "frontend");
 const backendPort = Number(process.env.TOOLSATHI_BACKEND_PORT || 4004);
 const frontendPort = Number(process.env.TOOLSATHI_FRONTEND_PORT || 5173);
-const fresh = process.argv.includes("--fresh");
-const sqlite = fresh || process.argv.includes("--sqlite");
+const v2 = process.argv.includes("--v2");
+const v22 = process.argv.includes("--v22");
+const fresh = v2 || process.argv.includes("--fresh");
+const sqlite = true;
 const children = [];
 let stopping = false;
 async function freePort(port) {
@@ -41,6 +43,7 @@ function launch(role, file, args, cwd, env) {
   });
 }
 async function main() {
+  if (process.argv.some(a=>a.startsWith('--hana'))) throw Error('ToolSathi uses SQLite only. Start with npm run dev:v22.');
   for (const file of [path.join(backend, "node_modules/@sap/cds/package.json"), path.join(frontend, "node_modules/vite/bin/vite.js")])
     if (!fs.existsSync(file)) throw Error("Install dependencies first: npm --prefix backend ci and npm --prefix frontend ci.");
   if (backendPort === frontendPort) throw Error("Backend and frontend require different ports.");
@@ -48,17 +51,27 @@ async function main() {
   if (stopping) return;
   const backendEnv = { ...process.env, NODE_ENV: "development", CDS_ENV: "development", AUTH_MODE: "header", ENFORCE_APPROVALS: "true", ALLOW_UNAPPROVED_MOCKS: "false", PORT: String(backendPort) };
   if (sqlite) backendEnv.DATABASE_MODE = "sqlite";
+  if (v2) Object.assign(backendEnv, { V2_WORKFLOW_ENABLED: 'true', V2_SYNTHETIC_FIXTURES: 'true' });
+  if (v22) {
+    Object.assign(backendEnv, { V2_WORKFLOW_ENABLED: 'true', V22_WORKFLOW_ENABLED: 'true', V22_SYNTHETIC_FIXTURES: 'true', V2_SYNTHETIC_FIXTURES: 'false' });
+    // One documented persistent V2.2 database; the versioned synthetic scenario is
+    // applied once (never reset, never overwritten) and preserved across restarts.
+    backendEnv.SQLITE_FILE = process.env.SQLITE_FILE || path.join(backend, 'db.sqlite');
+  }
   if (fresh) {
     const backup = path.join(root, "backup");
     fs.mkdirSync(backup, { recursive: true });
     backendEnv.CDS_REQUIRES_DB_CREDENTIALS_URL = path.join(backup, `demo-${require("node:crypto").randomUUID()}.sqlite`);
+    backendEnv.SQLITE_FILE = backendEnv.CDS_REQUIRES_DB_CREDENTIALS_URL;
     console.log(`Fresh isolated SQLite demo: ${backendEnv.CDS_REQUIRES_DB_CREDENTIALS_URL}`);
   }
   launch("backend", path.join(backend, "srv/server.js"), sqlite ? ["--database=sqlite"] : [], backend, backendEnv);
   launch("frontend", path.join(frontend, "node_modules/vite/bin/vite.js"), ["--host", "127.0.0.1", "--port", String(frontendPort), "--strictPort"], frontend, {
     ...process.env, VITE_API_BASE_URL: "/api", API_PROXY_TARGET: `http://localhost:${backendPort}`,
+    ...(v22 ? { VITE_AI_ENABLED: 'true' } : {}),
     TOOLSATHI_VITE_CACHE_DIR: process.env.TOOLSATHI_VITE_CACHE_DIR || path.join(frontend, "node_modules", `.vite-${frontendPort}`),
   });
+  console.log(`ToolSathi database: SQLite ${backendEnv.SQLITE_FILE || backendEnv.CDS_REQUIRES_DB_CREDENTIALS_URL || 'db.sqlite'} (persistent; restart preserves records)`);
   console.log(`Starting ToolSathi: http://localhost:${frontendPort} (API http://localhost:${backendPort}/api). Ctrl+C stops both processes.`);
 }
 for (const signal of ["SIGINT", "SIGTERM"]) process.once(signal, () => { void stop(); });

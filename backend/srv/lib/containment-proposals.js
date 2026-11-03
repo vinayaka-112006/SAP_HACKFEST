@@ -29,6 +29,7 @@ function buildContainmentProposal({
   incident,
   tool,
   repeatFailure,
+  managerReview,
   trace,
   qualityBatchIds = [],
   stockBatchIds = [],
@@ -65,7 +66,8 @@ function buildContainmentProposal({
   let payload;
 
   if (type === "TOOL_RESTRICTION") {
-    if (!repeat) return failed("repeat_failure_threshold_not_met");
+    const reviewed=managerReview?.auditId&&managerReview.reviewedBy&&managerReview.reviewedAt&&['High','Critical'].includes(managerReview.severity);
+    if (!repeat&&!reviewed) return failed("repeat_failure_threshold_not_met");
     if (!tool || tool.state !== "Active")
       return failed("tool_not_in_restrictable_state", {
         state: tool?.state ?? null,
@@ -74,7 +76,7 @@ function buildContainmentProposal({
       toolId,
       action: "RESTRICT",
       reason: proposalReason,
-      evidence: { repeatFailure: repeatEvidence },
+      evidence: { repeatFailure: repeatEvidence,...(reviewed?{managerReview}:{}) },
     };
   } else if (type === "MAINTENANCE_NOTIFICATION") {
     if (!repeat) return failed("repeat_failure_threshold_not_met");
@@ -142,6 +144,7 @@ function buildContainmentProposal({
       reason: proposalReason,
       evidence: {
         ...(repeatEvidence ? { repeatFailure: repeatEvidence } : {}),
+        ...(type==='TOOL_RESTRICTION'&&managerReview?.auditId?{managerReview}:{}),
         ...(evidence ? { trace: evidence } : {}),
         exposure: trace ? "Potentially exposed" : "Unknown",
         affectedQuantity: null,

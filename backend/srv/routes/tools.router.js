@@ -9,6 +9,7 @@ router.get(
   wrap(async (req, res) =>
     res.json(
       label({
+        demoScenario: await require('../lib/synthetic-scenario').read(cds.db),
         tools: await cds.db.run(
           cds.ql.SELECT.from(entity("Tool")).orderBy("toolId"),
         ),
@@ -21,7 +22,8 @@ router.get(
   requireRole(),
   wrap(async (req, res) => {
     const result = await transaction(async (tx) => {
-      await tool(tx, req.params.id);
+      const selected=await tool(tx, req.params.id);
+      if(await require('../lib/v2').workflowAvailable(tx))await require('../lib/operations').scope(tx,req.user,selected);
       const events = (
         await tx.run(
           cds.ql.SELECT.from(entity("ToolHistoryEvent"))

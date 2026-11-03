@@ -1,10 +1,14 @@
 import React from 'react';
+import {useStore} from '../state/store';
+import {useResource} from '../state/useResource';
 
 /**
  * Enterprise Production Status Ribbon
  * Professional industrial system header indicating plant connectivity and line telemetry.
  */
 export default function SyntheticRibbon() {
+  const {client,currentRole}=useStore();
+  const status=useResource('system:'+currentRole,signal=>client.request('/health',{signal}));
   return (
     <aside className="synthetic-ribbon"
       aria-label="Enterprise system telemetry status"
@@ -39,7 +43,7 @@ export default function SyntheticRibbon() {
         </span>
         <span style={{ opacity: 0.4 }}>|</span>
         <span style={{ color: '#94A3B8' }}>
-          SAP S/4HANA &amp; DM: SIMULATED | NO TENANT CONNECTED
+          {status.data?`${status.data.databaseMode==='hana'?'SAP HANA Cloud':'SQLite'} · Connected`:'Database connection unverified'} | SAP S/4HANA &amp; DM: SIMULATED
         </span>
       </div>
 

@@ -22,3 +22,8 @@ default-env.json
 *service_key*
 
 /frontend/.vite/
+
+# V2.3 protected uploads (documents and incident photos)
+/backend/uploads/
+
+/demo/runtime/raw/

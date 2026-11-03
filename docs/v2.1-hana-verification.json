@@ -1,0 +1,124 @@
+{
+  "at": "2026-11-02T11:33:18.946Z",
+  "remoteWrites": false,
+  "scenario": {
+    "toolId": "TOOL-B",
+    "reportedAt": "2026-11-04T05:12:00.000Z",
+    "synthetic": true,
+    "source": "Original synthetic-v1 import audit and matching production runs",
+    "auditId": "AUD-SEED-0001",
+    "localFixtureAnchor": "2026-10-31T05:12:00.000Z",
+    "storedClockDiffersFromLocalFixture": true
+  },
+  "trace": [
+    {
+      "hours": 24,
+      "total": 35,
+      "tiers": {
+        "CONFIRMED": 35,
+        "PROBABLE": 0,
+        "UNKNOWN": 0
+      },
+      "locations": {
+        "IN_STOCK": 35,
+        "SHIPPED": 0,
+        "UNKNOWN_LOCATION": 0
+      },
+      "score": 100,
+      "allSerialsMatch": true,
+      "allEvidenceAndGapsPreserved": true
+    },
+    {
+      "hours": 72,
+      "total": 100,
+      "tiers": {
+        "CONFIRMED": 90,
+        "PROBABLE": 4,
+        "UNKNOWN": 6
+      },
+      "locations": {
+        "IN_STOCK": 40,
+        "SHIPPED": 60,
+        "UNKNOWN_LOCATION": 0
+      },
+      "score": 82,
+      "allSerialsMatch": true,
+      "allEvidenceAndGapsPreserved": true
+    },
+    {
+      "hours": 168,
+      "total": 160,
+      "tiers": {
+        "CONFIRMED": 146,
+        "PROBABLE": 8,
+        "UNKNOWN": 6
+      },
+      "locations": {
+        "IN_STOCK": 50,
+        "SHIPPED": 110,
+        "UNKNOWN_LOCATION": 0
+      },
+      "score": 83,
+      "allSerialsMatch": true,
+      "allEvidenceAndGapsPreserved": true
+    }
+  ],
+  "connected": true,
+  "tables": 35,
+  "counts": {
+    "toolsathi.Approval": 1,
+    "toolsathi.AuditLog": 82,
+    "toolsathi.Batch": 18,
+    "toolsathi.CalibrationRecord": 1,
+    "toolsathi.ConversationSession": 0,
+    "toolsathi.Counter": 2,
+    "toolsathi.Dealer": 2,
+    "toolsathi.EquipmentRequirement": 5,
+    "toolsathi.Incident": 24,
+    "toolsathi.IncidentEvidence": 0,
+    "toolsathi.IncidentRelationship": 0,
+    "toolsathi.InventoryStock": 9,
+    "toolsathi.MockDocument": 1,
+    "toolsathi.NcCode": 5,
+    "toolsathi.PartReservation": 0,
+    "toolsathi.ProductionDemand": 5,
+    "toolsathi.ProductionRun": 18,
+    "toolsathi.Proposal": 1,
+    "toolsathi.RepairLog": 3,
+    "toolsathi.RepairWorkOrder": 1,
+    "toolsathi.Shipment": 9,
+    "toolsathi.SopDoc": 8,
+    "toolsathi.SparePart": 20,
+    "toolsathi.TechnicianQualification": 8,
+    "toolsathi.TemporaryAssignment": 0,
+    "toolsathi.Tool": 8,
+    "toolsathi.ToolHistoryEvent": 63,
+    "toolsathi.ToolUseEvent": 18,
+    "toolsathi.TraceResult": 35,
+    "toolsathi.Unit": 300,
+    "toolsathi.UserInvitation": 0,
+    "toolsathi.UserNotification": 0,
+    "toolsathi.UserProfile": 26,
+    "toolsathi.WorkforceProfile": 14,
+    "toolsathi.WorkStation": 5
+  },
+  "totalRecords": 692,
+  "originalTables": 21,
+  "originalRecordsPreserved": 585,
+  "backupManifestVerified": true,
+  "auditProtectionVerified": true,
+  "matchingSyntheticRecords": 106,
+  "repeatSeedPreviewInserts": 0,
+  "schemaMatchesModel": true,
+  "exclusiveSchema": true,
+  "persistence": {
+    "backendStarts": 2,
+    "databaseMode": "hana",
+    "sameDatabase": true,
+    "incidentUnchangedAfterRestart": true,
+    "persistedSeedIncident": "V21-INC-01",
+    "workforceReadVerified": true,
+    "recommendationCount": 4,
+    "testWrites": 0
+  }
+}

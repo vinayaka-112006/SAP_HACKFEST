@@ -47,6 +47,8 @@ function createAdapter(machine, approvals) {
             Object.hasOwn(incident, from));
   }
   function canToolTransition(from, to, ctx = {}) {
+    // Additive V2.2 correction seam; tool-state validates persisted work and evidence.
+    if(from==='Awaiting verification'&&to==='Under repair'&&ctx.correction===true&&['Manager','Verifier'].includes(ctx.role))return true;
     if (machine) return machine.canToolTransition(from, to, ctx);
     if (from === "Retired") return false;
     if (to === "Retired") return true;

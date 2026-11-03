@@ -21,6 +21,10 @@
     {
       "name": "$XSAPPNAME.Verifier",
       "description": "Verifier access"
+    },
+    {
+      "name": "$XSAPPNAME.Administrator",
+      "description": "Application onboarding and qualification administration"
     }
   ],
   "role-templates": [
@@ -58,6 +62,13 @@
       "scope-references": [
         "$XSAPPNAME.Verifier"
       ]
+    },
+    {
+      "name": "Administrator",
+      "description": "Administrator",
+      "scope-references": [
+        "$XSAPPNAME.Administrator"
+      ]
     }
   ],
   "role-collections": [
@@ -94,6 +105,13 @@
       "description": "Verifier role collection",
       "role-template-references": [
         "$XSAPPNAME.Verifier"
+      ]
+    },
+    {
+      "name": "ToolSathi_Administrator",
+      "description": "Administrator role collection",
+      "role-template-references": [
+        "$XSAPPNAME.Administrator"
       ]
     }
   ]

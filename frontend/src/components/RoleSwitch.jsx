@@ -42,7 +42,8 @@ const ROLES = [
       </svg>
     )
   },
-  { id: 'Verifier', label: 'Verifier', icon: null }
+  { id: 'Verifier', label: 'Verifier', icon: null },
+  { id: 'Administrator', label: 'Administrator', icon: null }
 ];
 
 /**

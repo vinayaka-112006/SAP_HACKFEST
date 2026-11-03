@@ -362,4 +362,5 @@ text += "The console exposes the existing tool restriction, stock block, quality
 text += "Incident reportedAt is the client-reported event time in UTC; the route rejects malformed and future event times, while createdAt records server receipt time. An omitted reportedAt is assigned the server receipt time. Incident confirmation stores a business confirmer reference separately from authenticated audit actor identity. Successful trace generation assigns one traceId shared by its response, trace record, application audit event and tool history entry; a new request or window creates a separate trace version. Audit timestamps remain operation time.\n\n";
 text += "There is no incident closure API in this backend. Return-to-service verification sets the tool Active; it does not close the incident. Do not present incident closure or a completed reconciliation lifecycle as implemented until its policy and API contract are defined.\n\n";
 fs.writeFileSync("docs/api-contract.md", text.trimEnd() + "\n");
+require('./update-v2-contract')();
 console.log("Updated contract and OpenAPI from public synthetic examples.");

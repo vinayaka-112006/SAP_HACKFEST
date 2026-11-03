@@ -1,6 +1,6 @@
 const { fail } = require("./http");
 const { cds } = require("./db");
-const roles = ["Worker", "Manager", "Quality", "Technician", "Verifier"];
+const roles = ["Worker", "Manager", "Quality", "Technician", "Verifier", "Administrator"];
 const verified = Symbol("verified-xsuaa-user");
 let service;
 const mode = () =>
@@ -64,6 +64,20 @@ function requireRole(...allowed) {
         : user.role;
       if (!role) fail(403, "FORBIDDEN", "Role is not permitted");
       req.user = { ...user, role };
+      if (['Manager','Verifier'].includes(role) && await require('./v2').workflowAvailable(cds.db)) {
+        const incidentId=/\/incidents\/([^/?]+)/.exec(req.originalUrl)?.[1] || req.body?.incidentId || req.query.incident || req.query.incidentId;
+        if(incidentId)await require('./v2').access(cds.db,req.user,decodeURIComponent(incidentId));
+      }
+      if (mode() === 'xsuaa' && ['Worker','Technician'].includes(role)) {
+        const incidentId = /\/incidents\/([^/?]+)/.exec(req.originalUrl)?.[1] || req.body?.incidentId || req.query.incident || req.query.incidentId;
+        if (incidentId) await require('./v2').access(cds.db, req.user, decodeURIComponent(incidentId));
+        if (/\/audit(?:\?|$)|\/tools\/[^/]+\/history|\/ai\/search|\/incidents\/[^/]+\/similar/.test(req.originalUrl))
+          fail(403, 'FORBIDDEN', 'This history is restricted to review roles');
+        if (req.method === 'POST' && /\/incidents$/.test(req.path) && req.body?.reporterId !== user.id)
+          fail(403, 'FORBIDDEN', 'Reporter must match authenticated identity');
+        if (req.method === 'POST' && /\/confirm$/.test(req.path) && req.body?.confirmedBy !== user.id)
+          fail(403, 'FORBIDDEN', 'Confirmer must match authenticated identity');
+      }
       next();
     } catch (e) {
       next(e);
