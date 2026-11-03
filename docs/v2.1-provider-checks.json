@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-02T10:40:49.893Z",
+  "checkedAt": "2026-11-03T03:27:39.326Z",
   "remoteWrites": false,
   "groq": {
     "connected": true,
@@ -12,21 +12,21 @@
         "language": "en",
         "tts": true,
         "stt": true,
-        "audioBytes": 124230,
+        "audioBytes": 135520,
         "transcriptNonempty": true
       },
       {
         "language": "kn",
         "tts": true,
         "stt": true,
-        "audioBytes": 112940,
+        "audioBytes": 116704,
         "transcriptNonempty": true
       },
       {
         "language": "hi",
         "tts": true,
         "stt": true,
-        "audioBytes": 97888,
+        "audioBytes": 90360,
         "transcriptNonempty": true
       }
     ],

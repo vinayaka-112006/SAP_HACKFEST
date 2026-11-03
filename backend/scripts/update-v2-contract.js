@@ -4,6 +4,7 @@ const schemas={
   language:{type:'string',enum:['en','kn','hi']},boolean:{type:'boolean'},version:{type:'integer',minimum:0},
 };
 const contracts=[
+  ['get','/v2/demo-identities','Development header-authentication only; synthetic V22 identities','',''],
   ['post','/v2/incidents/{id}/exposure-reports','Scoped Manager Quality Verifier','window','filters'],
   ['get','/v2/exposure-reports/{id}','Scoped Manager Quality Verifier','',''],
   ['get','/v2/exposure-reports/{id}/download','Scoped Manager Quality Verifier','',''],

@@ -5,6 +5,12 @@ const {requireRole}=require('../lib/auth');
 const v=require('../lib/v2'),ops=require('../lib/operations');
 const run=fn=>wrap(async(req,res)=>res.json(label(await transaction(async tx=>{await ops.enabled(tx);return fn(req,tx);})))) ;
 const now=()=>new Date().toISOString();
+router.get('/v2/demo-identities',requireRole(),run(async(req,tx)=>{
+  if(process.env.NODE_ENV==='production'||(process.env.AUTH_MODE||'header')!=='header')fail(404,'NOT_FOUND','Endpoint not found');
+  const profiles=(await ops.rows(tx,'UserProfile')).filter(p=>p.userId.startsWith('V22-')&&p.team.startsWith('V22 SYNTHETIC')&&p.status==='Active');
+  const details=await ops.rows(tx,'UserProfileDetail');
+  return {synthetic:true,identities:profiles.map(p=>({userId:p.userId,displayName:p.displayName,role:p.role,workCenter:p.workCenter,language:p.language,shiftEndsAt:details.find(d=>d.userId===p.userId)?.shiftEndsAt||null})).sort((a,b)=>a.userId.localeCompare(b.userId))};
+}));
 router.get('/v2/dashboard',requireRole(),run(async(req,tx)=>{
   const permissions=await ops.permissions(tx,req.user),issues=await ops.issues(tx,req.user);
   const allTools=await ops.rows(tx,'Tool'),tools=allTools.filter(t=>permissions.unrestricted||permissions.workCenters.includes(t.workCenter));

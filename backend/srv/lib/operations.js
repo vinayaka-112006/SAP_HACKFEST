@@ -1,11 +1,13 @@
 const { cds, entity, decode } = require('./db');
 const { fail } = require('./http');
 const v = require('./v2');
+const migration = require('./schema-migration');
 const rows = (tx, name, where) => tx.run(where ? cds.ql.SELECT.from(entity(name)).where(where) : cds.ql.SELECT.from(entity(name)));
 const array = value => { try { const parsed=JSON.parse(value||'[]'); return Array.isArray(parsed)?parsed:[]; } catch { return []; } };
 async function available(tx) {
   if (cds.db.kind !== 'sqlite') return process.env.V22_WORKFLOW_ENABLED === 'true';
-  return Boolean((await tx.run("SELECT name FROM sqlite_master WHERE type='table' AND name='toolsathi_UserAuthorization'")).length);
+  // Every additive V2.2 table must exist before dashboards report real data.
+  return (await migration.missing(tx)).length === 0;
 }
 async function enabled(tx) {
   if (!await available(tx)) fail(409,'V22_SCHEMA_REQUIRED','Deploy the reviewed additive V2.2 schema and enable V22_WORKFLOW_ENABLED before using operations dashboards');

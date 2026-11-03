@@ -61,13 +61,25 @@
         "status": "PASSED"
       },
       {
+        "name": "V2.2 automatic allocation requires confirmation and the assigned worker acknowledges it",
+        "status": "PASSED"
+      },
+      {
         "name": "V2.1 assistant stays within the viewport and uses actual authorized sources",
+        "status": "PASSED"
+      },
+      {
+        "name": "V2.2 exposure PDF and CSV downloads use a persisted server snapshot and survive refresh",
+        "status": "PASSED"
+      },
+      {
+        "name": "V2.2 role dashboards open scoped issue details, survive refresh, and persist notification reads",
         "status": "PASSED"
       }
     ],
     "pageErrors": [],
     "frontendUrl": "http://localhost:5174",
-    "backendUrl": "http://localhost:59987/api",
+    "backendUrl": "http://localhost:63994/api",
     "backendSmoke": "PASSED",
     "backendStubVerification": "PASSED",
     "manualFallbackWithAiDisabled": true,
@@ -78,7 +90,22 @@
     "v21VoiceTextFallback": true,
     "physicalMicrophoneTested": false,
     "v21WorkforceBrowser": true,
+    "v22AutomaticAllocation": {
+      "managerConfirmed": true,
+      "workerAcknowledged": true
+    },
     "v21ChatBrowser": true,
+    "v22ExposureDownloads": {
+      "pdfBytes": 34583,
+      "csvBytes": 126307,
+      "persistedSnapshot": true
+    },
+    "v22Dashboards": {
+      "roles": 4,
+      "issueRefresh": true,
+      "notificationRead": true,
+      "visibleWorkerVoice": true
+    },
     "v21ResponsiveLocales": {
       "routes": 5,
       "languages": 3,
@@ -92,7 +119,7 @@
     },
     "trace": [
       {
-        "traceId": "TRACE-565941d8-97f0-4427-80ac-4a483d188573",
+        "traceId": "TRACE-3b72d36c-3b70-4515-a5f4-c1e4b5e633f1",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -141,7 +168,7 @@
         }
       },
       {
-        "traceId": "TRACE-f02501a1-ca77-4112-99d7-6787ba18e301",
+        "traceId": "TRACE-dc9eeb58-1d24-4df6-8dbc-68269c153080",
         "windowHours": 24,
         "summary": {
           "totalUnits": 35,
@@ -190,7 +217,7 @@
         }
       },
       {
-        "traceId": "TRACE-24d94d2c-d23e-409f-89b2-d83c114f1be0",
+        "traceId": "TRACE-b9923581-cc2c-434d-bebe-e61dd598db6a",
         "windowHours": 168,
         "summary": {
           "totalUnits": 160,
@@ -239,7 +266,7 @@
         }
       },
       {
-        "traceId": "TRACE-fa974d74-90c7-44e5-b38f-372a70382862",
+        "traceId": "TRACE-25dc2d33-8e3d-45c1-9282-5e0e44eff826",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -288,7 +315,7 @@
         }
       },
       {
-        "traceId": "TRACE-5fe40f63-00b7-4ebe-96ea-6db01a66d2d4",
+        "traceId": "TRACE-62dd7284-834a-4b77-9dd3-319df32173bf",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -337,7 +364,7 @@
         }
       },
       {
-        "traceId": "TRACE-d2164036-6686-4d09-a649-18ff3414dac6",
+        "traceId": "TRACE-9b90182f-b3d7-42bd-825e-80e21afd1416",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -386,7 +413,7 @@
         }
       },
       {
-        "traceId": "TRACE-515d33a7-eb31-4166-960e-6d4040cf0a26",
+        "traceId": "TRACE-9f336fd9-c792-4370-99a1-f512df19bef8",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -435,7 +462,7 @@
         }
       },
       {
-        "traceId": "TRACE-a7cdb373-7047-45fc-9189-c9f472102262",
+        "traceId": "TRACE-9b18003b-b751-4fc9-888e-b136352d7103",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -484,7 +511,7 @@
         }
       },
       {
-        "traceId": "TRACE-00625b2f-b55c-413b-9391-ef551d32e039",
+        "traceId": "TRACE-f31aa307-ac31-4c4a-8032-aa4c49dcadab",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -533,7 +560,7 @@
         }
       },
       {
-        "traceId": "TRACE-ed79c481-1303-428a-8e47-c5d8da502d23",
+        "traceId": "TRACE-2191e3a2-1bf0-46f9-9e29-9a54eecedaa7",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -582,7 +609,7 @@
         }
       },
       {
-        "traceId": "TRACE-8db8c72b-3d54-4188-a4f5-13d21f20de7a",
+        "traceId": "TRACE-f3a7fb53-fbc7-4f87-a99a-ed79f79278c7",
         "windowHours": 72,
         "summary": {
           "totalUnits": 100,
@@ -631,7 +658,7 @@
         }
       },
       {
-        "traceId": "TRACE-531a2f15-f8eb-4396-98d1-1f54a6cd82aa",
+        "traceId": "TRACE-4ea57aeb-df37-4056-a24f-047c470920e8",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -680,7 +707,7 @@
         }
       },
       {
-        "traceId": "TRACE-a54c9e1f-8842-4b77-a0f5-7996b14de923",
+        "traceId": "TRACE-9f44ad29-dd7b-40ab-af23-8557eadec5bd",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -729,7 +756,7 @@
         }
       },
       {
-        "traceId": "TRACE-bfbf9b9a-9f7d-4d9d-aa3b-00994b73cfb6",
+        "traceId": "TRACE-60478746-4e68-40c1-ba46-767cc1c2c509",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -778,7 +805,7 @@
         }
       },
       {
-        "traceId": "TRACE-6ebeeea9-8fa1-480c-a406-0c159378e821",
+        "traceId": "TRACE-a0abc38b-1caa-4e4b-8d54-80624ce73956",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -827,7 +854,7 @@
         }
       },
       {
-        "traceId": "TRACE-37443666-36f2-40e4-a293-a8af9c290071",
+        "traceId": "TRACE-9fc045fe-8590-44e3-9ef6-652f1da2154c",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -876,7 +903,7 @@
         }
       },
       {
-        "traceId": "TRACE-b9f42f68-051e-4015-976c-65cc07cefcd5",
+        "traceId": "TRACE-c426106e-3776-4d7c-9158-236b1be19291",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -925,7 +952,7 @@
         }
       },
       {
-        "traceId": "TRACE-924fa09f-6063-44e7-8a09-2d7b58de1c45",
+        "traceId": "TRACE-1fc7ab71-320e-444d-9fed-beb23704b1e5",
         "windowHours": 72,
         "summary": {
           "totalUnits": 0,
@@ -970,10 +997,108 @@
           "low": 0,
           "high": 0,
           "unknownSeparate": 0,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-c8f0ea2f-1542-4137-9144-a9067fafb462",
+        "windowHours": 168,
+        "summary": {
+          "totalUnits": 160,
+          "byTier": {
+            "CONFIRMED": 146,
+            "PROBABLE": 8,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 50,
+            "SHIPPED": 110,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 55,
+            "DLR-Y": 55
+          }
+        },
+        "dataQuality": {
+          "score": 83,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 1.5
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 1
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
+          "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
+        }
+      },
+      {
+        "traceId": "TRACE-c100fec8-df11-45e4-a2da-253bfe088eb6",
+        "windowHours": 168,
+        "summary": {
+          "totalUnits": 160,
+          "byTier": {
+            "CONFIRMED": 146,
+            "PROBABLE": 8,
+            "UNKNOWN": 6
+          },
+          "byLocation": {
+            "IN_STOCK": 50,
+            "SHIPPED": 110,
+            "UNKNOWN_LOCATION": 0
+          },
+          "staleLocationUnits": 5,
+          "shippedByDealer": {
+            "DLR-X": 55,
+            "DLR-Y": 55
+          }
+        },
+        "dataQuality": {
+          "score": 83,
+          "deductions": [
+            {
+              "code": "UNKNOWN_UNITS",
+              "amount": 1.5
+            },
+            {
+              "code": "PROBABLE_UNITS",
+              "amount": 1
+            },
+            {
+              "code": "STALE_SHIPMENT_RECORDS",
+              "amount": 5
+            },
+            {
+              "code": "CONFLICT_RUNS",
+              "amount": 10
+            }
+          ]
+        },
+        "exposureRange": {
+          "low": 35,
+          "high": 154,
+          "unknownSeparate": 6,
           "definition": "low=Confirmed in 24h; high=Confirmed+Probable in 7d; Unknown counted separately"
         }
       }
     ],
-    "executedAt": "2026-11-02T15:25:11.563Z"
+    "executedAt": "2026-11-03T03:20:26.800Z"
   }
 }

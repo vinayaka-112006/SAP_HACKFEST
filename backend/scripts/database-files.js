@@ -8,7 +8,7 @@ function target() {
     cds.env.requires.db.kind !== "sqlite"
   )
     throw new Error("Local SQLite operation only");
-  const file = cds.env.requires.db.credentials?.url;
+  const file = process.env.SQLITE_FILE || cds.env.requires.db.credentials?.url;
   if (!file || file === ":memory:")
     throw new Error("Persistent SQLite file required");
   const resolved = path.resolve(projectRoot, file);

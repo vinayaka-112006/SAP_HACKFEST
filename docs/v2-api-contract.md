@@ -4,6 +4,7 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 
 | Method and path | Authority | Required body fields | Optional body fields |
 |---|---|---|---|
+| GET /v2/demo-identities | Development header-authentication only; synthetic V22 identities | — | — |
 | POST /v2/incidents/{id}/exposure-reports | Scoped Manager Quality Verifier | window | filters |
 | GET /v2/exposure-reports/{id} | Scoped Manager Quality Verifier | — | — |
 | GET /v2/exposure-reports/{id}/download | Scoped Manager Quality Verifier | — | — |

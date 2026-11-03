@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "node scripts/dev.js",
+    "dev": "node scripts/dev.js --v22",
     "dev:local": "node scripts/dev.js --sqlite",
     "dev:fresh": "node scripts/dev.js --fresh",
     "dev:v2": "node scripts/dev.js --v2",
@@ -13,6 +13,9 @@
     "build:backend": "npm --prefix backend run build",
     "build:frontend": "npm --prefix frontend run build",
     "dev:v21": "node scripts/dev.js --v2",
-    "dev:hana:v21": "node scripts/dev.js --hana-v21"
+    "dev:v22": "node scripts/dev.js --v22",
+    "dev:v22:fresh": "node scripts/dev.js --v22 --fresh",
+    "demo:v22:preview": "npm --prefix backend run demo:v22:preview",
+    "demo:v22:seed": "npm --prefix backend run demo:v22:seed"
   }
 }

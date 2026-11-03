@@ -2,6 +2,7 @@
 // Export only the configured exclusive ToolSathi schema into ignored local backup/.
 const config=require('../srv/lib/database-config');config.loadEnvironment();process.chdir(config.projectRoot);
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
+const version=process.argv.includes('--v22')?'v2.2':'v2.1';
 async function main(){
  const cds=require('@sap/cds'),operations=require('../srv/lib/hana-operations'),transfer=require('../srv/lib/data-transfer');
  const selected=config.configureDatabase(cds,{mode:'hana'});config.assertTarget(selected);
@@ -29,7 +30,7 @@ async function main(){
     }
   }finally{sqlite.close();if(temporary.startsWith(path.resolve('../backup')+path.sep))fs.unlinkSync(temporary);}
   const report={at:new Date().toISOString(),backupFile:path.basename(backup),tables:descriptors.length,records:Object.values(data).reduce((n,r)=>n+r.length,0),manifestVerified:true,sqliteRestoreVerified:true,remoteWrites:false};
-  fs.writeFileSync('../docs/v2.1-backup-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+  fs.writeFileSync('../docs/'+version+'-backup-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
  }finally{await db.disconnect();}
 }
 main().catch(e=>{console.error(JSON.stringify({code:e.code||'HANA_BACKUP_FAILED',message:'Backup or restore verification failed; no remote write was performed.'}));process.exitCode=1;});

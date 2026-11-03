@@ -1,4 +1,4 @@
-const { directCredentials, configureDatabase, assertTarget, diagnostic } = require("../srv/lib/database-config");
+const { directCredentials, configureDatabase, assertTarget, diagnostic } = require("../srv/lib/historical-hana-config");
 const { execFileSync, spawnSync } = require("node:child_process");
 const { assertExclusive, deploymentPlan, deploy } = require("../srv/lib/hana-operations");
 const valid = () => ({ HANA_SQL_ENDPOINT: "example.hana.hanacloud.ondemand.com:443", HANA_USER: "TOOLSATHI_APP", HANA_PASSWORD: "test-only-not-a-real-password", HANA_SCHEMA: "TOOLSATHI" });
@@ -72,7 +72,7 @@ test("HANA compiler plan contains only CREATE tables and append-only triggers", 
   expect(() => assertExclusive({ schemaVisible: true, objects: [{ OBJECT_NAME: "TOOLSATHI_TOOL", OBJECT_TYPE: "VIEW" }] }, model)).toThrow();
 });
 test("HDI bindings are never subjected to the direct-schema deployer", async () => {
-  await expect(deploy({}, {}, {}, { mode: "hana", schema: "HDI_123", connection: "binding" }, { apply: true, env: { HANA_TARGET_CONFIRMED: "HDI_123" } })).rejects.toMatchObject({ code: "HANA_HDI_DEPLOY_REQUIRED" });
+  await expect(deploy({}, {}, {}, { mode: "hana", schema: "HDI_123", connection: "binding" }, { apply: true, env: { HANA_TARGET_CONFIRMED: "HDI_123" } })).rejects.toMatchObject({ code: "DATABASE_MODE_UNSUPPORTED" });
 });
 test("the catalog's own SCHEMA row is permitted without permitting foreign objects", async () => {
   const cds = require("@sap/cds"), model = await cds.load("db/schema.cds");
@@ -103,7 +103,7 @@ test("native .env loading occurs before CAP configuration and never prints the p
   fs.writeFileSync(file, 'DATABASE_MODE=hana\nHANA_CONNECTION=direct\nHANA_SQL_ENDPOINT=example.com:443\nHANA_USER=TOOLSATHI_APP\nHANA_PASSWORD="test-only#quoted"\nHANA_SCHEMA=TOOLSATHI\nHANA_ENCRYPT=true\nHANA_VALIDATE_CERTIFICATE=true\n');
   const env = { ...process.env, NODE_ENV: "development", CDS_ENV: "development" };
   for (const key of Object.keys(env)) if (/^HANA_|^DATABASE_MODE$/.test(key)) delete env[key];
-  const script = "const config=require('./srv/lib/database-config');config.loadEnvironment(process.argv[1]);const cds=require('@sap/cds');const selected=config.configureDatabase(cds);console.log(JSON.stringify({mode:selected.mode,port:cds.env.requires.db.credentials.port,passwordLoaded:cds.env.requires.db.credentials.password==='test-only#quoted',tls:cds.env.requires.db.credentials.sslValidateCertificate}))";
+  const script = "const config=require('./srv/lib/historical-hana-config');config.loadEnvironment(process.argv[1]);const cds=require('@sap/cds');const selected=config.configureDatabase(cds);console.log(JSON.stringify({mode:selected.mode,port:cds.env.requires.db.credentials.port,passwordLoaded:cds.env.requires.db.credentials.password==='test-only#quoted',tls:cds.env.requires.db.credentials.sslValidateCertificate}))";
   const output = execFileSync(process.execPath, ["-e", script, file], { env, encoding: "utf8" });
   expect(JSON.parse(output)).toEqual({ mode: "hana", port: 443, passwordLoaded: true, tls: true });
   expect(output).not.toContain("test-only#quoted");
@@ -113,6 +113,6 @@ test("real startup with incomplete HANA credentials exits nonzero without exposi
   for (const key of ["HANA_SQL_ENDPOINT", "HANA_USER", "HANA_SCHEMA"]) env[key] = "";
   const result = spawnSync(process.execPath, ["srv/server.js", "--database=hana"], { env, encoding: "utf8", timeout: 20000 });
   expect(result.status).toBe(1);
-  expect(result.stderr).toContain("HANA_CREDENTIALS_MISSING");
+  expect(result.stderr).toContain("DATABASE_MODE_UNSUPPORTED");
   expect(result.stderr + result.stdout).not.toContain(env.HANA_PASSWORD);
 });

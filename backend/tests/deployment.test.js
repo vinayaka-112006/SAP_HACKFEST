@@ -1,8 +1,8 @@
 const fs = require("node:fs");
 const { execFileSync } = require("node:child_process");
 const yaml = require("yaml");
-test("MTA bindings and XSUAA role collections are structurally consistent", () => {
-  const mta = yaml.parse(fs.readFileSync("mta.yaml", "utf8"));
+test("Historical MTA bindings and XSUAA role collections are structurally consistent", () => {
+  const mta = yaml.parse(fs.readFileSync("docs/archive/mta-hana.yaml", "utf8"));
   const security = require("../xs-security.json");
   expect(mta.modules.map((m) => m.name)).toEqual([
     "toolsathi-srv",
@@ -22,7 +22,7 @@ test("MTA bindings and XSUAA role collections are structurally consistent", () =
   expect(security["role-templates"]).toHaveLength(6);
   expect(security["role-collections"]).toHaveLength(6);
 });
-test("production profile selects HANA/XSUAA without local SQLite credentials", () => {
+test("production profile selects persistent SQLite and keeps verified XSUAA authentication", () => {
   const env = { ...process.env, NODE_ENV: "production", CDS_ENV: "production" };
   // Inspect production defaults independently of the offline test runner's database pins.
   for (const key of Object.keys(env)) if (/^cds[_.]requires[_.]db/i.test(key)) delete env[key];
@@ -37,7 +37,7 @@ test("production profile selects HANA/XSUAA without local SQLite credentials", (
       encoding: "utf8",
     },
   );
-  expect(JSON.parse(out)).toEqual({ kind: "hana", auth: "xsuaa" });
+  expect(JSON.parse(out)).toEqual({ kind: "sqlite", url: "db.sqlite", auth: "xsuaa" });
 });
 test("OpenAPI is a valid document with all declared operations including AI communication and platform workflow", async () => {
   const out = execFileSync(

@@ -16644,6 +16644,117 @@
           }
         }
       }
+    },
+    "/v2/demo-identities": {
+      "get": {
+        "summary": "demo-identities (get)",
+        "description": "Roles: Development header-authentication only; synthetic V22 identities. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.",
+        "tags": [
+          "V2"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Persisted result or authorized read. Provider limitations are explicit in providerStatus / semanticStatus.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "_label",
+                    "_stub"
+                  ],
+                  "properties": {
+                    "_label": {
+                      "type": "string",
+                      "enum": [
+                        "SIMULATED"
+                      ]
+                    },
+                    "_stub": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Role, scope, invitation or object ownership denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "State, idempotency conflict or reviewed V2 schema deployment required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "AI rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Database/internal error; no success claimed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
