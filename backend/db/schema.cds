@@ -450,3 +450,62 @@ entity ExposureReport {
   digest : String(64);
   snapshot : LargeString;
 }
+
+// V2.3 onboarding: role applications, declared skills and protected documents.
+// A requested role is never a grant; only an Administrator review may create a profile.
+entity OnboardingApplication {
+  key applicationId : String(120);
+  userId : String(120);
+  status : String(30);
+  requestedRole : String(120);
+  fullName : String(120);
+  email : String(200);
+  phone : String(40);
+  language : String(2);
+  department : String(120);
+  workCenter : String(120);
+  shift : String(120);
+  employeeId : String(120);
+  team : String(120);
+  notes : LargeString;
+  reviewNotes : LargeString;
+  reviewedBy : String(120);
+  reviewedAt : Timestamp;
+  createdAt : Timestamp;
+  updatedAt : Timestamp;
+}
+entity ApplicantSkill {
+  key skillId : String(120);
+  applicationId : String(120);
+  userId : String(120);
+  category : String(120);
+  name : String(120);
+  level : String(30);
+  years : Integer;
+  specialization : String(120);
+  workCenter : String(120);
+  certification : String(120);
+  issuer : String(120);
+  validUntil : Date;
+  notes : LargeString;
+  source : String(30);
+  verified : Boolean;
+  verifiedBy : String(120);
+  verifiedAt : Timestamp;
+}
+entity UploadedDocument {
+  key documentId : String(120);
+  userId : String(120);
+  applicationId : String(120);
+  incidentId : String(120);
+  docType : String(40);
+  fileName : String(240);
+  mimeType : String(120);
+  size : Integer;
+  storageName : String(240);
+  checksum : String(64);
+  description : String(500);
+  status : String(30);
+  reviewNote : LargeString;
+  createdAt : Timestamp;
+}
