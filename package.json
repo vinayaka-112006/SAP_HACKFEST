@@ -16,6 +16,10 @@
     "dev:v22": "node scripts/dev.js --v22",
     "dev:v22:fresh": "node scripts/dev.js --v22 --fresh",
     "demo:v22:preview": "npm --prefix backend run demo:v22:preview",
-    "demo:v22:seed": "npm --prefix backend run demo:v22:seed"
+    "demo:v22:seed": "npm --prefix backend run demo:v22:seed",
+    "demo:data:preview": "npm --prefix backend run demo:data:preview",
+    "demo:data:seed": "npm --prefix backend run demo:data:seed",
+    "demo:data:verify": "npm --prefix backend run demo:data:verify",
+    "demo:data:reset-isolated": "npm --prefix backend run demo:data:reset-isolated"
   }
 }

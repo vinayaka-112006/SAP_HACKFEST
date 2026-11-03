@@ -49,9 +49,26 @@ Other scripts (repository root):
 | `npm run dev:local` | SQLite launcher without the V2.2 synthetic scenario flags. |
 | `npm run demo:v22:preview` | Read-only preview of the synthetic V2.2 scenario against the persistent database. |
 | `npm run demo:v22:seed` | Idempotent, transactional seed of missing V2.2 synthetic records. |
+| `npm run demo:data:preview` | Preview the 43-identity, 20-incident, 5-work-center demonstration dataset. |
+| `npm run demo:data:seed` | Idempotent, non-destructive seed of the Grand Finale demonstration dataset into `backend/db.sqlite`. |
+| `npm run demo:data:verify` | Comprehensive regression verification suite (asserts 43 profiles, 20 incidents, workforce allocation, qualification rules, Tool B trace). |
+| `npm run demo:data:reset-isolated` | Guarded reset utility strictly for isolated scratch databases. |
 | `npm run dev:backend` / `npm run dev:frontend` | Start one process only. |
 | `npm run test:backend` | Full backend suite (Jest, isolated in-memory SQLite). |
 | `npm run build:backend` / `npm run build:frontend` | CAP production build / Vite production build. |
+
+## Grand Finale Demonstration Dataset
+
+The complete, realistic, interconnected synthetic demonstration dataset for the Grand Finale is documented in detail at:
+👉 **[ToolSathi Demonstration Dataset & Live Walkthrough Guide](docs/toolsathi-demo-data.md)**
+
+It provides:
+- **43 Synthetic Profiles**: 15 Workers across 5 work centers, 10 Managers, 10 Technicians (with specialized qualification and workload states), 5 Verifiers/Assigners (separation of duties), 2 Quality leads, 1 Administrator.
+- **20 Connected Incidents**: 5 Closed/Solved with verified evidence, 5 Unresolved/Blocked (spare parts, information, verification failed), 10 Active progressive stages.
+- **Downed Torque Tool Workforce Optimization**: 3 idle workers on `TS-DEMO-V23-TOOL-TORQUE-01`; auto-allocates Worker 1 to Packaging (+35 units), Worker 2 to Final Inspection (+41 units), and rejects Worker 3 (ineligible/expired certification).
+- **25 Spare Parts Inventory**: Multi-tool spare inventory with zero-stock part triggering parts blocker workflow.
+- **Deterministic Trace Regression**: Strictly preserved reference Tool B baseline (24h: 35, 72h: 100 [90/4/6], 168h: 160 units).
+
 
 ## Four operational dashboards
 

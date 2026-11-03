@@ -37,7 +37,11 @@
     "hana:verify:readonly": "node scripts/v21-check.js --hana-readonly",
     "demo:v22:generate": "node scripts/v22-generate.js",
     "demo:v22:preview": "node scripts/v22-seed.js --preview",
-    "demo:v22:seed": "node scripts/v22-seed.js --apply"
+    "demo:v22:seed": "node scripts/v22-seed.js --apply",
+    "demo:data:preview": "node scripts/demo-data-seed.js --preview",
+    "demo:data:seed": "node scripts/demo-data-seed.js --apply",
+    "demo:data:verify": "node scripts/demo-data-verify.js",
+    "demo:data:reset-isolated": "node scripts/demo-data-reset-isolated.js"
   },
   "dependencies": {
     "@cap-js/sqlite": "3.1.2",
