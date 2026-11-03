@@ -4,6 +4,9 @@ Generated from `backend/scripts/update-v2-contract.js`; exact schemas extend `ba
 
 | Method and path | Authority | Required body fields | Optional body fields |
 |---|---|---|---|
+| POST /v2/incidents/{id}/exposure-reports | Scoped Manager Quality Verifier | window | filters |
+| GET /v2/exposure-reports/{id} | Scoped Manager Quality Verifier | — | — |
+| GET /v2/exposure-reports/{id}/download | Scoped Manager Quality Verifier | — | — |
 | GET /incidents/{id}/repair-records | Scoped Manager Quality Verifier or assigned Technician | — | — |
 | GET /incidents/{id}/recovery | Scoped Manager Quality Verifier | — | — |
 | POST /incidents/{id}/recovery/evidence | Scoped Manager | alternativeToolId sourceReference validUntil | operationCompatible available |

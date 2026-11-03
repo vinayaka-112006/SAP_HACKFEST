@@ -42,14 +42,21 @@ test('assignment and independent verification are separately approved capabiliti
 
 test('delegated assignment, parts blocker, correction, failed verification and independent closure use the shared lifecycle',async()=>{
   const future=new Date(Date.now()+86400000).toISOString();
-  // Isolated fixture begins in an already restricted maintenance condition.
-  await cds.db.run(cds.ql.INSERT.into(entity('Tool')).entries({toolId:'OPS-TOOL',type:'OPS-FIXTURE',workCenter,state:'Restricted'}));
+  await cds.db.run(cds.ql.INSERT.into(entity('Tool')).entries({toolId:'OPS-TOOL',type:'OPS-FIXTURE',workCenter,state:'Active'}));
   for(const [userId,role]of [['OPS-T','Technician'],['OPS-T2','Technician'],['OPS-INDEP','Verifier']])await cds.db.run(cds.ql.INSERT.into(entity('UserProfile')).entries({userId,role,displayName:userId,workCenter,status:'Active',language:'en',createdAt:new Date().toISOString()}));
   await call('put','/v2/equipment-requirements/OPS-FIXTURE',{skill:'OPS',certification:'OPS-CERT',safetyAuthorization:'OPS-SAFE'},'Administrator','OPS-ADMIN');
   for(const user of ['OPS-T','OPS-T2'])expect((await call('put','/v2/qualifications/'+user,{toolType:'OPS-FIXTURE',workCenter,skill:'OPS',certification:'OPS-CERT',safetyAuthorization:'OPS-SAFE',expiresAt:future,availableUntil:future,maxAssignments:2},'Administrator','OPS-ADMIN')).status).toBe(200);
-  const created=await call('post','/incidents',{toolId:'OPS-TOOL',reporterId:'OPS-W',language:'en',rawText:'Synthetic restricted tool needs inspection'},'Worker','OPS-W');
+  const created=await call('post','/incidents',{toolId:'OPS-TOOL',reporterId:'OPS-W',language:'en',category:'OPS',rawText:'Synthetic tool needs inspection'},'Worker','OPS-W');
   const id=created.body.incident.incidentId,base='/v2/incidents/'+id;
   expect((await call('post',`/incidents/${id}/confirm`,{confirmedBy:'OPS-W'},'Worker','OPS-W')).status).toBe(200);
+  const proposalBody={type:'TOOL_RESTRICTION',reason:'Manager reviewed high-severity first fault; temporary isolation required'};
+  expect((await call('post',`/incidents/${id}/proposals`,proposalBody)).status).toBe(409);
+  expect((await call('post',base+'/triage',{severity:'High',urgency:'Urgent',shift:'Synthetic day',reason:'Reviewed observed first-fault evidence',version:0,escalate:false})).status).toBe(200);
+  const proposed=await call('post',`/incidents/${id}/proposals`,proposalBody);expect(proposed.status).toBe(200);expect(proposed.body.proposal.payload.evidence.managerReview.auditId).toBeTruthy();
+  const restriction={incidentId:id,toolId:'OPS-TOOL',action:'RESTRICT',reason:proposalBody.reason};
+  expect((await call('post','/mock/dm/tool-restrictions',restriction)).body.error.code).toBe('APPROVAL_REQUIRED');
+  const approved=await call('post',`/approvals/${proposed.body.proposal.proposalId}/decision`,{decision:'APPROVED',reason:'Scope and worker observation reviewed'});expect(approved.status).toBe(200);
+  expect((await call('post','/mock/dm/tool-restrictions',{...restriction,approvalId:approved.body.approval.approvalId})).status).toBe(200);
   expect((await call('post',base+'/assign',{technicianId:'OPS-T'},'Verifier','OPS-INDEP')).status).toBe(403);
   const assigned=await call('post',base+'/assign',{technicianId:'OPS-T'},'Verifier','OPS-V');expect(assigned.status).toBe(200);
   expect((await call('post',base+'/assign',{technicianId:'OPS-T2'})).status).toBe(409);

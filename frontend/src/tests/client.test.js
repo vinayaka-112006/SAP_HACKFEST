@@ -20,6 +20,14 @@ function setup(value, options = {}) {
   });
   return { api, calls };
 }
+test('binary downloads retain authentication and preserve structured authorization errors',async()=>{
+  let headers;
+  const api=createApiClient({demoMode:true,getSession:()=>({userId:'DOWNLOAD-M',role:'Manager'}),fetchImpl:async(_url,init)=>{headers=init.headers;return new Response('%PDF-SYNTHETIC',{headers:{'content-type':'application/pdf'}});}});
+  const blob=await api.download('/v2/exposure-reports/example/download?format=pdf');
+  assert.equal(await blob.text(),'%PDF-SYNTHETIC');assert.equal(headers['x-demo-role'],'Manager');
+  const denied=setup({error:{code:'WORK_CENTER_FORBIDDEN',message:'Outside scope'}},{status:403});
+  await assert.rejects(()=>denied.api.download('/v2/exposure-reports/example/download?format=csv'),{code:'WORK_CENTER_FORBIDDEN',status:403});
+});
 test("live tools envelope and normalized base URL", async () => {
   const { api, calls } = setup({ tools: [{ toolId: "TOOL-B" }] });
   assert.deepEqual(await api.getTools(), [{ toolId: "TOOL-B" }]);

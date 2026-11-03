@@ -926,6 +926,19 @@ check('V2.1 assistant stays within the viewport and uses actual authorized sourc
   assert.ok(bound.x+bound.width<=1440&&bound.y+bound.height<=1050);
   await dialog.getByRole('button',{name:'Close assistant'}).click();report.v21ChatBrowser=true;
 });
+check('V2.2 exposure PDF and CSV downloads use a persisted server snapshot and survive refresh',async()=>{
+  await page.goto(frontendUrl+'/exposure/'+incidentId+'?window=168');await skipIntro(page);
+  await page.getByRole('button',{name:'Manager local demo role',exact:true}).first().click();
+  await page.getByLabel('Local demo user ID',{exact:true}).fill('EXPORT-BROWSER-M');
+  await page.getByRole('button',{name:'Download PDF',exact:true}).waitFor();
+  const pdfEvent=page.waitForEvent('download');await page.getByRole('button',{name:'Download PDF',exact:true}).click();
+  const pdf=await pdfEvent;assert.equal(await pdf.failure(),null);const bytes=fs.readFileSync(await pdf.path());assert.equal(bytes.subarray(0,5).toString(),'%PDF-');assert.match(pdf.suggestedFilename(),/\.pdf$/);
+  await page.getByRole('button',{name:'Download CSV',exact:true}).waitFor();
+  const csvEvent=page.waitForEvent('download');await page.getByRole('button',{name:'Download CSV',exact:true}).click();
+  const csv=await csvEvent;const contents=fs.readFileSync(await csv.path(),'utf8');assert.ok(contents.includes('SN-000001'));assert.ok(contents.includes('SYNTHETIC'));
+  assert.ok(page.url().includes('report='));await page.reload();await page.getByRole('button',{name:'Download PDF',exact:true}).waitFor();
+  report.v22ExposureDownloads={pdfBytes:bytes.length,csvBytes:Buffer.byteLength(contents),persistedSnapshot:true};
+});
 check('V2.2 role dashboards open scoped issue details, survive refresh, and persist notification reads',async()=>{
   await page.goto(frontendUrl+'/technician');await skipIntro(page);
   await page.getByRole('button',{name:'Technician local demo role',exact:true}).first().click();

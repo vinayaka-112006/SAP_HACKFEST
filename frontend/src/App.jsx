@@ -15,6 +15,7 @@ import { LocaleProvider } from './features/v2/locale';
 import WebsiteAssistant from './features/v2/WebsiteAssistant';
 import {DashboardRedirect,RoleDashboard,Issues,IssueDetail,Notifications,Profile,Login} from './screens/Operations';
 import {OperationsNav} from './features/operations/common';
+import Exposure from './screens/Exposure';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
@@ -61,6 +62,7 @@ export default function App() {
             <Route path="/verifier" element={<RoleDashboard role="Verifier" />} />
             <Route path="/issues" element={<Issues />} />
             <Route path="/issues/:incidentId" element={<IssueDetail />} />
+            <Route path="/exposure/:incidentId" element={<Exposure />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Profile />} />

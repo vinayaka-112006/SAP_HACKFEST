@@ -208,12 +208,22 @@ router.post(
         req.body.type === "QUALITY_NOTIFICATION"
           ? await traceEvidence(tx, incident.incidentId)
           : null;
+      let managerReview=null;
+      if(req.body.type==='TOOL_RESTRICTION'&&await require('../lib/operations').available(tx)){
+        const review=await require('../lib/v2').one(tx,'IssueOperation',{incidentId:incident.incidentId});
+        if(review?.reviewedBy&&['High','Critical'].includes(review.severity)){
+          const entries=await tx.run(cds.ql.SELECT.from(entity('AuditLog')).where({incidentId:incident.incidentId,actor:review.reviewedBy,actorRole:'Manager',action:'INCIDENT_TRIAGED'}));
+          const audit=entries.map(decode).find(entry=>entry.details?.version===review.version);
+          if(audit)managerReview={reviewedBy:review.reviewedBy,reviewedAt:review.reviewedAt,severity:review.severity,urgency:review.urgency,version:review.version,auditId:audit.auditId};
+        }
+      }
       const candidate = buildContainmentProposal({
         type: req.body.type,
         reason: req.body.reason,
         incident,
         tool,
         repeatFailure: repeatEvidence,
+        managerReview,
         trace,
         qualityBatchIds: trace?.confirmedBatchIds || [],
         stockBatchIds: trace?.stockBatchIds || [],

@@ -4,6 +4,9 @@ const schemas={
   language:{type:'string',enum:['en','kn','hi']},boolean:{type:'boolean'},version:{type:'integer',minimum:0},
 };
 const contracts=[
+  ['post','/v2/incidents/{id}/exposure-reports','Scoped Manager Quality Verifier','window','filters'],
+  ['get','/v2/exposure-reports/{id}','Scoped Manager Quality Verifier','',''],
+  ['get','/v2/exposure-reports/{id}/download','Scoped Manager Quality Verifier','',''],
   ['get','/incidents/{id}/repair-records','Scoped Manager Quality Verifier or assigned Technician','',''],
   ['get','/incidents/{id}/recovery','Scoped Manager Quality Verifier','',''],
   ['post','/incidents/{id}/recovery/evidence','Scoped Manager','alternativeToolId sourceReference validUntil','operationCompatible available'],
@@ -58,6 +61,8 @@ const contracts=[
   ['post','/v2/chat','Any authenticated role; object and tool permissions enforced','message language','incidentId generate tool'],
 ];
 function property(key){
+  if(key==='window')return {type:'integer',enum:[24,72,168]};
+  if(key==='filters')return {type:'object',additionalProperties:false,properties:Object.fromEntries(['serial','batchId','tier','locationStatus','shipmentId'].map(k=>[k,schemas.string]))};
   if(['sourceToolIds','destinationStationIds'].includes(key))return {type:'array',minItems:1,maxItems:30,items:schemas.string};
   if(['minutes','maxMinutes'].includes(key))return {type:'integer',minimum:15,maximum:480};
   if(key==='maxWorkers')return {type:'integer',minimum:1,maximum:50};
@@ -84,6 +89,10 @@ function update(){
     for(const code of [400,401,403,404,409,429,500])responses[code]={description:{400:'Invalid input',401:'Authentication required',403:'Role, scope, invitation or object ownership denied',404:'Record not found',409:'State, idempotency conflict or reviewed V2 schema deployment required',429:'AI rate limited',500:'Database/internal error; no success claimed'}[code],content:{'application/json':{schema:{$ref:'#/components/schemas/Error'}}}};
     const operation={summary:path.split('/').slice(2).join(' ')+' ('+method+')',description:'Roles: '+roles+'. Reuses XSUAA; development headers are local demonstration only. No HANA migration is executed by this endpoint.',tags:['V2'],parameters,responses};
     if(method!=='get')operation.requestBody={required:true,content:{'application/json':{schema:{type:'object',additionalProperties:false,...(req?{required:req.split(' ')}:{}),properties:Object.fromEntries(fields.map(key=>[key,key==='reason'&&path.endsWith('/messages')?schemas.boolean:property(key)]))}}}};
+    if(path.endsWith('/download')){
+      parameters.push({name:'format',in:'query',required:true,schema:{type:'string',enum:['pdf','csv']}});
+      operation.responses['200']={description:'Authorized persisted snapshot rendered as an attachment; synthetic disclaimer is included in the report',content:{'application/pdf':{schema:{type:'string',format:'binary'}},'text/csv':{schema:{type:'string',format:'binary'}}}};
+    }
     api.paths[path]||={};api.paths[path][method]=operation;
   }
   fs.writeFileSync(file,JSON.stringify(api,null,2)+'\n');

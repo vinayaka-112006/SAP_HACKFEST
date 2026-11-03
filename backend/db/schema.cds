@@ -440,3 +440,13 @@ entity AssignmentDetail {
   decidedAt : Timestamp;
   decidedBy : String(120);
 }
+entity ExposureReport {
+  key reportId : String(120);
+  incidentId : String(120);
+  createdBy : String(120);
+  createdAt : Timestamp;
+  windowHours : Integer;
+  version : Integer;
+  digest : String(64);
+  snapshot : LargeString;
+}
