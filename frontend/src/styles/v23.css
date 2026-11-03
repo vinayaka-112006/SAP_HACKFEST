@@ -221,7 +221,7 @@
 .v23-hero-stats { display: flex; gap: 26px; margin-top: 34px; flex-wrap: wrap; }
 .v23-hero-stats strong { display: block; font: 700 22px/1.2 var(--v23-mono); color: #ffffff; }
 .v23-hero-stats span { font-size: 12.5px; color: var(--v23-faint); }
-.v23-robot { position: relative; aspect-ratio: 1 / 1; max-width: 520px; margin-left: auto; display: grid; place-items: center; perspective: 900px; }
+.v23-robot { position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 520px; margin-left: auto; display: grid; place-items: center; perspective: 900px; }
 .v23-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(34, 211, 238, 0.35); box-shadow: inset 0 0 40px rgba(34, 211, 238, 0.12); }
 .v23-ring.r1 { inset: 6%; transform: rotateX(68deg); animation: v23-spin 18s linear infinite; }
 .v23-ring.r2 { inset: 16%; transform: rotateX(68deg) rotateZ(30deg); border-color: rgba(45, 212, 191, 0.4); animation: v23-spin 24s linear infinite reverse; }

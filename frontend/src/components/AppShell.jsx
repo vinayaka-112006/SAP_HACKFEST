@@ -11,11 +11,11 @@ export const homeFor = (role) => homes[role] || "/issues";
 
 const labels = (role) => [
   { group: "Operations" },
-  { to: homeFor(role), label: "Dashboard", icon: "dashboard", end: true },
+  // The administrator console is the administrator's dashboard; one entry avoids a duplicate route key.
+  { to: homeFor(role), label: role === "Administrator" ? "Administration" : "Dashboard", icon: role === "Administrator" ? "settings" : "dashboard", end: true },
   { to: "/issues", label: "Issues", icon: "issues" },
   { to: "/equipment", label: "Equipment", icon: "equipment" },
   ...(role === "Manager" ? [{ to: "/workforce", label: "Workforce", icon: "workforce" }] : []),
-  ...(role === "Administrator" ? [{ to: "/admin", label: "Administration", icon: "settings" }] : []),
   { group: "Account" },
   { to: "/notifications", label: "Notifications", icon: "bell", badge: true },
   { to: "/profile", label: "Profile", icon: "user" },
@@ -43,7 +43,7 @@ function NavList({ role, unread, onNavigate }) {
         item.group ? (
           <span className="v23-nav-label" key={"g" + index}>{item.group}</span>
         ) : (
-          <NavLink key={item.to} to={item.to} end={item.end} className="v23-nav-item" onClick={onNavigate}>
+          <NavLink key={item.to + index} to={item.to} end={item.end} className="v23-nav-item" onClick={onNavigate}>
             <Icon name={item.icon} />
             <span>{item.label}</span>
             {item.badge && unread > 0 && <span className="v23-badge">{unread}</span>}
